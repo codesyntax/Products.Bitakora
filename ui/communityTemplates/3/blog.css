@@ -1,8 +1,8 @@
 body {
-	margin: 0px 0px 20px 0px;
+	margin: 0px 0px 0px 0px;
 	text-align: center;
-	
 	background: #fff url(/img/3edukibe.gif) no-repeat bottom;
+font-size: small;
 	}
 
 a {
@@ -40,6 +40,7 @@ h1, h2, h3 {
 	text-align: left;
 	padding: 0px;
 	width: 700px;
+        border: 1px solid #fff;
 	background: #fff url(/img/3edukierdi.gif) repeat-y top;
 	}
 
@@ -74,9 +75,7 @@ a#banner-img {
 
 #center {
 	float: left;
-	width: 500px;
-	
-	
+	width: 495px;
 	overflow: hidden;
 	}
 
@@ -84,43 +83,38 @@ a#banner-img {
 	padding: 0px 30px 0px 20px;
 	color: #666666;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
-	font-size: small;
+	font-size: 0.9em;
 	}
 
 #right {
 	float: left;
-
+        font-size: 0.85em;
 	width: 200px;
-	
 	overflow: hidden;
 	}
 
 .content p {
 	color: #666666;
 	font-family: Verdana,'Trebuchet MS', sans-serif;
-	font-size: x-small;
-	font-weight: normal;
-	line-height: 150%;
+	line-height: 140%;
 	text-align: left;
 	margin-bottom: 10px;
 	}
 
 .content blockquote {
-	line-height: 150%;
+	line-height: 140%;
 	}
 
 .content li {
-	line-height: 150%;
+	line-height: 140%;
 	}
 
 .content h2 {
 	font-family: Verdana,'Trebuchet MS', sans-serif;
-	font-size: x-small;
+	font-size: 0.90em;
 	border-bottom: 1px solid #fff;
 	background: url(/img/3lainoa.gif) no-repeat left bottom;
 	text-align: right;
-	
-	
 	margin-bottom: 10px;
 	
 	}
@@ -129,29 +123,22 @@ a#banner-img {
 	color: #C27609;
 	font-family: Verdana,'Trebuchet MS', sans-serif;
 	font-size: 20px;
-	
 	text-align: left;
-	
-	
 	margin-bottom: 10px;
 	
 	}
 .content p.posted {
 	color: #999999;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
-	font-size: x-small;
 	border-top: 1px solid #fff;
 	text-align: left;
-	
-	
-	
 	margin-bottom: 25px;
-	line-height: normal;
 	padding: 3px;
 	}
 
 .sidebar {
 	padding: 0px 15px 0px 15px;
+font-size: 0.95em;
 	}
 
 
@@ -160,10 +147,7 @@ a#banner-img {
   	line-height: 140%;
 	color: #666666;
 	font-family: Verdana, Arial, sans-serif;
-	font-size: x-small;
-	
-	
-	
+	/*font-size: x-small;*/
   	padding: 2px;
 	text-align: center;
 	margin-bottom: 30px;
@@ -179,8 +163,6 @@ a#banner-img {
 #calendar caption {
 	color: #666666;
 	font-family: Verdana, Arial, sans-serif;
-	font-size: x-small;
-	
 	text-align: center;
 	font-weight: bold;
 	
@@ -201,12 +183,9 @@ a#banner-img {
 .sidebar h2 {
 	color: #FEF1ED;
 	font-family: Verdana, Arial, sans-serif;
-	font-size: x-small;
-	text-align: center;
+	font-size: 0.85em;
 	font-weight: bold;
-	
 	text-transform: uppercase;
-  	
 	letter-spacing: .3em;
 	}
 
@@ -219,12 +198,6 @@ a#banner-img {
 .sidebar li {
 	color: #666666;
 	font-family: Verdana, Arial, sans-serif;
-	font-size: x-small;
-	text-align: center;
-	line-height: 150%;
-	
-	
-	
 	margin-top: 10px;
 	list-style-type: none;
 	}
@@ -240,7 +213,6 @@ a#banner-img {
 
 .link-note {
 	font-family: Verdana, Arial, sans-serif;
-	font-size: x-small;
 	line-height: 150%;
 	text-align: left;
 	padding: 2px;
@@ -249,7 +221,6 @@ a#banner-img {
 
 #powered {
 	font-family: Verdana, Arial, sans-serif;
-	font-size: x-small;
 	line-height: 150%;
 	text-align: left;
 	color: #666666;

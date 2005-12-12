@@ -1,7 +1,8 @@
 body {
-	margin: 0px 0px 50px 0px;
+	padding: 0px 0px 50px 0px;
 	text-align: center;
 	background:#EFEFEF url(/img/1bekoa.jpg) no-repeat bottom;
+        margin: 0 auto;
 }
 
 a {
@@ -13,7 +14,7 @@ a:link {
 	}
 
 a:visited {
-	color: #B83803;
+	color: #930;
 	}
 
 a:active {
@@ -37,16 +38,17 @@ h1, h2, h3 {
 	padding: 0px;
 	width: 700px;
 	height: auto;
-	background:url(/img/1fondoa.jpg) repeat-y top left;
+	background:#EFEFEF url(/img/1fondoa.jpg) repeat-y top left;
+        border: 1px solid #EFEFEF;
 	}
 
 #banner {
-	font-family: Verdana, Arial, sans-serif;
 	color: #FFFFFF;
 	text-align: left;
+        font-family:'Trebuchet MS', Verdana, arial, sans-serif;
 	padding: 0px;
 	height: 132px;
-	background:#F7F7F7 url(/img/1goikoa.jpg) no-repeat top left;
+	background:#EFEFEF url(/img/1goikoa.jpg) no-repeat top left;
 	}
 
 a#banner-img {
@@ -54,17 +56,16 @@ a#banner-img {
 	}
 
 
-#banner a {
+#banner a,#banner a:visited {
 	text-decoration: none;
-	font-family:'Trebuchet MS', Verdana, arial, sans-serif;
+	color: #B83803;
 	}
 
 #banner h1 {
 	font-size: 30px;
 	padding:50px 0px 0px 40px;
 	color: #B83803;
-	
-	
+font-weight: bold;
 	}
 
 #banner h2 {
@@ -75,24 +76,20 @@ a#banner-img {
 
 #center {
 	float: left;
-	width: 500px;
+	width: 490px;
 	overflow: hidden;
 	}
 
 .content {
 	padding: 10px 15px 5px 20px;
-	
 	color: #666666;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	font-size: small;
 	}
 
 #right {
-		float: left;
-	
-	
+	float: left;
 	width: 200px;
-	
 	overflow: hidden;
 	}
 
@@ -153,7 +150,7 @@ a#banner-img {
 	}
 
 .sidebar {
-	padding: 15px 15px 15px 15px;
+	padding: 15px 10px 15px 10px;
 	}
 
 

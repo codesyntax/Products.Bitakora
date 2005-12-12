@@ -1,6 +1,6 @@
 <h2><dtml-var "gettext('What is this?')"></h2>
 <ul>
-  <dtml-in "objectValues('LocalContent')" sort="id">
+  <dtml-in "community().objectValues('LocalContent')" sort="id">
     <li><a href="<dtml-var absolute_url>"><dtml-var title_or_id></a></li>
   </dtml-in>
 </ul>

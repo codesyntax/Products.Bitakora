@@ -1,4 +1,4 @@
-﻿<dtml-var standard_html_header>
+<dtml-var standard_html_header>
 
 <dtml-let came_from="REQUEST.get('came_from', '')">
     <dtml-if expr="_.SecurityGetUser().getUserName() == 'Anonymous User'">
@@ -10,7 +10,7 @@
 
     <dtml-else>
         <dtml-if came_from>
-            <dtml-call expr="RESPONSE.redirect(came_from)">
+            <dtml-call expr="REQUEST.RESPONSE.redirect(came_from)">
         <dtml-else>
             <p><dtml-var "gettext('Welcome!')"></p>
         </dtml-if>

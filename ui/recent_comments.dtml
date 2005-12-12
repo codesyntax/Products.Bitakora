@@ -1,4 +1,4 @@
-﻿<dtml-if lastComments>
+<dtml-if lastComments>
 <h2><dtml-var "gettext('Recent Comments')"></h2>
 <ul>
   <dtml-in lastComments>

@@ -1,4 +1,4 @@
-﻿<dtml-var standard_html_header>
+<dtml-var standard_html_header>
 
 <dtml-if expr="_.SecurityGetUser().getUserName() == 'Anonymous User'">
  <h3><dtml-var "gettext('Logged out')"></h3>

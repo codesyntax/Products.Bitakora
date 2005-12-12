@@ -5,10 +5,10 @@
 
 <form action="/step3.do" method="post">
 
-<dtml-in "img.templates.objectIds()">
+<dtml-in "templates.objectIds()">
 <p>
 <input type="radio" name="template" id="template<dtml-var sequence-item>" value="<dtml-var sequence-item>" /> <label for="template<dtml-var sequence-item>"># <dtml-var sequence-item></label>
-<a href="/img/template<dtml-var sequence-item>.jpg" target="_blank"><img src="/img/template<dtml-var sequence-item>-small.jpg" alt="Template<dtml-var sequence-item>" /></a>
+<a href="/img/template<dtml-var sequence-item>.jpg"><img src="/img/template<dtml-var sequence-item>-small.jpg" alt="Template<dtml-var sequence-item>" /></a>
 </p>
 </dtml-in>
 

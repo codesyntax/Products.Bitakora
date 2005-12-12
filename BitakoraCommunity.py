@@ -20,6 +20,12 @@ from Products.Localizer.LocalContent import LocalContent
 # ZCatalog
 from Products.ZCatalog import ZCatalog
 
+# CookieCrumbler
+try:
+    from Products.CookieCrumbler import CookieCrumbler
+except:
+    from Products.CMFCore.CookieCrumbler import CookieCrumbler
+
 # To add ZCatalog FieldIndex and TextIndexNG2
 from ZPublisher.HTTPRequest import record
 
@@ -34,6 +40,8 @@ manage_addBitakoraCommunityForm = HTMLFile('ui/BitakoraCommunity_add', globals()
 def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
     """ """
     self._setObject(id, BitakoraCommunity(id, admin_mail))
+    com = getattr(self, id)
+    com.Catalog.refreshCatalog(1)
 
     if REQUEST is not None:
         return self.manage_main(self, REQUEST)
@@ -67,6 +75,7 @@ class BitakoraCommunity(BTreeFolder2):
         self._addMethods()
         self._addTemplates()
         self._addContent()
+        self._addOthers()
         self._buildIndexes()         
         
     def _addLocalizer(self):
@@ -94,11 +103,14 @@ class BitakoraCommunity(BTreeFolder2):
 
         return options       
 
+    def _addOthers(self):
+        """ Add other stuff """
+        self.manage_addUserFolder()
+        self._setObject('cookie_authentication', CookieCrumbler('cookie_authentication'))
            
     def _addCatalog(self):
         """ Add ZCatalog instance """
-        catalog = ZCatalog.ZCatalog('Catalog', 'Catalog')
-        self._setObject('Catalog', catalog)
+        self._setObject('Catalog', ZCatalog.ZCatalog('Catalog', 'Catalog'))
         
     def _buildIndexes(self):
         """ Stuff to create Catalog indexes """
@@ -113,7 +125,9 @@ class BitakoraCommunity(BTreeFolder2):
                                   ('published', 'FieldIndex'),
                                   ('date', 'DateIndex'),
                                   ('tags', 'KeywordIndex'),
-                                  ('yearmonth', 'KeywordIndex')]:
+                                  ('yearmonth', 'KeywordIndex'), 
+                                  ('postcount', 'FieldIndex'),
+                                  ('users', 'FieldIndex')]:
             catalog.addIndex(name,index_type)
 
         extras = record()
@@ -132,8 +146,8 @@ class BitakoraCommunity(BTreeFolder2):
         """ method for adding templates, scripts, ... """
         
         dtmls = ['blogs_main', 'column', 'create_blog_form', 'index_html', 'last_posts']
-        dtmls.extend(['logged_in', 'logged_out', 'login_form'])
-        dtmls.extend(['menu', 'mini_login_form', 'preheader'])
+        dtmls.extend(['logged_in', 'logged_out', 'login_form', 'entry_body_community'])
+        dtmls.extend(['menu', 'mini_login_form', 'preheader', 'default_template'])
         dtmls.extend(['standard_html_footer', 'standard_html_header', 'step1', 'step2', 'step3'])
         dtmls.extend(['step3.done', 'tag_all_html', 'tag_html'])        
         for dtml in dtmls:
@@ -142,7 +156,7 @@ class BitakoraCommunity(BTreeFolder2):
         login = getattr(self, 'logged_in')
         login._proxy_roles=('Manager',)
         
-        scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog']
+        scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog', 'logout']
         for script in scripts:
             addPythonScript(self, script, 'ui/communityTemplates/%s' % script)
             ob = getattr(self, script)
@@ -181,6 +195,9 @@ class BitakoraCommunity(BTreeFolder2):
             except:
                 # new LocalContent
                 self._setObject(content, LocalContent(content, 'en', tuple(languages)))
+            
+            obj = getattr(self, content)
+            self.Catalog.uncatalog_object('/'.join(obj.getPhysicalPath()))  
 
         
     def delBlogs(self, ids=[], REQUEST=None):
@@ -213,6 +230,11 @@ class BitakoraCommunity(BTreeFolder2):
         """ clean html from posts """
         from EpozPostTidy import cleanHTML as clean
         return clean(html)
+        
+        
+    def community(self):
+        """ return the community """
+        return self
         
     def communityTitle(self):
         """ return the title """

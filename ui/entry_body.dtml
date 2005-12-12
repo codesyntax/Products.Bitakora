@@ -1,4 +1,4 @@
-﻿<h2><dtml-var showDate></h2>
+<h2><dtml-var showDate></h2>
 <h3><dtml-if inentry><dtml-var showTitle html_quote><dtml-else><a href="<dtml-var absolute_url>" id="post<dtml-var getId>" title="<dtml-var showTitle html_quote>"><dtml-var showTitle html_quote></a></dtml-if></h3>
 
 <div class="storycontent">

@@ -114,14 +114,14 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     about = HTMLFile('ui/about', globals())
     contents = HTMLFile('ui/contents', globals())
     downloadTXT = HTMLFile('ui/downloadTXT', globals())
-    logged_in = HTMLFile('ui/logged_in', globals())
-    logged_out = HTMLFile('ui/logged_out', globals())
-    login_form = HTMLFile('ui/login_form', globals())
+    #logged_in = HTMLFile('ui/logged_in', globals())
+    #logged_out = HTMLFile('ui/logged_out', globals())
+    #login_form = HTMLFile('ui/login_form', globals())
     posting_html = HTMLFile('ui/posting_html', globals())
     recent_comments = HTMLFile('ui/recent_comments', globals())
     reference_body = HTMLFile('ui/reference_body', globals())
-    Bitakora_comment_js = HTMLFile('ui/Bitakora_comment.js', globals())
-    Bitakora_edit_js = HTMLFile('ui/Bitakora_edit.js', globals())
+    bitakora_comment_js = HTMLFile('ui/bitakora_comment.js', globals())
+    bitakora_edit_js = HTMLFile('ui/bitakora_edit.js', globals())
     #standard_error_message = HTMLFile('ui/standard_error_message', globals())
     standard_html_footer = HTMLFile('ui/standard_html_footer', globals())
     standard_html_header = HTMLFile('ui/standard_html_header', globals())
@@ -162,8 +162,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         self.contact_mail = contact_mail      
         self.management_page_charset = u'UTF-8'
         self.sidebar_html = u''
-        catalog = ZCatalog.ZCatalog('Catalog', 'Catalog')
-        self._setObject('Catalog', catalog)
+        self._setObject('Catalog', ZCatalog.ZCatalog('Catalog', 'Catalog'))
         self._buildIndexes()
         self._addMethods()
         self._setObject('pingback', PingMethodContainer())
@@ -299,7 +298,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                 # We are in a Bitakora Community, so uncatalog the post there
                 cat = self.getParentNode().get('Catalog', 'None')
                 if cat is not None:
-                
                     cat.uncatalog_object('/'.join(obj.getPhysicalPath()))           
             self._delObject(id)
 
@@ -464,7 +462,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             
     security.declarePublic('inCommunity')            
     def inCommunity(self):
-        """ Return whether this Bitakora is in a Bitakora community """            
+        """ Return whether this Bitakora is in a Bitakora community """    
         if self.getParentNode().meta_type == 'BitakoraCommunity':
             return 1
         return 0      
