@@ -1,0 +1,13 @@
+<dtml-var standard_html_header>
+
+<div id="lastentries">
+<h2><dtml-var title_or_id></h2>
+
+<dtml-var body fmt="structured-text">
+</div>
+
+<div id="utilities">
+<dtml-var column>
+</div>
+
+<dtml-var standard_html_footer>
