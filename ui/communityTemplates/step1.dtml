@@ -1,0 +1,33 @@
+<dtml-var standard_html_header>
+
+<h2><dtml-var "gettext('1st step: Create an account')"></h2>
+
+<form action="/step1.do" method="post">
+
+<fieldset>
+<p>
+<label for="username"><dtml-var "gettext('Username')"></label><br/>
+<input type="text" id="username" name="username" size="20" <dtml-if "REQUEST.SESSION.get('username')">value="<dtml-var "REQUEST.SESSION.get('username')">"</dtml-if>/> <dtml-if "REQUEST.get('r', '') == '2'"><span class="alert"><dtml-var "gettext('This username already exists')"></span></dtml-if>
+</p>
+
+<p>
+<label for="password"><dtml-var "gettext('Password')"></label><br/>
+<input type="password" id="password" name="password" size="20" /> <dtml-if "REQUEST.get('r', '') == '1'"><span class="alert"><dtml-var "gettext('Passwords do not match')"></span></dtml-if>
+</p>
+
+<p>
+<label for="password2"><dtml-var "gettext('Retype your password')"></label><br/>
+<input type="password" id="password2" name="password2" size="20" />
+</p>
+
+<p>
+<label for="contact_mail"><dtml-var "gettext('Email address')"></label><br/>
+<input type="text" id="contact_mail" name="contact_mail:utf8" size="20" <dtml-if "REQUEST.SESSION.get('contact_mail')">value="<dtml-var "REQUEST.SESSION.get('contact_mail')">"</dtml-if>/> <dtml-if "REQUEST.get('r', '') == '3'"><span class="alert"><dtml-var "gettext('Invalid e-mail address')"></span></dtml-if>
+</p>
+
+
+<input type="submit" value=" <dtml-var "gettext('Create your account')"> "/>
+
+</form>
+
+<dtml-var standard_html_footer>

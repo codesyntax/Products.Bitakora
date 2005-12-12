@@ -1,0 +1,14 @@
+﻿<dtml-var standard_html_header>
+<h1><dtml-var "gettext('Tags')"></h1>
+
+<dtml-let lista="tagsAndPixels()"
+          keys="lista.keys()"
+          b_url="this().absolute_url()">
+<div id="tags">
+<dtml-in keys>
+<a href="<dtml-var b_url>/tag/<dtml-var sequence-item>" style="font-size:<dtml-var "lista[_['sequence-item']]">em;" class="PopularTag"><dtml-var sequence-item></a>&nbsp;
+</dtml-in>
+</div>
+</dtml-let>
+
+<dtml-var standard_html_footer>

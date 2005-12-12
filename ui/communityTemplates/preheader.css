@@ -1,0 +1,87 @@
+#preheader {
+	margin:0 auto;
+	background: #C00 url(img/logotxikia.gif)no-repeat top left;
+	color: #fff;
+	padding: 0px;
+	height:25px;
+	text-align:right;
+	font-size: 10px;
+       font-family: Verdana, sans-serif;
+	}
+#preheader a{
+	color: #fff;
+	}
+#preheader a:hover{
+	color: #000;
+	}
+
+#tagline {
+	font-size: 10px;
+	text-align:left;
+	width: 450px;
+	float:left;
+	}
+#tagline a{
+	padding:3px 0px 5px 150px;
+        color: #c00;
+	}
+#tagline a:hover{
+        color: #c00;
+	}
+
+#community{
+	margin-left: 500px;
+	padding:5px 10px;
+	}
+#community a{
+	border: 1px outset #c33;
+	background: #C00;
+	color: #fff;
+	margin-left: 15px;
+	padding: 1px 3px 1px 3px;
+	text-decoration: none;
+
+	}
+#community a:hover{
+	border: 1px inset #c00;
+	background: #c00;
+	}
+
+tr.bakoitia td{
+	background: #efefef;
+	}
+
+.left{
+	margin: 0px 10px 5px 0px;
+	float: left;
+}
+
+.right{
+	margin: 0px 5px 5px 10px;
+	float: right;
+}
+.left p, .irudia p{
+	font-size: 10px;
+	color: #666;
+	text-align: left;
+	
+}
+
+.right p{
+	font-size: 10px;
+	color: #666;
+	text-align: right;
+}
+.xml {
+	border: 1px solid;
+	border-color: #FC9 #630 #330 #F96;
+	padding: 0 3px;
+	font: bold 10px verdana,sans-serif;
+	color: #FFF;
+	background: #F60;
+	text-decoration: none;
+	margin: 0;
+}
+a:link.xml {
+	color: #FFF;
+}

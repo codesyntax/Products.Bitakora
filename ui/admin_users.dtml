@@ -1,0 +1,28 @@
+<dtml-var manage_page_header>
+<dtml-var manage_tabs>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+<p>Select the users you want to delete.</p>
+
+<form action="delUsers" method="post" onsubmit="javascript:return confirm('Are you sure')">
+<table>
+<tr>
+<th>User</th>
+<th>Blog</th>
+</tr>
+<dtml-in "acl_users.getUserNames()">
+<tr>
+<td><input type="checkbox" name="ids:list" id="<dtml-var sequence-item>" value="<dtml-var sequence-item>" /> <label for="<dtml-var sequence-item>"><dtml-var sequence-item></label></td>
+<td><a href="<dtml-var "usersBlog(_['sequence-item'])">"><dtml-var "usersBlog(_['sequence-item'])"></a></td>
+</tr>
+</dtml-in>
+</table>
+<p><input type="submit" value="Delete" /></p>
+</form>
+
+<dtml-var manage_page_footer>

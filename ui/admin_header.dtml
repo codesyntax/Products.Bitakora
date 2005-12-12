@@ -1,0 +1,62 @@
+﻿<style>
+#fitxak {
+	border-bottom: 1px solid #006699;
+	margin: 0;
+	padding-bottom: 19px;
+	padding-left: 10px;
+}
+
+#fitxak ul, #fitxak li{
+	display: inline;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#fitxak a:link, #fitxak a:visited{
+	background: #E8EBF0;
+	border: 1px solid #006699;
+	float: left;
+	font-size: x-small;
+	font-weight: normal;
+	line-height: 14px;
+	margin-right: 8px;
+	padding: 2px 10px 2px 10px;
+	text-decoration: none;
+}
+
+#fitxak a:link#current, #fitxak a:visited#current {
+	background: #fff;
+	border-bottom: 1px solid #fff;
+	color: #000;
+}
+
+#fitxak a:hover { }
+
+body.section-1 #fitxak li#nav-1 a,
+body.section-2 #fitxak li#nav-2 a,
+body.section-3 #fitxak li#nav-3 a,
+body.section-4 #fitxak li#nav-4 a{
+	background: #fff;
+	border-bottom: 1px solid #fff;
+	color: #000;
+}
+
+#fitxak #subnav-1,
+#fitxak #subnav-2,
+#fitxak #subnav-3,
+#fitxak #subnav-4{
+	display: none;
+	width: 90%;
+}
+.system-msg{
+    color: red;
+}
+</style>
+<ul id="fitxak">
+<dtml-let url="REQUEST.get('URL', '')">
+<dtml-in admin_options>        
+    <li><a href="<dtml-var blogurl>/<dtml-var sequence-item>" <dtml-if "url.find(_['sequence-item']) != -1">id="current"</dtml-if>><dtml-var "gettext(_['sequence-item'])"></a></li>
+</dtml-in>
+</dtml-let>
+</ul>

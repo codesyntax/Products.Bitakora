@@ -1,0 +1,6 @@
+<dtml-var standard_html_header>
+<h2><dtml-var "gettext('Congratulations!')"></h2>
+
+<p><dtml-var "gettext('Your new blog is ready. Now you just have to log-in and start blogging !')"></p>
+
+<dtml-var standard_html_footer>

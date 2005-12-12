@@ -1,0 +1,55 @@
+﻿<dtml-var standard_html_header>
+
+<dtml-var admin_header>
+
+<h1><dtml-var "gettext('Edit')"></h1>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+<form action="editBlog" method="post" enctype="multipart/form-data">
+
+<p>
+<label for="title"><dtml-var "gettext('Blog title')"></label><br/>
+<input id="title" type="text" name="title:utf8" value="<dtml-var title>" size="50"/>
+</p>
+
+<p>
+<label for="subtitle"><dtml-var "gettext('Blog subtitle')"></label><br/>
+<input id="subtitle" type="text" name="subtitle:utf8" value="<dtml-var subtitle>" size="50"/>
+</p>
+
+<p>
+<dtml-var "gettext('Your actual image')"> <br/> 
+<img src="<dtml-var imageUrl>" alt="<dtml-var blog_title>" title="<dtml-var blog_title>" /><br/>
+<label for="image"><dtml-var "gettext('Image 65x65 pixels')"></label><br />
+<input type="file" id="image" name="image" size="50" />
+
+</p>
+
+<p>
+<label for="description"><dtml-var "gettext('Blog description')"></label> <br/>
+<textarea id="description" name="description:utf8:utext" rows="10" cols="50"><dtml-var showDescription></textarea>
+</p>
+
+
+<p>
+<label for="contact_mail"><dtml-var "gettext('Contact email')"></label><br/>
+<input id="contact_mail" type="text" name="contact_mail:utf8" value="<dtml-var contact_mail>" size="50"/>
+</p>
+
+<p>
+<dtml-var "gettext('Comment policy')"><br/>
+<input type="radio" name="comment_allowed:int" value="1" id="comyes" <dtml-if commentsAllowed>checked="checked"</dtml-if>/> <label for="comyes"><dtml-var "gettext('Comments allowed')"></label> <br/>
+<input type="radio" name="comment_allowed:int" value="2" id="commod" <dtml-if commentsModerated>checked="checked"</dtml-if>/> <label for="commod"><dtml-var "gettext('Comments allowed but moderated')"></label><br/>
+<input type="radio" name="comment_allowed:int" value="0" id="comno" <dtml-if commentsNotAllowed>checked="checked"</dtml-if>/> <label for="comno"><dtml-var "gettext('Comments not allowed')"></label>
+</p>
+
+
+<input value="<dtml-var "gettext('Save Changes')">" type="submit"/>
+</form>
+
+<dtml-var standard_html_footer>

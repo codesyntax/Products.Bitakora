@@ -1,0 +1,21 @@
+﻿<dtml-var standard_html_header>
+
+<ul>
+<dtml-in "Catalog.uniqueValuesFor('yearmonth')" sort=sequence-item reverse>
+
+<li><dtml-var "showYearMonth(_['sequence-item'])">
+
+<dtml-let all_sequence="Catalog(published=1,meta_type='Post',sort_on='date', sort_order='descending', yearmonth=_['sequence-item'], date=_.DateTime(), date_usage='range:max')">
+<ol>
+<dtml-in all_sequence> 
+<dtml-with getObject>
+<li><a href="<dtml-var absolute_url>"><dtml-var showTitle></a> <dtml-var showDate></li>
+</dtml-with>
+</dtml-in>
+</ol>
+</dtml-let>
+</li>
+</dtml-in>
+</ul>
+
+<dtml-var standard_html_footer>

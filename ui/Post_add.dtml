@@ -1,0 +1,65 @@
+﻿<dtml-var standard_html_header>
+
+<dtml-var admin_header>
+
+<dtml-if "'.' in REQUEST.keys()">
+<div class="preview">
+<dtml-var entry_preview>
+</div>
+</dtml-if>
+
+
+<h1><dtml-var "gettext('Add a new post')"></h1>
+
+<form action="" method="post">
+
+<p>
+<label for="author"><dtml-var "gettext('Author')"></label><br/>
+<input type="text" id="author" name="author:utf8:ustring" value="<dtml-var "REQUEST.get('AUTHENTICATED_USER', 'Anonymous')">" size="50"/>
+</p>
+
+<p>
+<label for="title"><dtml-var "gettext('Title')"></label><br/>
+<input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('title', '')">"/>
+</p>
+
+<p>
+<label for="tags"><dtml-var "gettext('Tags')"></label><br/>
+<input type="text" id="tags" name="tags:utf8:utokens" size="50"/>
+</p>
+
+<p>
+<label for="text"><dtml-var "gettext('Body')"></label><br/>
+<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', ''), toolbox='', lang='en',
+            path='', widget='bitakora_edit_js',
+            style='width: 440px; height: 250px; border: 1px solid #000000;', 
+            button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
+
+<dtml-comment><textarea id="body" name="body:utf8:text" rows="10" cols="50"></textarea></dtml-comment>
+</p>
+
+<p>
+<label><dtml-var "gettext('Status')"></label><br/>
+<input type="radio" name="publish:int" id="yes" value="1" checked="checked"/> <label for="yes"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no" value="0" /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
+</p>
+
+<p>
+<dtml-var "gettext('Comment policy')"><br/>
+<input type="radio" name="comment_allowed:int" value="1" id="comyes" <dtml-if commentsAllowed>checked="checked"</dtml-if>/> <label for="comyes"><dtml-var "gettext('Comments allowed')"></label> <br/>
+<input type="radio" name="comment_allowed:int" value="2" id="commod" <dtml-if commentsModerated>checked="checked"</dtml-if>/> <label for="commod"><dtml-var "gettext('Comments allowed but moderated')"></label><br/>
+<input type="radio" name="comment_allowed:int" value="0" id="comno" <dtml-if commentsNotAllowed>checked="checked"</dtml-if>/> <label for="comno"><dtml-var "gettext('Comments not allowed')"></label>
+</p>
+
+<p>
+<label for="date"><dtml-var "gettext('Date')"></label><br/>
+<input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "_.unicode(_.DateTime()).encode('utf-8')">"/>
+</p>
+
+<input type="submit" value=" <dtml-var "gettext('Add')"> " name="../manage_addPost:method" "/>
+
+<input type="submit" value="<dtml-var "gettext('Preview')">" name=".:method" "/>
+
+</form>
+
+<dtml-var standard_html_footer>

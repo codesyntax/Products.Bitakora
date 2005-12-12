@@ -1,0 +1,32 @@
+﻿<h2><dtml-var "gettext('Post a comment')"></h2>
+
+<div class="comment-data">
+<form method="post" action="<dtml-var blogurl missing="">/<dtml-var id>/">
+<p>
+<label for="author"><dtml-var "gettext('Name:')"></label><br/>
+<input id="author" name="author:utf8:ustring" size="30" value="<dtml-if "REQUEST.has_key('comment_author')"><dtml-var "_.unicode(REQUEST['comment_author']).encode('utf-8')" html_quote></dtml-if>" />
+</p>
+<p>
+<label for="email"><dtml-var "gettext('Email Address:')"></label><br/>
+<input id="email" name="email:utf8:ustring" size="30" value="<dtml-if "REQUEST.has_key('comment_email')"><dtml-var "_.unicode(REQUEST['comment_email']).encode('utf-8')" html_quote></dtml-if>" />
+</p>
+<p>
+<label for="url"><dtml-var "gettext('URL:')"></label><br/>
+<input id="url" name="url:utf8:ustring" size="30" value="<dtml-if "REQUEST.has_key('comment_url')"><dtml-var "_.unicode(REQUEST['comment_url']).encode('utf-8')" html_quote></dtml-if>" />
+</p>
+<p>
+<label><dtml-var "gettext('Comments:')"></label><br/>
+<dtml-var "Epoz('body:utf8:ustring', data='', toolbox='', lang='en',
+            path='', widget='bitakora_comment_js',
+            style='width: 440px; height: 250px; border: 1px solid #000000;',
+            button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;',
+            css='', customcss='', charset='utf-8', pageurl='')">
+<dtml-comment><textarea id="text" name="body:utf8" rows="10" cols="50"><dtml-if "REQUEST.form.has_key('body')"><dtml-var "REQUEST.form['body']" html_quote></dtml-if></textarea></dtml-comment>
+</p>
+<p>
+<input type="checkbox" id="setcookie" name="setcookie" <dtml-if "REQUEST.has_key('comment_author')">checked="checked"</dtml-if>/><label for="setcookie"><dtml-var "gettext('Remember your info. on cookie?')"></label><br/>
+<input type="submit" name="manage_addComment:method" value=" <dtml-var "gettext('Send your comment')"> " /><br/>
+<input type="submit" name="forgetPersonalInfo:method" value="<dtml-var "gettext('Forget personal info')">" />
+</p>
+</form>
+</div>

@@ -1,0 +1,6 @@
+<blockquote class="referencebody" cite="<dtml-var showURI>" id="reference<dtml-var getId>">
+<dtml-var showExcerpt>
+</blockquote>
+<p class="posted">
+<dtml-var "gettext('Reference by:')">&nbsp;<a href="<dtml-var showURI>"><dtml-var showTitle></a> <dtml-var showDate>
+</p>

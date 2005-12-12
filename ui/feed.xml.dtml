@@ -1,0 +1,25 @@
+﻿<dtml-call "RESPONSE.setHeader('content-type', 'text/xml; charset=UTF-8')"><?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title><dtml-var title_or_id></title>
+    <link><dtml-var blogurl></link>
+    <description><dtml-var subtitle></description>
+    <dtml-in "published_posts(size=10)">
+     <dtml-with getObject>
+     <item>
+      <title><dtml-var showTitle html_quote></title>
+      <link><dtml-var blogurl>/<dtml-var getId></link>
+      <description><![CDATA[
+        <dtml-var showBody>
+       ]]></description>
+      <dtml-in tagList>
+        <category><dtml-var sequence-item></category>
+      </dtml-in>
+      <comments><dtml-var blogurl>/<dtml-var getId>#comments</comments>
+      <author><dtml-var showAuthor html_quote> - <dtml-var contact_mail></author>
+      <pubDate><dtml-var "date.rfc822()"></pubDate>
+      </dtml-with>
+     </item>
+    </dtml-in>
+  </channel>
+</rss>

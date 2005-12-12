@@ -1,0 +1,5 @@
+<div id="preheader">
+<div id="tagline"><p><a href="/"><dtml-var "gettext('Blog community title')"></a></p></div>
+<div id="community"><a href="/"><dtml-var "gettext('Blog community title')"></a><a href="/step1"><dtml-var "gettext('Create a new blog')"></a></div>
+
+</div>

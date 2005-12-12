@@ -1,0 +1,18 @@
+<dtml-if "REQUEST.SESSION.get('username', None) is None"><dtml-call "REQUEST.RESPONSE.redirect('/')"></dtml-if>
+<dtml-var standard_html_header>
+
+<h2><dtml-var "gettext('3rd step: choose a template')"></h2>
+
+<form action="/step3.do" method="post">
+
+<dtml-in "img.templates.objectIds()">
+<p>
+<input type="radio" name="template" id="template<dtml-var sequence-item>" value="<dtml-var sequence-item>" /> <label for="template<dtml-var sequence-item>"># <dtml-var sequence-item></label>
+<a href="/img/template<dtml-var sequence-item>.jpg" target="_blank"><img src="/img/template<dtml-var sequence-item>-small.jpg" alt="Template<dtml-var sequence-item>" /></a>
+</p>
+</dtml-in>
+
+<p><input type="submit" value="<dtml-var "gettext('Start blogging!')">" /></p>
+
+</form>
+<dtml-var standard_html_footer>

@@ -1,0 +1,8 @@
+﻿<h2><dtml-var "gettext('Contents')"></h2>
+
+<ul>
+    <li><a href="<dtml-var blogurl>/archive"><dtml-var "gettext('Archive')"></a></li>
+    <li><a href="<dtml-var blogurl>/tag"><dtml-var "gettext('Tags')"></a></li>
+    <li><a href="<dtml-var blogurl>/feed.xml" class="xml"><dtml-var "gettext('RSS')"></a></li>
+    <li><a href="http://www.codesyntax.com"><dtml-var "gettext('Powered by Squishblog. By CodeSyntax')"></a></li>
+</ul>

@@ -1,0 +1,58 @@
+﻿<dtml-var standard_html_header>
+
+<dtml-var admin_header>
+
+<h1><dtml-var "gettext('Sidebar management')"></h1>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+<h2><dtml-var "gettext('HTML block')"></h2>
+
+<p><dtml-var "gettext('You can add some HTML to your sidebar. You can paste there Flickr photos javascript, del.icio.us tagroll, your bloglines subscriptions, or anything you want')"></p>
+
+<form action="save_sidebar_html" method="post">
+
+ <p>
+ <label for="html"><dtml-var "gettext('Edit here your HTML')"></label><br />
+ <textarea id="html" name="html:utf8:utext" rows="7" cols="40"><dtml-var "sidebar_html.encode('utf-8')" missing=""></textarea>
+ </p>
+ <p><input type="submit" value="<dtml-var "gettext('Save')">" /></p>
+</form>
+
+
+<h2><dtml-var "gettext('Links')"></h2>
+
+<p><dtml-var "gettext('You can add some websites to your link list on the sidebar. Links on this list will be shown in the sidebar of your blog')"></p>
+
+<dtml-in showLinks mapping>
+
+    <form action="removeLink" method="post" onsubmit="javascript:return confirm('<dtml-var "gettext('Are you sure?')">');">
+        <p>
+        <input type="hidden" name="key:int" value="<dtml-var key>"/>
+        <a href="<dtml-var url>"><dtml-var url> - <dtml-var title></a> &nbsp;
+        <input type="submit" value="<dtml-var "gettext('Delete link')">" />
+        </p>
+    </form>
+
+<dtml-else>
+    <h3><dtml-var "gettext('No links yet !')"></h3>
+</dtml-in>
+
+<h3><dtml-var "gettext('Add a new link')"></h3>
+<form action="addLink" method="get">
+<p><label for="url"><dtml-var "gettext('Url')"></label><br />
+   <input type="text" size="50" name="url:utf8" id="url" />
+ </p>
+
+ <p>
+    <label for="title"><dtml-var "gettext('Title')"></label><br />
+    <input type="text" size="50" name="title:utf8" id="title" />
+ </p>
+ <p><input type="submit" value="<dtml-var "gettext('Add')">" /></p>
+</form>
+
+<dtml-var standard_html_footer>

@@ -1,0 +1,149 @@
+﻿<dtml-var standard_html_header>
+
+<dtml-var admin_header>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+<dtml-if "'.' in REQUEST.keys()">
+<dtml-call "REQUEST.set('preview', '1')">
+<div class="preview">
+<dtml-var entry_preview>
+</div>
+
+</dtml-if>
+
+
+
+<h1><dtml-var "gettext('Edit this post')"></h1>
+
+<p><a href="<dtml-var absolute_url>"><dtml-var "gettext('View')"></a></p>
+
+<form action="" method="post">
+
+<p>
+<label for="author"><dtml-var "gettext('Author')"></label><br/>
+<dtml-if preview>
+<input type="text" id="author" name="author:utf8:ustring" value="<dtml-var "REQUEST.get('author')">" size="50"/>
+<dtml-else>
+<input type="text" id="author" name="author:utf8:ustring" value="<dtml-var showAuthor>" size="50"/>
+</dtml-if>
+</p>
+
+<p>
+<label for="title"><dtml-var "gettext('Title')"></label><br/>
+<dtml-if preview>
+<input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('title')">"/>
+<dtml-else>
+<input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var showTitle>"/>
+</dtml-if>
+</p>
+
+<p>
+<label for="tags"><dtml-var "gettext('Tags')"></label><br/>
+<dtml-if preview>
+<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(REQUEST.get('tags')).encode('utf-8')">"/>
+<dtml-else>
+<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var showTags>"/>
+</dtml-if>
+</p>
+
+<p>
+<label for="body"><dtml-var "gettext('Body')"></label><br/>
+<dtml-if preview>
+<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body'), toolbox='', lang='en',
+            path='', widget='bitakora_edit_js',
+            style='width: 440px; height: 250px; border: 1px solid #000000;', 
+            button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
+<dtml-else>
+<dtml-var "Epoz('body:utf8:utext', data=showBody(), toolbox='', lang='es',
+            path='', widget='bitakora_edit_js',
+            style='width: 440px; height: 250px; border: 1px solid #000000;', 
+            button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
+</dtml-if>
+
+<dtml-comment><textarea id="body" name="body:utf8:text" rows="10" cols="50"><dtml-var showBody></textarea> </dtml-comment>
+</p>
+
+<p>
+<label><dtml-var "gettext('Status')"></label><br/>
+<dtml-if preview>
+<input type="radio" name="publish:int" id="yes" value="1" <dtml-if "REQUEST.get('publish')==1">checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no" value="0" <dtml-if "REQUEST.get('publish') ==0">checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
+<dtml-else>
+<input type="radio" name="publish:int" id="yes" value="1" <dtml-if published>checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no" value="0" <dtml-if hidden>checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
+</dtml-if>
+</p>
+
+<p>
+<label for="date"><dtml-var "gettext('Date')"></label><br/>
+<dtml-if preview>
+<input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('date')">"/>
+<dtml-else>
+<input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var showDate>"/>
+</dtml-if>
+</p>
+
+<p>
+<dtml-var "gettext('Comment policy')"><br/>
+<input type="radio" name="comment_allowed:int" value="1" id="comyes" <dtml-if commentsAllowed>checked="checked"</dtml-if>/> <label for="comyes"><dtml-var "gettext('Comments allowed')"></label> <br/>
+<input type="radio" name="comment_allowed:int" value="2" id="commod" <dtml-if commentsModerated>checked="checked"</dtml-if>/> <label for="commod"><dtml-var "gettext('Comments allowed but moderated')"></label><br/>
+<input type="radio" name="comment_allowed:int" value="0" id="comno" <dtml-if commentsNotAllowed>checked="checked"</dtml-if>/> <label for="comno"><dtml-var "gettext('Comments not allowed')"></label>
+</p>
+
+<p>
+<input type="submit" value="<dtml-var "gettext('Edit')">" name="../manage_editPost:method" />
+<input type="submit" value="<dtml-var "gettext('Preview')">" name=".:method" />
+</p>
+
+</form>
+
+<h2><dtml-var "gettext('Edit comments')"></h2>
+<dtml-in "commentList(all=1)">
+<dtml-let commid="getId()">
+<h3 id="comment<dtml-var commid>">#comment<dtml-var getId></h3>
+<form action="manage_editComment" method="post">
+<fieldset>
+<p>
+<label for="author<dtml-var commid>"><dtml-var "gettext('Name:')"></label><br/>
+<input id="author<dtml-var commid>" name="author:utf8:ustring" size="30" value="<dtml-var showAuthor>" />
+</p>
+<p>
+<label for="email<dtml-var commid>"><dtml-var "gettext('Email Address:')"></label><br/>
+<input id="email<dtml-var commid>" name="email:utf8:ustring" size="30" value="<dtml-var showEmail>" />
+</p>
+<p>
+<label for="url<dtml-var commid>"><dtml-var "gettext('URL:')"></label><br/>
+<input id="url<dtml-var commid>" name="url:utf8:ustring" size="30" value="<dtml-var showURL>" />
+</p>
+<p>
+<label for="date<dtml-var commid>"><dtml-var "gettext('Date')"></label><br/>
+<input id="date<dtml-var commid>" name="date:utf8:ustring" size="30" value="<dtml-var showDate>" />
+</p>
+<p>
+<label for="text<dtml-var commid>"><dtml-var "gettext('Comments:')"></label><br/>
+<textarea id="text<dtml-var commid>" name="body:utf8:ustring" rows="10" cols="50"><dtml-var showBody></textarea>
+</p>
+
+<p>
+<label><dtml-var "gettext('Status')"></label><br/>
+<input type="radio" name="publish:int" id="yes<dtml-var commid>" value="1" <dtml-if published>checked="checked"</dtml-if> /> <label for="yes<dtml-var commid>"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no<dtml-var commid>" value="0" <dtml-if hidden>checked="cheked"</dtml-if> /> <label for="no<dtml-var commid>"><dtml-var "gettext('Unpublished')"></label>
+</p>
+
+<input type="hidden" name="id" value="<dtml-var getId>"/>
+<input type="submit" value="<dtml-var "gettext('Edit Comment')">"/>
+<input type="submit" value="<dtml-var "gettext('Delete comment')">" name="delete" onclick="javascript:return confirm('<dtml-var "gettext('Are you sure?')">');"/>
+</fieldset>
+</form>
+</dtml-let>
+
+<dtml-else>
+<p><dtml-var "gettext('There is no comment yet!')"></p>
+
+</dtml-in>
+<dtml-var standard_html_footer>

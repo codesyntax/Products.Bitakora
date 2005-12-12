@@ -1,0 +1,42 @@
+﻿<dtml-var standard_html_header>
+
+<dtml-if "REQUEST.has_key('id')">
+
+<dtml-in "Catalog.searchResults(tags=_.unicode(REQUEST.get('id'), 'utf-8'), published=1, meta_type='Post', sort_on='date', sort_order='descending', date=_.DateTime(), date_usage='range:max')">
+
+<dtml-if sequence-start>
+    <h3><dtml-var "gettext('Posts cataloged with tag: <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></h3>
+    <ol>
+</dtml-if>
+<dtml-with getObject>
+<li><a href="<dtml-var absolute_url>"><dtml-var showTitle></a> <dtml-var showDate></li>
+</dtml-with>
+
+<dtml-if sequence-end>
+</ol>
+</dtml-if>
+
+<dtml-else>
+    <p><dtml-var "gettext('There is no post with tag <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></p>
+</dtml-in>
+
+<dtml-else>
+
+<h3><dtml-var "gettext('tag')"></h3>
+
+<p>
+<dtml-let pxk="tagsAndPixels()"
+          pxks="pxk.keys()">
+<dtml-call "pxks.sort()">
+
+<dtml-in "pxks">
+<a href="<dtml-var blogurl>/tag/<dtml-var sequence-item>" style="font-size:<dtml-var "pxk[_['sequence-item']]">em;" ><dtml-var sequence-item></a>&nbsp;
+</dtml-in>
+
+
+</dtml-let>
+</p>
+
+</dtml-if>
+
+<dtml-var standard_html_footer>

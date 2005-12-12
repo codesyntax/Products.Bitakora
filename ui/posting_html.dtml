@@ -1,0 +1,30 @@
+﻿<dtml-var standard_html_header>
+<dtml-call "REQUEST.set('inentry', 1)">
+<dtml-var entry_body>
+<dtml-call "REQUEST.set('inentry', 0)">
+
+<dtml-if commentList>
+<div id="comments" class="comments">
+<h2><dtml-var "gettext('Comments')"></h2>
+<dtml-in commentList>
+    <dtml-var comment_body>
+</dtml-in>
+</div>
+</dtml-if>
+
+<dtml-if referenceList>
+<div id="trackbacks" class="comments">
+<h2><dtml-var "gettext('References')"></h2>
+<dtml-in referenceList>
+    <dtml-var reference_body missing="">
+</dtml-in>
+</div>
+</dtml-if>
+
+<dtml-if canComment>
+<div class="comments">
+    <dtml-var comment_form>
+</div>
+</dtml-if>
+
+<dtml-var standard_html_footer>

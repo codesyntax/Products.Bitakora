@@ -1,0 +1,51 @@
+<dtml-var standard_html_header>
+
+<dtml-var admin_header>
+
+<h1><dtml-var "gettext('Post list')"></h1>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+
+<dtml-if "Catalog.searchResults(meta_type='Post')">
+    
+<form action="manage_delPosts" onsubmit="javascript:return confirm('<dtml-var "gettext('Are you sure?')">');">
+
+<table>
+<tr>
+    <th><dtml-var "gettext('#')"></th>
+    <th><dtml-var "gettext('Edit')"></th>
+    <th><dtml-var "gettext('Date')"></th>
+    <th><dtml-var "gettext('Tags')"></th>
+    <th><dtml-var "gettext('Published')"></th>
+</tr>
+
+
+<dtml-in "Catalog.searchResults(meta_type='Post', sort_on='date', sort_order='descending')">
+<dtml-with getObject>
+<tr>
+    <td><input type="checkbox" name="ids:list" value="<dtml-var id>"/></td>
+    <td><a href="<dtml-var getId>/edit"><dtml-var showTitle></a> <a href="<dtml-var getId>"><dtml-var "gettext('View')"></a></td>
+
+    <td><dtml-var showDate></td>
+    <td><dtml-var showTags></td>
+    <td><dtml-if published><dtml-var "gettext('Yes')"><dtml-else><dtml-var "gettext('No')"></dtml-if></td>
+
+
+</tr>
+</dtml-with>
+</dtml-in>
+
+</table>
+<input type="submit" value="<dtml-var "gettext('Delete')">"/>
+</form>
+<dtml-else>
+    <p><dtml-var "gettext('There is no post yet')"></p>
+    <p><dtml-var "gettext('Add your first post using <strong>post</strong> tab')"></p>
+</dtml-if>
+
+<dtml-var standard_html_footer>

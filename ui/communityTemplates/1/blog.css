@@ -1,0 +1,272 @@
+body {
+	margin: 0px 0px 50px 0px;
+	text-align: center;
+	background:#EFEFEF url(/img/1bekoa.jpg) no-repeat bottom;
+}
+
+a {
+	text-decoration: none;
+	}
+
+a:link {
+	color: #B83803;
+	}
+
+a:visited {
+	color: #B83803;
+	}
+
+a:active {
+	color: #B83803;
+	}
+
+a:hover {
+	color: #FFCC33;
+	}
+
+h1, h2, h3 {
+	margin: 0px;
+	padding: 0px;
+	font-weight: normal;
+	}
+
+#container {
+	line-height: 140%;
+	margin: auto;
+	text-align: left;
+	padding: 0px;
+	width: 700px;
+	height: auto;
+	background:url(/img/1fondoa.jpg) repeat-y top left;
+	}
+
+#banner {
+	font-family: Verdana, Arial, sans-serif;
+	color: #FFFFFF;
+	text-align: left;
+	padding: 0px;
+	height: 132px;
+	background:#F7F7F7 url(/img/1goikoa.jpg) no-repeat top left;
+	}
+
+a#banner-img {
+	display: none;
+	}
+
+
+#banner a {
+	text-decoration: none;
+	font-family:'Trebuchet MS', Verdana, arial, sans-serif;
+	}
+
+#banner h1 {
+	font-size: 30px;
+	padding:50px 0px 0px 40px;
+	color: #B83803;
+	
+	
+	}
+
+#banner h2 {
+	font-size: 20px;
+	color: #FCB853;
+	padding:10px 0px 0px 45px;
+	}
+
+#center {
+	float: left;
+	width: 500px;
+	overflow: hidden;
+	}
+
+.content {
+	padding: 10px 15px 5px 20px;
+	
+	color: #666666;
+	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: small;
+	}
+
+#right {
+		float: left;
+	
+	
+	width: 200px;
+	
+	overflow: hidden;
+	}
+
+.content p {
+	color: #666666;
+	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: small;
+	font-weight: normal;
+	line-height: 150%;
+	text-align: left;
+	margin-bottom: 10px;
+	}
+
+.content blockquote {
+	line-height: 150%;
+	}
+
+.content li {
+	line-height: 150%;
+	}
+
+.content h2 {
+	color: #ccc;
+	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: x-small;
+	text-align: left;
+	margin-bottom: 0px;
+	font-weight: bold;
+	
+	}
+
+.content h3 {
+	color: #333;
+	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: 15px;
+	
+	text-align: left;
+	font-weight: bold;
+	
+	background: url(/img/1titulo.jpg) no-repeat top left;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	
+	}
+
+.content p.posted {
+	color: #999999;
+	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: x-small;
+	border-top: 1px solid #999999;
+	text-align: left;
+	
+	
+	
+	margin-bottom: 25px;
+	line-height: normal;
+	padding: 3px;
+	}
+
+.sidebar {
+	padding: 15px 15px 15px 15px;
+	}
+
+
+
+#calendar {
+  	line-height: 140%;
+	color: #666666;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	
+	
+	
+  	padding: 2px;
+	text-align: center;
+	margin-bottom: 30px;
+	}
+
+#calendar table {
+	padding: 2px;
+	border-collapse: collapse;
+	border: 0px;
+	width: 100%;
+	}
+
+#calendar caption {
+	color: #666666;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	
+	text-align: center;
+	font-weight: bold;
+	
+	text-transform: uppercase;
+	
+	letter-spacing: .3em;
+	}
+
+#calendar th {
+	text-align: center;
+	font-weight: normal;
+	}
+
+#calendar td {
+	text-align: center;
+	}
+
+.sidebar h2 {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	background: url(/img/1menua.jpg) no-repeat right;
+	/*background-color:#F5C04D;*/
+	text-align: left;
+	font-weight: bold;
+	height:30px;
+	text-transform: uppercase;
+	padding-left:5px;
+  	
+	}
+
+.sidebar ul {
+	padding-left: 0px;
+	margin: 0px;
+	margin-bottom: 30px;
+	}
+
+.sidebar li {
+	color: #666666;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	text-align: left;
+	line-height: 200%;
+	border-bottom:1px solid #ccc;
+	margin-top: 0px;
+	list-style-type: none;
+
+	}
+
+.sidebar img {
+	border: 3px solid #FFFFFF;
+	}
+
+.photo {
+	text-align: left;
+	margin-bottom: 20px;
+	}
+
+.link-note {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	line-height: 150%;
+	text-align: left;
+	padding: 2px;
+	margin-bottom: 15px;
+	}
+
+#powered {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	line-height: 150%;
+	text-align: left;
+	color: #666666;
+	margin-top: 50px;
+	}
+
+#comment-data {
+	float: left;
+	width: 180px;
+	padding-right: 15px;
+	margin-right: 15px;
+	text-align: left;
+	border-right: 1px dotted #BBB;
+	}
+
+textarea[id="comment-text"] {
+	width: 80%;
+	}

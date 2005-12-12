@@ -1,0 +1,28 @@
+<dtml-var standard_html_header>
+
+<dtml-let came_from="REQUEST.get('came_from', '')">
+
+    <dtml-if expr="_.SecurityGetUser().getUserName() == 'Anonymous User'">
+
+        <dtml-call expr="REQUEST['RESPONSE'].unauthorized()">
+
+        <h3><dtml-var "gettext('Login failure')"></h3>
+
+        <p><dtml-var "gettext('Please <a href=login_form?came_from=&dtml.url_quote-came_from;>try again.</a>')"></p>
+
+
+    <dtml-else>
+
+        <dtml-call "RESPONSE.redirect(usersBlog(REQUEST.AUTHENTICATED_USER.getUserName()))">
+        <dtml-comment>
+        <dtml-if came_from>
+            <dtml-call expr="RESPONSE.redirect(came_from)">
+        <dtml-else>
+            <p><dtml-var "gettext('Welcome!')"></p>
+        </dtml-if>
+        </dtml-comment>
+    </dtml-if>
+
+</dtml-let>
+
+<dtml-var standard_html_footer>

@@ -1,0 +1,11 @@
+<dtml-if "not REQUEST.AUTHENTICATED_USER.getId()">
+<div class="utility">
+<dtml-var create_blog_form>
+</div>
+</dtml-if>
+<div class="utility">
+<dtml-var menu>
+</div>
+<div class="utility">
+<dtml-var tag_all_html>
+</div>

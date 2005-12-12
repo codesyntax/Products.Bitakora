@@ -1,0 +1,34 @@
+﻿<dtml-var standard_html_header>
+<dtml-if "REQUEST.get('ndx', None)">
+    <dtml-in "published_posts(start=1)" size=10 start=ndx>
+       <dtml-with getObject>
+        <dtml-var entry_body>
+       </dtml-with>    
+    <dtml-else>
+        <p><dtml-var "gettext('There is no entry.')"></p>
+    </dtml-in>
+    <dtml-in "published_posts(start=1)" size=10 start=ndx>
+      <p>
+      <dtml-if previous-sequence>
+        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var previous-sequence-start-number>" class="next"><dtml-var "gettext('Next posts')"></a> &nbsp;&nbsp;
+      </dtml-if>
+      <dtml-if next-sequence>
+        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var next-sequence-start-number>" class="previous"><dtml-var "gettext('Previous posts')"></a>
+      </dtml-if>
+      </p>
+    </dtml-in>
+
+<dtml-else>
+    <dtml-in published_posts> 
+        <dtml-with getObject>
+        <dtml-var entry_body>
+        </dtml-with>    
+      <dtml-if sequence-end>
+       <p><a href="<dtml-var URL>?ndx=11" class="next"><dtml-var "gettext('Next posts')"></a> </p>
+      </dtml-if>
+    <dtml-else>
+        <p><dtml-var "gettext('There is no entry.')"></p>
+    </dtml-in>
+
+</dtml-if>
+<dtml-var standard_html_footer>

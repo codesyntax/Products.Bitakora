@@ -1,0 +1,48 @@
+<dtml-var standard_html_header>
+
+<div id="lastentries">
+
+<h2><dtml-var "gettext('Tags')"></h2>
+
+<dtml-if "REQUEST.has_key('id')">
+<dtml-in "Catalog.searchResults(tags=_.unicode(REQUEST.get('id'), 'utf-8'), meta_type='Post', sort_on='date', sort_order='reverse')">
+<dtml-if sequence-start>
+    <h3><dtml-var "gettext('Posts cataloged with tag: <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></h3>
+</dtml-if>
+<dtml-with getObject>
+<div class="entry">
+     <h2><a href="<dtml-var blogurl>"><dtml-var blog_title></a></h2>
+     <img src="<dtml-var imageUrl>" title="<dtml-var blog_title>" alt="<dtml-var blog_title>" />
+     <h3><a href="<dtml-var absolute_url>"><dtml-var showTitle></a></h3>
+     <p><dtml-var showBody size="200"></p>
+  </div>
+</dtml-with>
+
+<dtml-else>
+    <p><dtml-var "gettext('There is no post with tag <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></p>
+</dtml-in>
+
+<dtml-else>
+
+<h3><dtml-var "gettext('tag')"></h3>
+
+<p>
+
+<dtml-let pxk="tagsAndPixels()"
+          pxks="pxk.keys()">
+<dtml-call "pxks.sort()">
+
+<dtml-in "pxks">
+<a href="<dtml-var blogurl>/tag/<dtml-var sequence-item>" style="font-size:<dtml-var "pxk[_['sequence-item']]">px;" ><dtml-var sequence-item></a>&nbsp;
+</dtml-in>
+</dtml-let>
+</p>
+</dtml-if>
+
+</div>
+
+<div id="utilities">
+ <dtml-var column>
+</div>
+
+<dtml-var standard_html_footer>

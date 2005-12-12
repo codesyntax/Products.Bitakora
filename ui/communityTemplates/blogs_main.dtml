@@ -1,0 +1,7 @@
+<div id="lastentries">
+<dtml-var last_posts>
+</div>
+
+<div id="utilities">
+<dtml-var column>
+</div>

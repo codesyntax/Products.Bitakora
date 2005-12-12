@@ -1,0 +1,8 @@
+<dtml-var standard_html_header>
+
+<h1><dtml-var "gettext('Oooooops')"></h1>
+
+
+<p><dtml-var "gettext('Some error happened of the resource you were looking for does not exist. Try again please.')"></p>
+
+<dtml-var standard_html_footer>

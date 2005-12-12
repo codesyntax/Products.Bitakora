@@ -1,0 +1,10 @@
+﻿<dtml-in showLinks mapping>
+<dtml-if sequence-start>
+<h2><dtml-var "gettext('Links')"></h2>
+<ul>
+</dtml-if>
+    <li><a href="<dtml-var url>" title="<dtml-var title html_quote>"><dtml-var title html_quote></a></li>
+<dtml-if sequence-end>
+</ul>
+</dtml-if>
+</dtml-in>

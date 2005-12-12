@@ -1,0 +1,7 @@
+<h2><dtml-var "gettext('About this')"></h2>
+<div class="link-note">
+<p>
+<dtml-if imageUrl><img src="<dtml-var imageUrl>" alt="<dtml-var blog_title>" title="<dtml-var blog_title>" /> <br/></dtml-if>
+<dtml-var showDescription>
+</p>
+</div>
