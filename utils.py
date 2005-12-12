@@ -19,7 +19,7 @@ ok_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_ '
 def addDTML(obj,id,title,file): 
     file_path = Globals.package_home(globals())
     f=open(file_path+'/'+file+'.dtml')
-    file=unicode(f.read(), 'utf-8').encode('utf-8')
+    file=f.read()
     f.close()
     obj.manage_addDTMLMethod(id,title,file)
     return getattr(obj,id)
@@ -27,7 +27,7 @@ def addDTML(obj,id,title,file):
 def addPythonScript(obj,id,file):
     file_path = Globals.package_home(globals())
     f=open(file_path+'/'+file+'.py')     
-    file=unicode(f.read(), 'utf-8').encode('utf-8')  
+    file=f.read()
     f.close()     
     manage_addPythonScript(obj,id)
     obj._getOb(id).write(file)
