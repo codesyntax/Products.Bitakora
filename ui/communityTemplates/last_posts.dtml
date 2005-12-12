@@ -1,12 +1,30 @@
 <h2><dtml-var "gettext('Last posts')"></h2>
 
-<dtml-in "Catalog.searchResults(meta_type='Post', published=1, size=10, date=_.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending')">
-<dtml-with getObject>
-  <div class="entry">
-     <h2><a href="<dtml-var blogurl>"><dtml-var blog_title></a></h2>
-     <img src="<dtml-var imageUrl>" title="<dtml-var blog_title>" alt="<dtml-var blog_title>" />
-     <h3><a href="<dtml-var absolute_url>"><dtml-var showTitle></a></h3>
-     <p><dtml-var showBody size="200"></p>
-  </div>
-</dtml-with>
-</dtml-in>
+<dtml-if "REQUEST.get('ndx', None)">
+    <dtml-in "communityLastPosts(start=1)" size=10 start=ndx>
+       <dtml-with getObject>
+        <dtml-var entry_body_community>
+       </dtml-with>    
+    <dtml-else>
+        <p><dtml-var "gettext('There is no entry.')"></p>
+    </dtml-in>
+     <dtml-in "communityLastPosts(start=1)" size=10 start=ndx>
+      <dtml-if next-sequence>
+        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var next-sequence-start-number>" class="next"><dtml-var "gettext('Previous posts')"></a>
+      </dtml-if>
+      <dtml-if previous-sequence>
+        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var previous-sequence-start-number>" class="previous"><dtml-var "gettext('Next posts')"></a> 
+      </dtml-if>
+    </dtml-in>
+<dtml-else>
+    <dtml-in communityLastPosts> 
+        <dtml-with getObject>
+        <dtml-var entry_body_community>
+        </dtml-with>  
+       <dtml-if sequence-end>  
+       <p><a href="<dtml-var URL>?ndx=11" class="next"><dtml-var "gettext('Next posts')"></a> </p>
+       </dtml-if>
+    <dtml-else>
+        <p><dtml-var "gettext('There is no entry.')"></p>
+    </dtml-in>
+</dtml-if>

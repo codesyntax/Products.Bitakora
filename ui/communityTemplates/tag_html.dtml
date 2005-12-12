@@ -10,12 +10,7 @@
     <h3><dtml-var "gettext('Posts cataloged with tag: <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></h3>
 </dtml-if>
 <dtml-with getObject>
-<div class="entry">
-     <h2><a href="<dtml-var blogurl>"><dtml-var blog_title></a></h2>
-     <img src="<dtml-var imageUrl>" title="<dtml-var blog_title>" alt="<dtml-var blog_title>" />
-     <h3><a href="<dtml-var absolute_url>"><dtml-var showTitle></a></h3>
-     <p><dtml-var showBody size="200"></p>
-  </div>
+<dtml-var entry_body_community>
 </dtml-with>
 
 <dtml-else>

@@ -1,4 +1,4 @@
-﻿<h2><dtml-var "gettext('Contents')"></h2>
+<h2><dtml-var "gettext('Contents')"></h2>
 
 <ul>
     <li><a href="<dtml-var blogurl>/archive"><dtml-var "gettext('Archive')"></a></li>

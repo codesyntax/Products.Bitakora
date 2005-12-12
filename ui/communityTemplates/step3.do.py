@@ -18,7 +18,7 @@ id = request.SESSION.get('id')
 template = str(request.get('template'))
 
 # create the blog
-container.manage_addProduct['Squishblog'].manage_addSquishblog(id, title, u'', contact_mail)
+container.manage_addProduct['Bitakora'].manage_addBitakora(id, title, u'', contact_mail)
 
 blog = container.get(id)
 

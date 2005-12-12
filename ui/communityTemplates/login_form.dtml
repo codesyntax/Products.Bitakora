@@ -4,9 +4,9 @@
 
 <h3><dtml-var "gettext('Just for registered users')"></h3>
 
-<dtml-let came_from="REQUEST.get('came_from', '')" action_url="came_from or '/'">
+<dtml-let came_from="REQUEST.get('came_from', '')" action_url="came_from or '/logged_in'">
 
-<form action="&dtml-action_url;" method="POST">
+<form action="&dtml-action_url;" method="post">
 
 <fieldset>
 

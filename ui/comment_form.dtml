@@ -1,4 +1,4 @@
-﻿<h2><dtml-var "gettext('Post a comment')"></h2>
+<h2><dtml-var "gettext('Post a comment')"></h2>
 
 <div class="comment-data">
 <form method="post" action="<dtml-var blogurl missing="">/<dtml-var id>/">

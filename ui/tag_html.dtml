@@ -1,4 +1,4 @@
-﻿<dtml-var standard_html_header>
+<dtml-var standard_html_header>
 
 <dtml-if "REQUEST.has_key('id')">
 

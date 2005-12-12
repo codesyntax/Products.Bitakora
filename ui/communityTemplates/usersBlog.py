@@ -7,7 +7,7 @@
 ##parameters=user
 ##title=
 ##
-cat = context.Catalog
+cat = container.Catalog
 
 blog = cat.searchResults(users=user)
 

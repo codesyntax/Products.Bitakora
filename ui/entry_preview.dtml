@@ -1,4 +1,4 @@
-﻿<h2><dtml-var "REQUEST.get('date')"></h2>
+<h2><dtml-var "REQUEST.get('date')"></h2>
 <h3><dtml-var "REQUEST.get('title')"></h3>
 
 <div class="storycontent">

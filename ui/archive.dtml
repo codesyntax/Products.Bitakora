@@ -1,4 +1,4 @@
-﻿<dtml-var standard_html_header>
+<dtml-var standard_html_header>
 
 <ul>
 <dtml-in "Catalog.uniqueValuesFor('yearmonth')" sort=sequence-item reverse>

@@ -1,5 +1,8 @@
 <div id="preheader">
-<div id="tagline"><p><a href="/"><dtml-var "gettext('Blog community title')"></a></p></div>
-<div id="community"><a href="/"><dtml-var "gettext('Blog community title')"></a><a href="/step1"><dtml-var "gettext('Create a new blog')"></a></div>
-
+<div id="tagline"><p><a href="/"><dtml-var communityTitle></a></p></div>
+<dtml-if "REQUEST.AUTHENTICATED_USER.getId()">
+<div id="community"><a href="<dtml-var "usersBlog(REQUEST.AUTHENTICATED_USER.getId())">/admin"><dtml-var "gettext('Manage your blog')"></a> &nbsp; <a href="/logout" ><dtml-var "gettext('Logout')"></a></div>
+<dtml-else>
+<div id="community"><a href="/step1"><dtml-var "gettext('Create a new blog')"></a> &nbsp; <a href="/login_form"><dtml-var "gettext('Log in to your blog')"></a></div>
+</dtml-if>
 </div>

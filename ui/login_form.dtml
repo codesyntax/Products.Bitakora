@@ -1,4 +1,4 @@
-﻿<dtml-var standard_html_header>
+<dtml-var standard_html_header>
 
 <h3><dtml-var "gettext('Just for registered users')"></h3>
 

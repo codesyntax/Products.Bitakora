@@ -1,4 +1,4 @@
-﻿<dtml-var standard_html_header>
+<dtml-var standard_html_header>
 <dtml-if "REQUEST.get('ndx', None)">
     <dtml-in "published_posts(start=1)" size=10 start=ndx>
        <dtml-with getObject>
