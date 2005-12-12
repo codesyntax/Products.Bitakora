@@ -52,6 +52,7 @@ class BitakoraCommunity(BTreeFolder2):
         It will contain blogs and methods for the main page of the community """
     from Bitakora import Bitakora
 
+    __ac_roles__ = ('Blogger',)
     security = ClassSecurityInfo()
     meta_type = 'BitakoraCommunity'
 
@@ -152,9 +153,11 @@ class BitakoraCommunity(BTreeFolder2):
         dtmls.extend(['step3.done', 'tag_all_html', 'tag_html'])        
         for dtml in dtmls:
             addDTML(self, dtml, '', 'ui/communityTemplates/%s' % dtml)
-            
+        
+        """    
         login = getattr(self, 'logged_in')
         login._proxy_roles=('Manager',)
+        """
         
         scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog', 'logout']
         for script in scripts:
