@@ -1,12 +1,12 @@
 #preheader {
 	margin:0 auto;
-	background: #C00;
+	background: #C00 url(img/logotxikia.gif)no-repeat top left;
 	color: #fff;
 	padding: 0px;
 	height:25px;
 	text-align:right;
 	font-size: 10px;
-	font-family: Verdana, sans-serif;
+       font-family: Verdana, sans-serif;
 	}
 #preheader a{
 	color: #fff;
@@ -22,10 +22,11 @@
 	float:left;
 	}
 #tagline a{
-	padding:3px 0px 5px 10px;
-}
+	padding:3px 0px 5px 150px;
+        color: #c00;
+	}
 #tagline a:hover{
-    color: #000;
+        color: #c00;
 	}
 
 #community{

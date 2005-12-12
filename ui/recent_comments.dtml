@@ -1,9 +1,9 @@
-<dtml-if "getPublishedComments(size=10)">
+﻿<dtml-if lastComments>
 <h2><dtml-var "gettext('Recent Comments')"></h2>
 <ul>
-  <dtml-in "getPublishedComments(size=10)">
+  <dtml-in lastComments>
    <dtml-with getObject>
-   <li><a href="<dtml-var absolute_url>"> <dtml-var postTitle></a><br /><dtml-var showAuthor></li>
+   <li><a href="<dtml-var blogurl>/<dtml-var postid>#comment<dtml-var getId>"><dtml-var showAuthor>  <dtml-var postTitle></a></li>
    </dtml-with>
   </dtml-in>
 </ul>

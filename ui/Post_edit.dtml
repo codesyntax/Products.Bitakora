@@ -1,10 +1,10 @@
-<dtml-var standard_html_header>
+﻿<dtml-var standard_html_header>
 
 <dtml-var admin_header>
 
 <dtml-if "REQUEST.get('msg', '')">
 <div class="system-msg">
-    <dtml-var "gettext(REQUEST.get('msg'))">
+    <dtml-var "REQUEST.get('msg')">
 </div>
 </dtml-if>
 
@@ -26,8 +26,8 @@
 
 <p>
 <label for="author"><dtml-var "gettext('Author')"></label><br/>
-<dtml-if REQUEST.preview>
-<input type="text" id="author" name="author:utf8:ustring" value="<dtml-var "REQUEST.get('author', '')">" size="50"/>
+<dtml-if preview>
+<input type="text" id="author" name="author:utf8:ustring" value="<dtml-var "REQUEST.get('author')">" size="50"/>
 <dtml-else>
 <input type="text" id="author" name="author:utf8:ustring" value="<dtml-var showAuthor>" size="50"/>
 </dtml-if>
@@ -35,8 +35,8 @@
 
 <p>
 <label for="title"><dtml-var "gettext('Title')"></label><br/>
-<dtml-if REQUEST.preview>
-<input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('title', '')">"/>
+<dtml-if preview>
+<input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('title')">"/>
 <dtml-else>
 <input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var showTitle>"/>
 </dtml-if>
@@ -44,8 +44,8 @@
 
 <p>
 <label for="tags"><dtml-var "gettext('Tags')"></label><br/>
-<dtml-if REQUEST.preview>
-<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(prepareTags(tags=REQUEST.get('tags', [])))">"/>
+<dtml-if preview>
+<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(REQUEST.get('tags')).encode('utf-8')">"/>
 <dtml-else>
 <input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var showTags>"/>
 </dtml-if>
@@ -53,13 +53,13 @@
 
 <p>
 <label for="body"><dtml-var "gettext('Body')"></label><br/>
-<dtml-if REQUEST.preview>
-<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', '') and cleanBody(body) or '', toolbox='', lang=Localizer.get_selected_language(),
+<dtml-if preview>
+<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body'), toolbox='', lang='en',
             path='', widget='bitakora_edit_js',
             style='width: 440px; height: 250px; border: 1px solid #000000;', 
             button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
 <dtml-else>
-<dtml-var "Epoz('body:utf8:utext', data=showBody(), toolbox='', lang=Localizer.get_selected_language(),
+<dtml-var "Epoz('body:utf8:utext', data=showBody(), toolbox='', lang='es',
             path='', widget='bitakora_edit_js',
             style='width: 440px; height: 250px; border: 1px solid #000000;', 
             button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
@@ -70,9 +70,9 @@
 
 <p>
 <label><dtml-var "gettext('Status')"></label><br/>
-<dtml-if REQUEST.preview>
-<input type="radio" name="publish:int" id="yes" value="1" <dtml-if "REQUEST.get('publish', 0)==1">checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
-<input type="radio" name="publish:int" id="no" value="0" <dtml-if "REQUEST.get('publish', 1) ==0">checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
+<dtml-if preview>
+<input type="radio" name="publish:int" id="yes" value="1" <dtml-if "REQUEST.get('publish')==1">checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no" value="0" <dtml-if "REQUEST.get('publish') ==0">checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
 <dtml-else>
 <input type="radio" name="publish:int" id="yes" value="1" <dtml-if published>checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
 <input type="radio" name="publish:int" id="no" value="0" <dtml-if hidden>checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
@@ -81,8 +81,8 @@
 
 <p>
 <label for="date"><dtml-var "gettext('Date')"></label><br/>
-<dtml-if REQUEST.preview>
-<input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('date', '')">"/>
+<dtml-if preview>
+<input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('date')">"/>
 <dtml-else>
 <input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var showDate>"/>
 </dtml-if>
@@ -143,44 +143,7 @@
 </dtml-let>
 
 <dtml-else>
-<p><dtml-var "gettext('There are no comments yet!')"></p>
+<p><dtml-var "gettext('There is no comment yet!')"></p>
+
 </dtml-in>
-
-<h2><dtml-var "gettext('Edit references')"></h2>
-<dtml-in "referenceList(all=1)">
-<dtml-let commid="getId()">
-<h3 id="<dtml-var commid>">#<dtml-var getId></h3>
-<form action="<dtml-var "getParentNode().absolute_url()">/<dtml-var commid>" method="post">
-<fieldset>
-<p>
-<label for="uri<dtml-var commid>"><dtml-var "gettext('URI:')"></label><br/>
-<input id="uri<dtml-var commid>" name="uri:utf8:ustring" size="40" value="<dtml-var showURI>" />
-</p>
-<p>
-<label for="title<dtml-var commid>"><dtml-var "gettext('Title:')"></label><br/>
-<input id="title<dtml-var commid>" name="title:utf8:ustring" size="40" value="<dtml-var showTitle>" />
-</p>
-<p>
-<label for="excerpt<dtml-var commid>"><dtml-var "gettext('Excerpt:')"></label><br/>
-<textarea id="excerpt<dtml-var commid>" name="excerpt:utf8:ustring" rows="10" cols="40"><dtml-var showExcerpt></textarea>
-</p>
-
-<p>
-<label><dtml-var "gettext('Status')"></label><br/>
-<input type="radio" name="publish:int" id="yes<dtml-var commid>" value="1" <dtml-if published>checked="checked"</dtml-if> /> <label for="yes<dtml-var commid>"><dtml-var "gettext('Published')"></label>
-<input type="radio" name="publish:int" id="no<dtml-var commid>" value="0" <dtml-if hidden>checked="cheked"</dtml-if> /> <label for="no<dtml-var commid>"><dtml-var "gettext('Unpublished')"></label>
-</p>
-
-<input type="hidden" name="id" value="<dtml-var getId>"/>
-<input type="submit" value="<dtml-var "gettext('Edit reference')">" name="edit:method"/>
-<input type="submit" value="<dtml-var "gettext('Delete reference')">" name="delete:method" onclick="javascript:return confirm('<dtml-var "gettext('Are you sure?')">');"/>
-</fieldset>
-</form>
-</dtml-let>
-
-<dtml-else>
-<p><dtml-var "gettext('There are no comments yet!')"></p>
-</dtml-in>
-
-
 <dtml-var standard_html_footer>

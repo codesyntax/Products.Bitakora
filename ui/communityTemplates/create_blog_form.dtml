@@ -1,3 +1,3 @@
 <h2><dtml-var "gettext('Create a blog')"></h2>
 
-<p><a href="<dtml-var communityUrl>/step1"><dtml-var "gettext('Create a blog')"></a></p>
+<p><a href="/step1"><dtml-var "gettext('Create your blog')"></a></p>

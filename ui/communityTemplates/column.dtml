@@ -1,18 +1,5 @@
-<div class="utility login">
-    <dtml-if "REQUEST.AUTHENTICATED_USER.getId()">
-        <ul class="nav">
-                <li class="first"><dtml-var "gettext('Hello %(user)s') % {'user':REQUEST.AUTHENTICATED_USER.getId()}"></li>
-                <li><a href="<dtml-var "usersBlog(REQUEST.AUTHENTICATED_USER.getId())">/post"><dtml-var "gettext('Write a new post')"></a></li>
-                <li><a href="<dtml-var "usersBlog(REQUEST.AUTHENTICATED_USER.getId())">/admin"><dtml-var "gettext('Manage your blog')"></a></li>
-                <li><a href="<dtml-var communityUrl>/logout" ><dtml-var "gettext('Logout')"></a></li>
-        </ul>
-        <dtml-else>
-          <dtml-var mini_login_form>
-     </dtml-if>
-    
-</div>
 <dtml-if "not REQUEST.AUTHENTICATED_USER.getId()">
-<div class="utility login">
+<div class="utility">
 <dtml-var create_blog_form>
 </div>
 </dtml-if>

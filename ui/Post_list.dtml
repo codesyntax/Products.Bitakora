@@ -6,7 +6,7 @@
 
 <dtml-if "REQUEST.get('msg', '')">
 <div class="system-msg">
-    <dtml-var "gettext(REQUEST.get('msg'))">
+    <dtml-var "REQUEST.get('msg')">
 </div>
 </dtml-if>
 
@@ -29,7 +29,7 @@
 <dtml-with getObject>
 <tr>
     <td><input type="checkbox" name="ids:list" value="<dtml-var id>"/></td>
-    <td><a href="<dtml-var getId>/edit"><dtml-var showTitle></a> <strong><a href="<dtml-var getId>">(<dtml-var "gettext('View')">)</a></strong></td>
+    <td><a href="<dtml-var getId>/edit"><dtml-var showTitle></a> <a href="<dtml-var getId>"><dtml-var "gettext('View')"></a></td>
 
     <td><dtml-var showDate></td>
     <td><dtml-var showTags></td>
@@ -44,7 +44,7 @@
 <input type="submit" value="<dtml-var "gettext('Delete')">"/>
 </form>
 <dtml-else>
-    <p><dtml-var "gettext('There are no entries.')"></p>
+    <p><dtml-var "gettext('There is no post yet')"></p>
     <p><dtml-var "gettext('Add your first post using <strong>post</strong> tab')"></p>
 </dtml-if>
 

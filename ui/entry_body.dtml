@@ -1,4 +1,4 @@
-<h2><dtml-var showDate></h2>
+﻿<h2><dtml-var showDate></h2>
 <h3><dtml-if inentry><dtml-var showTitle html_quote><dtml-else><a href="<dtml-var absolute_url>" id="post<dtml-var getId>" title="<dtml-var showTitle html_quote>"><dtml-var showTitle html_quote></a></dtml-if></h3>
 
 <div class="storycontent">
@@ -16,6 +16,6 @@
      | <a href="<dtml-var blogurl missing="">/<dtml-var getId>#comments"><dtml-var "gettext('Comments')"> (<dtml-var numberOfComments>)</a>
     </dtml-if>
     <dtml-if canReference>
-     | <a href="<dtml-var blogurl missing="">/<dtml-var getId>#trackbacks"><dtml-var "gettext('References')"> (<dtml-var numberOfReferences>)</a>
+     | <a href="<dtml-var blogurl missing="">/<dtml-var getId>#trackbacks"><dtml-var "gettext('Trackbacks')"> (<dtml-var numberOfReferences>)</a>
     </dtml-if>
 </p>

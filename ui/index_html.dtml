@@ -1,12 +1,11 @@
-<dtml-var standard_html_header>
-
+﻿<dtml-var standard_html_header>
 <dtml-if "REQUEST.get('ndx', None)">
     <dtml-in "published_posts(start=1)" size=10 start=ndx>
        <dtml-with getObject>
         <dtml-var entry_body>
        </dtml-with>    
     <dtml-else>
-        <p><dtml-var "gettext('There are no entries.')"></p>
+        <p><dtml-var "gettext('There is no entry.')"></p>
     </dtml-in>
     <dtml-in "published_posts(start=1)" size=10 start=ndx>
       <p>
@@ -20,7 +19,6 @@
     </dtml-in>
 
 <dtml-else>
-
     <dtml-in published_posts> 
         <dtml-with getObject>
         <dtml-var entry_body>
@@ -29,12 +27,8 @@
        <p><a href="<dtml-var URL>?ndx=11" class="next"><dtml-var "gettext('Next posts')"></a> </p>
       </dtml-if>
     <dtml-else>
-    
-        <p><dtml-var "gettext('There are no entries.')"></p>
-    
-    
+        <p><dtml-var "gettext('There is no entry.')"></p>
     </dtml-in>
 
 </dtml-if>
-
 <dtml-var standard_html_footer>

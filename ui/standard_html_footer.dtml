@@ -1,4 +1,4 @@
-  </div>
+﻿  </div>
  </div>
 
 <div id="right">
@@ -7,9 +7,8 @@
  </div>
 </div>
 
-<div style="clear: both;"></div>
+<div style="clear: both;"> </div>
 
 </div>
-<dtml-var google_analytics missing="">
 </body>
 </html>

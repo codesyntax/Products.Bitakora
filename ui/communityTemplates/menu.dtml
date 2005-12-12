@@ -1,8 +1,6 @@
-<h2><dtml-var "gettext('About this')"></h2>
+<h2><dtml-var "gettext('What is this?')"></h2>
 <ul>
-  <dtml-in "community().objectValues('LocalContent')" sort="id">
+  <dtml-in "objectValues('LocalContent')" sort="id">
     <li><a href="<dtml-var absolute_url>"><dtml-var title_or_id></a></li>
   </dtml-in>
-    <li><a href="http://www.codesyntax.com/bitakora"><dtml-var "gettext('Powered by Bitakora')"></a></li>
-  
 </ul>

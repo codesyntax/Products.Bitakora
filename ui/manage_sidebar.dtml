@@ -1,4 +1,4 @@
-<dtml-var standard_html_header>
+﻿<dtml-var standard_html_header>
 
 <dtml-var admin_header>
 
@@ -6,19 +6,19 @@
 
 <dtml-if "REQUEST.get('msg', '')">
 <div class="system-msg">
-    <dtml-var "gettext(REQUEST.get('msg'))">
+    <dtml-var "REQUEST.get('msg')">
 </div>
 </dtml-if>
 
 <h2><dtml-var "gettext('HTML block')"></h2>
 
-<p><dtml-var "gettext('You can add some HTML to your sidebar. You can paste there javascripts for Flickr photos, the del.icio.us tagroll, your bloglines subscriptions, whatever...')"></p>
+<p><dtml-var "gettext('You can add some HTML to your sidebar. You can paste there Flickr photos javascript, del.icio.us tagroll, your bloglines subscriptions, or anything you want')"></p>
 
 <form action="save_sidebar_html" method="post">
 
  <p>
  <label for="html"><dtml-var "gettext('Edit here your HTML')"></label><br />
- <textarea id="html" name="html:utf8:utext" rows="7" cols="40"><dtml-var show_sidebar_html missing=""></textarea>
+ <textarea id="html" name="html:utf8:utext" rows="7" cols="40"><dtml-var "sidebar_html.encode('utf-8')" missing=""></textarea>
  </p>
  <p><input type="submit" value="<dtml-var "gettext('Save')">" /></p>
 </form>
@@ -44,13 +44,13 @@
 
 <h3><dtml-var "gettext('Add a new link')"></h3>
 <form action="addLink" method="get">
-<p><label for="url"><dtml-var "gettext('URL')"></label><br />
-   <input type="text" size="50" name="url:utf8:ustring" id="url" />
+<p><label for="url"><dtml-var "gettext('Url')"></label><br />
+   <input type="text" size="50" name="url:utf8" id="url" />
  </p>
 
  <p>
     <label for="title"><dtml-var "gettext('Title')"></label><br />
-    <input type="text" size="50" name="title:utf8:ustring" id="title" />
+    <input type="text" size="50" name="title:utf8" id="title" />
  </p>
  <p><input type="submit" value="<dtml-var "gettext('Add')">" /></p>
 </form>

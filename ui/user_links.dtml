@@ -1,4 +1,4 @@
-<dtml-in showLinks mapping>
+﻿<dtml-in showLinks mapping>
 <dtml-if sequence-start>
 <h2><dtml-var "gettext('Links')"></h2>
 <ul>

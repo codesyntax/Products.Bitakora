@@ -1,49 +1,37 @@
-# -*- coding: utf-8 -*-
-# (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
-# Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
-# See also LICENSE.txt
-
-#$Id$
-
 # Zope modules
+from Globals import package_home, Persistent
 import Globals
 from OFS.SimpleItem import SimpleItem
+from OFS.Traversable import Traversable
+from Acquisition import Implicit
 from AccessControl import ClassSecurityInfo
+from BTrees.IOBTree import IOBTree
 
 # Catalog
 from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 
 # Other stuff
 import DateTime
-from utils import clean
-__version__ = "$Revision$"
+from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
+__version__ = "$Revision: 0.01 $"
 
 def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
     """ Add a pingback """
-
-    from utils import isPingbackSpam
-    
-    if isPingbackSpam(sourceTitle, sourceURI, sourceExcerpt, self.blogurl(), self.REQUEST):
-        try:
-            return REQUEST.RESPONSE.redirect('http://www.google.com')
-        except:
-            return 0
-
     id = self.createReferenceId()
     newTitle = clean(sourceTitle)
     newURI = clean(sourceURI)
     newExcerpt = clean(sourceExcerpt)
     pingback = Reference(id, newTitle, newURI, newExcerpt, self.getId())
     self._setObject(id, pingback)
-    return 1
         
 
 class Reference(CatalogPathAware, SimpleItem):
-    """ Reference class """
-    meta_type = 'Reference'
+    """ asdfklasfasldfj """
 
     security = ClassSecurityInfo()
-    #security.setDefaultAccess("allow")
+    security.setDefaultAccess("allow")
+
+    meta_type = 'Reference'
 
     security.declarePrivate('__init__')
     def __init__(self, id, title, uri, excerpt, postid, publish=1):
@@ -56,36 +44,18 @@ class Reference(CatalogPathAware, SimpleItem):
         self.postid = postid
         self.date = DateTime.DateTime()
 
-    security.declareProtected('Manage Bitakora', 'edit')
-    def edit(self, title, uri, excerpt, publish=1, REQUEST=None):
+    security.declarePrivate('edit')
+    def edit(self, title, uri, excerpt, publish=1):
         """ Editor """
         self.title = title
         self.uri = uri
         self.excerpt = excerpt
         self.published = publish
-        self.reindex_object()
-        if REQUEST is not None:
-            url = REQUEST.HTTP_REFERER.split('?')[0]
-            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Reference edited successfully')
-
-    security.declareProtected('Manage bitakora', 'delete')
-    def delete(self, REQUEST):
-        """ delete this comment """
-        REQUEST['delete'] = 1
-        self.getParentNode()._delObject(self.id)
-        if REQUEST is not None:
-            url = REQUEST.HTTP_REFERER.split('?')[0]
-            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Reference deleted successfully')
 
     security.declarePublic('index_html')
     def index_html(self,REQUEST=None):
         """ Each post is rendered usint Reference_body template """
         return self.getParentNode().index_html(REQUEST)
-
-    security.declarePublic('hidden')
-    def hidden(self):
-        """ return true if this comment is not published """
-        return not self.published
 
     security.declarePublic('showTitle')
     def showTitle(self):
@@ -95,7 +65,7 @@ class Reference(CatalogPathAware, SimpleItem):
     security.declarePublic('showDate')
     def showDate(self):
         """ get the date """
-        return unicode(str(self.date))
+        return self.date
 
     security.declarePublic('showBody')
     def showURI(self):
@@ -115,6 +85,6 @@ class Reference(CatalogPathAware, SimpleItem):
     security.declarePublic('absolute_url')
     def absolute_url(self):
         """ """
-        return self.getParentNode().absolute_url()+'#'+self.id
+        return self.getParentNode().absolute_url()+'#reference'+self.id
         
-Globals.InitializeClass(Reference)
+Globals.InitializeClass(Reference)        

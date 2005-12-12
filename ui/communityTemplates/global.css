@@ -1,117 +1,72 @@
 body {
 	font: small verdana, sans-serif;
-	margin:0 auto;
+	margin:auto 0;
 	padding:0px;
-	}
-
-h1, h2, h3 {
-	font-family: "Trebuchet MS", "Bitstream Vera Sans", Verdana, Helvetica, sans-serif;
-}
-
-strong {
-	font-weight: bold;
-}
-
-em {
-	font-style: italic;
-}
-
-img, img a{
-	border: 0px;
-}
-
-p {
-	margin: 0.3em 0 1.2em;
-	line-height: 1.4em;
-}
-
-
-a:link{
-	color: #c00;
-	text-decoration: none;
-}
-
-a:visited{
-	color: #600;
-	text-decoration: none;
-}
-
-a:hover{
-	color: #000;
-	text-decoration: underline;
-}
+	background: #C00;
+		}
 
 #container {
 	width:750px;
 	margin: auto;
 	background: #fff;
 	}
-
 #header {
-	height: 75px;
-	/*background: #666;
-	margin: 5px 0 15px 0;
-	border-radius: 9px;
-	-moz-border-radius: 9px;*/
-
-	}
-
-#blogtitle {
-	float: left;
-	padding:0px;
+	background: #c00 url("header.gif") no-repeat bottom;
+	height: 180px;
 	color: #fff;
 	}
-/*
-#blogtitle h1 a{
-	margin: 0;
-	padding:10px;
-	color: #fff;
-	}*/
-
-/************Formularioak**********/
-
-#content{
-	margin: 0;
+#header h1 a{
+	padding: 0 400px 140px 0;
 	}
-
 	
-#content h2{
-	margin-top:0px;
-	margin-bottom:0.1em;
-	font-weight: normal;
+#title {
+	width:250px;
+	float: left;
+	}
+#title a{
+	color: #C00;
+	}
+#login{
+	float: right;
+	font-size: 0.8em;
+	margin: 10px 0 0 0;
+	width: 250px;
+	
+	}
+#login legend{
+	font-size: 1.5em;
+	font-family: "Trebuchet MS", "Bitstream Vera Sans", Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	padding:0px;
+	margin: 0 0 3px 0;
+	color: #fff;
+	float: right;
+	
+	}
+#login fieldset{
+	border: 0px;
+	text-align: right;
 	}
 
-#content fieldset{
-	border: 0px;
+#login a{
+	color: #fff;
+	}
+#login p{
+	margin:0 0 5px 0;
 	}
 
 #lastentries{
 	width: 440px;
 	float: left;
-	}
-
-#lastentries h2{
-	font-size: 11px;
-	font-weight: bold;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	margin-bottom: 10px;
+	margin-left: 10px;
 	}
 
 .entry {
 	float: left;
-	width: 455px;
+	width: 435px;
 	font-size: 0.85em;
 	margin-bottom:10px;
-	font: small verdana, sans-serif;
-	}
-
-.entry p.data {
-	font-size: 0.90em;
-	color: #666;
-	margin-top:10px;
-	font-family: "Trebuchet MS", "Bitstream Vera Sans", Verdana, Helvetica, sans-serif;
-	letter-spacing: 1px;
+	
 	}
 
 .entry img{
@@ -122,7 +77,7 @@ a:hover{
 	height: 65px;
 	}
 
-#lastentries .entry h2{
+.entry h2{
 	background: #e5e5e5;
 	color: #fff;
 	font-size: 10px;
@@ -130,31 +85,30 @@ a:hover{
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	padding:  2px 0 2px 10px;
-	border-radius: 6px;
+		border-radius: 6px;
 	-moz-border-radius: 6px;
 	}
 
 .entry h2, .entry h3, .entry p {
 	margin:0px;
 	line-height: 130%;
-	font-family: verdana, sans-serif;
 	}
 
 .entry h3 {
 	font-size: 1em;
+	margin-top:5px;
 	}
 
 
 #utilities {
-	margin-left: 490px;
-	margin-right: 0px;
-	}
+	margin-left: 470px;
 
+	}
 .utility {
 	background: #e5e5e5;
 	padding: 10px;
-	margin-bottom: 15px;
-	
+	margin-bottom: 20px;
+	margin-right: 10px;
 	border-radius: 12px;
 	-moz-border-radius: 12px;
 	}
@@ -163,57 +117,71 @@ a:hover{
 	margin:0px;
 	padding: 0 0 0 20px;
 	list-style: none;
-	background: url("/img/gezia.gif") no-repeat left;
-	}
-.login li{
-	background: url("/img/gezia2.gif") no-repeat left;
+	background: url("gezia.gif") no-repeat left;
 	}
 
 .utility ul{
 	margin:0px;
 	padding: 0;
 	}
-
-.login{
-	background: #C00;
-	color: #fff;
-	}
-
-.login form{
-	margin:0;
-	padding:0;
-	}
-
-.login legend{
-	font-size: 15px;
-	font-family: "Trebuchet MS", "Bitstream Vera Sans", Verdana, Helvetica, sans-serif;
-	font-weight: bold;
-	padding:0;
-	margin: 0 0 6px 0;
-	color: #fff;/*Hau beharrezkoa da IErentzako*/
-	}
-
-.login fieldset{
-	border: 1px solid #fff;
-	text-align: right;
-	font-size: 0.8em;
-	margin:0;
-	padding:0;
-	}
-
-.login p input{
-	margin:0;
-	}
-.login a:link, .login a:visited{
-	color: #fff;
-	text-decoration: underline;
-	}
-.login p{
-	margin:0 0 5px 0;
-	}
 	
+
+h1 {
+    font-size:110%;
+	color: #CC0000;
+	margin-top:0px;
+	font-family: "Trebuchet MS", "Bitstream Vera Sans", Verdana, Helvetica, sans-serif;
+}
+	
+
+h1, h2, h3 {
+	/*color: #6699CC;*/
+}
+
+*html h1 {
+    font-size:120%;
+}
+
+h2 {
+    font-size:90%;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+img, img a{
+    border: 0px;
+}
+
+p {
+    margin: 0.3em 0 1.2em;
+    line-height: 1.4em;
+}
+
+
+a:link{
+	color: #c00;
+	text-decoration: none;
+}
+
+a:visited{
+	color: #c66;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #000;
+	text-decoration: underline;
+}
+
 #footer {
     clear: both;
+	background: #c00 url("footer.gif") no-repeat top;
 	margin: 0px 0px 0px 0px;
 	height: 145px;
 }
@@ -225,36 +193,5 @@ a:hover{
 #footer a:hover{  
 	color: #CC0000;
 	background: #fff;
-}
-
-a.next {  
-	padding:2px 20px 2px 5px;
-	background: #999;
-	color: #fff;
-	text-decoration: none;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	font-size: 0.85em;
-	/*float: left;*/
-}
-
-a:hover.next, a:hover.previous  {  
-	color: #333;
-	text-decoration: none;
-}
-
-a:visitited.next, a:previous.next {  
-	color: #fff;
-}
-
-a.previous {  
-	padding: 2px 5px 2px 20px;
-	background: #999;
-	color: #fff;
-	text-decoration: none;
-	margin-right: 20px;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	font-size: 0.85em;
 }
 

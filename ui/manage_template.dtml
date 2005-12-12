@@ -6,11 +6,11 @@
 
 <dtml-if "REQUEST.get('msg', '')">
 <div class="system-msg">
-    <dtml-var "gettext(REQUEST.get('msg'))">
+    <dtml-var "REQUEST.get('msg')">
 </div>
 </dtml-if>
 
-<p><dtml-var "gettext('You can change your template here, editing the CSS file. Template is compatible with MovableType 3.1 stylesheets')"></p>
+<p><dtml-var "gettext('You can change your template here, editing the CSS file. This template is compatible with MovableType 3, so you can paste here any MT3 compatible stylesheet')"></p>
 
 <form action="save_css" method="post">
 
@@ -25,7 +25,7 @@
 <dtml-if inCommunity>
 <dtml-in "img.templates.objectIds()">
 <form action="select_template" method="post" onsubmit="javascript:return confirm('<dtml-var "gettext('When selecting this template, the css you have edited (if you did so) will be lost. Are you sure?')">');">
-<p><a href="<dtml-var communityUrl>/img/template<dtml-var sequence-item>.gif" target="_blank"><img src="<dtml-var communityUrl>/img/template<dtml-var sequence-item>-small.gif" alt="Template<dtml-var sequence-item>" /></a></p>
+<p><a href="/img/template<dtml-var sequence-item>.jpg" target="_blank"><img src="/img/template<dtml-var sequence-item>-small.jpg" alt="Template<dtml-var sequence-item>" /></a>
 <input type="hidden" name="template" value="<dtml-var sequence-item>" />
 <input type="submit" value="<dtml-var "gettext('Select this template')">" />
 </form>

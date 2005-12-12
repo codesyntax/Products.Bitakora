@@ -7,14 +7,11 @@
 ##parameters=
 ##title=
 ##
-
-import DateTime
-
-tags = [tag for tag in container.Catalog.uniqueValuesFor('tags') if tag.strip()]
+tags = container.Catalog.uniqueValuesFor('tags')
 zenbat = {}
 for tag in tags:
-    tagkop = container.Catalog.searchResults(tags=tag, meta_type='Post', date={'query':DateTime.DateTime(), 'range':'max'}, published=1)
-    zenbat[tag] = len(tagkop)
+    tagkop = container.Catalog.searchResults(tags=tag)
+    zenbat[tag.encode('utf-8')] = len(tagkop)
 
 maxpx = 2.00
 minpx = 0.70

@@ -1,16 +1,5 @@
-# -*- coding: utf-8 -*-
-# (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
-# Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
-#
-# Portions Copyright (c) 2000-2001 Chris Withers
-#
-# See also LICENSE.txt
-
-#$Id$
-
 # Importing
 from Products.PythonScripts.PythonScript import manage_addPythonScript
-from Products.PythonScripts.standard import url_quote
 
 import Globals
 
@@ -23,11 +12,6 @@ import re
 import xmlrpclib
 
 ok_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_ '
-CAPTCHAS_NET_USER = 'bitakora'
-CAPTCHAS_NET_SECRET = 'HmE2OawsnKWxzHpgQRNmW9RuR5Ea8zV2Sn5eRzrT'
-AKISMET_KEY = '5cbed64f50bb'
-AKISMET_AGENT = 'Bitakora [http://www.codesyntax.com/bitakora]'
-AKISMET_ENABLED = 1
 
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
 
@@ -42,7 +26,7 @@ def addDTML(obj,id,title,file):
 def addPythonScript(obj,id,file):
     file_path = Globals.package_home(globals())
     f=open(file_path+'/'+file+'.py')     
-    file=f.read()
+    file=f.read()     
     f.close()     
     manage_addPythonScript(obj,id)
     obj._getOb(id).write(file)
@@ -56,7 +40,17 @@ def addImage(obj,id,file):
     title=''     
     tlen = len(contents)     
     new_id = obj.manage_addImage(id,contents,title=title)   
-      
+    
+        
+def createUploadable(filename):
+    file_path = Globals.package_home(globals())
+    filename=file_path+'/'+filename
+    f=open(filename,'rb')
+    # extra step 'cos we can't set attributes on files
+    s=StringIO(f.read())
+    s.filename=filename
+    return s
+    
 def addFile(obj,id,file):
     file_path = Globals.package_home(globals())
     f=open(file_path+'/'+file,'rb')           
@@ -66,44 +60,60 @@ def addFile(obj,id,file):
     tlen = len(contents)     
     new_id = obj.manage_addFile(id,contents,title=title)   
 
+def createId(title):
+    """ Create an id for a post based on its title """
+    id = title.strip()
+    #id = tit.translate(translation_table)
+    id = ''.join([c for c in id if c in ok_chars])
+    while id.startswith('-') or id.startswith('_') or id.startswith(' '):
+        id = id[1:]
+
+    while id.endswith('-') or id.endswith('_') or id.endswith(' '):
+        id = id[:-1]
+
+    id = id.lower()
+    if not id:
+        return u'blog-post%d' % self.postcount
+
+    return u'-'.join(id.split(' '))
+
+def createNewId(oldid):
+    """ Create a new id if the previous one was taken """
+    if oldid[-1].isdigit():
+        num = oldid.split('-')
+        end = int(num[-1]) + 1
+        return '-'.join(num[:-1]) + '-' + str(end)
+    else:
+        return oldid+'-1'
+
 def clean(text):
     """ clean the text to delete all unwanted things """
     return text
 
 def cleanBody(self, text):
     """ clean the text to delete all unwanted HTML """
-    try:
-        from EpozPostTidy import EpozPostTidy
-    except:
-        def EpozPostTidy(self, text, s=''):
-            return text
+    from EpozPostTidy import EpozPostTidy
     
     return EpozPostTidy(self, text, '')
 
 def prepareTags(tags=[]):
     """ prepare the tags deleting all unwanted things """
-    try:
-        from sets import Set as set    
-    except:
-        def set(li):
-            return li
-            
+    return tags
     import string
     
-    sep = '!"#$%&\'()*+,./:;<=>?@[\\]^`{|}~'
-    mt = string.maketrans(unicode(sep), unicode(' '*(len(sep))))
-    mt = unicode(mt, 'iso-8859-1')
+    mt = string.maketrans(string.punctuation, ' '*(len(string.punctuation)))
+    
     newtags = []
     for tag in tags:
-        t = tag
+        t = tag.encode('utf-8')
         t = t.translate(mt)
         t = t.strip()
-        #t = unicode(t)
+        t = unicode(t)
         t = t.lower()
-        if t:
-            newtags.append(t)
+        newtags.append(t)
+        
+    return newtags
 
-    return list(set(newtags))
 
 def cleanEmail(email):
     """ clean email """
@@ -112,75 +122,6 @@ def cleanEmail(email):
 def cleanURL(url):
     """ clean url """
     return url
-
-
-def notifyByEmail(mailhost, mTo, mFrom, mSubj, mMsg):
-    mailhost.send(mMsg, mTo, mFrom, mSubj)
-
-
-def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitakora_cpt='', random_cpt='', captcha_zz=0, REQUEST=None):
-    """ Send a mail to blog owner """
-
-    if captcha_zz:
-        if not checkCaptchaValue(random_cpt, bitakora_cpt):
-            if REQUEST is not None:
-                return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=%s&name=%s&email=%s&subject=%s&body=%s#bitakora_cpt_control' % (context.gettext('Are you a bot? Please try again...'), url_quote(name.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(subject.encode('utf-8')), url_quote(body.encode('utf-8'))))
-
-            return None
-
-        try:
-            mailhost = getattr(context,context.superValues('Mail Host')[0].id)
-            try:
-                from EpozPostTidy import cleanHTML
-            except ImportError:
-                def cleanHTML(text):
-                    return text
-
-            mTo = context.contact_mail
-            if context.inCommunity():
-                mFrom = context.admin_mail
-            else:
-                mFrom = context.contact_mail
-
-            variables = {}            
-            variables['from'] = mFrom.encode('utf-8')
-            variables['to'] = mTo.encode('utf-8')
-            variables['comment_author'] = name.encode('utf-8')
-            variables['comment_email'] = email.encode('utf-8')
-            variables['comment_subject'] = subject.encode('utf-8')
-            variables['comment_body'] = body.encode('utf-8')
-            mSubj = context.gettext('New message from your blog!') 
-            mMsg = context.contact_email_template(context, **variables)
-
-            notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
-        except Exception,e:
-            # If there is no MailHost, or other error happened
-            # there won't be e-mail notifications
-            from logging import getLogger
-            log = getLogger('send_contact_mail')
-            log.info(e)
-
-    if REQUEST is not None:
-        return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=Ok')        
-
-
-
-def fillMessageCatalog(gettext):
-    locales = ['eu', 'es', 'pl']
-    file_path = Globals.package_home(globals())
-    log = []
-    for locale in locales:
-        fp = open('%s/locale/%s.po' % (file_path, locale))
-        try:
-            gettext.po_import(locale, fp.read())
-        except:
-            log.append('Locale %s could not be imported')
-        fp.close()
-        
-    if log:
-        return log
-
-    return 1
 
 def discoverPingbackUrl(url):
     """ There are 2 ways to discover the pingback URL of a given URL:
@@ -216,11 +157,10 @@ def discoverPingbackUrl(url):
 
 def makeXMLRPCCall(serverURI, sourceURI, targetURI):
     server = xmlrpclib.Server(serverURI)
-    res = ''
     try:
         res = server.pingback.ping(sourceURI, targetURI)
     except:
-        return """ Ezin da: %s, %s, %s""" % (sourceURI, targetURI, serverURI)
+        return """ Ezin da """
     if res == '0':
         return """ A generic fault code. Servers MAY use this error code instead of any of the others if they do not have a way of determining the correct fault code."""
 
@@ -245,103 +185,3 @@ def makeXMLRPCCall(serverURI, sourceURI, targetURI):
 
     else:
         return res
-
-
-def getCaptchaImage(self):
-    """ Get a captcha image from Captchas.net service, using bitakora's user and password"""
-    from CaptchasDotNet import CaptchasDotNet
-       
-    captcha = CaptchasDotNet(client=CAPTCHAS_NET_USER, secret=CAPTCHAS_NET_SECRET)
-    
-    rnd = captcha.random()
-    img = captcha.image()
-    
-    return rnd, img
-    
-def checkCaptchaValue(random, input):
-    """ Check the captcha using Captchas.net service """
-    from CaptchasDotNet import CaptchasDotNet
-    
-    captcha = CaptchasDotNet(client=CAPTCHAS_NET_USER, secret=CAPTCHAS_NET_SECRET)
-    return captcha.verify(input, random)
-    
-def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_url='', blogurl='', REQUEST=None):
-    if not AKISMET_ENABLED:
-        return 0
-
-    from akismet import Akismet, AkismetError, APIKeyError
-    from urllib2 import URLError, HTTPError
-    from socket import timeout
-    ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
-    data = {}
-    data['blog'] = blogurl
-    try:
-        data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
-        data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
-        data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
-    except:
-        data['user_ip'] = '192.168.0.1'
-        data['user_agent'] = 'Mozilla'
-        data['referrer'] = 'unknown'
-        
-    data['comment_type'] = 'comment'
-    data['comment_author'] = comment_author
-    data['comment_author_email'] = comment_email
-    data['comment_author_url'] = comment_url
-    try:
-        data.update(REQUEST)
-    except:
-        pass
-    from zLOG import LOG, INFO
-    try:
-        return ak.comment_check(comment=comment_body, data=data)
-    except AkismetError:
-        # Something happened with an argument
-        LOG('isCommentSpam', INFO, 'Argument error')
-        return 0
-    except URLError, HTTPError:
-        # Something happended with the conection
-        LOG('isCommentSpam', INFO, 'Connection error')
-        return 0
-    except APIKeyError:
-        # Something happened with the API Key
-        LOG('isCommentSpam', INFO, 'APIKeyError')
-        return 0
-    except timeout:
-        # Aghhhh, connection time out
-        LOG('isCommentSpam', INFO, 'Connection timeout')
-        return 0
-    except:
-        # What the hell happened?
-        
-        LOG('isCommentSpam', INFO, 'Unknown error: %s' % comment_body)
-        return 0
-    
-def isPingbackSpam(title='', url='', excerpt='', blogurl='', REQUEST=None):
-    if not AKISMET_ENABLED:
-        return 0
-
-    from akismet import Akismet
-    ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
-    data = {}
-    data['blog'] = blogurl
-    try:
-        data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
-        data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
-        data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
-    except:
-        pass
-    
-    data['comment_type'] = 'pingback'
-    data['comment_author'] = title
-    data['comment_author_email'] = url
-    data['comment_author_url'] = url
-    try:
-        data.update(REQUEST)   
-    except:
-        pass
-
-    return ak.comment_check(comment=excerpt, data=data)
-
-    
-    

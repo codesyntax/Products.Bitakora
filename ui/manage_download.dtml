@@ -1,0 +1,13 @@
+<dtml-var standard_html_header>
+
+<dtml-var admin_header>
+
+<h1><dtml-var "gettext('Download your blog')"></h1>
+
+<p><dtml var "gettext('From here, you can download your blog in TXT format')"></p>
+
+<ul>
+    <li><a href="<dtml-var blogurl>/downloadTXT"><dtml-var "gettext('Download in TXT')"></a></li>
+</ul>
+
+<dtml-var standard_html_footer>

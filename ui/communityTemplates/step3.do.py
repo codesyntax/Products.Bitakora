@@ -18,7 +18,7 @@ id = request.SESSION.get('id')
 template = str(request.get('template'))
 
 # create the blog
-container.manage_addProduct['Bitakora'].manage_addBitakora(str(id), title, u'', contact_mail)
+container.manage_addProduct['Squishblog'].manage_addSquishblog(id, title, u'', contact_mail)
 
 blog = container.get(id)
 
@@ -34,4 +34,4 @@ blog.select_template(template)
 container.Catalog.catalog_object(blog, '/'.join(blog.getPhysicalPath()))
 
 # We are done !!!!
-RESPONSE.redirect('%s/step3.done' % context.communityUrl())
+RESPONSE.redirect('/step3.done')

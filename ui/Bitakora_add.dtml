@@ -1,13 +1,14 @@
-<dtml-var manage_page_header>
+﻿<dtml-var manage_page_header>
 <dtml-call "RESPONSE.setHeader('Content-Type','text/html; charset=UTF-8')">
 
 <dtml-var "manage_form_title(this(), _,
                              form_title='Add Bitakora',
-                             help_product='Bitakora')">
+                             help_product='Bitakora',
+                             help_topic='Bitakora_add.stx')">
 
 
 <p class="form-help">
-	Bitakora is a fully featured blog product for Zope
+	Bitakora is a fully featured blog product for Zope based on Squishdot and COREBlog
 </p>
 
 
@@ -20,12 +21,12 @@
 
 <p>
 <label for="title">Title</label><br/>
-<input type="text" id="title" name="title:utf8:ustring" size="50"/>
+<input type="text" id="title" name="title:utf8" size="50"/>
 </p>
 
 <p>
 <label for="subtitle">Subtitle</label><br/>
-<input type="text" id="subtitle" name="subtitle:utf8:ustring" size="50"/>
+<input type="text" id="subtitle" name="subtitle:utf8" size="50"/>
 </p>
 
 <p>
@@ -35,7 +36,7 @@
 
 <p>
 <label for="contact_mail">Contact mail</label><br/>
-<input type="text" id="contact_mail" name="contact_mail:utf8:ustring" size="50"/>
+<input type="text" id="contact_mail" name="contact_mail:utf8" size="50"/>
 </p>
 
 

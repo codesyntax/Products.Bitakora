@@ -1,4 +1,4 @@
-<blockquote class="referencebody" cite="<dtml-var showURI>" id="<dtml-var getId>">
+<blockquote class="referencebody" cite="<dtml-var showURI>" id="reference<dtml-var getId>">
 <dtml-var showExcerpt>
 </blockquote>
 <p class="posted">

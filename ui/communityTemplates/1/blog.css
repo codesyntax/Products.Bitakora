@@ -1,19 +1,19 @@
 body {
-	padding: 0px 0px 50px 0px;
+	margin: 0px 0px 50px 0px;
 	text-align: center;
-	background:#EFEFEF url(img/1bekoa.jpg) no-repeat bottom;
-	margin: 0 auto;
-	font-size: small;
-	color: #333;
+	background:#EFEFEF url(/img/1bekoa.jpg) no-repeat bottom;
 }
 
 a {
 	text-decoration: none;
+	}
+
+a:link {
 	color: #B83803;
 	}
 
 a:visited {
-	color: #CC6633;
+	color: #B83803;
 	}
 
 a:active {
@@ -22,7 +22,6 @@ a:active {
 
 a:hover {
 	color: #FFCC33;
-	text-decoration:underline;
 	}
 
 h1, h2, h3 {
@@ -33,26 +32,21 @@ h1, h2, h3 {
 
 #container {
 	line-height: 140%;
-	margin:0 auto;
+	margin: auto;
 	text-align: left;
 	padding: 0px;
 	width: 700px;
 	height: auto;
-	background:#EFEFEF url(img/1fondoa.jpg) repeat-y top left;
-	border: 1px solid transparent;
-}
-
-*html #container {
-	width: 698px;
-	border:none;
-}
+	background:url(/img/1fondoa.jpg) repeat-y top left;
+	}
 
 #banner {
-	color: #FFF;
-	font-family:'Trebuchet MS', Verdana, arial, sans-serif;
+	font-family: Verdana, Arial, sans-serif;
+	color: #FFFFFF;
+	text-align: left;
 	padding: 0px;
-	height: 130px;
-	background:#EFEFEF url(img/1goikoa.jpg) no-repeat top left;
+	height: 132px;
+	background:#F7F7F7 url(/img/1goikoa.jpg) no-repeat top left;
 	}
 
 a#banner-img {
@@ -60,16 +54,17 @@ a#banner-img {
 	}
 
 
-#banner a,#banner a:visited {
+#banner a {
 	text-decoration: none;
-	color: #B83803;
+	font-family:'Trebuchet MS', Verdana, arial, sans-serif;
 	}
 
 #banner h1 {
 	font-size: 30px;
 	padding:50px 0px 0px 40px;
 	color: #B83803;
-	font-weight: bold;
+	
+	
 	}
 
 #banner h2 {
@@ -80,40 +75,39 @@ a#banner-img {
 
 #center {
 	float: left;
-	width: 490px;
+	width: 500px;
 	overflow: hidden;
 	}
 
 .content {
 	padding: 10px 15px 5px 20px;
-	color: #333;
-	font-family: 'Trebuchet MS', Verdana, sans-serif;	
+	
+	color: #666666;
+	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: small;
 	}
 
 #right {
-	float: left;
+		float: left;
+	
+	
 	width: 200px;
+	
 	overflow: hidden;
 	}
 
 .content p {
+	color: #666666;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
+	font-size: small;
+	font-weight: normal;
 	line-height: 150%;
+	text-align: left;
 	margin-bottom: 10px;
 	}
 
-.content .storycontent h3{
-	font-size:110%;
-	margin:0;
-	padding:0;
-	background:none;
-}
 .content blockquote {
 	line-height: 150%;
-	}
-
-.content textarea{
-	width: 450px;
 	}
 
 .content li {
@@ -121,88 +115,103 @@ a#banner-img {
 	}
 
 .content h2 {
-	color: #999;
+	color: #ccc;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
-	margin-bottom: 5px;
-	font-weight: normal;
-	font-size: 0.85em;
-}
-
-.content h1 {
-	color: #999;
-	font-family: 'Trebuchet MS', Verdana, sans-serif;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	font-size: 1.5em;
-}
+	font-size: x-small;
+	text-align: left;
+	margin-bottom: 0px;
+	font-weight: bold;
+	
+	}
 
 .content h3 {
+	color: #333;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	font-size: 15px;
+	
+	text-align: left;
 	font-weight: bold;
-	background: url(img/1titulo.jpg) repeat top left;
+	
+	background: url(/img/1titulo.jpg) no-repeat top left;
 	margin-bottom: 10px;
 	padding-left: 10px;
-}
+	
+	}
 
 .content p.posted {
-	color: #999;
+	color: #999999;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
-	border-top: 1px solid #ccc;
+	font-size: x-small;
+	border-top: 1px solid #999999;
+	text-align: left;
+	
+	
+	
 	margin-bottom: 25px;
 	line-height: normal;
 	padding: 3px;
-	font-size: 0.85em;
-}
+	}
+
+.sidebar {
+	padding: 15px 15px 15px 15px;
+	}
+
+
 
 #calendar {
   	line-height: 140%;
-	color: #666;
+	color: #666666;
 	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	
+	
+	
   	padding: 2px;
 	text-align: center;
 	margin-bottom: 30px;
-}
+	}
 
 #calendar table {
 	padding: 2px;
 	border-collapse: collapse;
 	border: 0px;
 	width: 100%;
-}
+	}
 
 #calendar caption {
-	color: #666;
+	color: #666666;
 	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	
 	text-align: center;
 	font-weight: bold;
+	
 	text-transform: uppercase;
+	
 	letter-spacing: .3em;
-}
+	}
 
 #calendar th {
 	text-align: center;
 	font-weight: normal;
-}
+	}
 
 #calendar td {
 	text-align: center;
-}
-
-.sidebar {
-	padding: 15px 10px 15px 10px;
-	font-size: 0.85em;
-	font-family: Verdana, Arial, sans-serif;
-}
+	}
 
 .sidebar h2 {
-	background: url(img/1menua.jpg) no-repeat right;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	background: url(/img/1menua.jpg) no-repeat right;
+	/*background-color:#F5C04D;*/
+	text-align: left;
 	font-weight: bold;
 	height:30px;
 	text-transform: uppercase;
 	padding-left:5px;
-	font-size: 1em;
-}
+  	
+	}
 
 .sidebar ul {
 	padding-left: 0px;
@@ -211,37 +220,41 @@ a#banner-img {
 	}
 
 .sidebar li {
-	line-height: 150%;
+	color: #666666;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
+	text-align: left;
+	line-height: 200%;
 	border-bottom:1px solid #ccc;
-	padding-bottom: 3px;
+	margin-top: 0px;
 	list-style-type: none;
-}
+
+	}
 
 .sidebar img {
-	border: 1px solid #ccc;
-	padding: 5px;
+	border: 3px solid #FFFFFF;
 	}
 
 .photo {
-	margin-bottom: 10px;
+	text-align: left;
+	margin-bottom: 20px;
 	}
 
 .link-note {
 	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
 	line-height: 150%;
-	padding: 0px;
+	text-align: left;
+	padding: 2px;
 	margin-bottom: 15px;
-	}
-
-.link-note p{
-	margin-top: 0;
 	}
 
 #powered {
 	font-family: Verdana, Arial, sans-serif;
+	font-size: x-small;
 	line-height: 150%;
-	
-	color: #666;
+	text-align: left;
+	color: #666666;
 	margin-top: 50px;
 	}
 
@@ -250,23 +263,10 @@ a#banner-img {
 	width: 180px;
 	padding-right: 15px;
 	margin-right: 15px;
+	text-align: left;
 	border-right: 1px dotted #BBB;
 	}
 
-.comments h2 {
-	border-bottom:1px solid #999;
-	background-color:#e5e5e5;
-	padding-left:5px;
-        color: #333;
-}
-
-td, th{
-	border: 1px solid #ccc;
-	padding: 5px;
+textarea[id="comment-text"] {
+	width: 80%;
 	}
-
-table{
-	margin-bottom: 10px;
-	}
-
-

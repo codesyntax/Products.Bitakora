@@ -1,4 +1,4 @@
-<dtml-var standard_html_header>
+﻿<dtml-var standard_html_header>
 
 <dtml-var admin_header>
 
@@ -10,12 +10,6 @@
 
 
 <h1><dtml-var "gettext('Add a new post')"></h1>
-
-<dtml-if "REQUEST.get('msg', '')">
-<div class="system-msg">
-    <dtml-var "gettext(REQUEST.get('msg'))">
-</div>
-</dtml-if>
 
 <form action="" method="post">
 
@@ -31,12 +25,12 @@
 
 <p>
 <label for="tags"><dtml-var "gettext('Tags')"></label><br/>
-<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(prepareTags(tags=REQUEST.get('tags', [])))">"/>
+<input type="text" id="tags" name="tags:utf8:utokens" size="50"/>
 </p>
 
 <p>
 <label for="text"><dtml-var "gettext('Body')"></label><br/>
-<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', '') and cleanBody(body) or '', toolbox='', lang=Localizer.get_selected_language(),
+<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', ''), toolbox='', lang='en',
             path='', widget='bitakora_edit_js',
             style='width: 440px; height: 250px; border: 1px solid #000000;', 
             button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
@@ -62,9 +56,9 @@
 <input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "_.unicode(_.DateTime()).encode('utf-8')">"/>
 </p>
 
-<input type="submit" value=" <dtml-var "gettext('Add')"> " name="../manage_addPost:method" />
+<input type="submit" value=" <dtml-var "gettext('Add')"> " name="../manage_addPost:method" "/>
 
-<input type="submit" value="<dtml-var "gettext('Preview')">" name=".:method" />
+<input type="submit" value="<dtml-var "gettext('Preview')">" name=".:method" "/>
 
 </form>
 

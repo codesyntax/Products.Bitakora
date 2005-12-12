@@ -3,10 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<title><dtml-var communityTitle></title>
+<title><dtml-var "gettext('Blog community title')"></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<link rel="stylesheet" href="<dtml-var communityUrl>/img/global.css" media="screen" type="text/css" />
+<link rel="stylesheet" href="/img/global.css" media="screen" type="text/css" />
 
 </head>
 
@@ -15,9 +15,21 @@
 <div id="container">
  <div id="header">
  <div id="blogtitle">
-    <h1><a href="<dtml-var communityUrl>"><dtml-if "'logo.gif' in img.objectIds()"><img src="<dtml-var communityUrl>/img/logo.gif" alt="<dtml-var communityTitle>" title="<dtml-var communityTitle>" /><dtml-else><dtml-var communityTitle></dtml-if></a></h1>
+    <h1><a href="/"><dtml-var "gettext('Blog community title')"></a></h1>
  </div>
- 
+ <div id="login">
+    <dtml-if "REQUEST.AUTHENTICATED_USER.getId()">
+        <ul class="nav">
+                <li class="first"><dtml-var "gettext('Hello %(user)s') % {'user':REQUEST.AUTHENTICATED_USER.getId()}"></li>
+                <li><a href="<dtml-var "usersBlog(REQUEST.AUTHENTICATED_USER.getId())">/post"><dtml-var "gettext('Write a new post')"></a></li>
+                <li><a href="<dtml-var "usersBlog(REQUEST.AUTHENTICATED_USER.getId())">/admin"><dtml-var "gettext('Manage your blog')"></a></li>
+                <li><a href="/logout" ><dtml-var "gettext('Logout')"></a></li>
+        </ul>
+        <dtml-else>
+          <dtml-var mini_login_form>
+     </dtml-if>
+    
+ </div>
  </div>
 
  <div id="content">

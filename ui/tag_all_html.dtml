@@ -1,4 +1,4 @@
-<dtml-var standard_html_header>
+﻿<dtml-var standard_html_header>
 <h1><dtml-var "gettext('Tags')"></h1>
 
 <dtml-let lista="tagsAndPixels()"

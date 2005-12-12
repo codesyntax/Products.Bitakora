@@ -1,5 +1,5 @@
-<dtml-call "RESPONSE.setHeader('content-type', 'text/html; charset=UTF-8')">
-//
+﻿<dtml-call "RESPONSE.setHeader('content-type', 'text/html; charset=UTF-8')">
+﻿//
 // Create HTML for Epoz-Editor
 //
 // Use CSS #button_id {display:none;} to disable buttons
@@ -23,9 +23,9 @@ function CreateEpoz() {
 */
 
     widget += '<select id="formatblock" onchange="SelectFormat(this);" style="margin-bottom: 2px;">';
-    //widget += '<option value="">'+EpozLang["Normal"]+'</option>';
+    widget += '<option value="">'+EpozLang["Normal"]+'</option>';
     widget += '<option value="<p>">'+EpozLang["Paragraph"]+'</option>';
-    //widget += '<option value="<pre>">'+EpozLang["Formatted"]+'</option>';
+    widget += '<option value="<pre>">'+EpozLang["Formatted"]+'</option>';
     widget += '</select>';
     widget += '<br />';
 

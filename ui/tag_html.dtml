@@ -1,11 +1,11 @@
-<dtml-var standard_html_header>
+﻿<dtml-var standard_html_header>
 
 <dtml-if "REQUEST.has_key('id')">
 
-<dtml-in "Catalog.searchResults(tags=_.unicode(REQUEST.get('id'), 'utf-8'), published=1, meta_type='Post', sort_on='date', sort_order='descending', date={'query':_.DateTime(), 'range':'max'})">
+<dtml-in "Catalog.searchResults(tags=_.unicode(REQUEST.get('id'), 'utf-8'), published=1, meta_type='Post', sort_on='date', sort_order='descending', date=_.DateTime(), date_usage='range:max')">
 
 <dtml-if sequence-start>
-    <h3><dtml-var "gettext('Tag: <em>%(tagname)s</em>') % {'tagname':_.unicode(REQUEST.get('id'), 'utf-8')}"></h3>
+    <h3><dtml-var "gettext('Posts cataloged with tag: <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></h3>
     <ol>
 </dtml-if>
 <dtml-with getObject>
@@ -17,7 +17,7 @@
 </dtml-if>
 
 <dtml-else>
-    <p><dtml-var "gettext('There are no posts tagged <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></p>
+    <p><dtml-var "gettext('There is no post with tag <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></p>
 </dtml-in>
 
 <dtml-else>

@@ -1,19 +1,9 @@
-# -*- coding: utf-8 -*-
-# (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
-# Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
-# See also LICENSE.txt
-
-#$Id$
-
 # Zope modules
-from OFS.SimpleItem import SimpleItem
+from OFS.ObjectManager import SimpleItem
 from OFS.Traversable import Traversable
 from Acquisition import Implicit
 from AccessControl import ClassSecurityInfo
 from Globals import Persistent
-
-from zLOG import LOG, INFO
-
 try:
     import urllib2 as urllib
 except:
@@ -21,7 +11,7 @@ except:
     
 from urllister import URLLister
 
-__version__ = "$Revision$"
+__version__ = "$Revision: 0.01 $"
 
 class PingMethodContainer(Persistent, SimpleItem, Implicit, Traversable):
     """ An object to provide 'ping' method for pingbacks  """
@@ -43,36 +33,30 @@ class PingMethodContainer(Persistent, SimpleItem, Implicit, Traversable):
 
     security.declarePublic('ping')
     def ping(self, sourceURI='', targetURI=''):
-        """ some stuff here too """       
+        """ some stuff here too """
         if not sourceURI or not targetURI or \
            not sourceURI.startswith('http') or not targetURI.startswith('http'):
-            LOG('ping', INFO, 'not valid URIs: tgt %s src %s' % (targetURI, sourceURI))
             return '0'
-        if not self.exists(sourceURI):
-            LOG('ping', INFO, 'source does not exist: %s' % sourceURI)           
+        elif not self.exists(sourceURI):
             return '0x0010'
-        if not self.hasLinkToTarget(sourceURI, targetURI):
-            LOG('ping', INFO, 'source does not have link to target src %s tg %s' % (sourceURI, targetURI))
+        elif not self.hasLinkToTarget(sourceURI, targetURI):
             return '0x00110'
-        if not self.targetExists(targetURI):
-            LOG('ping', INFO, 'target does not exist: %s' % targetURI)
+        elif not self.targetExists(targetURI):
             return '0x0020'
-        if not self.pingable(targetURI):
-            LOG('ping', INFO, 'target is not pingable: %s' % targetURI)        
+        elif not self.pingable(targetURI):
             return '0x0021'
-        if self.pingbackExists(sourceURI, targetURI):
-            LOG('ping', INFO, 'pingback already exists target src %s tg %s' % (sourceURI, targetURI))      
+        elif self.pingbackExists(sourceURI, targetURI):
             return '0x0030'
-        
-        # Everything seems to be OK now :)
-        sock = urllib.urlopen(sourceURI)
-        html = sock.read()
-        sock.close()
-        excerpt = self.extractExcerpt(targetURI, html)
-        title = self.extractTitle(html)
-        post = self.getPostFromURI(targetURI)
-        post.manage_addPingback(title, sourceURI, excerpt)
-        return 1
+        else:
+            # Everything seems to be OK now :)
+            sock = urllib.urlopen(sourceURI)
+            html = sock.read()
+            sock.close()
+            post = self.pingable(targetURI)
+            excerpt = self.extractExcerpt(targetURI, html)
+            title = self.extractTitle(html)
+            post.manage_addPingback(title, sourceURI, excerpt)
+            return '200 OK'
 
     security.declarePrivate('exists')
     def exists(self, sourceURI):
@@ -110,67 +94,44 @@ class PingMethodContainer(Persistent, SimpleItem, Implicit, Traversable):
             postId = pieces[-2]
         else:
             postId = pieces[-1]
-               
+
         if postId.find('#') != -1:
             # ups, it's a comment's URL
             return 0
         # Acquisition.Implicit -i esker gurasoen metodoetan bilatzen du
         blog = self.blog()
         try:
-            post = getattr(blog, postId, None)
-            if post is not None and post.canReference():
-                return 1
+            post = getattr(blog, postId)
+            if post and post.canReference():
+                return post
             else:
                 return 0
         except:
             # Hau ez da post bat...
-            return 0
+            pass
 
     security.declarePrivate('targetExists')
     def targetExists(self, targetURI):
-        try:
-            sock = urllib.urlopen(targetURI)
-            sock.close()
-            return 1          
-        except:
-            return 0
-        
-    security.declarePrivate('getPostFromURI')
-    def getPostFromURI(self, uri):
-        pieces = uri.split('/')
-        postId = ''
-        # pieces = ['http:', '', 'www.eibar.com', 'blogak', 'mikel', 'asdfasdfaf']
-        if pieces[-1] == '':
-            # the URI was http://www.eibar.com/blogak/mikel/asdfasdfaf/
-            postId = pieces[-2]
-        else:
-            postId = pieces[-1]
-               
-        if postId.find('#') != -1:
-            # ups, it's a comment's URL
-            return 0
-        # Acquisition.Implicit -i esker gurasoen metodoetan bilatzen du
-        blog = self.blog()
-        post = blog.get(postId, None)
-        return post
+        return 1
 
     security.declarePrivate('pingbackExists')
     def pingbackExists(self, sourceURI, targetURI):
-        post = self.getPostFromURI(targetURI)
-        if post is not None and post.hasPingback(sourceURI):
+        post = self.pingable(targetURI)
+        if post.hasPingback(sourceURI):
             return 1
         else:
             return 0
 
+    security.declarePrivate('fetchSource')
+    def fetchSource(self, sourceURI):
+        return ''
+
     security.declarePrivate('extractExcerpt')
     def extractExcerpt(self, targetURI, html):
-        from EpozPostTidy import pingbackHTML
-        cleanedhtml = pingbackHTML(html)
-        pos = cleanedhtml.find(targetURI)
+        pos = html.find(targetURI)
         start = pos - 150
         end = pos + 150
-        excerpt = cleanedhtml[start:end]
-    
+        excerpt = html[start:end]
         return unicode('...'+excerpt+'...')
 
     security.declarePrivate('extractTitle')

@@ -4,20 +4,18 @@
 
 <dtml-var user_links missing="">
 
-<dtml-var show_sidebar_html missing="">
+<dtml-var "sidebar_html.encode('utf-8')" missing="">
 
 <dtml-var calendar missing="">
-
+	
 <dtml-var categories_sidebar missing="">
-
+	
 <dtml-var recent_comments missing="">
-
-<dtml-var recent_references missing="">
 
 <dtml-var recent_entries missing="">
 
 <dtml-var recent_trackbacks missing="">
 
 <dtml-var searchform missing="">
-
-<dtml-var contents missing="">
+	
+﻿<dtml-var contents missing="">

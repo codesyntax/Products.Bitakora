@@ -4,5 +4,5 @@
 
 <p class="posted">
 <dtml-var "gettext('Posted by:')">&nbsp;<strong><dtml-var showAuthor html_quote></strong>.<dtml-var showDate><br/>
-<dtml-var showURL html_quote>
+<dtml-var showURL html_quote> - <dtml-var showEmail html_quote>
 </p>

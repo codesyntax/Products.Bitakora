@@ -1,32 +1,24 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
-# Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
-# See also LICENSE.txt
-
-#$Id$
 
 """ Bitakora community """
 
-__version__ = "$Revision$"
+__version__ = "$Revision: 0.1 $"
 
 # Zope modules
 from AccessControl import ClassSecurityInfo
+from Acquisition import Implicit, aq_base
 import Globals
 from Globals import HTMLFile
 
 # Modules from Localizer
+from Products.Localizer.LanguageManager import LanguageManager
 from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog
+from Products.Localizer.LocalPropertyManager import LocalPropertyManager, LocalProperty
 from Products.Localizer.LocalContent import LocalContent
 
 # ZCatalog
 from Products.ZCatalog import ZCatalog
-
-# CookieCrumbler
-try:
-    from Products.CookieCrumbler.CookieCrumbler import CookieCrumbler
-except:
-    from Products.CMFCore.CookieCrumbler import CookieCrumbler
 
 # To add ZCatalog FieldIndex and TextIndexNG2
 from ZPublisher.HTTPRequest import record
@@ -34,22 +26,14 @@ from ZPublisher.HTTPRequest import record
 # BTreeFolder2
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
-from utils import addDTML, addPythonScript, addImage, addFile, fillMessageCatalog
+from utils import addDTML, addPythonScript, addImage, addFile
 import DateTime
-
-try:
-    True
-except:
-    True = 1
-    False = 0
 
 manage_addBitakoraCommunityForm = HTMLFile('ui/BitakoraCommunity_add', globals())
 
 def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
     """ """
     self._setObject(id, BitakoraCommunity(id, admin_mail))
-    com = getattr(self, id)
-    com.Catalog.refreshCatalog(1)
 
     if REQUEST is not None:
         return self.manage_main(self, REQUEST)
@@ -58,13 +42,13 @@ def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
 class BitakoraCommunity(BTreeFolder2):
     """ BTreeFolder2 container for Bitakora community. 
         It will contain blogs and methods for the main page of the community """
-    meta_type = 'BitakoraCommunity'
-    
+    from Bitakora import Bitakora
+
     security = ClassSecurityInfo()
-    security.setPermissionDefault('Manage BitakoraCommunity',('Manager',))
+    meta_type = 'BitakoraCommunity'
 
     _properties = ({'id':'admin_mail', 'type': 'ustring', 'mode': 'w'},
-                   {'id':'management_page_charset','type':'string', 'mode':'w'},
+                   {'id':'management_page_charset','type':'ustring', 'mode':'w'},
                    {'id':'title', 'type':'ustring', 'mode':'w'})
        
     manage_adminBlogs = HTMLFile('ui/admin_blogs', globals())
@@ -76,28 +60,23 @@ class BitakoraCommunity(BTreeFolder2):
         BTreeFolder2.__init__(self, id)
         self.id = id
         self.admin_mail = admin_mail
-        self.management_page_charset = 'UTF-8'
+        self.management_page_charset = u'UTF-8'
         self.title = u'blog community'
         self._addLocalizer()
         self._addCatalog()
         self._addMethods()
         self._addTemplates()
         self._addContent()
-        self._addOthers()
         self._buildIndexes()         
         
     def _addLocalizer(self):
         """ Add Localizer stuff """
         try:
             # old MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', ('en', 'eu', 'es')))
+            self._setObject('gettext', MessageCatalog('gettext', '', ('en',)))
         except:
             # new MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en', 'eu', 'es']))   
-            
-        # fill the gettext with 'es' and 'eu' locales
-        gettext = getattr(self, 'gettext')
-        res = fillMessageCatalog(gettext)
+            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en']))        
         
         localizer = Localizer('Localizer', ('en',))
         localizer._v_hook = 1
@@ -115,14 +94,11 @@ class BitakoraCommunity(BTreeFolder2):
 
         return options       
 
-    def _addOthers(self):
-        """ Add other stuff """
-        self.manage_addUserFolder()
-        self._setObject('cookie_authentication', CookieCrumbler('cookie_authentication'))
            
     def _addCatalog(self):
         """ Add ZCatalog instance """
-        self._setObject('Catalog', ZCatalog.ZCatalog('Catalog', 'Catalog'))
+        catalog = ZCatalog.ZCatalog('Catalog', 'Catalog')
+        self._setObject('Catalog', catalog)
         
     def _buildIndexes(self):
         """ Stuff to create Catalog indexes """
@@ -137,9 +113,7 @@ class BitakoraCommunity(BTreeFolder2):
                                   ('published', 'FieldIndex'),
                                   ('date', 'DateIndex'),
                                   ('tags', 'KeywordIndex'),
-                                  ('yearmonth', 'KeywordIndex'), 
-                                  ('postcount', 'FieldIndex'),
-                                  ('users', 'FieldIndex')]:
+                                  ('yearmonth', 'KeywordIndex')]:
             catalog.addIndex(name,index_type)
 
         extras = record()
@@ -158,21 +132,17 @@ class BitakoraCommunity(BTreeFolder2):
         """ method for adding templates, scripts, ... """
         
         dtmls = ['blogs_main', 'column', 'create_blog_form', 'index_html', 'last_posts']
-        dtmls.extend(['logged_in', 'logged_out', 'login_form', 'entry_body_community'])
-        dtmls.extend(['menu', 'mini_login_form', 'preheader', 'default_template'])
+        dtmls.extend(['logged_in', 'logged_out', 'login_form'])
+        dtmls.extend(['menu', 'mini_login_form', 'preheader'])
         dtmls.extend(['standard_html_footer', 'standard_html_header', 'step1', 'step2', 'step3'])
         dtmls.extend(['step3.done', 'tag_all_html', 'tag_html'])        
-        dtmls.extend(['reminder', 'reminder.done', 'changepass'])
         for dtml in dtmls:
             addDTML(self, dtml, '', 'ui/communityTemplates/%s' % dtml)
-        
-        """    
+            
         login = getattr(self, 'logged_in')
         login._proxy_roles=('Manager',)
-        """
         
-        scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog', 'logout']
-        scripts.extend(['reminder.do', 'changepass.do'])
+        scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog']
         for script in scripts:
             addPythonScript(self, script, 'ui/communityTemplates/%s' % script)
             ob = getattr(self, script)
@@ -211,12 +181,8 @@ class BitakoraCommunity(BTreeFolder2):
             except:
                 # new LocalContent
                 self._setObject(content, LocalContent(content, 'en', tuple(languages)))
-            
-            obj = getattr(self, content)
 
-
-       
-    security.declareProtected('Manage BitakoraCommunity', 'delBlogs')        
+        
     def delBlogs(self, ids=[], REQUEST=None):
         """ delete selected blogs """   
         del_users = []
@@ -227,14 +193,12 @@ class BitakoraCommunity(BTreeFolder2):
             del_users.extend([user for user,roles in rol])
             self._delObject(id)
             
-        #self.acl_users.userFolderDelUsers(del_users)            
+        self.acl_users.userFolderDelUsers(del_users)            
         self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
-            url = REQUEST.HTTP_REFERER.split('?')[0]
-            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Blogs deleted successfully')
+            REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Blogs deleted successfully')
 
-    security.declareProtected('Manage BitakoraCommunity', 'delUsers')
     def delUsers(self, ids=[], REQUEST=None):
         """ delete selected blogs """   
 
@@ -242,57 +206,31 @@ class BitakoraCommunity(BTreeFolder2):
         self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
-            url = REQUEST.HTTP_REFERER.split('?')[0]
-            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Users deleted successfully')
+            REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Users deleted successfully')
 
-    security.declarePublic('cleanHTML')
+
     def cleanHTML(self, html):
         """ clean html from posts """
-    	# Which one is more efficient?
-
-        # One way...
-        try:
-            from EpozPostTidy import cleanHTML as clean
-            return clean(html)
-        except:
-            # perhaps more efficient but needed for old Zopes
-            # Another way... (from Zopelabs)
-        	intag = [False]
-        	
-        	def chk(c, intag):
-        		if intag[0]:
-        			intag[0] = (c != '>')
-        			return False
-        		elif c == '<':
-        			intag[0] = True
-        			return False
-        		return True
-        	
-        	return ''.join([c for c in html if chk(c, intag)])
-        	
+        from EpozPostTidy import cleanHTML as clean
+        return clean(html)
         
-    security.declarePublic('community')        
-    def community(self):
-        """ return the community """
-        return self
-        
-    security.declarePublic('communityTitle')        
     def communityTitle(self):
         """ return the title """
         return self.title
-        
-    security.declarePublic('communityUrl')
-    def communityUrl(self):
-        """ return the URL of the community """
-        return self.absolute_url()
                 
-    security.declarePublic('communityLastPosts')                
     def communityLastPosts(self, size=10, start=None):
         """ The method for getting 'size' published posts"""
         if start is None:
-            return self.Catalog.searchResults(meta_type='Post', published=1, sort_limit=size, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
+            return self.Catalog.searchResults(meta_type='Post', published=1, sort_limit=size, date=DateTime.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending')
         else:
-            return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
+            return self.Catalog.searchResults(meta_type='Post', published=1, date=DateTime.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending')
             
+
+    def fix(self):
+        """ Fix things """
+        for blog in self.objectValues('Squisblog'):
+            blog.fix()
+            
+        return 'Ok'
         
 Globals.InitializeClass(BitakoraCommunity)        
