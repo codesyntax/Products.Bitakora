@@ -1,10 +1,17 @@
 <dtml-var standard_html_header>
 
 <dtml-if expr="_.SecurityGetUser().getUserName() == 'Anonymous User'">
+ 
  <h3><dtml-var "gettext('Logged out')"></h3>
+
  <p><dtml-var "gettext('Come again soon!')"></p>
+
 <dtml-else>
+
  <dtml-var "gettext('You are logged in using HTTP authentication.  You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>')">
+
 </dtml-if>
+
+
 
 <dtml-var standard_html_footer>
