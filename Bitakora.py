@@ -70,10 +70,11 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
     # Add a MessageCatalog if we are a standalone Bitakora
     # if not, the BitakoraCommunity MessageCatalog will handle
     # the messages
+    """
     if self.meta_type == 'BitakoraCommunity':
         sq._delObject('gettext')
         self.Catalog.catalog_object(sq, '/'.join(sq.getPhysicalPath()))
-    
+    """
     if REQUEST is not None:
         return self.manage_main(self, REQUEST)
 
@@ -88,7 +89,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
     security = ClassSecurityInfo()
 
-    security.setPermissionDefault('Bitakora admin',     ('Blogger', 'Manager',))
+    security.setPermissionDefault('Manage Bitakora',     ('Blogger', 'Manager',))
     security.setPermissionDefault('Add Bitakora Comment',('Anonymous','Manager'))
                                     
     _properties = ({'id':'title', 'type': 'ustring', 'mode': 'w'},
@@ -129,24 +130,24 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     tag_html = HTMLFile('ui/tag_html', globals())
     user_links = HTMLFile('ui/user_links', globals())
 
-    security.declareProtected('Bitakora admin', 'manage_addPost')
+    security.declareProtected('Manage Bitakora', 'manage_addPost')
     
-    security.declareProtected('Bitakora admin', 'admin')
+    security.declareProtected('Manage Bitakora', 'admin')
     admin = HTMLFile('ui/Post_list', globals())
     
-    security.declareProtected('Bitakora admin', 'post')
+    security.declareProtected('Manage Bitakora', 'post')
     post = HTMLFile('ui/Post_add', globals())
     
-    security.declareProtected('Bitakora admin', 'props')
+    security.declareProtected('Manage Bitakora', 'props')
     props = HTMLFile('ui/Blog_edit', globals())
 
-    security.declareProtected('Bitakora admin', 'sidebar')
+    security.declareProtected('Manage Bitakora', 'sidebar')
     sidebar = HTMLFile('ui/manage_sidebar', globals())    
     
-    security.declareProtected('Bitakora admin', 'template')
+    security.declareProtected('Manage Bitakora', 'template')
     template = HTMLFile('ui/manage_template', globals())
     
-    security.declareProtected('Bitakora admin', 'download')
+    security.declareProtected('Manage Bitakora', 'download')
     download = HTMLFile('ui/manage_download', globals())
 
     admin_options = ['admin', 'post', 'sidebar', 'props', 'template', 'download']
@@ -182,7 +183,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ Just a wrapper around call """
         return self.Catalog(REQUEST, **kw)
 
-    security.declareProtected('Bitakora admin', 'editBlog')
+    security.declareProtected('Manage Bitakora', 'editBlog')
     def editBlog(self, title, subtitle, contact_mail, description, comment_allowed, image=None, REQUEST=None):
         """ editing method """
         self.title = title
@@ -283,7 +284,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         css.update_data(data)
 
 
-    security.declareProtected('Bitakora admin', 'manage_delPosts')
+    security.declareProtected('Manage Bitakora', 'manage_delPosts')
     def manage_delPosts(self, ids=[], REQUEST=None):
         """ To delete posts from ZMI """
         for id in ids:
@@ -383,7 +384,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def blog(self):
         return self
 
-    security.declareProtected('Bitakora admin', 'addLink')
+    security.declareProtected('Manage Bitakora', 'addLink')
     def addLink(self, url, title, REQUEST=None):
         """ Add a new link in link menu """
         try:
@@ -397,7 +398,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), self.gettext('Link added succesfully')))
 
-    security.declareProtected('Bitakora admin', 'removeLink')
+    security.declareProtected('Manage Bitakora', 'removeLink')
     def removeLink(self, key=None, REQUEST=None):
         """ remove link from link menu """
         if key is not None:
@@ -423,7 +424,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
         return elems
         
-    security.declareProtected('Bitakora admin', 'save_sidebar_html')
+    security.declareProtected('Manage Bitakora', 'save_sidebar_html')
     def save_sidebar_html(self, html=u'', REQUEST=None):
         """ save sidebar HTML """
         self.sidebar_html = html
@@ -431,7 +432,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.absolute_url(), self.gettext('HTML saved succesfully')))        
         
         
-    security.declareProtected('Bitakora admin', 'save_css')
+    security.declareProtected('Manage Bitakora', 'save_css')
     def save_css(self, css=u'', REQUEST=None):
         """ save CSS """       
         doc = getattr(self, 'blog.css')
@@ -440,7 +441,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         if REQUEST is not None:
             REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), self.gettext('CSS edited succesfully')))
             
-    security.declareProtected('Bitakora admin', 'select_template')
+    security.declareProtected('Manage Bitakora', 'select_template')
     def select_template(self, template, REQUEST=None):
         """ select an existing template """
         if not template in self.templates.objectIds():

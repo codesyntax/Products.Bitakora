@@ -12,10 +12,8 @@
 
 <p>
 <label for="id"><dtml-var "gettext('Blog id')"></label><br/>
-http://www.blogak.com/<input type="text" name="id" id="id" size="20" <dtml-if "REQUEST.SESSION.has_key('id')">value="<dtml-var "REQUEST.SESSION.get('id')">"</dtml-if>/><dtml-if "REQUEST.get('r', '') == '4'"><span class="alert"><dtml-var "gettext('This id is already in use')"></span></dtml-if>
+<dtml-var "community().absolute_url()">/<input type="text" name="id" id="id" size="20" <dtml-if "REQUEST.SESSION.has_key('id')">value="<dtml-var "REQUEST.SESSION.get('id')">"</dtml-if>/><dtml-if "REQUEST.get('r', '') == '4'"><span class="alert"><dtml-var "gettext('This id is already in use')"></span></dtml-if>
 </p>
-
-<p>Automatikoki ez sortzeko blogerrek daukan bezala CAPTCHA erabili behar da?</p>
 
 <p><input type="submit" value="<dtml-var "gettext('Create your blog')">" /></p>
 </fieldset>
