@@ -2,7 +2,7 @@ body {
 	font: small verdana, sans-serif;
 	margin:0 auto;
 	padding:0px;
-	background: #C00;
+	#background: #C00;
 	}
 
 h1, h2, h3 {
@@ -48,7 +48,7 @@ a:hover{
 	background: #fff;
 	}
 #header {
-	background: #c00 url("header.gif") no-repeat bottom;
+	#background: #c00 url("header.gif") no-repeat bottom;
 	height: 75px;
 	}
 
@@ -197,7 +197,7 @@ a:hover{
 	
 #footer {
     clear: both;
-	background: #c00 url("footer.gif") no-repeat top;
+	#background: #c00 url("footer.gif") no-repeat top;
 	margin: 0px 0px 0px 0px;
 	height: 145px;
 }

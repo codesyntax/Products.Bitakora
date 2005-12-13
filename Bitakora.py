@@ -57,15 +57,23 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
         imgid = 'image.gif'
         new_id = sq.manage_addImage(imgid,contents,title=title)
         sq.imageUrl = '%s/%s' % (sq.absolute_url(), imgid)
+
+    perms = {}
+    perms['Anonymous'] = ['Add Bitakora Comment']
+    perms['Blogger'] = ['Manage Bitakora']
+    
+    for role, perm in perms.items():
+        sq.manage_role(role_to_manage=role, permissions=perm)
+
         
     # Add a MessageCatalog if we are a standalone Bitakora
     # if not, the BitakoraCommunity MessageCatalog will handle
     # the messages
-    """
+
     if self.meta_type == 'BitakoraCommunity':
         sq._delObject('gettext')
         self.Catalog.catalog_object(sq, '/'.join(sq.getPhysicalPath()))
-    """
+
     if REQUEST is not None:
         return self.manage_main(self, REQUEST)
 
