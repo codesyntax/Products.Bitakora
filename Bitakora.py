@@ -80,8 +80,8 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security = ClassSecurityInfo()
     security.setDefaultAccess('allow')
 
-    #security.setPermissionDefault('Manage Bitakora',     ('Blogger', 'Manager',))
-    #security.setPermissionDefault('Add Bitakora Comment',('Anonymous', 'Manager',))
+    security.setPermissionDefault('Manage Bitakora',     ('Blogger', 'Manager',))
+    security.setPermissionDefault('Add Bitakora Comment',('Anonymous', 'Manager',))
                                     
     _properties = ({'id':'title', 'type': 'ustring', 'mode': 'w'},
                    {'id':'subtitle', 'type':'ustring', 'mode':'w'},
