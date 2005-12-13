@@ -197,7 +197,7 @@ class BitakoraCommunity(BTreeFolder2):
                 self._setObject(content, LocalContent(content, 'en', tuple(languages)))
             
             obj = getattr(self, content)
-            self.Catalog.uncatalog_object('/'.join(obj.getPhysicalPath()))  
+
 
        
     security.declareProtected('Manage BitakoraCommunity', 'delBlogs')        

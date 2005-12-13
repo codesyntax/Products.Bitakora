@@ -4,12 +4,12 @@ README.txt
 
 You will have two extra products:
 
- - Squishblog: Fully featured blog product for Zope. With ideas of Squishdot and COREBlog.
+ - Bitakora: Fully featured blog product for Zope. With ideas of Squishdot and COREBlog.
  
- - SquishblogCommunity: A way for having a blog community based on Squishblog.
+ - BitakoraCommunity: A way for having a blog community based on Bitakora.
  
  
-Squishblog Features
+Bitakora Features
 
  - All templates and scripts are in the File System.
 
@@ -28,7 +28,7 @@ Squishblog Features
  - Clean URLs and tag based categorization of posts.
 
 
-SquishblogCommunity Features
+BitakoraCommunity Features
 
  - All template and scripts are loaded to the ZMI during instantiation of the product, in the same way Squishdot does, to allow community managers to customize it.
 
