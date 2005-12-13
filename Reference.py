@@ -1,11 +1,9 @@
+# -*- coding: utf-8 -*-
 # Zope modules
-from Globals import package_home, Persistent
+from Globals import package_home
 import Globals
 from OFS.SimpleItem import SimpleItem
-from OFS.Traversable import Traversable
-from Acquisition import Implicit
 from AccessControl import ClassSecurityInfo
-from BTrees.IOBTree import IOBTree
 
 # Catalog
 from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
@@ -26,12 +24,11 @@ def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
         
 
 class Reference(CatalogPathAware, SimpleItem):
-    """ asdfklasfasldfj """
+    """ Reference class """
+    meta_type = 'Reference'
 
     security = ClassSecurityInfo()
-    security.setDefaultAccess("allow")
-
-    meta_type = 'Reference'
+    #security.setDefaultAccess("allow")
 
     security.declarePrivate('__init__')
     def __init__(self, id, title, uri, excerpt, postid, publish=1):
@@ -87,4 +84,4 @@ class Reference(CatalogPathAware, SimpleItem):
         """ """
         return self.getParentNode().absolute_url()+'#reference'+self.id
         
-Globals.InitializeClass(Reference)        
+Globals.InitializeClass(Reference)
