@@ -1,11 +1,9 @@
+# -*- coding: utf-8 -*-
 # Zope modules
-from Globals import package_home, Persistent
+from Globals import package_home
 import Globals
 from OFS.SimpleItem import SimpleItem
-from OFS.Traversable import Traversable
-from Acquisition import Implicit
 from AccessControl import ClassSecurityInfo
-from BTrees.IOBTree import IOBTree
 
 # Catalog
 from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
@@ -49,11 +47,9 @@ def manage_addComment(self, author, body, url='', email='', REQUEST=None):
 
 class Comment(CatalogPathAware, SimpleItem):
     """ Comment class """
-
-    security = ClassSecurityInfo()
-    security.setDefaultAccess("allow")
-
     meta_type = 'Comment'
+    
+    security = ClassSecurityInfo()
 
     security.declarePrivate('__init__')
     def __init__(self, id, author, email, url, body, date, postid, publish=1):

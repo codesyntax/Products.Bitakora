@@ -6,15 +6,13 @@ __version__ = "$Revision: 0.1 $"
 
 # Zope modules
 from AccessControl import ClassSecurityInfo
-from Acquisition import Implicit, aq_base
 import Globals
 from Globals import HTMLFile
 
 # Modules from Localizer
-from Products.Localizer.LanguageManager import LanguageManager
 from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog
-from Products.Localizer.LocalPropertyManager import LocalPropertyManager, LocalProperty
+from Products.Localizer.LocalPropertyManager import LocalPropertyManager
 from Products.Localizer.LocalContent import LocalContent
 
 # ZCatalog
@@ -22,7 +20,7 @@ from Products.ZCatalog import ZCatalog
 
 # CookieCrumbler
 try:
-    from Products.CookieCrumbler import CookieCrumbler
+    from Products.CookieCrumbler.CookieCrumbler import CookieCrumbler
 except:
     from Products.CMFCore.CookieCrumbler import CookieCrumbler
 
@@ -50,11 +48,10 @@ def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
 class BitakoraCommunity(BTreeFolder2):
     """ BTreeFolder2 container for Bitakora community. 
         It will contain blogs and methods for the main page of the community """
-    from Bitakora import Bitakora
-
-    __ac_roles__ = ('Blogger',)
-    security = ClassSecurityInfo()
     meta_type = 'BitakoraCommunity'
+    
+    security = ClassSecurityInfo()
+    security.setPermissionDefault('Manage BitakoraCommunity',('Manager',))
 
     _properties = ({'id':'admin_mail', 'type': 'ustring', 'mode': 'w'},
                    {'id':'management_page_charset','type':'ustring', 'mode':'w'},
@@ -202,7 +199,8 @@ class BitakoraCommunity(BTreeFolder2):
             obj = getattr(self, content)
             self.Catalog.uncatalog_object('/'.join(obj.getPhysicalPath()))  
 
-        
+       
+    security.declareProtected('Manage BitakoraCommunity', 'delBlogs')        
     def delBlogs(self, ids=[], REQUEST=None):
         """ delete selected blogs """   
         del_users = []
@@ -217,8 +215,9 @@ class BitakoraCommunity(BTreeFolder2):
         self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
-            REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Blogs deleted successfully')
+            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Blogs deleted successfully')
 
+    security.declareProtected('Manage BitakoraCommunity', 'delUsers')
     def delUsers(self, ids=[], REQUEST=None):
         """ delete selected blogs """   
 
@@ -226,23 +225,25 @@ class BitakoraCommunity(BTreeFolder2):
         self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
-            REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Users deleted successfully')
+            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Users deleted successfully')
 
-
+    security.declarePublic('cleanHTML')
     def cleanHTML(self, html):
         """ clean html from posts """
         from EpozPostTidy import cleanHTML as clean
         return clean(html)
         
-        
+    security.declarePublic('community')        
     def community(self):
         """ return the community """
         return self
         
+    security.declarePublic('communityTitle')        
     def communityTitle(self):
         """ return the title """
         return self.title
                 
+    security.declarePublic('communityLastPosts')                
     def communityLastPosts(self, size=10, start=None):
         """ The method for getting 'size' published posts"""
         if start is None:
@@ -250,10 +251,10 @@ class BitakoraCommunity(BTreeFolder2):
         else:
             return self.Catalog.searchResults(meta_type='Post', published=1, date=DateTime.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending')
             
-
+    security.declareProtected('Manage BitakoraCommunity', 'fix')
     def fix(self):
         """ Fix things """
-        for blog in self.objectValues('Squisblog'):
+        for blog in self.objectValues('Bitakora'):
             blog.fix()
             
         return 'Ok'

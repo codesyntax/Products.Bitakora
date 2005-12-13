@@ -1,13 +1,8 @@
+# -*- coding: utf-8 -*-
 # Zope modules
 from Globals import package_home, Persistent, HTMLFile
 import Globals
-from OFS.SimpleItem import SimpleItem
-from OFS.Traversable import Traversable
-from OFS.ObjectManager import ObjectManager
-from Acquisition import Implicit
 from AccessControl import ClassSecurityInfo
-from BTrees.IOBTree import IOBTree
-
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
 # Catalog
@@ -60,7 +55,8 @@ def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comm
     return self.manage_main(self, REQUEST)
 
 class Post(CatalogPathAware, BTreeFolder2):
-    """ asdfklasfasldfj """
+    """ Post class """
+    meta_type = 'Post'
 
     from Comment import manage_addComment
     from Reference import manage_addPingback
@@ -68,8 +64,6 @@ class Post(CatalogPathAware, BTreeFolder2):
     security = ClassSecurityInfo()
     #security.setDefaultAccess("allow")
     
-    meta_type = 'Post'
-
     security.declareProtected('Add Bitakora Comment', 'manage_addComment')
 
     security.declareProtected('Manage Bitakora', 'edit')
@@ -88,8 +82,6 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.comment_allowed = comment_allowed
         self.reference_allowed = reference_allowed
         self.published = publish
-        self.comments = IOBTree()
-        self.references = IOBTree()
         self.reindex_object()
         
 
@@ -342,19 +334,22 @@ class Post(CatalogPathAware, BTreeFolder2):
             for cookie in ['comment_author', 'comment_url', 'comment_email']:
                 REQUEST.RESPONSE.expireCookie(cookie)
             
-            REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER)
+            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER)
 
     def users(self):
         return None            
-            
+
+    security.declarePublic('commentsAllowed')
     def commentsAllowed(self):
         """ Are comments allowed? """
         return self.comment_allowed
-        
+
+    security.declarePublic('commentsModerated')        
     def commentsModerated(self):
         """ Are comments moderated? """
         return self.comment_allowed == 2
-        
+
+    security.declarePublic('commentsNotAllowed')        
     def commentsNotAllowed(self):
         """ Are not comments allowed? """
         return not self.comment_allowed            
