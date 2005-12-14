@@ -22,7 +22,7 @@ __version__ = "$Revision: 0.01 $"
 
 def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, REQUEST=None):
     """ Called from ZMI when creating new posts """
-    #return self._catalog
+
     newid = createId(title)
     newtitle = clean(title)
     newauthor = clean(author)

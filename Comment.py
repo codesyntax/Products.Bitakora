@@ -63,8 +63,8 @@ class Comment(CatalogPathAware, SimpleItem):
         self.published = publish
         self.postid = postid
 
-    security.declarePrivate('edit')
-    def edit(self, author, email, url, body, date, publish=1):
+    security.declareProtected('Manage Bitakora', 'edit')
+    def edit(self, author, email, url, body, date, publish=1, REQUEST=None):
         """ Editor """
         self.author = author
         self.email = email
@@ -73,6 +73,16 @@ class Comment(CatalogPathAware, SimpleItem):
         self.date = DateTime.DateTime(date)
         self.published = publish
         self.reindex_object()
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Comment edited successfuly')
+
+    security.declareProtected('Manage bitakora', 'delete')
+    def delete(self, REQUEST):
+        """ delete this comment """
+        REQUEST['delete'] = 1
+        self.getParentNode().manage_editComment(author='', email='', url='', body='', date='', id=self.id, REQUEST=REQUEST)
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Comment deleted successfuly')
 
     security.declarePublic('index_html')
     def index_html(self,REQUEST=None):
