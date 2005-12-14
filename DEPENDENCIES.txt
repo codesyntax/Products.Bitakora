@@ -3,4 +3,6 @@ DEPENDENCIES.txt
 Epoz: Tested with 2.0.1
 Localizer: Tested with 0.8.1 and above
 TextIndexNG2: Tested with 2.0.1
+BTreeFolder2
+CookieCrumbler
 

@@ -1,0 +1,3 @@
+BUGS
+
+  - With CMF's Cookie Crumbler, sometimes it works correctly, and sometimes no...
