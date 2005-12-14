@@ -138,7 +138,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     post = HTMLFile('ui/Post_add', globals())
     
     security.declareProtected('Manage Bitakora', 'props')
-    props = HTMLFile('ui/Blog_edit', globals())
+    prefs = HTMLFile('ui/Blog_edit', globals())
 
     security.declareProtected('Manage Bitakora', 'sidebar')
     sidebar = HTMLFile('ui/manage_sidebar', globals())    
@@ -146,10 +146,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declareProtected('Manage Bitakora', 'template')
     template = HTMLFile('ui/manage_template', globals())
     
-    security.declareProtected('Manage Bitakora', 'download')
-    download = HTMLFile('ui/manage_download', globals())
+    security.declareProtected('Manage Bitakora', 'comments')
+    comments = HTMLFile('ui/manage_comments', globals())
    
-    admin_options = ['admin', 'post', 'sidebar', 'props', 'template', 'download']
+    admin_options = ['admin', 'post', 'sidebar', 'prefs', 'template', 'comments']
 
     security.declarePrivate('__init__')
     def __init__(self, id, title, subtitle, description, contact_mail):
@@ -183,13 +183,12 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         return self.Catalog(REQUEST, **kw)
 
     security.declareProtected('Manage Bitakora', 'editBlog')
-    def editBlog(self, title, subtitle, contact_mail, description, comment_allowed, image=None, REQUEST=None):
+    def editBlog(self, title, subtitle, contact_mail, description, image=None, REQUEST=None):
         """ editing method """
         self.title = title
         self.subtitle = subtitle
         self.contact_mail = contact_mail
         self.description = description
-        self.comment_allowed = comment_allowed
         if image.read():
             ext = image.filename.split('.')[-1]
             imgid = 'image.%s' % ext
@@ -212,6 +211,15 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                         
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/props?msg=%s' % (self.blogurl(), 'Properties edited succesfully'))
+
+    security.declareProtected('Manage Bitakora', 'editCommentPolicy')
+    def editCommentPolicy(self, comment_allowed, REQUEST=None):
+        """ edit comment policy """
+        self.comment_allowed = comment_allowed
+        
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect('%s/comments?msg=%s' % (self.blogurl(), 'Comment policy edited succesfully'))
+        
 
     security.declarePrivate('_buildIndexes')
     def _buildIndexes(self):
@@ -511,6 +519,12 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return users[0]
         return ''
      
+    security.declarePublic('blogComments')
+    def blogComments(self):
+        """ return catalogged comments """
+        return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending')
+
+        
     security.declareProtected('Manage Bitakora', 'fix')
     def fix(self):
         """ general method for fixing things """

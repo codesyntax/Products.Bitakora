@@ -41,15 +41,15 @@
 <input id="contact_mail" type="text" name="contact_mail:utf8" value="<dtml-var contact_mail>" size="50"/>
 </p>
 
-<p>
-<dtml-var "gettext('Comment policy')"><br/>
-<input type="radio" name="comment_allowed:int" value="1" id="comyes" <dtml-if commentsAllowed>checked="checked"</dtml-if>/> <label for="comyes"><dtml-var "gettext('Comments allowed')"></label> <br/>
-<input type="radio" name="comment_allowed:int" value="2" id="commod" <dtml-if commentsModerated>checked="checked"</dtml-if>/> <label for="commod"><dtml-var "gettext('Comments allowed but moderated')"></label><br/>
-<input type="radio" name="comment_allowed:int" value="0" id="comno" <dtml-if commentsNotAllowed>checked="checked"</dtml-if>/> <label for="comno"><dtml-var "gettext('Comments not allowed')"></label>
-</p>
-
-
 <input value="<dtml-var "gettext('Save Changes')">" type="submit"/>
 </form>
+
+<h1><dtml-var "gettext('Download your blog')"></h1>
+
+<p><dtml var "gettext('From here, you can download your blog in TXT format')"></p>
+
+<ul>
+    <li><a href="<dtml-var blogurl>/downloadTXT"><dtml-var "gettext('Download in TXT')"></a></li>
+</ul>
 
 <dtml-var standard_html_footer>

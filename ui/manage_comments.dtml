@@ -1,0 +1,71 @@
+<dtml-var standard_html_header>
+
+<dtml-var admin_header>
+
+<h1><dtml-var "gettext('Comments')"></h1>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+<h2><dtml-var "gettext('Comment policy')"></h2>
+
+<form action="editCommentPolicy" method="post">
+<p>
+<input type="radio" name="comment_allowed:int" value="1" id="comyes" <dtml-if commentsAllowed>checked="checked"</dtml-if>/> <label for="comyes"><dtml-var "gettext('Comments allowed')"></label> <br/>
+<input type="radio" name="comment_allowed:int" value="2" id="commod" <dtml-if commentsModerated>checked="checked"</dtml-if>/> <label for="commod"><dtml-var "gettext('Comments allowed but moderated')"></label><br/>
+<input type="radio" name="comment_allowed:int" value="0" id="comno" <dtml-if commentsNotAllowed>checked="checked"</dtml-if>/> <label for="comno"><dtml-var "gettext('Comments not allowed')"></label>
+</p>
+
+<p><input type="submit" value="<dtml-var "gettext('Edit policy')">" /></p>
+
+</form>
+
+<h2><dtml-var "gettext('Comment management')"></h2>
+
+<p><dtml-var "gettext('Comments awaiting moderation')"></p>
+
+<dtml-in blogComments>
+<dtml-with getObject>
+<dtml-let commid="getId()">
+<form action="<dtml-var "getParentNode().absolute_url()">/<dtml-var commid>" method="post">
+<fieldset>
+<h3><a href="<dtml-var "getParentNode().absolute_url()">"><dtml-var "gettext('View original post')"></a></h3>
+<p>
+<label for="author<dtml-var commid>"><dtml-var "gettext('Name:')"></label><br/>
+<input id="author<dtml-var commid>" name="author:utf8:ustring" size="30" value="<dtml-var showAuthor>" />
+</p>
+<p>
+<label for="email<dtml-var commid>"><dtml-var "gettext('Email Address:')"></label><br/>
+<input id="email<dtml-var commid>" name="email:utf8:ustring" size="30" value="<dtml-var showEmail>" />
+</p>
+<p>
+<label for="url<dtml-var commid>"><dtml-var "gettext('URL:')"></label><br/>
+<input id="url<dtml-var commid>" name="url:utf8:ustring" size="30" value="<dtml-var showURL>" />
+</p>
+<p>
+<label for="date<dtml-var commid>"><dtml-var "gettext('Date')"></label><br/>
+<input id="date<dtml-var commid>" name="date:utf8:ustring" size="30" value="<dtml-var showDate>" />
+</p>
+<p>
+<label for="text<dtml-var commid>"><dtml-var "gettext('Comments:')"></label><br/>
+<textarea id="text<dtml-var commid>" name="body:utf8:ustring" rows="10" cols="50"><dtml-var showBody></textarea>
+</p>
+
+<p>
+<label><dtml-var "gettext('Status')"></label><br/>
+<input type="radio" name="publish:int" id="yes<dtml-var commid>" value="1" <dtml-if published>checked="checked"</dtml-if> /> <label for="yes<dtml-var commid>"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no<dtml-var commid>" value="0" <dtml-if hidden>checked="cheked"</dtml-if> /> <label for="no<dtml-var commid>"><dtml-var "gettext('Unpublished')"></label>
+</p>
+<input type="hidden" name="id" value="<dtml-var getId>"/>
+<input type="submit" value="<dtml-var "gettext('Edit Comment')">" name="edit:method"/>
+<input type="submit" value="<dtml-var "gettext('Delete comment')">" name="delete:method" onclick="javascript:return confirm('<dtml-var "gettext('Are you sure?')">');"/>
+</fieldset>
+</form>
+</dtml-let>
+</dtml-with>
+</dtml-in>
+
+<dtml-var standard_html_footer>
