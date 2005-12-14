@@ -148,6 +148,7 @@ class BitakoraCommunity(BTreeFolder2):
         dtmls.extend(['menu', 'mini_login_form', 'preheader', 'default_template'])
         dtmls.extend(['standard_html_footer', 'standard_html_header', 'step1', 'step2', 'step3'])
         dtmls.extend(['step3.done', 'tag_all_html', 'tag_html'])        
+        dtmls.extend(['reminder', 'reminder.done', 'changepass'])
         for dtml in dtmls:
             addDTML(self, dtml, '', 'ui/communityTemplates/%s' % dtml)
         
@@ -157,6 +158,7 @@ class BitakoraCommunity(BTreeFolder2):
         """
         
         scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog', 'logout']
+        scripts.extend(['reminder.do', 'changepass.do'])
         for script in scripts:
             addPythonScript(self, script, 'ui/communityTemplates/%s' % script)
             ob = getattr(self, script)
@@ -241,7 +243,7 @@ class BitakoraCommunity(BTreeFolder2):
     security.declarePublic('communityTitle')        
     def communityTitle(self):
         """ return the title """
-        return self.title
+        return self.title.encode('utf-8')
                 
     security.declarePublic('communityLastPosts')                
     def communityLastPosts(self, size=10, start=None):

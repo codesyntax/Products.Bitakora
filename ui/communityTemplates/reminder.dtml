@@ -11,10 +11,10 @@
 <dtml-let came_from="REQUEST.get('came_from', '')"
           action_url="came_from or 'logged_in'">
 
-<form action="<dtml-var communityUrl>/reminder.do" method="post">
+<form action="reminder.do" method="post">
 
 <dtml-if expr="REQUEST.get('retry', 0)">
-<p style="color:red;"><dtml-var "gettext('Please try again')"></p>
+<p style="color:red;"><dtml-var "gettext('Try again please.')"></p>
 </dtml-if>
 
 <dtml-if came_from>

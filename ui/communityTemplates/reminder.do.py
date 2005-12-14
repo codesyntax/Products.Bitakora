@@ -38,13 +38,13 @@ this_username=context.REQUEST.get('__ac_name','')
 if acl.getUser(this_username):
     blog = context.usersBlog(this_username, blog=1)
 
-    email = getattr(blog, 'contact_mail', '')
+    email = blog.getProperty('contact_mail', '')
 
     if validEmail(email):
         key = generateKey()
         blog.manage_addProperty('key', key, 'string')
         sendMail(email=email,user=this_username,key=key)
-        return context.REQUEST.RESPONSE.redirect('%s/reminder.done' % context.communityUrl())
+        return context.REQUEST.RESPONSE.redirect('/reminder.done')
 
     else:
         #haven't email
@@ -55,4 +55,4 @@ else:
     #it doesn't exist
     msg = context.gettext('Oooooop.... this username is wrong')
 
-return context.REQUEST.RESPONSE.redirect('%s/reminder?msg=%s' % (context.communityUrl(), msg))
+return context.REQUEST.RESPONSE.redirect('/reminder?msg=%s' % msg)

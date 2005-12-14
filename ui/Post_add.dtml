@@ -11,6 +11,12 @@
 
 <h1><dtml-var "gettext('Add a new post')"></h1>
 
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
 <form action="" method="post">
 
 <p>

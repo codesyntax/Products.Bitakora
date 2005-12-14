@@ -28,6 +28,7 @@
     <p>
       <input type="submit" name="submit" value="<dtml-var "gettext('Login')">"/>
     </p>
+    <p><small><a href="/reminder"><dtml-var "gettext('Lost your password?')"></a></small></p>
 </fieldset>
 </form>
 </dtml-let>

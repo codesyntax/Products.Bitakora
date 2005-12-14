@@ -1,6 +1,13 @@
 <dtml-var standard_html_header>
 
 <h3><dtml-var "gettext('Just for registered users')"></h3>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
 <dtml-let came_from="REQUEST.get('came_from', '')" action_url="came_from or '/logged_in'">
 <form action="&dtml-action_url;" method="post">
 <fieldset>
@@ -28,6 +35,7 @@
     <p>
       <input type="submit" name="submit" value="<dtml-var "gettext('Login')">"/>
     </p>
+    <p><small><a href="/reminder"><dtml-var "gettext('Lost your password?')"></a></small></p>
 </fieldset>
 </form>
 </dtml-let>

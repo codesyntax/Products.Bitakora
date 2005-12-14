@@ -15,7 +15,7 @@
 </div>
 </dtml-if>
 
-<form action="<dtml-var communityUrl>/changepass.do" method="post">
+<form action="changepass.do" method="post">
 <p>
 <label for="name"><dtml-var "gettext('Login')"></label><br />
 <input type="text" name="name" size="20" value="<dtml-var req_user>" disabled="disabled" />
