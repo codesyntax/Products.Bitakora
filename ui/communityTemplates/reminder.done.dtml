@@ -1,0 +1,10 @@
+<dtml-var standard_html_header>
+
+
+<h1><dtml-var "gettext('Forgot your password?')"></h1>
+
+
+<p><dtml-var "gettext('Ok. An email was sent!')"></p>
+
+
+<dtml-var standard_html_footer>

@@ -4,15 +4,18 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=user
+##parameters=user, blog=0
 ##title=
 ##
 cat = container.Catalog
 
-blog = cat.searchResults(users=user)
+b = cat.searchResults(users=user)
 
-if blog:
-    return blog[0].getURL()
+if b:
+    if not blog:
+        return b[0].getURL()
+    else:
+        return b[0].getObject()
 
 return ''
 

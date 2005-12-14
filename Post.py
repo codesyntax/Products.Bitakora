@@ -12,7 +12,7 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 import DateTime
 from utils import addDTML, clean, cleanBody, cleanEmail, cleanURL, discoverPingbackUrl, makeXMLRPCCall
 from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
-from utils import createId, createNewId
+
 from urllister import URLLister
 from Comment import Comment
 from Reference import Reference
@@ -22,8 +22,10 @@ __version__ = "$Revision: 0.01 $"
 
 def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, REQUEST=None):
     """ Called from ZMI when creating new posts """
-
-    newid = createId(title)
+    if not title:
+        return REQUEST.RESPONSE.redirect('%s/post?msg=%s' % (self.blogurl(), 'You must provide at least the title of the post'))
+        
+    newid = self.createId(title)
     newtitle = clean(title)
     newauthor = clean(author)
     newbody = cleanBody(self, body)
@@ -31,7 +33,7 @@ def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comm
     newdate = DateTime.DateTime(date)
 
     while hasattr(self, newid):
-        newid = createNewId(newid)
+        newid = self.createNewId(newid)
 
     post = Post(newid, newtitle, newauthor, newbody, newtags, newdate, publish, comment_allowed)
       

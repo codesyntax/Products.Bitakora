@@ -21,7 +21,7 @@ from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 import DateTime, string
 
 # Own modules
-from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars, createId, createNewId
+from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
 from PingMethodContainer import PingMethodContainer
 
 
@@ -137,7 +137,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declareProtected('Manage Bitakora', 'post')
     post = HTMLFile('ui/Post_add', globals())
     
-    security.declareProtected('Manage Bitakora', 'props')
+    security.declareProtected('Manage Bitakora', 'prefs')
     prefs = HTMLFile('ui/Blog_edit', globals())
 
     security.declareProtected('Manage Bitakora', 'sidebar')
@@ -205,12 +205,12 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                 self.manage_addImage(original_id, original_img)
                 self.imageUrl = '%s/%s' % (self.absolute_url(), original_id)
                 if REQUEST is not None:
-                    return REQUEST.RESPONSE.redirect('%s/props?msg=%s' % (self.blogurl(), 'Your image is too large. Try with a smaller one'))
+                    return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Your image is too large. Try with a smaller one'))
             
             self.imageUrl = '%s/%s' % (self.absolute_url(), imgid)
                         
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/props?msg=%s' % (self.blogurl(), 'Properties edited succesfully'))
+            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Properties edited succesfully'))
 
     security.declareProtected('Manage Bitakora', 'editCommentPolicy')
     def editCommentPolicy(self, comment_allowed, REQUEST=None):
@@ -529,5 +529,31 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def fix(self):
         """ general method for fixing things """
         return None
+
+    def createId(self, title):
+        """ Create an id for a post based on its title """
+        id = title.strip()
+        #id = tit.translate(translation_table)
+        id = ''.join([c for c in id if c in ok_chars])
+        while id.startswith('-') or id.startswith('_') or id.startswith(' '):
+            id = id[1:]
+    
+        while id.endswith('-') or id.endswith('_') or id.endswith(' '):
+            id = id[:-1]
+    
+        id = id.lower()
+        if not id:
+            return u'blog-post%d' % self.postcount
+    
+        return u'-'.join(id.split(' '))
+        
+    def createNewId(self, oldid):
+        """ Create a new id if the previous one was taken """
+        if oldid[-1].isdigit():
+            num = oldid.split('-')
+            end = int(num[-1]) + 1
+            return '-'.join(num[:-1]) + '-' + str(end)
+        else:
+            return oldid+'-1'           
 
 Globals.InitializeClass(Bitakora)

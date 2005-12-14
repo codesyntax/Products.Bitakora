@@ -61,32 +61,6 @@ def addFile(obj,id,file):
     tlen = len(contents)     
     new_id = obj.manage_addFile(id,contents,title=title)   
 
-def createId(title):
-    """ Create an id for a post based on its title """
-    id = title.strip()
-    #id = tit.translate(translation_table)
-    id = ''.join([c for c in id if c in ok_chars])
-    while id.startswith('-') or id.startswith('_') or id.startswith(' '):
-        id = id[1:]
-
-    while id.endswith('-') or id.endswith('_') or id.endswith(' '):
-        id = id[:-1]
-
-    id = id.lower()
-    if not id:
-        return u'blog-post%d' % self.postcount
-
-    return u'-'.join(id.split(' '))
-
-def createNewId(oldid):
-    """ Create a new id if the previous one was taken """
-    if oldid[-1].isdigit():
-        num = oldid.split('-')
-        end = int(num[-1]) + 1
-        return '-'.join(num[:-1]) + '-' + str(end)
-    else:
-        return oldid+'-1'
-
 def clean(text):
     """ clean the text to delete all unwanted things """
     return text

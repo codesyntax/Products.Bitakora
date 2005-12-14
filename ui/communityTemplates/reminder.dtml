@@ -1,0 +1,34 @@
+<dtml-var standard_html_header>
+
+<h1><dtml-var "gettext('Forgot your password?')"></h1>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+<dtml-let came_from="REQUEST.get('came_from', '')"
+          action_url="came_from or 'logged_in'">
+
+<form action="reminder.do" method="post">
+
+<dtml-if expr="REQUEST.get('retry', 0)">
+<p style="color:red;"><dtml-var "gettext('Try again please.')"></p>
+</dtml-if>
+
+<dtml-if came_from>
+  <p><input type="hidden" name="came_from" value="&dtml-came_from;" /></p>
+</dtml-if>
+
+<p>
+<label for="__ac_name"><dtml-var "gettext('Enter your username and you will receive an email to choose a new password.')"></label><br />
+<input type="text" name="__ac_name" size="20" value="<dtml-var "REQUEST.get('__ac_name', '')">" />
+</p>
+<p>
+<input type="submit" name="submit" value="<dtml-var "gettext('Send')">" />
+</p>
+</form>
+</dtml-let>
+
+<dtml-var standard_html_footer>

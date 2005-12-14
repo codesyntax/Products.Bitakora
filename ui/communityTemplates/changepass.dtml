@@ -1,0 +1,48 @@
+<dtml-var standard_html_header>
+
+
+<h1><dtml-var "gettext('Change your password')"></h1>
+
+<dtml-let req_user="REQUEST.get('user','')"
+          req_key="REQUEST.get('key','')"
+          key="usersBlog(req_user, blog=1).getProperty('key', '')">
+
+<dtml-if "key==req_key">
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg">
+    <dtml-var "REQUEST.get('msg')">
+</div>
+</dtml-if>
+
+<form action="changepass.do" method="post">
+<p>
+<label for="name"><dtml-var "gettext('Login')"></label><br />
+<input type="text" name="name" size="20" value="<dtml-var req_user>" disabled="disabled" />
+</p>
+
+<p>
+<input type="hidden" name="key" value="<dtml-var req_key>" />
+<input type="hidden" name="__ac_name" value="<dtml-var req_user>" />
+</p>
+
+<p>
+<label for="password"><dtml-var "gettext('New password')"></label><br />
+<input type="password" size="32" name="password" id="password" class="sized" value="" />
+</p>
+
+<p>
+<label for="password_confirm"><dtml-var "gettext('Repeat your new password')"></label><br />
+<input type="password" size="32" name="password_confirm" id="password_confirm" class="sized" value="" />
+</p>
+
+<p><input type="submit" name="submit" value="<dtml-var "gettext('Change')">" /></p>
+</form>
+
+<dtml-else>
+<p class="error"><dtml-var "gettext('You can\'t change this password')"></p>
+</dtml-if>
+
+</dtml-let>
+
+<dtml-var standard_html_footer>
