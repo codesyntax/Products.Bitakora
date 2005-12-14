@@ -1,5 +1,3 @@
-#$Id$
-
 TODO
 
  - Upload file and images, and easy integration with posts
