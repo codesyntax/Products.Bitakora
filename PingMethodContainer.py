@@ -1,5 +1,5 @@
 # Zope modules
-from OFS.ObjectManager import SimpleItem
+from OFS.SimpleItem import SimpleItem
 from OFS.Traversable import Traversable
 from Acquisition import Implicit
 from AccessControl import ClassSecurityInfo
