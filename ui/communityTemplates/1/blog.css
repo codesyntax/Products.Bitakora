@@ -2,9 +2,8 @@ body {
 	padding: 0px 0px 50px 0px;
 	text-align: center;
 	background:#EFEFEF url(/img/1bekoa.jpg) no-repeat bottom;
-        margin: 0 auto;
+	margin: 0 auto;
 }
-
 a {
 	text-decoration: none;
 	}
@@ -14,7 +13,7 @@ a:link {
 	}
 
 a:visited {
-	color: #930;
+	color: #FCB853;
 	}
 
 a:active {
@@ -23,6 +22,7 @@ a:active {
 
 a:hover {
 	color: #FFCC33;
+	text-decoration:underline;
 	}
 
 h1, h2, h3 {
@@ -33,21 +33,24 @@ h1, h2, h3 {
 
 #container {
 	line-height: 140%;
-	margin: auto;
+	margin:0 auto;
 	text-align: left;
 	padding: 0px;
 	width: 700px;
 	height: auto;
 	background:#EFEFEF url(/img/1fondoa.jpg) repeat-y top left;
-        border: 1px solid #EFEFEF;
-	}
-
+	border: 1px solid transparent;
+}
+*html #container {
+	width: 698px;
+	border:none;
+}
 #banner {
 	color: #FFFFFF;
 	text-align: left;
-        font-family:'Trebuchet MS', Verdana, arial, sans-serif;
+	font-family:'Trebuchet MS', Verdana, arial, sans-serif;
 	padding: 0px;
-	height: 132px;
+	height: 130px;
 	background:#EFEFEF url(/img/1goikoa.jpg) no-repeat top left;
 	}
 
@@ -65,7 +68,7 @@ a#banner-img {
 	font-size: 30px;
 	padding:50px 0px 0px 40px;
 	color: #B83803;
-font-weight: bold;
+	font-weight: bold;
 	}
 
 #banner h2 {
@@ -86,7 +89,9 @@ font-weight: bold;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	font-size: small;
 	}
-
+*html .content {
+	font-size:x-small;
+}
 #right {
 	float: left;
 	width: 200px;
@@ -102,7 +107,15 @@ font-weight: bold;
 	text-align: left;
 	margin-bottom: 10px;
 	}
-
+*html .content p {
+	font-size: x-small;
+}
+.content .storycontent h3{
+	font-size:110%;
+	margin:0;
+	padding:0;
+	background:none;
+}
 .content blockquote {
 	line-height: 150%;
 	}
@@ -112,90 +125,77 @@ font-weight: bold;
 	}
 
 .content h2 {
-	color: #ccc;
+	color: #999;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
-	font-size: x-small;
+	font-size: small;
 	text-align: left;
 	margin-bottom: 0px;
 	font-weight: bold;
-	
-	}
-
+}
+*html content h2{
+	font-size: x-small;
+}
 .content h3 {
 	color: #333;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	font-size: 15px;
-	
 	text-align: left;
 	font-weight: bold;
-	
 	background: url(/img/1titulo.jpg) no-repeat top left;
 	margin-bottom: 10px;
 	padding-left: 10px;
-	
-	}
+}
 
 .content p.posted {
 	color: #999999;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	font-size: x-small;
-	border-top: 1px solid #999999;
+	border-top: 1px solid #ccc;
 	text-align: left;
-	
-	
-	
 	margin-bottom: 25px;
 	line-height: normal;
 	padding: 3px;
-	}
-
-.sidebar {
-	padding: 15px 10px 15px 10px;
-	}
-
-
+}
 
 #calendar {
   	line-height: 140%;
 	color: #666666;
 	font-family: Verdana, Arial, sans-serif;
 	font-size: x-small;
-	
-	
-	
   	padding: 2px;
 	text-align: center;
 	margin-bottom: 30px;
-	}
+}
 
 #calendar table {
 	padding: 2px;
 	border-collapse: collapse;
 	border: 0px;
 	width: 100%;
-	}
+}
 
 #calendar caption {
 	color: #666666;
 	font-family: Verdana, Arial, sans-serif;
 	font-size: x-small;
-	
 	text-align: center;
 	font-weight: bold;
-	
 	text-transform: uppercase;
-	
 	letter-spacing: .3em;
-	}
+}
 
 #calendar th {
 	text-align: center;
 	font-weight: normal;
-	}
+}
 
 #calendar td {
 	text-align: center;
-	}
+}
+
+.sidebar {
+	padding: 15px 10px 15px 10px;
+}
 
 .sidebar h2 {
 	font-family: Verdana, Arial, sans-serif;
@@ -207,8 +207,10 @@ font-weight: bold;
 	height:30px;
 	text-transform: uppercase;
 	padding-left:5px;
-  	
-	}
+}
+*html .sidebar h2{
+	font-size:xx-small;
+}
 
 .sidebar ul {
 	padding-left: 0px;
@@ -225,8 +227,10 @@ font-weight: bold;
 	border-bottom:1px solid #ccc;
 	margin-top: 0px;
 	list-style-type: none;
-
-	}
+}
+*html .sidebar li{
+	font-size: xx-small;
+}
 
 .sidebar img {
 	border: 3px solid #FFFFFF;
@@ -263,7 +267,11 @@ font-weight: bold;
 	text-align: left;
 	border-right: 1px dotted #BBB;
 	}
-
+.comments h2 {
+	border-bottom:1px solid #999;
+	background-color:#e5e5e5;
+	padding-left:5px;
+}
 textarea[id="comment-text"] {
 	width: 80%;
 	}
