@@ -21,12 +21,12 @@ request.SESSION.set('username', request.form.get('username'))
 request.SESSION.set('contact_mail', request.form.get('contact_mail'))
 
 if request.form.get('password') != request.form.get('password2'):
-    return RESPONSE.redirect('%s/step1?r=1' % self.communityUrl())
+    return RESPONSE.redirect('%s/step1?r=1' % context.communityUrl())
 if request.form.get('username') in container.acl_users.getUserNames():
-    return RESPONSE.redirect('%s/step1?r=2' % self.communityUrl())
+    return RESPONSE.redirect('%s/step1?r=2' % context.communityUrl())
 if not validEmail(request.form.get('contact_mail')):
-    return RESPONSE.redirect('%s/step1?r=3' % self.communityUrl())
+    return RESPONSE.redirect('%s/step1?r=3' % context.communityUrl())
 
 request.SESSION.set('password', request.form.get('password'))
 
-return RESPONSE.redirect('%s/step2' % self.communityUrl())
+return RESPONSE.redirect('%s/step2' % context.communityUrl())

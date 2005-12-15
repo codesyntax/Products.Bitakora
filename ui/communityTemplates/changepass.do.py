@@ -24,10 +24,10 @@ original_key = blog.getProperty('key', '')
 if original_key and original_key==req_key and pass1==pass2:
     acl.userFolderEditUser(username, pass1, roles, domains)
     blog.manage_delProperties(['key'])
-    return context.REQUEST.RESPONSE.redirect('%s/login_form?msg=%s' % (self.communityUrl(), context.gettext('Your password has been changed')))
+    return context.REQUEST.RESPONSE.redirect('%s/login_form?msg=%s' % (context.communityUrl(), context.gettext('Your password has been changed')))
 elif pass1!=pass2:
-    return context.REQUEST.RESPONSE.redirect('%s/changepass?user=%s&key=%s&msg=%s' % (self.communityUrl(), username,req_key,'password1 != password2'))
+    return context.REQUEST.RESPONSE.redirect('%s/changepass?user=%s&key=%s&msg=%s' % (context.communityUrl(), username,req_key,context.gettext()))
 elif (not original_key) or original_key!=req_key:
-    return context.REQUEST.RESPONSE.redirect('%s/changepass?user=%s&key=%s&msg=%s' % (self.communityUrl(), username,req_key,'Wrong key'))
+    return context.REQUEST.RESPONSE.redirect('%s/changepass?user=%s&key=%s&msg=%s' % (context.communityUrl(), username,req_key,'Wrong key'))
 
-return context.REQUEST.RESPONSE.redirect('%s/changepass?user=%s&key=%s' % (self.communityUrl(), username,req_key,))
+return context.REQUEST.RESPONSE.redirect('%s/changepass?user=%s&key=%s' % (context.communityUrl(), username,req_key,))
