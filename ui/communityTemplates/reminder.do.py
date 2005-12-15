@@ -44,7 +44,7 @@ if acl.getUser(this_username):
         key = generateKey()
         blog.manage_addProperty('key', key, 'string')
         sendMail(email=email,user=this_username,key=key)
-        return context.REQUEST.RESPONSE.redirect('%s/reminder.done' % self.communityUrl())
+        return context.REQUEST.RESPONSE.redirect('%s/reminder.done' % context.communityUrl())
 
     else:
         #haven't email
@@ -55,4 +55,4 @@ else:
     #it doesn't exist
     msg = context.gettext('Oooooop.... this username is wrong')
 
-return context.REQUEST.RESPONSE.redirect('%s/reminder?msg=%s' % (self.communityUrl(), msg))
+return context.REQUEST.RESPONSE.redirect('%s/reminder?msg=%s' % (context.communityUrl(), msg))
