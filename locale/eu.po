@@ -1,0 +1,460 @@
+msgid ""
+msgstr "Project-Id-Version: \n"
+"POT-Creation-Date: 2005-12-15 16:12+CET\n"
+"PO-Revision-Date: 2005-12-15 16:12+CET\n"
+"Last-Translator:  <>\n"
+"Language-Team: eu <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "#"
+msgstr "#"
+
+msgid "1st step: Create an account"
+msgstr "1. urratsa: Kontua ireki"
+
+msgid "2nd step: Name your blog"
+msgstr "2. urratsa: Eman izena blogari"
+
+msgid "3rd step: choose a template"
+msgstr "3. urratsa: aukeratu diseinua"
+
+msgid "About this"
+msgstr "Honen inguruan"
+
+msgid "Add"
+msgstr "Gehitu"
+
+msgid "Add a new link"
+msgstr "Gehitu esteka bat"
+
+msgid "Add a new post"
+msgstr "Artikulua gehitu"
+
+msgid "Add your first post using <strong>post</strong> tab"
+msgstr "Gehitu zure lehen artikulua <strong>idatzi</strong> fitxaren bidez"
+
+msgid "Archive"
+msgstr "Artxiboa"
+
+msgid "Are you sure"
+msgstr "Ziur zaude?"
+
+msgid "Are you sure?"
+msgstr "Ziur zaude?"
+
+msgid "Author"
+msgstr "Egilea"
+
+msgid "Blog"
+msgstr "Bloga"
+
+msgid "Blog description"
+msgstr "Blogaren deskribapena"
+
+msgid "Blog id"
+msgstr "Blog ID-a"
+
+msgid "Blog subtitle"
+msgstr "Blogaren leloa"
+
+msgid "Blog title"
+msgstr "Blogaren izenburua"
+
+msgid "Body"
+msgstr "Gorputza"
+
+msgid "Change"
+msgstr "Aldatu"
+
+msgid "Change password in blog community"
+msgstr "Aldatu blog komunitatean duzun pasahitza"
+
+msgid "Change your password"
+msgstr "Aldatu pasahitza"
+
+msgid "Come again whenever you want!"
+msgstr "Nahi duzunean itzul zaitez!"
+
+msgid "Comment management"
+msgstr "Erantzunen kudeaketa"
+
+msgid "Comment policy"
+msgstr "Erantzunekiko politika"
+
+msgid "Comments"
+msgstr "Erantzunak"
+
+msgid "Comments allowed"
+msgstr "Erantzunak libre"
+
+msgid "Comments allowed but moderated"
+msgstr "Erantzunak bai, baina moderatuta"
+
+msgid "Comments awaiting moderation"
+msgstr "Moderatzeko zain dauden erantzunak"
+
+msgid "Comments not allowed"
+msgstr "Erantzunik ez"
+
+msgid "Comments:"
+msgstr "Erantzunak:"
+
+msgid "Congratulations!"
+msgstr "Zorionak"
+
+msgid "Contact email"
+msgstr "Konkturako e-posta"
+
+msgid "Contact mail"
+msgstr "Kontakturako e-posta"
+
+msgid "Contents"
+msgstr "Edukiak"
+
+msgid "Create a blog"
+msgstr "Sortu blog bat"
+
+msgid "Create a new blog"
+msgstr "Sortu blog berria"
+
+msgid "Create your account"
+msgstr "Sortu zure kontua"
+
+msgid "Create your blog"
+msgstr "Sortu zure bloga"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Delete"
+msgstr "Ezabatu"
+
+msgid "Delete comment"
+msgstr "Ezabatu erantzuna"
+
+msgid "Delete link"
+msgstr "Ezabatu esteka"
+
+msgid "Download in TXT"
+msgstr "Jaitsi TXT eran"
+
+msgid "Download your blog"
+msgstr "Jaitsi zure blogeko edukia"
+
+msgid "Edit"
+msgstr "Editatu"
+
+msgid "Edit Comment"
+msgstr "Editatu erantzuna"
+
+msgid "Edit comments"
+msgstr "Editatu erantzunak"
+
+msgid "Edit here your HTML"
+msgstr "Editatu hemen HTML zatia"
+
+msgid "Edit policy"
+msgstr "Editatu erantzunen politika"
+
+msgid "Edit this post"
+msgstr "Editatu artikulu hau"
+
+msgid "Email Address:"
+msgstr "E-posta helbidea:"
+
+msgid "Email address"
+msgstr "E-posta helbidea"
+
+msgid "Enter to write in your blog"
+msgstr "Sar zaitez zure blogean idaztera"
+
+msgid "Enter your username and you will receive an email to choose a new password."
+msgstr "Sartu zure erabiltzaile-izena eta e-postaz abisua jasoko duzu pasahitz berria aukeratzeko."
+
+msgid "Forget personal info"
+msgstr "Ahaztu datu pertsonalak"
+
+msgid "Forgot your password?"
+msgstr "Pasahitza ahaztu zaizu?"
+
+msgid "HTML block"
+msgstr "HTML atala"
+
+msgid "Hello %(user)s"
+msgstr "Kaixo %(user)s"
+
+msgid "Id"
+msgstr "ID"
+
+msgid "Image 65x65 pixels"
+msgstr "irudia, 65x65 pixel"
+
+msgid "Invalid email address"
+msgstr "E-posta okerra"
+
+msgid "Just for registered users"
+msgstr "Baimendutako erabiltzaileentzat"
+
+msgid "Last posts"
+msgstr "Azken artikuluak"
+
+msgid "Links"
+msgstr "Estekak"
+
+msgid "Log in to your blog"
+msgstr "Sar zaitez blogera"
+
+msgid "Logged out"
+msgstr "Deskonektatua"
+
+msgid "Login"
+msgstr "Sartu"
+
+msgid "Login failure"
+msgstr "Konexioan okerra"
+
+msgid "Logout"
+msgstr "Irten"
+
+msgid "Lost your password?"
+msgstr "Pasahitza ahaztu zaizu?"
+
+msgid "Manage your blog"
+msgstr "Kudeatu zure bloga"
+
+msgid "Name:"
+msgstr "Izena:"
+
+msgid "New password"
+msgstr "Pasahitz berria"
+
+msgid "Next posts"
+msgstr "Hurrengoak"
+
+msgid "No"
+msgstr "Ez"
+
+msgid "No entries."
+msgstr "Artikulurik ez."
+
+msgid "No links yet !"
+msgstr "Estekarik ez oraingoz"
+
+msgid "Ok. An email was sent!"
+msgstr "Egina. E-postaz mezua bidali dizugu!"
+
+msgid "Oooooops"
+msgstr "Ene ba!"
+
+msgid "Password"
+msgstr "Pasahitza"
+
+msgid "Passwords do not match"
+msgstr "Pasahitzak ez datoz bat"
+
+msgid "Paste here your css"
+msgstr "Itsatsi hemen zure CSS kodea"
+
+msgid "Permalink"
+msgstr "Permalink"
+
+msgid "Please try again"
+msgstr "Mesedez saiatu berriro"
+
+msgid "Post a comment"
+msgstr "Idatzi artikulu bat"
+
+msgid "Post list"
+msgstr "Artikulu zerrenda"
+
+msgid "Posted by:"
+msgstr "Nork:"
+
+msgid "Powered by Bitakora"
+msgstr "Bitakora-rekin egina"
+
+msgid "Preview"
+msgstr "Aurreikusi"
+
+msgid "Previous posts"
+msgstr "Zaharragoak"
+
+msgid "Published"
+msgstr "Bistan"
+
+msgid "RSS"
+msgstr "RSS"
+
+msgid "Recent Comments"
+msgstr "Azken erantzunak"
+
+msgid "Reference by:"
+msgstr "Erreferentzia:"
+
+msgid "References"
+msgstr "Errenferentziak:"
+
+msgid "Remember my name"
+msgstr "Gogoratu izena"
+
+msgid "Remember your info. on cookie?"
+msgstr "Gogoratu datuak cookie batean?"
+
+msgid "Repeat your new password"
+msgstr "Errepika ezazu pasahitz berria"
+
+msgid "Retype your password"
+msgstr "Errepika ezazu pasahitza"
+
+msgid "Save"
+msgstr "Gorde"
+
+msgid "Save Changes"
+msgstr "Aldaketak gorde"
+
+msgid "Select the blogs you want to delete. With the blog, the users defined in each blog will be deleted."
+msgstr "Aukeratu ezabatu nahi dituzun blogak. Blogarekin batera, bakoitzean definituriko erabiltzaileak ere ezabatuko dira,"
+
+msgid "Select the users you want to delete."
+msgstr "Aukeratu ezabatu nahi dituzun erabiltzaileak."
+
+msgid "Select this template"
+msgstr "Diseinu hau aukeratu"
+
+msgid "Send"
+msgstr "Bidali"
+
+msgid "Send your comment"
+msgstr "Erantzun"
+
+msgid "Sidebar management"
+msgstr "Albo-zutabearen kudeaketa"
+
+msgid "Some error happened of the resource you were looking for does not exist. Try again please."
+msgstr "Errorea gertatu da. Baliabide hori ez dugu aurkitu. Saiatu berriro mesedez."
+
+msgid "Start blogging now !!"
+msgstr "Ekin blogari berehala!"
+
+msgid "Start blogging!"
+msgstr "Ekin blogari!"
+
+msgid "Status"
+msgstr "Estatusa"
+
+msgid "Subtitle"
+msgstr "Leloa"
+
+msgid "Tag: <em>%(tagname)s</em>"
+msgstr "Etiketa: <em>%(tagname)s</em>"
+
+msgid "Tags"
+msgstr "Etiketak"
+
+msgid "Template management"
+msgstr "Diseinua kudeatu"
+
+msgid "There are no comments yet!"
+msgstr "Erantzunik ez oraingoz"
+
+msgid "There are no entries."
+msgstr "Artikulurik ez."
+
+msgid "There are no posts tagged <em>%(tagname)s</em>"
+msgstr "<em>%(tagname)s</em> etiketa duen artikulurik ez dago"
+
+msgid "This BitakoraCommunity object, can handle with many Bitakoras, and create a community."
+msgstr "Bitakora Komunitatea, bitakora zehatz ugari kudeatzeko tresna"
+
+msgid "This id is already in use"
+msgstr "ID hori beste norbaitek erabiltzen du dagoeneko"
+
+msgid "This username already exists"
+msgstr "Erabiltzaile izen hori okupatua dago"
+
+msgid "Title"
+msgstr "Izenburua"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "URL:"
+msgstr "URL"
+
+msgid "Unpublished"
+msgstr "Ezkutuan"
+
+msgid "User"
+msgstr "Erabiltzailea"
+
+msgid "Username"
+msgstr "Erabiltzaile-izena"
+
+msgid "View"
+msgstr "Ikus"
+
+msgid "View original post"
+msgstr "Ikus artikulu jatorrizkoa"
+
+msgid "Welcome!"
+msgstr "Ongi etorri!"
+
+msgid "When selecting this template, the css you have edited (if you did so) will be lost. Are you sure?"
+msgstr "Diseinu hau aukeratzean, aurreko CSS-a ezabatuko duzun, eta hartan agian eginak zenituen aldaketak galduko dira. Jarraitu nahi duzu?"
+
+msgid "Write a new post"
+msgstr "Artikulu berria idatzi"
+
+msgid "Yes"
+msgstr "Bai"
+
+msgid "You are logged in using HTTP authentication.  You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>"
+msgstr "HTTP autentifikatuarekin zaude konketatua. <a href=/manage_zmi_logout>ZMI interfazetik</a> irten beharko duzu"
+
+msgid "You are logged in using HTTP authentication. You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>"
+msgstr "HTTP autentifikatuarekin zaude konketatua. <a href=/manage_zmi_logout>ZMI interfazetik</a> irten beharko duzu"
+
+msgid "You can add some HTML to your sidebar. You can paste there javascripts for Flickr photos, the del.icio.us tagroll, your bloglines subscriptions, whatever..."
+msgstr "HTML zatia sar dezakezu zure albo-zutabean. Javascript puska bat, adibidez, Flickr-eko zure argazkiak edo beste zerbait erakusteko..."
+
+msgid "You can add some websites to your link list on the sidebar. Links on this list will be shown in the sidebar of your blog"
+msgstr "Albo-zutabeko esteken atalean zure gogokoenak gehi ditzakezu."
+
+msgid "You can change your template here, editing the CSS file. Template is compatible with MovableType 3.1 stylesheets"
+msgstr "Zure diseinua alda dezakezu hemen, CSS fitxategia alegia. Diseinua bateragarria da MovableType 3.1 estilo orriekin."
+
+msgid "You can't change this password"
+msgstr "Ezin duzu pasahitz hori aldatu"
+
+msgid "Your current image"
+msgstr "Orain duzun irudia"
+
+msgid "Your new blog is ready. Now you just have to log-in and start blogging !"
+msgstr "Bloga prest daukazu. Orain sartu erabiltzaile-izen eta pasahitzarekin, eta ekin blogean idazteari!"
+
+msgid "Your password has been changed"
+msgstr "Pasahitza aldatu duzu"
+
+msgid "admin"
+msgstr "admin"
+
+msgid "comments"
+msgstr "erantzunak"
+
+msgid "post"
+msgstr "idatzi"
+
+msgid "prefs"
+msgstr "hob."
+
+msgid "sidebar"
+msgstr "albo-zut."
+
+msgid "tag"
+msgstr "etiketa"
+
+msgid "template"
+msgstr "diseinua"

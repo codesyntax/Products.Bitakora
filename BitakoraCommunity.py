@@ -30,7 +30,7 @@ from ZPublisher.HTTPRequest import record
 # BTreeFolder2
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
-from utils import addDTML, addPythonScript, addImage, addFile
+from utils import addDTML, addPythonScript, addImage, addFile, fillMessageCatalog
 import DateTime
 
 manage_addBitakoraCommunityForm = HTMLFile('ui/BitakoraCommunity_add', globals())
@@ -80,10 +80,14 @@ class BitakoraCommunity(BTreeFolder2):
         """ Add Localizer stuff """
         try:
             # old MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', ('en',)))
+            self._setObject('gettext', MessageCatalog('gettext', '', ('en', 'eu', 'es')))
         except:
             # new MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en']))        
+            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en', 'eu', 'es']))   
+            
+        # fill the gettext with 'es' and 'eu' locales
+        gettext = getattr(self, 'gettext')
+        res = fillMessageCatalog(gettext)
         
         localizer = Localizer('Localizer', ('en',))
         localizer._v_hook = 1

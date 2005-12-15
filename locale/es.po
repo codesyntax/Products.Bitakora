@@ -1,0 +1,460 @@
+msgid ""
+msgstr "Project-Id-Version: \n"
+"POT-Creation-Date: 2005-12-15 16:12+CET\n"
+"PO-Revision-Date: 2005-12-15 16:12+CET\n"
+"Last-Translator:  <>\n"
+"Language-Team: es <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "#"
+msgstr "#"
+
+msgid "1st step: Create an account"
+msgstr "Paso 1: Crea una cuneta"
+
+msgid "2nd step: Name your blog"
+msgstr "Paso 2: Da un nombre a tu blog"
+
+msgid "3rd step: choose a template"
+msgstr "Paso 3: Elige un diseño"
+
+msgid "About this"
+msgstr "Acerca de"
+
+msgid "Add"
+msgstr "Añadir"
+
+msgid "Add a new link"
+msgstr "Añadir enlace"
+
+msgid "Add a new post"
+msgstr "Añadir artículo"
+
+msgid "Add your first post using <strong>post</strong> tab"
+msgstr "Escribe tu primer artículo usando la pestaña <strong>art.</strong>"
+
+msgid "Archive"
+msgstr "Archivo"
+
+msgid "Are you sure"
+msgstr "¿Estas seguro/a?"
+
+msgid "Are you sure?"
+msgstr "¿Estas seguro/a?"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Blog description"
+msgstr "Descripción del blog"
+
+msgid "Blog id"
+msgstr "ID del blog"
+
+msgid "Blog subtitle"
+msgstr "Lema del blog"
+
+msgid "Blog title"
+msgstr "Título del blog"
+
+msgid "Body"
+msgstr "Cuerpo"
+
+msgid "Change"
+msgstr "Cambiar"
+
+msgid "Change password in blog community"
+msgstr "Cambia tu contraseña en la comunidad de blogs"
+
+msgid "Change your password"
+msgstr "Cambia tu contraseña"
+
+msgid "Come again whenever you want!"
+msgstr "Vuelve cuando quieras"
+
+msgid "Comment management"
+msgstr "Gestión de comentarios"
+
+msgid "Comment policy"
+msgstr "Política de comentarios"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "Comments allowed"
+msgstr "Comentarios libres"
+
+msgid "Comments allowed but moderated"
+msgstr "Comentarios moderados"
+
+msgid "Comments awaiting moderation"
+msgstr "Comentarios en espera de moderación"
+
+msgid "Comments not allowed"
+msgstr "No se permiten comentarios"
+
+msgid "Comments:"
+msgstr "Comentarios:"
+
+msgid "Congratulations!"
+msgstr "¡Felicidades!"
+
+msgid "Contact email"
+msgstr "Email de contacto"
+
+msgid "Contact mail"
+msgstr "Email de contacto"
+
+msgid "Contents"
+msgstr "Contenidos"
+
+msgid "Create a blog"
+msgstr "Crea un blog"
+
+msgid "Create a new blog"
+msgstr "Crea un nuevo blog"
+
+msgid "Create your account"
+msgstr "Crea tu cuenta"
+
+msgid "Create your blog"
+msgstr "Crea tu blog"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Delete comment"
+msgstr "Borrar comentario"
+
+msgid "Delete link"
+msgstr "Borrar enlace"
+
+msgid "Download in TXT"
+msgstr "Descarga en formato TXT"
+
+msgid "Download your blog"
+msgstr "Descárgate tu blog"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit Comment"
+msgstr "Editar comentario"
+
+msgid "Edit comments"
+msgstr "Editar comentarios"
+
+msgid "Edit here your HTML"
+msgstr "Edita aquí tu HTML"
+
+msgid "Edit policy"
+msgstr "Edita la política de moderación"
+
+msgid "Edit this post"
+msgstr "Edita este artículo"
+
+msgid "Email Address:"
+msgstr "Email:"
+
+msgid "Email address"
+msgstr "Email"
+
+msgid "Enter to write in your blog"
+msgstr "Entra a escribir en tu blog"
+
+msgid "Enter your username and you will receive an email to choose a new password."
+msgstr "Introduce tu nombre de usuario y recibirás un mensaje por email para escoger nueva contraseña."
+
+msgid "Forget personal info"
+msgstr "Olvidar datos personales"
+
+msgid "Forgot your password?"
+msgstr "¿Olvidaste tu contraseña?"
+
+msgid "HTML block"
+msgstr "Bloque de HTML"
+
+msgid "Hello %(user)s"
+msgstr "Hola %(user)s"
+
+msgid "Id"
+msgstr "ID"
+
+msgid "Image 65x65 pixels"
+msgstr "Imagen a 65x65 píxeles"
+
+msgid "Invalid email address"
+msgstr "Dirección email incorrecta"
+
+msgid "Just for registered users"
+msgstr "Sólo para usuarios registrados"
+
+msgid "Last posts"
+msgstr "Artículos más recientes"
+
+msgid "Links"
+msgstr "Enlace"
+
+msgid "Log in to your blog"
+msgstr "Conéctate a tu blog"
+
+msgid "Logged out"
+msgstr "Desconectado"
+
+msgid "Login"
+msgstr "Entra"
+
+msgid "Login failure"
+msgstr "Error al conectarse"
+
+msgid "Logout"
+msgstr "Salir"
+
+msgid "Lost your password?"
+msgstr "¿Olvidaste tu contraseña?"
+
+msgid "Manage your blog"
+msgstr "Gestiona tu blog"
+
+msgid "Name:"
+msgstr "Nombre:"
+
+msgid "New password"
+msgstr "Nueva contraseña"
+
+msgid "Next posts"
+msgstr "Siguientes"
+
+msgid "No"
+msgstr "No"
+
+msgid "No entries."
+msgstr "No hay artículos"
+
+msgid "No links yet !"
+msgstr "No hay enlaces"
+
+msgid "Ok. An email was sent!"
+msgstr "Hecho. Se te ha enviado un email."
+
+msgid "Oooooops"
+msgstr "¡Vaya!"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Passwords do not match"
+msgstr "Las contraseñas no coinciden"
+
+msgid "Paste here your css"
+msgstr "Pega aquí tu CSS"
+
+msgid "Permalink"
+msgstr "Enlace permanente"
+
+msgid "Please try again"
+msgstr "inténtalo de nuevo"
+
+msgid "Post a comment"
+msgstr "Envía un comentario"
+
+msgid "Post list"
+msgstr "Lista de artículos"
+
+msgid "Posted by:"
+msgstr "Remitente:"
+
+msgid "Powered by Bitakora"
+msgstr "Hecho con Bitakora"
+
+msgid "Preview"
+msgstr "Vista previa"
+
+msgid "Previous posts"
+msgstr "Anteriores"
+
+msgid "Published"
+msgstr "visible"
+
+msgid "RSS"
+msgstr "RSS"
+
+msgid "Recent Comments"
+msgstr "Comentarios recientes"
+
+msgid "Reference by:"
+msgstr "Referencia:"
+
+msgid "References"
+msgstr "Referencias"
+
+msgid "Remember my name"
+msgstr "Recuerda mi nombre"
+
+msgid "Remember your info. on cookie?"
+msgstr "¿Recordar datos en una cookie?"
+
+msgid "Repeat your new password"
+msgstr "Repite tu nueva contraseña"
+
+msgid "Retype your password"
+msgstr "Repite tu contraseña"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Save Changes"
+msgstr "Guardar cambios"
+
+msgid "Select the blogs you want to delete. With the blog, the users defined in each blog will be deleted."
+msgstr "Selecciona los blogs que quieres borrar. Al eliminar un blog, también borrarás los usuarios definidos para el mismo."
+
+msgid "Select the users you want to delete."
+msgstr "Selecciona los usuarios que quieres borrar."
+
+msgid "Select this template"
+msgstr "Selecciona este diseño"
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Send your comment"
+msgstr "Enviar"
+
+msgid "Sidebar management"
+msgstr "Gestión de la columna lateral"
+
+msgid "Some error happened of the resource you were looking for does not exist. Try again please."
+msgstr "Error. Ese recurso no fue hallado. Inténtalo otra vez por favor."
+
+msgid "Start blogging now !!"
+msgstr "¡Empieza a bloguear ya!"
+
+msgid "Start blogging!"
+msgstr "¡Empieza a bloguear!"
+
+msgid "Status"
+msgstr "Estatus"
+
+msgid "Subtitle"
+msgstr "Lema del blog"
+
+msgid "Tag: <em>%(tagname)s</em>"
+msgstr "Etiqueta: <em>%(tagname)s</em>"
+
+msgid "Tags"
+msgstr "Etiquetas"
+
+msgid "Template management"
+msgstr "Gestión del diseño"
+
+msgid "There are no comments yet!"
+msgstr "No hay comentarios"
+
+msgid "There are no entries."
+msgstr "No hay artículos"
+
+msgid "There are no posts tagged <em>%(tagname)s</em>"
+msgstr "No hay comentarios con la etiqueta <em>%(tagname)s</em>"
+
+msgid "This BitakoraCommunity object, can handle with many Bitakoras, and create a community."
+msgstr "En una BitakoraCommunity entran cuantas Bitakoras individuales quieras..."
+
+msgid "This id is already in use"
+msgstr "Ese ID ya está en uso"
+
+msgid "This username already exists"
+msgstr "Ese nombre de usuario ya está tomado"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "URL:"
+msgstr "URL:"
+
+msgid "Unpublished"
+msgstr "oculto"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "View"
+msgstr "Ver"
+
+msgid "View original post"
+msgstr "Ver artículo original"
+
+msgid "Welcome!"
+msgstr "¡Bienvenido/a!"
+
+msgid "When selecting this template, the css you have edited (if you did so) will be lost. Are you sure?"
+msgstr "Al escoger este diseño, el CSS anterior se eliminará, y con ello los cambios que quizás hayas efectuado en aquel. ¿Deseas continuar?"
+
+msgid "Write a new post"
+msgstr "Escribe un nuevo artículo"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "You are logged in using HTTP authentication.  You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>"
+msgstr "Estas logueado con autentificación HTTP. Deberás desconectarte del <a href=/manage_zmi_logout>interfaz ZMI</a> de Zope."
+
+msgid "You are logged in using HTTP authentication. You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>"
+msgstr "Estas logueado con autentificación HTTP. Deberás desconectarte del <a href=/manage_zmi_logout>interfaz ZMI</a> de Zope."
+
+msgid "You can add some HTML to your sidebar. You can paste there javascripts for Flickr photos, the del.icio.us tagroll, your bloglines subscriptions, whatever..."
+msgstr "Puedes añadir algo de HTML a tu columna lateral. Por ejemplo, un javascript para mostrar fotos de Flickr o alguna otra cosilla."
+
+msgid "You can add some websites to your link list on the sidebar. Links on this list will be shown in the sidebar of your blog"
+msgstr "Puedes añadir enlaces a tu columna lateral. "
+
+msgid "You can change your template here, editing the CSS file. Template is compatible with MovableType 3.1 stylesheets"
+msgstr "Puedes cambiar tu diseño editando el fichero CSS. El diseño es compatible con los estilos de MovableType 3.1"
+
+msgid "You can't change this password"
+msgstr "Esa contraseña no se puede cambiar"
+
+msgid "Your current image"
+msgstr "Tu imagen actual"
+
+msgid "Your new blog is ready. Now you just have to log-in and start blogging !"
+msgstr "Tu blog está listo. Sólo falta que te conectes con tu contraseña y nombre de usuario para empezar a escribir en el blog."
+
+msgid "Your password has been changed"
+msgstr "Tu contraseña ha sido modificada"
+
+msgid "admin"
+msgstr "admin"
+
+msgid "comments"
+msgstr "coment."
+
+msgid "post"
+msgstr "art."
+
+msgid "prefs"
+msgstr "pref."
+
+msgid "sidebar"
+msgstr "lateral"
+
+msgid "tag"
+msgstr "etiqueta"
+
+msgid "template"
+msgstr "diseño"

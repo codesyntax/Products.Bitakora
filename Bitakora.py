@@ -21,7 +21,8 @@ from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 import DateTime, string
 
 # Own modules
-from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
+from utils import addDTML, addPythonScript
+from utils import fillMessageCatalog, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
 from PingMethodContainer import PingMethodContainer
 
 
@@ -266,10 +267,13 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
         try:
             # old MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', ('en',)))
+            self._setObject('gettext', MessageCatalog('gettext', '', ('en', 'es', 'eu')))
         except:
             # new MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en']))
+            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en', 'es', 'eu']))
+        
+        gettext = getattr(self, 'gettext')
+        fillMessageCatalog(gettext)
         
         # Add a special tag.py script which makes use of traverse subpath
         self._setObject('tag', PythonScript('tag'))
