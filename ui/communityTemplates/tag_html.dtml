@@ -7,14 +7,14 @@
 <dtml-if "REQUEST.has_key('id')">
 <dtml-in "Catalog.searchResults(tags=_.unicode(REQUEST.get('id'), 'utf-8'), meta_type='Post', sort_on='date', sort_order='reverse')">
 <dtml-if sequence-start>
-    <h3><dtml-var "gettext('Posts cataloged with tag: <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></h3>
+    <h3><dtml-var "gettext('Tag: <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></h3>
 </dtml-if>
 <dtml-with getObject>
 <dtml-var entry_body_community>
 </dtml-with>
 
 <dtml-else>
-    <p><dtml-var "gettext('There is no post with tag <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></p>
+    <p><dtml-var "gettext('There are no posts tagged <em>%(tagname)s</em>') % {'tagname':REQUEST.get('id')}"></p>
 </dtml-in>
 
 <dtml-else>

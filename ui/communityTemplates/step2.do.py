@@ -14,6 +14,6 @@ request.SESSION.set('title', request.form.get('title'))
 request.SESSION.set('id', request.form.get('id'))
 
 if container.get(request.form.get('id'), None) is not None:
-    return RESPONSE.redirect('/step2?r=4')
+    return RESPONSE.redirect('%s/step2?r=4' % self.communityUrl())
 
-return RESPONSE.redirect('/step3')
+return RESPONSE.redirect('%s/step3' % self.communityUrl())

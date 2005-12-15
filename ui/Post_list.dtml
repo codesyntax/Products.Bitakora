@@ -44,7 +44,7 @@
 <input type="submit" value="<dtml-var "gettext('Delete')">"/>
 </form>
 <dtml-else>
-    <p><dtml-var "gettext('There is no post yet')"></p>
+    <p><dtml-var "gettext('There are no entries.')"></p>
     <p><dtml-var "gettext('Add your first post using <strong>post</strong> tab')"></p>
 </dtml-if>
 

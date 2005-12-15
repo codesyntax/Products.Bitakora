@@ -7,13 +7,13 @@
 </div>
 </dtml-if>
 
-<p>Select the blogs you want to delete. With the blog, the users defined in each blog will be deleted.</p>
+<p><dtml-var "gettext('Select the blogs you want to delete. With the blog, the users defined in each blog will be deleted.')"></p>
 
-<form action="delBlogs" method="post" onsubmit="javascript:return confirm('Are you sure')">
+<form action="delBlogs" method="post" onsubmit="javascript:return confirm('<dtml-var "gettext('Are you sure')">')">
 <table>
 <tr>
-<th>Blog name</th>
-<th>Blog url</th>
+<th><dtml-var "gettext('Blog')"></th>
+<th><dtml-var "gettext('URL')"></th>
 </tr>
 <dtml-in "objectValues('Bitakora')">
 <tr>
@@ -22,7 +22,7 @@
 </tr>
 </dtml-in>
 </table>
-<p><input type="submit" value="Delete" /></p>
+<p><input type="submit" value="<dtml-var "gettext('Delete')">" /></p>
 </form>
 
 <dtml-var manage_page_footer>

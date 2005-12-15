@@ -3,6 +3,6 @@
 
 <p><dtml-var "gettext('Your new blog is ready. Now you just have to log-in and start blogging !')"></p>
 
-<p><a href="/login_form"><dtml-var "gettext('Start blogging now !!')"></a></p>
+<p><a href="<dtml-var communityUrl>/login_form"><dtml-var "gettext('Start blogging now !!')"></a></p>
 
 <dtml-var standard_html_footer>

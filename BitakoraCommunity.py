@@ -244,6 +244,11 @@ class BitakoraCommunity(BTreeFolder2):
     def communityTitle(self):
         """ return the title """
         return self.title.encode('utf-8')
+        
+    security.declarePublic('communityUrl')
+    def communityUrl(self):
+        """ return the URL of the community """
+        return self.absolute_url()
                 
     security.declarePublic('communityLastPosts')                
     def communityLastPosts(self, size=10, start=None):

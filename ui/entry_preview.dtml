@@ -16,6 +16,6 @@
     | <a href="<dtml-var blogurl missing="">/<dtml-var getId>#comments"><dtml-var "gettext('Comments')"> (<dtml-var numberOfComments>)</a>
     </dtml-if>
     <dtml-if canReference>
-    | <a href="<dtml-var blogurl missing="">/<dtml-var getId>#trackbacks"><dtml-var "gettext('Trackbacks')"> (<dtml-var numberOfReferences>)</a>
+    | <a href="<dtml-var blogurl missing="">/<dtml-var getId>#trackbacks"><dtml-var "gettext('References')"> (<dtml-var numberOfReferences>)</a>
     </dtml-if>
 </p>

@@ -12,7 +12,7 @@
 
 <h2><dtml-var "gettext('HTML block')"></h2>
 
-<p><dtml-var "gettext('You can add some HTML to your sidebar. You can paste there Flickr photos javascript, del.icio.us tagroll, your bloglines subscriptions, or anything you want')"></p>
+<p><dtml-var "gettext('You can add some HTML to your sidebar. You can paste there javascripts for Flickr photos, the del.icio.us tagroll, your bloglines subscriptions, whatever...')"></p>
 
 <form action="save_sidebar_html" method="post">
 
@@ -44,7 +44,7 @@
 
 <h3><dtml-var "gettext('Add a new link')"></h3>
 <form action="addLink" method="get">
-<p><label for="url"><dtml-var "gettext('Url')"></label><br />
+<p><label for="url"><dtml-var "gettext('URL')"></label><br />
    <input type="text" size="50" name="url:utf8" id="url" />
  </p>
 

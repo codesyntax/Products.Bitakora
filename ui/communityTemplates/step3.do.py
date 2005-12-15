@@ -34,4 +34,4 @@ blog.select_template(template)
 container.Catalog.catalog_object(blog, '/'.join(blog.getPhysicalPath()))
 
 # We are done !!!!
-RESPONSE.redirect('/step3.done')
+RESPONSE.redirect('%s/step3.done' % self.communityUrl())
