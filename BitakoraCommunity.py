@@ -249,9 +249,9 @@ class BitakoraCommunity(BTreeFolder2):
     def communityLastPosts(self, size=10, start=None):
         """ The method for getting 'size' published posts"""
         if start is None:
-            return self.Catalog.searchResults(meta_type='Post', published=1, sort_limit=size, date=DateTime.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending')
+            return self.Catalog.searchResults(meta_type='Post', published=1, sort_limit=size, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
         else:
-            return self.Catalog.searchResults(meta_type='Post', published=1, date=DateTime.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending')
+            return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
             
     security.declareProtected('Manage BitakoraCommunity', 'fix')
     def fix(self):

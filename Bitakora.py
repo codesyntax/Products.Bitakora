@@ -314,9 +314,9 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def published_posts(self, size=10, start=None):
         """ The method for getting 'size' published posts"""
         if start is None:
-            return self.Catalog.searchResults(meta_type='Post', published=1, date=DateTime.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending', sort_limit=size)
+            return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending', sort_limit=size)
         else:
-            return self.Catalog.searchResults(meta_type='Post', published=1, date=DateTime.DateTime(), date_usage='range:max', sort_on='date', sort_order='descending')
+            return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
             
  
         
