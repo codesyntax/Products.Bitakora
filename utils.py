@@ -98,6 +98,23 @@ def cleanURL(url):
     """ clean url """
     return url
 
+def fillMessageCatalog(gettext):
+    locales = ['eu', 'es']
+    file_path = Globals.package_home(globals())
+    log = []
+    for locale in locales:
+        fp = open('%s/locale/%s.po' % (file_path, locale))
+        try:
+            gettext.po_import(locale, fp.read())
+        except:
+            log.append('Locale %s could not be imported')
+        fp.close()
+        
+    if log:
+        return log
+
+    return 1
+
 def discoverPingbackUrl(url):
     """ There are 2 ways to discover the pingback URL of a given URL:
         1- The server sends a HTTP Header X-Pingback: url with the url to ping
