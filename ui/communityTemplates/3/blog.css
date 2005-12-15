@@ -1,7 +1,7 @@
 body {
 	margin: 0px 0px 0px 0px;
 	text-align: center;
-	background: #fff url(/img/3edukibe.gif) no-repeat bottom;
+	background: #fff url(img/3edukibe.gif) no-repeat bottom;
 	font-size: small;
 }
 
@@ -32,7 +32,7 @@ h1, h2, h3 {
 }
 
 #container {
-	background: url(/img/3edukierdi.gif) repeat-y top;
+	background: url(img/3edukierdi.gif) repeat-y top;
 	line-height: 130%;
 	margin:0 auto;
 	text-align: left;
@@ -50,7 +50,7 @@ h1, h2, h3 {
 	text-align: left;
 	padding: 0px;
 	height: 140px;
-	background: #fff url(/img/3goikoa.gif) no-repeat top;
+	background: #fff url(img/3goikoa.gif) no-repeat top;
 }
 
 a#banner-img {
@@ -112,7 +112,7 @@ a#banner-img {
 	font-family: Verdana,'Trebuchet MS', sans-serif;
 	font-size: 0.90em;
 	border-bottom: 1px solid #fff;
-	background: url(/img/3lainoa.gif) no-repeat left bottom;
+	background: url(img/3lainoa.gif) no-repeat left bottom;
 	text-align: right;
 	margin-bottom: 10px;
 }

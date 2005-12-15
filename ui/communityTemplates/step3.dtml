@@ -8,7 +8,7 @@
 <dtml-in "templates.objectIds()">
 <p>
 <input type="radio" name="template" id="template<dtml-var sequence-item>" value="<dtml-var sequence-item>" /> <label for="template<dtml-var sequence-item>"># <dtml-var sequence-item></label>
-<a href="/img/template<dtml-var sequence-item>.jpg"><img src="/img/template<dtml-var sequence-item>-small.jpg" alt="Template<dtml-var sequence-item>" /></a>
+<a href="<dtml-var communityUrl>/img/template<dtml-var sequence-item>.jpg"><img src="<dtml-var communityUrl>/img/template<dtml-var sequence-item>-small.jpg" alt="Template<dtml-var sequence-item>" /></a>
 </p>
 </dtml-in>
 

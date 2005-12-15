@@ -8,7 +8,7 @@
 </div>
 </dtml-if>
 
-<dtml-let came_from="REQUEST.get('came_from', '')" action_url="came_from or '/logged_in'">
+<dtml-let came_from="REQUEST.get('came_from', '')" action_url="came_from or '%s/logged_in' % communityUrl()">
 <form action="&dtml-action_url;" method="post">
 <fieldset>
     <dtml-if expr="REQUEST.get('retry', 0)">

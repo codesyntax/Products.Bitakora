@@ -1,6 +1,6 @@
 body {
 	margin: 0px 0px 0px 0px;
-	background: #C0D8B0 url(/img/2fondoa.gif) repeat-y top center;
+	background: #C0D8B0 url(img/2fondoa.gif) repeat-y top center;
 	text-align: center;
 	}
 
@@ -37,7 +37,7 @@ h1, h2, h3 {
 	text-align: left;
 	padding: 0px;
 	width: 700px;
-	background: url(/img/2behekoa.gif) no-repeat bottom;
+	background: url(img/2behekoa.gif) no-repeat bottom;
 }
 *html #container {
 	width: 701px;
@@ -46,7 +46,7 @@ h1, h2, h3 {
 #banner {
 	font-family: Verdana, Arial, sans-serif;
 	color: #FFFFFF;
-	background: url(/img/2goikoa.gif) no-repeat top right;
+	background: url(img/2goikoa.gif) no-repeat top right;
 	text-align: left;
 	padding: 0px;
 	height: 120px;
@@ -196,7 +196,7 @@ a#banner-img {
 	color: #963D16;
 	font-family: Verdana, Arial, sans-serif;
 	font-size: small;
-	background: url(/img/2borobila.gif) no-repeat  left;
+	background: url(img/2borobila.gif) no-repeat  left;
 	padding-left:25px;
 	text-align: left;
 	font-weight: bold;
@@ -220,7 +220,7 @@ a#banner-img {
 	list-style-type: none;
 	font-weight: bold;
 	padding-left:25px;
-	background: url(/img/2fletxamenu.gif) no-repeat  left;
+	background: url(img/2fletxamenu.gif) no-repeat  left;
 	}
 *html .sidebar li {
 	font-size: xx-small;
