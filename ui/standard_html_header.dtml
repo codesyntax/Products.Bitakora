@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="<dtml-var blogurl missing="">/blog.css" media="screen" type="text/css" />
 <dtml-if inCommunity>
-<link rel="stylesheet" href="/img/preheader.css" media="screen" type="text/css" />
+<link rel="stylesheet" href="<dtml-var communityUrl>/img/preheader.css" media="screen" type="text/css" />
 </dtml-if>
 <link rel="pingback" href="<dtml-var blogurl missing="">" />
 

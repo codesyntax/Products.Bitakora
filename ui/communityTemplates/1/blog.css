@@ -1,7 +1,7 @@
 body {
 	padding: 0px 0px 50px 0px;
 	text-align: center;
-	background:#EFEFEF url(/img/1bekoa.jpg) no-repeat bottom;
+	background:#EFEFEF url(img/1bekoa.jpg) no-repeat bottom;
 	margin: 0 auto;
 }
 a {
@@ -38,7 +38,7 @@ h1, h2, h3 {
 	padding: 0px;
 	width: 700px;
 	height: auto;
-	background:#EFEFEF url(/img/1fondoa.jpg) repeat-y top left;
+	background:#EFEFEF url(img/1fondoa.jpg) repeat-y top left;
 	border: 1px solid transparent;
 }
 *html #container {
@@ -51,7 +51,7 @@ h1, h2, h3 {
 	font-family:'Trebuchet MS', Verdana, arial, sans-serif;
 	padding: 0px;
 	height: 130px;
-	background:#EFEFEF url(/img/1goikoa.jpg) no-repeat top left;
+	background:#EFEFEF url(img/1goikoa.jpg) no-repeat top left;
 	}
 
 a#banner-img {
@@ -141,7 +141,7 @@ a#banner-img {
 	font-size: 15px;
 	text-align: left;
 	font-weight: bold;
-	background: url(/img/1titulo.jpg) no-repeat top left;
+	background: url(img/1titulo.jpg) no-repeat top left;
 	margin-bottom: 10px;
 	padding-left: 10px;
 }
@@ -200,7 +200,7 @@ a#banner-img {
 .sidebar h2 {
 	font-family: Verdana, Arial, sans-serif;
 	font-size: x-small;
-	background: url(/img/1menua.jpg) no-repeat right;
+	background: url(img/1menua.jpg) no-repeat right;
 	/*background-color:#F5C04D;*/
 	text-align: left;
 	font-weight: bold;
