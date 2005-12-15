@@ -1,6 +1,6 @@
 #preheader {
 	margin:0 auto;
-	background: #C00 url(/img/logotxikia.gif)no-repeat top left;
+	background: #C00;
 	color: #fff;
 	padding: 0px;
 	height:25px;
@@ -25,11 +25,10 @@
 	float:left;
 	}
 #tagline a{
-	padding:3px 0px 5px 150px;
-        color: #c00;
-	}
+	padding:3px 0px 5px 10px;
+}
 #tagline a:hover{
-        color: #c00;
+    color: #000;
 	}
 
 #community{
