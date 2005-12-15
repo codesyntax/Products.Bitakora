@@ -3,7 +3,7 @@
 
 <h2><dtml-var "gettext('2nd step: Name your blog')"></h2>
 
-<form action="/step2.do" method="post">
+<form action="<dtml-var communityUrl>/step2.do" method="post">
 <fieldset>
 <p>
 <label for="title"><dtml-var "gettext('Blog title')"></label><br/>

@@ -2,7 +2,7 @@
 
 <h2><dtml-var "gettext('1st step: Create an account')"></h2>
 
-<form action="/step1.do" method="post">
+<form action="<dtml-var communityUrl>/step1.do" method="post">
 
 <fieldset>
 <p>
@@ -22,7 +22,7 @@
 
 <p>
 <label for="contact_mail"><dtml-var "gettext('Email address')"></label><br/>
-<input type="text" id="contact_mail" name="contact_mail:utf8" size="20" <dtml-if "REQUEST.SESSION.get('contact_mail')">value="<dtml-var "REQUEST.SESSION.get('contact_mail')">"</dtml-if>/> <dtml-if "REQUEST.get('r', '') == '3'"><span class="alert"><dtml-var "gettext('Invalid e-mail address')"></span></dtml-if>
+<input type="text" id="contact_mail" name="contact_mail:utf8" size="20" <dtml-if "REQUEST.SESSION.get('contact_mail')">value="<dtml-var "REQUEST.SESSION.get('contact_mail')">"</dtml-if>/> <dtml-if "REQUEST.get('r', '') == '3'"><span class="alert"><dtml-var "gettext('Invalid email address')"></span></dtml-if>
 </p>
 
 

@@ -4,7 +4,7 @@
  
  <h3><dtml-var "gettext('Logged out')"></h3>
 
- <p><dtml-var "gettext('Come again soon!')"></p>
+ <p><dtml-var "gettext('Come again whenever you want!')"></p>
 
 <dtml-else>
 

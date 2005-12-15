@@ -3,12 +3,11 @@
 
 <dtml-var "manage_form_title(this(), _,
                              form_title='Add Bitakora',
-                             help_product='Bitakora',
-                             help_topic='Bitakora_add.stx')">
+                             help_product='Bitakora')">
 
 
 <p class="form-help">
-	Bitakora is a fully featured blog product for Zope based on Squishdot and COREBlog
+	Bitakora is a fully featured blog product for Zope
 </p>
 
 

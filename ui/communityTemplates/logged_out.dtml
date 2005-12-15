@@ -4,11 +4,11 @@
  
  <h3><dtml-var "gettext('Logged out')"></h3>
 
- <p><dtml-var "gettext('Come again soon!')"></p>
+ <p><dtml-var "gettext('Come again whenever you want!')"></p>
 
 <dtml-else>
 
- <dtml-var "gettext('You are logged in using HTTP authentication.  You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>')">
+ <dtml-var "gettext('You are logged in using HTTP authentication. You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>')">
 
 </dtml-if>
 

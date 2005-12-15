@@ -143,7 +143,7 @@
 </dtml-let>
 
 <dtml-else>
-<p><dtml-var "gettext('There is no comment yet!')"></p>
+<p><dtml-var "gettext('There are no comments yet!')"></p>
 
 </dtml-in>
 <dtml-var standard_html_footer>

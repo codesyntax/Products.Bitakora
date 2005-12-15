@@ -6,7 +6,7 @@
 <title><dtml-var communityTitle></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<link rel="stylesheet" href="/img/global.css" media="screen" type="text/css" />
+<link rel="stylesheet" href="<dtml-var communityUrl>/img/global.css" media="screen" type="text/css" />
 
 </head>
 

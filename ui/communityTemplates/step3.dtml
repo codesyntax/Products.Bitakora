@@ -3,7 +3,7 @@
 
 <h2><dtml-var "gettext('3rd step: choose a template')"></h2>
 
-<form action="/step3.do" method="post">
+<form action="<dtml-var communityUrl>/step3.do" method="post">
 
 <dtml-in "templates.objectIds()">
 <p>

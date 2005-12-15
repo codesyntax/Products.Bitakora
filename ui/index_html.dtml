@@ -5,7 +5,7 @@
         <dtml-var entry_body>
        </dtml-with>    
     <dtml-else>
-        <p><dtml-var "gettext('There is no entry.')"></p>
+        <p><dtml-var "gettext('There are no entries.')"></p>
     </dtml-in>
     <dtml-in "published_posts(start=1)" size=10 start=ndx>
       <p>
@@ -27,7 +27,7 @@
        <p><a href="<dtml-var URL>?ndx=11" class="next"><dtml-var "gettext('Next posts')"></a> </p>
       </dtml-if>
     <dtml-else>
-        <p><dtml-var "gettext('There is no entry.')"></p>
+        <p><dtml-var "gettext('There are no entries.')"></p>
     </dtml-in>
 
 </dtml-if>

@@ -6,7 +6,7 @@
         <dtml-var entry_body_community>
        </dtml-with>    
     <dtml-else>
-        <p><dtml-var "gettext('There is no entry.')"></p>
+        <p><dtml-var "gettext('No entries.')"></p>
     </dtml-in>
      <dtml-in "communityLastPosts(start=1)" size=10 start=ndx>
       <dtml-if next-sequence>
@@ -25,6 +25,6 @@
        <p><a href="<dtml-var URL>?ndx=11" class="next"><dtml-var "gettext('Next posts')"></a> </p>
        </dtml-if>
     <dtml-else>
-        <p><dtml-var "gettext('There is no entry.')"></p>
+        <p><dtml-var "gettext('No entries.')"></p>
     </dtml-in>
 </dtml-if>
