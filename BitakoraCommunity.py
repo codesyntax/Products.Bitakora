@@ -54,7 +54,7 @@ class BitakoraCommunity(BTreeFolder2):
     security.setPermissionDefault('Manage BitakoraCommunity',('Manager',))
 
     _properties = ({'id':'admin_mail', 'type': 'ustring', 'mode': 'w'},
-                   {'id':'management_page_charset','type':'ustring', 'mode':'w'},
+                   {'id':'management_page_charset','type':'string', 'mode':'w'},
                    {'id':'title', 'type':'ustring', 'mode':'w'})
        
     manage_adminBlogs = HTMLFile('ui/admin_blogs', globals())
@@ -66,7 +66,7 @@ class BitakoraCommunity(BTreeFolder2):
         BTreeFolder2.__init__(self, id)
         self.id = id
         self.admin_mail = admin_mail
-        self.management_page_charset = u'UTF-8'
+        self.management_page_charset = 'UTF-8'
         self.title = u'blog community'
         self._addLocalizer()
         self._addCatalog()
@@ -221,7 +221,8 @@ class BitakoraCommunity(BTreeFolder2):
         self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Blogs deleted successfully')
+            url = REQUEST.HTTP_REFERER.split('?')[0]
+            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Blogs deleted successfully')
 
     security.declareProtected('Manage BitakoraCommunity', 'delUsers')
     def delUsers(self, ids=[], REQUEST=None):
@@ -231,7 +232,8 @@ class BitakoraCommunity(BTreeFolder2):
         self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Users deleted successfully')
+            url = REQUEST.HTTP_REFERER.split('?')[0]
+            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Users deleted successfully')
 
     security.declarePublic('cleanHTML')
     def cleanHTML(self, html):

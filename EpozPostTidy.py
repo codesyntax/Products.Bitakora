@@ -133,10 +133,10 @@ def EpozPostTidy(self, html, pageurl):
     
 def cleanHTML(html):
     parser = cleanHTMLParser()
-    parser.feed(unicode(html, 'utf-8'))
+    parser.feed(html)
     parser.close()
     htmlres = parser.res   
     htmlres = re.sub("[ ]+"," ",htmlres)
     htmlres = re.sub("[\n]+","\n", htmlres)
     
-    return htmlres.encode('utf-8')
+    return htmlres

@@ -80,7 +80,7 @@ def prepareTags(tags=[]):
     
     newtags = []
     for tag in tags:
-        t = tag.encode('utf-8')
+        t = tag
         t = t.translate(mt)
         t = t.strip()
         t = unicode(t)

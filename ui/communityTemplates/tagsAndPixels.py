@@ -11,7 +11,7 @@ tags = container.Catalog.uniqueValuesFor('tags')
 zenbat = {}
 for tag in tags:
     tagkop = container.Catalog.searchResults(tags=tag)
-    zenbat[tag.encode('utf-8')] = len(tagkop)
+    zenbat[tag] = len(tagkop)
 
 maxpx = 2.00
 minpx = 0.70

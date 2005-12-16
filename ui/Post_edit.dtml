@@ -4,7 +4,7 @@
 
 <dtml-if "REQUEST.get('msg', '')">
 <div class="system-msg">
-    <dtml-var "REQUEST.get('msg')">
+    <dtml-var "gettext(REQUEST.get('msg'))">
 </div>
 </dtml-if>
 

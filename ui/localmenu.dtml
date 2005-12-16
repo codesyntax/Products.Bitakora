@@ -4,7 +4,7 @@
 
 <dtml-var user_links missing="">
 
-<dtml-var "sidebar_html.encode('utf-8')" missing="">
+<dtml-var show_sidebar_html missing="">
 
 <dtml-var calendar missing="">
 

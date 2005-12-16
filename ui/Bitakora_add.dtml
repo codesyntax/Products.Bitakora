@@ -20,12 +20,12 @@
 
 <p>
 <label for="title">Title</label><br/>
-<input type="text" id="title" name="title:utf8" size="50"/>
+<input type="text" id="title" name="title:utf8:ustring" size="50"/>
 </p>
 
 <p>
 <label for="subtitle">Subtitle</label><br/>
-<input type="text" id="subtitle" name="subtitle:utf8" size="50"/>
+<input type="text" id="subtitle" name="subtitle:utf8:ustring" size="50"/>
 </p>
 
 <p>
@@ -35,7 +35,7 @@
 
 <p>
 <label for="contact_mail">Contact mail</label><br/>
-<input type="text" id="contact_mail" name="contact_mail:utf8" size="50"/>
+<input type="text" id="contact_mail" name="contact_mail:utf8:ustring" size="50"/>
 </p>
 
 

@@ -74,7 +74,8 @@ class Comment(CatalogPathAware, SimpleItem):
         self.published = publish
         self.reindex_object()
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Comment edited successfuly')
+            url = REQUEST.HTTP_REFERER.split('?')[0]
+            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Comment edited successfully')
 
     security.declareProtected('Manage bitakora', 'delete')
     def delete(self, REQUEST):
@@ -82,7 +83,8 @@ class Comment(CatalogPathAware, SimpleItem):
         REQUEST['delete'] = 1
         self.getParentNode().manage_editComment(author='', email='', url='', body='', date='', id=self.id, REQUEST=REQUEST)
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER+'?msg=Comment deleted successfuly')
+            url = REQUEST.HTTP_REFERER.split('?')[0]
+            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Comment deleted successfully')
 
     security.declarePublic('index_html')
     def index_html(self,REQUEST=None):
@@ -97,27 +99,27 @@ class Comment(CatalogPathAware, SimpleItem):
     security.declarePublic('showAuthor')
     def showAuthor(self):
         """ get the author """
-        return self.author.encode('utf-8')
+        return self.author
 
     security.declarePublic('showEmail')
     def showEmail(self):
         """ get the email """
-        return self.email.encode('utf-8')
+        return self.email
 
     security.declarePublic('showURL')
     def showURL(self):
         """ get the url """
-        return self.url.encode('utf-8')
+        return self.url
 
     security.declarePublic('showDate')
     def showDate(self):
         """ get the date """
-        return unicode(str(self.date)).encode('utf-8')
+        return unicode(str(self.date))
 
     security.declarePublic('showBody')
     def showBody(self):
         """ get the body """
-        return self.body.encode('utf-8')
+        return self.body
 
     security.declarePublic('getId')
     def getId(self):
