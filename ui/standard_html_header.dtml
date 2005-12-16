@@ -3,16 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<title><dtml-if showTitle><dtml-var showTitle> - </dtml-if><dtml-var blog_title></title>
+<title><dtml-if showTitle><dtml-var showTitle></dtml-if><dtml-var blog_title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="<dtml-var blogurl missing="">/blog.css" media="screen" type="text/css" />
 <dtml-if inCommunity>
 <link rel="stylesheet" href="<dtml-var communityUrl>/img/preheader.css" media="screen" type="text/css" />
 </dtml-if>
 <link rel="pingback" href="<dtml-var blogurl missing="">" />
-
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<dtml-var blogurl missing="">/feed.xml" />
-
 </head>
 
 <body>
@@ -21,9 +19,9 @@
 
 <div id="container">
  <div id="banner">
- 
+
     <h1><a href="<dtml-var blogurl>/"><dtml-var blog_title></a></h1>
-    <dtml-if subtitle><h2><dtml-var subtitle></h2></dtml-if>
+    <dtml-if blog_subtitle><h2><dtml-var blog_subtitle></h2></dtml-if>
 
  </div>
 

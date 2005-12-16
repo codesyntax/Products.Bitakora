@@ -79,7 +79,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.title = title
         self.author = author
         self.body = body
-        self.tags = [tag for tag in tags]
+        self.tags = tags
         self.date = date
         self.comment_allowed = comment_allowed
         self.reference_allowed = reference_allowed
@@ -186,32 +186,32 @@ class Post(CatalogPathAware, BTreeFolder2):
     security.declarePublic('showTitle')
     def showTitle(self):
         """ get the title """
-        return self.title.encode('utf-8')
+        return self.title
 
     security.declarePublic('showAuthor')
     def showAuthor(self):
         """ get the author """
-        return self.author.encode('utf-8')
+        return self.author
 
     security.declarePublic('showTags')
     def showTags(self):
         """ get the tags """
-        return u' '.join(self.tags).encode('utf-8')
+        return u' '.join(self.tags)
         
     security.declarePublic('tagList')
     def tagList(self):
         """ get the tag list """
-        return [tag.encode('utf-8') for tag in self.tags]
+        return self.tags
 
     security.declarePublic('showDate')
     def showDate(self):
         """ get the date """
-        return unicode(str(self.date)).encode('utf-8')
+        return unicode(str(self.date))
 
     security.declarePublic('showBody')
     def showBody(self):
         """ get the body """
-        return self.body.encode('utf-8')
+        return self.body
 
     security.declarePublic('canComment')
     def canComment(self):
@@ -284,13 +284,13 @@ class Post(CatalogPathAware, BTreeFolder2):
     security.declareProtected('View', 'numberOfComments')
     def numberOfComments(self):
         """ Method that returns the number of comments of this post """
-        return unicode(str(len(self.commentList()))).encode('utf-8')
+        return unicode(str(len(self.commentList())))
 
     security.declareProtected('View', 'numberOfReferences')
     def numberOfReferences(self):
         """ Method that returns the number of references of this post """
-        return unicode(str(len(self.referenceList()))).encode('utf-8')
-
+        return unicode(str(len(self.referenceList())))
+        
     security.declarePrivate('yearmonth')
     def yearmonth(self):
         """ for archive """

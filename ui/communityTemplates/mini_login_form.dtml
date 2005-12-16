@@ -13,12 +13,12 @@
     </dtml-if>
     <p>
         <label for="name"><dtml-var "gettext('Username')"></label>
-        <input type="text" id="name" name="__ac_name" size="20" value="<dtml-var "REQUEST.get('__ac_name', '')">"/>
+        <input type="text" id="name" name="__ac_name" size="12" value="<dtml-var "REQUEST.get('__ac_name', '')">"/>
     </p>
 
     <p>
         <label for="password"><dtml-var "gettext('Password')"></label>
-        <input type="password" id="password" name="__ac_password" size="20"/>
+        <input type="password" id="password" name="__ac_password" size="12"/>
     </p>
 
     <p>

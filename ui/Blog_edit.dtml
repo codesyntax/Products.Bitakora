@@ -6,7 +6,7 @@
 
 <dtml-if "REQUEST.get('msg', '')">
 <div class="system-msg">
-    <dtml-var "REQUEST.get('msg')">
+    <dtml-var "gettext(REQUEST.get('msg'))">
 </div>
 </dtml-if>
 
@@ -14,12 +14,12 @@
 
 <p>
 <label for="title"><dtml-var "gettext('Blog title')"></label><br/>
-<input id="title" type="text" name="title:utf8" value="<dtml-var title>" size="50"/>
+<input id="title" type="text" name="title:utf8:ustring" value="<dtml-var blog_title>" size="50"/>
 </p>
 
 <p>
 <label for="subtitle"><dtml-var "gettext('Blog subtitle')"></label><br/>
-<input id="subtitle" type="text" name="subtitle:utf8" value="<dtml-var subtitle>" size="50"/>
+<input id="subtitle" type="text" name="subtitle:utf8:ustring" value="<dtml-var blog_subtitle>" size="50"/>
 </p>
 
 <p>
@@ -38,7 +38,7 @@
 
 <p>
 <label for="contact_mail"><dtml-var "gettext('Contact email')"></label><br/>
-<input id="contact_mail" type="text" name="contact_mail:utf8" value="<dtml-var contact_mail>" size="50"/>
+<input id="contact_mail" type="text" name="contact_mail:utf8:ustring" value="<dtml-var show_contact_mail>" size="50" />
 </p>
 
 <input value="<dtml-var "gettext('Save Changes')">" type="submit"/>

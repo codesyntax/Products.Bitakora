@@ -92,12 +92,13 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.setPermissionDefault('Manage Bitakora',     ('Blogger', 'Manager',))
     security.setPermissionDefault('Add Bitakora Comment',('Anonymous', 'Manager',))
                                     
-    _properties = ({'id':'title', 'type': 'ustring', 'mode': 'w'},
-                   {'id':'subtitle', 'type':'ustring', 'mode':'w'},
-                   {'id':'contact_mail', 'type':'ustring', 'mode':'w'},
-                   {'id':'management_page_charset','type':'ustring', 'mode':'w'},
-                   {'id':'sidebar_html', 'type':'utext', 'mode':'w'},
-                   {'id':'description', 'type':'utext', 'mode':'w'})
+    _properties = (#{'id':'title', 'type': 'ustring', 'mode': 'w'},
+                   #{'id':'subtitle', 'type':'ustring', 'mode':'w'},
+                   #{'id':'contact_mail', 'type':'ustring', 'mode':'w'},
+                   {'id':'management_page_charset','type':'string', 'mode':'w'},
+                   #{'id':'sidebar_html', 'type':'utext', 'mode':'w'},
+                   #{'id':'description', 'type':'utext', 'mode':'w'}
+                   )
 
     manage_options=({'label':'Contents', 'action':'manage_main'},
                     {'label':'View', 'action':'index_html'},
@@ -342,12 +343,33 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declarePublic('blog_title')
     def blog_title(self):
         """ blog title """
-        return unicode(self.title, 'utf-8').encode('utf-8')
+        return self.title   
+        
+    security.declarePublic('blog_subtitle')
+    def blog_subtitle(self):
+        """ blog subtitle """
+        return self.subtitle
+        
+        
+    security.declarePublic('showDescription')
+    def showDescription(self):
+        return self.description
+        
+    security.declarePublic('show_contact_mail')
+    def show_contact_mail(self):
+        """ blog contact_mail """
+        return self.contact_mail
+       
+    security.declarePublic('show_sidebar_html')
+    def show_sidebar_html(self):
+        """ blog show_sidebar_html """
+        return self.sidebar_html
+              
 
     security.declarePublic('title_or_id')
     def title_or_id(self):
         """ title or id """
-        return self.title or self.id
+        return self.blog_title() or self.id
 
     security.declarePublic('blogurl')
     def blogurl(self):
@@ -363,7 +385,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         zenbat = {}
         for tag in tags:
             tagkop = self.Catalog.searchResults(tags=tag)
-            zenbat[tag.encode('utf-8')] = len(tagkop)
+            zenbat[tag] = len(tagkop)
 
         maxpx = 2.30
         minpx = 0.70
@@ -407,7 +429,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             min = self._links.minKey()
             self._links[min-1] = (url, title)
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), self.gettext('Link added succesfully')))
+            return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), 'Link added succesfully'))
 
     security.declareProtected('Manage Bitakora', 'removeLink')
     def removeLink(self, key=None, REQUEST=None):
@@ -417,12 +439,12 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                 del self._links[key]
             except:
                 if REQUEST is not None:
-                    return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), self.gettext('Error when deleting selected link')))
+                    return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), 'Error when deleting selected link'))
             if REQUEST is not None:        
-                return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), self.gettext('Selected link was removed succesfully')))
+                return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), 'Selected link was removed succesfully'))
         else:
             if REQUEST is not None:
-                return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), self.gettext('What?')))
+                return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), 'What?'))
 
     security.declarePublic('showLinks')
     def showLinks(self):
@@ -440,7 +462,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ save sidebar HTML """
         self.sidebar_html = html
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.absolute_url(), self.gettext('HTML saved succesfully')))        
+            return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.absolute_url(), 'HTML saved succesfully'))        
         
         
     security.declareProtected('Manage Bitakora', 'save_css')
@@ -450,14 +472,14 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         doc.update_data(css)
         
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), self.gettext('CSS edited succesfully')))
+            return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), 'CSS edited succesfully'))
             
     security.declareProtected('Manage Bitakora', 'select_template')
     def select_template(self, template, REQUEST=None):
         """ select an existing template """
         if not template in self.templates.objectIds():
             if REQUEST is not None:
-                return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), self.gettext('Selected template does not exist')))
+                return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), 'Selected template does not exist'))
             else:
                 return
         
@@ -466,7 +488,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         current.update_data(obj)
         
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), self.gettext('Template changed succesfully')))
+            return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), 'Template changed succesfully'))
             
     security.declarePublic('inCommunity')            
     def inCommunity(self):
@@ -474,11 +496,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         if self.getParentNode().meta_type == 'BitakoraCommunity':
             return 1
         return 0      
-        
-    security.declarePublic('showDescription')
-    def showDescription(self):
-        return self.description.encode('utf-8')
-        
+               
     security.declarePublic('showYearMonth')
     def showYearMonth(self, yearmonth):
         """ convert 200512 to December 2005 """
@@ -498,7 +516,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         }
         year = yearmonth[:4]
         month = yearmonth[4:]
-        return (self.gettext('%(month)s %(year)s') % {'month':self.gettext(months[month]), 'year':year}).encode('utf-8')
+        return (self.gettext('%(month)s %(year)s') % {'month':self.gettext(months[month]), 'year':year})
      
     security.declarePublic('commentsAllowed')
     def commentsAllowed(self):

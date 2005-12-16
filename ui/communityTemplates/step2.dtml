@@ -7,7 +7,7 @@
 <fieldset>
 <p>
 <label for="title"><dtml-var "gettext('Blog title')"></label><br/>
-<input type="text" name="title" id="title" size="50" <dtml-if "REQUEST.SESSION.has_key('title')">value="<dtml-var "REQUEST.SESSION.get('title')">"</dtml-if>/>
+<input type="text" name="title:utf8:ustring" id="title" size="50" <dtml-if "REQUEST.SESSION.has_key('title')">value="<dtml-var "REQUEST.SESSION.get('title')">"</dtml-if>/>
 </p>
 
 <p>

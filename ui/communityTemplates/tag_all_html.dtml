@@ -1,13 +1,6 @@
 <h2><dtml-var "gettext('Tags')"></h2>
 
-<dtml-let lista="tagsAndPixels()"
-          keys="lista.keys()"
-          b_url="this().absolute_url()">
-
-<dtml-in keys>
-
-<a href="<dtml-var b_url>/tag/<dtml-var sequence-item>" style="font-size:<dtml-var "lista[_['sequence-item']]">em;" class="PopularTag"><dtml-var sequence-item></a>&nbsp;
-
+<dtml-in "tagsAndPixels().items()">
+<a href="<dtml-var communityUrl>/tag/<dtml-var sequence-key>" style="font-size:<dtml-var sequence-item>em;" class="PopularTag"><dtml-var sequence-key></a>&nbsp;
 </dtml-in>
 
-</dtml-let>
