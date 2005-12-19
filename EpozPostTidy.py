@@ -1,13 +1,4 @@
-###
-# EpozPostTidy.py
-#
-# This is just an example for transforming
-# absolute urls to relative urls with Epoz.
-#
-# Use it at your own risk or improve it!
-###
-
-from Products.Bitakora.HTMLParser import HTMLParser
+from HTMLParser import HTMLParser
 import re
 
 # These tags will get a newline after the closing tag
