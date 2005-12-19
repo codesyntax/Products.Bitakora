@@ -1,22 +1,10 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
+# (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 #
 # Portions Copyright (c) 2000-2001 Chris Withers
 #
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 2 as published
-# by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-# 02111-1307, USA.
+# See also LICENSE.txt
 
 # Importing
 from Products.PythonScripts.PythonScript import manage_addPythonScript
@@ -61,17 +49,7 @@ def addImage(obj,id,file):
     title=''     
     tlen = len(contents)     
     new_id = obj.manage_addImage(id,contents,title=title)   
-    
-        
-def createUploadable(filename):
-    file_path = Globals.package_home(globals())
-    filename=file_path+'/'+filename
-    f=open(filename,'rb')
-    # extra step 'cos we can't set attributes on files
-    s=StringIO(f.read())
-    s.filename=filename
-    return s
-    
+      
 def addFile(obj,id,file):
     file_path = Globals.package_home(globals())
     f=open(file_path+'/'+file,'rb')           

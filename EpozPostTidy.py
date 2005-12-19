@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
+# Authors: Garikoitz Araolaza <garaolaza@codesyntax.com>
+#          Mikel Larreategi <mlarreategi@codesyntax.com>
+# See also LICENSE.txt
+
 from HTMLParser import HTMLParser
 import re
 
