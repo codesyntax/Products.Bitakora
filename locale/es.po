@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: \n"
-"POT-Creation-Date: 2005-12-15 16:12+CET\n"
-"PO-Revision-Date: 2005-12-15 16:12+CET\n"
+"POT-Creation-Date: 2005-12-19 11:12+CET\n"
+"PO-Revision-Date: 2005-12-19 11:12+CET\n"
 "Last-Translator:  <>\n"
 "Language-Team: es <>\n"
 "MIME-Version: 1.0\n"
@@ -63,8 +63,14 @@ msgstr "Lema del blog"
 msgid "Blog title"
 msgstr "Título del blog"
 
+msgid "Blogs deleted successfully"
+msgstr "Blogs eliminados"
+
 msgid "Body"
 msgstr "Cuerpo"
+
+msgid "CSS edited succesfully"
+msgstr "CSS editado"
 
 msgid "Change"
 msgstr "Cambiar"
@@ -78,11 +84,23 @@ msgstr "Cambia tu contraseña"
 msgid "Come again whenever you want!"
 msgstr "Vuelve cuando quieras"
 
+msgid "Comment deleted succesfully"
+msgstr "Comentario borrado"
+
+msgid "Comment does not exists"
+msgstr "No se ha hallado ese comentario"
+
+msgid "Comment edited succesfully"
+msgstr "Comentario editado"
+
 msgid "Comment management"
 msgstr "Gestión de comentarios"
 
 msgid "Comment policy"
 msgstr "Política de comentarios"
+
+msgid "Comment policy edited succesfully"
+msgstr "Se ha actualizado la política de comentarios"
 
 msgid "Comments"
 msgstr "Comentarios"
@@ -174,6 +192,9 @@ msgstr "Entra a escribir en tu blog"
 msgid "Enter your username and you will receive an email to choose a new password."
 msgstr "Introduce tu nombre de usuario y recibirás un mensaje por email para escoger nueva contraseña."
 
+msgid "Error when deleting selected link"
+msgstr "Error: no se pudo borrar ese enlace"
+
 msgid "Forget personal info"
 msgstr "Olvidar datos personales"
 
@@ -182,6 +203,9 @@ msgstr "¿Olvidaste tu contraseña?"
 
 msgid "HTML block"
 msgstr "Bloque de HTML"
+
+msgid "HTML saved succesfully"
+msgstr "Bloque de HTML guardado"
 
 msgid "Hello %(user)s"
 msgstr "Hola %(user)s"
@@ -200,6 +224,9 @@ msgstr "Sólo para usuarios registrados"
 
 msgid "Last posts"
 msgstr "Artículos más recientes"
+
+msgid "Link added succesfully"
+msgstr "Enlace añadido"
 
 msgid "Links"
 msgstr "Enlace"
@@ -267,6 +294,15 @@ msgstr "inténtalo de nuevo"
 msgid "Post a comment"
 msgstr "Envía un comentario"
 
+msgid "Post added succesfully"
+msgstr "Artículo añadido"
+
+msgid "Post deleted succesfully"
+msgstr "Artículo borrado"
+
+msgid "Post edited succesfully"
+msgstr "Artículo editadi"
+
 msgid "Post list"
 msgstr "Lista de artículos"
 
@@ -275,6 +311,9 @@ msgstr "Remitente:"
 
 msgid "Powered by Bitakora"
 msgstr "Hecho con Bitakora"
+
+msgid "Preferences edited succesfully"
+msgstr "Las preferencias se han editado correctamente."
 
 msgid "Preview"
 msgstr "Vista previa"
@@ -324,6 +363,12 @@ msgstr "Selecciona los usuarios que quieres borrar."
 msgid "Select this template"
 msgstr "Selecciona este diseño"
 
+msgid "Selected link was removed succesfully"
+msgstr "Enlace borrado"
+
+msgid "Selected template does not exist"
+msgstr "No se hallado el diseño que seleccionaste"
+
 msgid "Send"
 msgstr "Enviar"
 
@@ -354,6 +399,9 @@ msgstr "Etiqueta: <em>%(tagname)s</em>"
 msgid "Tags"
 msgstr "Etiquetas"
 
+msgid "Template changed succesfully"
+msgstr "Diseño actualizado"
+
 msgid "Template management"
 msgstr "Gestión del diseño"
 
@@ -368,6 +416,9 @@ msgstr "No hay comentarios con la etiqueta <em>%(tagname)s</em>"
 
 msgid "This BitakoraCommunity object, can handle with many Bitakoras, and create a community."
 msgstr "En una BitakoraCommunity entran cuantas Bitakoras individuales quieras..."
+
+msgid "This id contains illegal characters"
+msgstr "Este ID contiene caracteres que no son válidos"
 
 msgid "This id is already in use"
 msgstr "Ese ID ya está en uso"
@@ -393,6 +444,9 @@ msgstr "Usuario"
 msgid "Username"
 msgstr "Nombre de usuario"
 
+msgid "Users deleted successfully"
+msgstr "Usuarios borrados"
+
 msgid "View"
 msgstr "Ver"
 
@@ -401,6 +455,9 @@ msgstr "Ver artículo original"
 
 msgid "Welcome!"
 msgstr "¡Bienvenido/a!"
+
+msgid "What?"
+msgstr "¿Qué?"
 
 msgid "When selecting this template, the css you have edited (if you did so) will be lost. Are you sure?"
 msgstr "Al escoger este diseño, el CSS anterior se eliminará, y con ello los cambios que quizás hayas efectuado en aquel. ¿Deseas continuar?"
@@ -429,14 +486,26 @@ msgstr "Puedes cambiar tu diseño editando el fichero CSS. El diseño es compati
 msgid "You can't change this password"
 msgstr "Esa contraseña no se puede cambiar"
 
+msgid "You must provide at least the title of the post"
+msgstr "Se requiere un título por lo menos"
+
+msgid "You tried to upload something that is not a valid picture image. Try with a 65x65 pixel sized jpg, png or gif."
+msgstr "Has intentado cargar algo que no era una imagen en formato válido. Inténtalo otra vez con un jpg, png o gif de 65x65 píxeles."
+
 msgid "Your current image"
 msgstr "Tu imagen actual"
+
+msgid "Your image is too large. Try with a smaller one"
+msgstr "Imagen demasiado pesada. Inténtalo otra vez con un jpg, png o gif de 65x65 píxeles."
 
 msgid "Your new blog is ready. Now you just have to log-in and start blogging !"
 msgstr "Tu blog está listo. Sólo falta que te conectes con tu contraseña y nombre de usuario para empezar a escribir en el blog."
 
 msgid "Your password has been changed"
 msgstr "Tu contraseña ha sido modificada"
+
+msgid "Your password must be at least 4 characters long"
+msgstr "La contraseña debe tener al menos 4 caracteres."
 
 msgid "admin"
 msgstr "admin"
