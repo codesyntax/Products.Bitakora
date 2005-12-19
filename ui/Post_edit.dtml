@@ -45,7 +45,7 @@
 <p>
 <label for="tags"><dtml-var "gettext('Tags')"></label><br/>
 <dtml-if preview>
-<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(REQUEST.get('tags')).encode('utf-8')">"/>
+<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(prepareTags(tags=REQUEST.get('tags')))">"/>
 <dtml-else>
 <input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var showTags>"/>
 </dtml-if>

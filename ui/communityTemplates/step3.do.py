@@ -18,7 +18,7 @@ id = request.SESSION.get('id')
 template = str(request.get('template'))
 
 # create the blog
-container.manage_addProduct['Bitakora'].manage_addBitakora(id, title, u'', contact_mail)
+container.manage_addProduct['Bitakora'].manage_addBitakora(str(id), title, u'', contact_mail)
 
 blog = container.get(id)
 

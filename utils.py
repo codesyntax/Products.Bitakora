@@ -73,17 +73,17 @@ def cleanBody(self, text):
 
 def prepareTags(tags=[]):
     """ prepare the tags deleting all unwanted things """
-    return tags
+    
     import string
     
-    mt = string.maketrans(string.punctuation, ' '*(len(string.punctuation)))
-    
+    mt = string.maketrans(unicode(string.punctuation), unicode(' '*(len(string.punctuation))))
+    mt = unicode(mt, 'iso-8859-1')
     newtags = []
     for tag in tags:
         t = tag
         t = t.translate(mt)
         t = t.strip()
-        t = unicode(t)
+        #t = unicode(t)
         t = t.lower()
         newtags.append(t)
         
