@@ -80,7 +80,7 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
 
 class Bitakora(BTreeFolder2, CatalogPathAware):
     """ Bitakora is a new blog product for Zope """
-    from Post import manage_addPost 
+    from Post import manage_addPost
     
     meta_type = 'Bitakora'  
 
@@ -192,13 +192,16 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         self.contact_mail = contact_mail
         self.description = description
         if image.read():
+            if not image.headers['Content-Type'].lower().startswith('image'):
+                return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'You tried to upload something that is not a valid picture image. Try with a 65x65 pixel sized jpg, png or gif.'))
+
             ext = image.filename.split('.')[-1]
             imgid = 'image.%s' % ext
             original_id = self.imageUrl.split('/')[-1]
             original_img = self.get(original_id).data
             self._delObject(original_id)
         
-            image.seek(0)           
+            image.seek(0)      
             self.manage_addImage(imgid, image)
             
             img = self.get(imgid)
@@ -212,7 +215,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             self.imageUrl = '%s/%s' % (self.absolute_url(), imgid)
                         
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Properties edited succesfully'))
+            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Preferences edited succesfully'))
 
     security.declareProtected('Manage Bitakora', 'editCommentPolicy')
     def editCommentPolicy(self, comment_allowed, REQUEST=None):
@@ -547,11 +550,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending')
 
         
-    security.declareProtected('Manage Bitakora', 'fix')
-    def fix(self):
-        """ general method for fixing things """
-        return None
-
     def createId(self, title):
         """ Create an id for a post based on its title """
         id = title.strip()
@@ -577,5 +575,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return '-'.join(num[:-1]) + '-' + str(end)
         else:
             return oldid+'-1'           
+            
+    def prepareTags(self, tags):
+        """ return tags to add and edit interfaces preview """
+        from utils import prepareTags as prepTags
+        return prepTags(tags)
 
 Globals.InitializeClass(Bitakora)
