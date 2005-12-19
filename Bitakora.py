@@ -1,4 +1,21 @@
 # -*- coding: utf-8 -*-
+# (C) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
+# Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as published
+# by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
 # Zope modules
 from Globals import HTMLFile
 import Globals
@@ -250,19 +267,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         self.Catalog.manage_addIndex('body', 'TextIndexNG2', extra=extras)
         self.Catalog.manage_addIndex('excerpt', 'TextIndexNG2', extra=extras)
 
-        # delete the default metadata columns
-        for name in self.Catalog.schema():
-            self.Catalog.delColumn(name)
-
-        # Add the meta data columns for search results
-        # hau ez dakit... Squishdot-etik kopiatu dut
-        # supongo katalogoaren bilaketa ostean getObject
-        # egiten ez ibiltzeko dela
-        """
-        for name in ['id','title','author','body','tags','date']:
-            self.Catalog.addColumn(name,'')
-        """
-
     security.declarePrivate('_addMethods')
     def _addMethods(self):
         """ Just to have all methods adding something extra
@@ -325,9 +329,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
-            
- 
-        
         
     security.declarePublic('last_post')
     def last_post(self):
@@ -351,8 +352,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declarePublic('blog_subtitle')
     def blog_subtitle(self):
         """ blog subtitle """
-        return self.subtitle
-        
+        return self.subtitle  
         
     security.declarePublic('showDescription')
     def showDescription(self):
@@ -368,7 +368,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ blog show_sidebar_html """
         return self.sidebar_html
               
-
     security.declarePublic('title_or_id')
     def title_or_id(self):
         """ title or id """

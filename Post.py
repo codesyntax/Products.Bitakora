@@ -1,4 +1,23 @@
 # -*- coding: utf-8 -*-
+# (C) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
+# Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
+#
+# Portions Copyright (c) 2003-2005 Atsushi Shibata
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as published
+# by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
 # Zope modules
 from Globals import package_home, Persistent, HTMLFile
 import Globals
@@ -64,8 +83,6 @@ class Post(CatalogPathAware, BTreeFolder2):
     from Reference import manage_addPingback
 
     security = ClassSecurityInfo()
-    #security.setDefaultAccess("allow")
-    
     security.declareProtected('Add Bitakora Comment', 'manage_addComment')
 
     security.declareProtected('Manage Bitakora', 'edit')
@@ -322,7 +339,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     def send_ping(self, serverurl, blogtitle, url):
         """ """
         from xmlrpclib import Server, Transport
-        version_str = 'Bitakora 0.1Beta'
+        version_str = 'Bitakora 0.1'
         title = blogtitle.encode('utf-8')
         svr = Server(serverurl)
         Transport.user_agent = version_str
