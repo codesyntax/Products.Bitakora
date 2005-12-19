@@ -7,12 +7,12 @@
 <fieldset>
 <p>
 <label for="username"><dtml-var "gettext('Username')"></label><br/>
-<input type="text" id="username" name="username" size="20" <dtml-if "REQUEST.SESSION.get('username')">value="<dtml-var "REQUEST.SESSION.get('username')">"</dtml-if>/> <dtml-if "REQUEST.get('r', '') == '2'"><span class="alert"><dtml-var "gettext('This username already exists')"></span></dtml-if>
+<input type="text" id="username" name="username" size="20" <dtml-if "REQUEST.SESSION.get('username')">value="<dtml-var "REQUEST.SESSION.get('username')">"</dtml-if>/> <dtml-if "REQUEST.get('r', '') == '2'"><span class="alert"><dtml-var "gettext('This username already exists')"></span></dtml-if> <dtml-if "REQUEST.get('r', '') == '4'"><span class="alert"><dtml-var "gettext('This username contains illegal characters')"></span></dtml-if>
 </p>
 
 <p>
 <label for="password"><dtml-var "gettext('Password')"></label><br/>
-<input type="password" id="password" name="password" size="20" /> <dtml-if "REQUEST.get('r', '') == '1'"><span class="alert"><dtml-var "gettext('Passwords do not match')"></span></dtml-if>
+<input type="password" id="password" name="password" size="20" /> <dtml-if "REQUEST.get('r', '') == '1'"><span class="alert"><dtml-var "gettext('Passwords do not match')"></span> </dtml-if><dtml-if "REQUEST.get('r', '') == '5'"><span class="alert"><dtml-var "gettext('Your password must be at least 4 characters long')"></span></dtml-if>
 </p>
 
 <p>
