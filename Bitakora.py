@@ -539,21 +539,33 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         
     def createId(self, title):
         """ Create an id for a post based on its title """
-        id = title.strip()
-        #id = tit.translate(translation_table)
+        from string import maketrans
+        s1 = unicode(r"'\;/ &:ÀÁÂÄÇÈÊÉËÌÎÍÏÒÔÓÖÙÛÚÜÝŸàâáäçèêéëìîíïòôóöùûúüýÿÑñ", 'utf-8')
+        s2 = unicode(r'-------aaaaceeeeiiiioooouuuuyyaaaaceeeeiiiioooouuuuyyNn', 'utf-8')
+
+        # XXX This is not efficient at all
+        # but string.maketrans and id.translate 
+        # don't work correctly with unicode strings....
+        id = title.strip()        
+        for i in range(len(s1)):
+            id = id.replace(s1[i], s2[i])           
+
         id = ''.join([c for c in id if c in ok_chars])
         while id.startswith('-') or id.startswith('_') or id.startswith(' '):
             id = id[1:]
     
         while id.endswith('-') or id.endswith('_') or id.endswith(' '):
             id = id[:-1]
+            
+        while id.find('--') != -1:
+            id = id.replace('--', '-')
     
         id = id.lower()
         if not id:
             return u'blog-post%d' % self.postcount
     
         return u'-'.join(id.split(' '))
-        
+      
     def createNewId(self, oldid):
         """ Create a new id if the previous one was taken """
         if oldid[-1].isdigit():
