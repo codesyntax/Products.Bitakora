@@ -71,7 +71,7 @@ def cleanBody(self, text):
 
 def prepareTags(tags=[]):
     """ prepare the tags deleting all unwanted things """
-    
+    from sets import Set as set    
     import string
     
     mt = string.maketrans(unicode(string.punctuation), unicode(' '*(len(string.punctuation))))
@@ -85,7 +85,8 @@ def prepareTags(tags=[]):
         t = t.lower()
         newtags.append(t)
         
-    return newtags
+        
+    return list(set(newtags))
 
 
 def cleanEmail(email):
