@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<title><dtml-if showTitle><dtml-var showTitle></dtml-if> - <dtml-var blog_title></title>
+<title><dtml-if showTitle><dtml-var showTitle> - </dtml-if><dtml-var blog_title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="<dtml-var blogurl missing="">/blog.css" media="screen" type="text/css" />
 <dtml-if inCommunity>
