@@ -562,7 +562,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     
         id = id.lower()
         if not id:
-            return u'blog-post%d' % self.postcount
+            return u'blogpost-%d' % self.postcount
     
         return u'-'.join(id.split(' '))
       
