@@ -20,7 +20,7 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 # Other stuff
 import DateTime
 from utils import addDTML, clean, cleanBody, cleanEmail, cleanURL, discoverPingbackUrl, makeXMLRPCCall
-from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
+from utils import addPythonScript, prepareTags, ok_chars
 
 from urllister import URLLister
 from Comment import Comment

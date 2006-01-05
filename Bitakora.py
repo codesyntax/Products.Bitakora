@@ -27,7 +27,7 @@ import DateTime, string
 
 # Own modules
 from utils import addDTML, addPythonScript
-from utils import fillMessageCatalog, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
+from utils import fillMessageCatalog, prepareTags, ok_chars
 from PingMethodContainer import PingMethodContainer
 
 
