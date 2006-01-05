@@ -27,9 +27,9 @@ Bitakora Features
 
  - Clean URLs and tag based categorization of posts.
  
- - Support of Pingback references (http://www.hixie.ch/specs/pingback/pingback)
+ - Support of "Pingback references":http://www.hixie.ch/specs/pingback/pingback
  
- - Automatic update ping to Pingomatic (http://pingomatic.com)
+ - Automatic update ping to "Pingomatic":http://pingomatic.com
 
 
 BitakoraCommunity Features
