@@ -1,8 +1,12 @@
 DEPENDENCIES.txt
 
-Epoz
-Localizer
-TextIndexNG2
-BTreeFolder2
-CookieCrumbler
+ - Epoz (we use 2.0.1)
+
+- Localizer (we use 1.1.1)
+
+- TextIndexNG2 (we use 2.2.0)
+
+- BTreeFolder2 (we use 1.0. Note that in Zope 2.8.x this product is included and there is no need of installing it)
+
+- CookieCrumbler (we use 1.2)
 
