@@ -1,9 +1,4 @@
-#$Id$
-
-==========
 IMPORT.txt
-==========
-
 
 You can import your actual blog to Bitakora preparing an XML file with this format:
 
@@ -11,17 +6,17 @@ You can import your actual blog to Bitakora preparing an XML file with this form
 <posts>
   <post>
     <author>  </author>
-    <title><![CDATA[   ]]></title>
+    <title>   </title>
     <date>    </date>
     <body><![CDATA[    ]]></body>
-    <tags><![CDATA[    ]]></tags>
+    <tags>    </tags>
     <comments>
       <comment>
-        <author><![CDATA[   ]]> </author>
+        <author>  </author>
         <date>    </date>
         <body><![CDATA[    ]]></body>
-        <url><![CDATA[   ]]></url>
-        <email><![CDATA[   ]]</email>
+        <url>     </url>
+        <email>   </email>
       </comment>
       <comment>
           ...
@@ -34,14 +29,6 @@ You can import your actual blog to Bitakora preparing an XML file with this form
 </posts>
 
 The content of the body tag should be in HTML (not structured-text, not reStructuredText), and enclosed in a CDATA section.
-
-To identify diferent tags within <tags>, each tag must be separated by ;. Examples:
-
-- <tags>sport;football;arsenal;chelsea</tags>
-- <tags>mycat</tags>
-- etc
-
-I know that it's not very smart to enclose everything in CDATA sections, bat it's the easiest way for avoiding navigators and parsers complaining about '&' and so on.
 
 After preparing that file, you can upload it using 'prefs' tab of your blog admin site.
 

@@ -579,5 +579,20 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ return tags to add and edit interfaces preview """
         from utils import prepareTags as prepTags
         return prepTags(tags)
+        
+    def importXML(self, file, REQUEST=None):
+        """ upload XML file with blog data """
+        from XMLImporter import importXML as imp
+        data = imp(xml=file.read())
+        for post in data:
+            id = self.manage_addPost(title=post['title'], author=post['author'], body=post['body'], tags=post['tags'], date=post['date'], not_clean=1, sendping=0)
+            posta = self.get(id)
+            for comment in post.get('comments', []):
+                posta.manage_addComment(author=comment['author'], body=comment['body'], url=comment['url'], email=comment['email'], date=comment['date'])
+                
+                
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.absolute_url(), 'XML file imported succesfully'))            
+         
 
 Globals.InitializeClass(Bitakora)

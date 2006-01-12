@@ -3,11 +3,6 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
-#$Id$
-#$URL$
-#$Rev$
-#$Date$
-
 from xml.sax.handler import ContentHandler
 from xml.sax import make_parser
 
@@ -26,7 +21,6 @@ class XMLImporter(ContentHandler):
         self.intitle = 0
         self.inauthor = 0
         self.infmt = 0
-        self.inid = 0
         self.inbody = 0
         self.intags = 0
         self.indate = 0  
@@ -36,7 +30,6 @@ class XMLImporter(ContentHandler):
         self.body = ''
         self.tags = ''
         self.date = ''
-        self.id = ''
         self.resetComment()      
         
     def startElement(self, tag, attrs):
@@ -48,8 +41,6 @@ class XMLImporter(ContentHandler):
                 self.inbody = 1     
             elif tag == 'date':
                 self.indate = 1
-            elif tag == 'id':
-                self.inid = 1
                 
         elif self.incomment:      
             if tag == 'author':
@@ -85,8 +76,6 @@ class XMLImporter(ContentHandler):
                 self.inbody = 0   
             elif tag == 'date':
                 self.indate = 0
-            elif tag == 'id':
-                self.inid = 0
                 
         elif self.incomment:      
             if tag == 'author':
@@ -141,18 +130,15 @@ class XMLImporter(ContentHandler):
         elif self.inurl:
             self.url += chars
         elif self.inemail:
-            self.email += chars      
-        elif self.inid:
-            self.id += chars                  
+            self.email += chars                        
             
     def createPost(self):
         post = {}
-        post['id'] = self.id
         post['title'] = self.title
         post['author'] = self.author
         post['fmt'] = self.fmt
         post['body'] = self.body
-        post['tags'] = self.tags.split(';')
+        post['tags'] = self.tags.split(' ')
         post['date'] = self.date
         post['comments'] = self.comments[:]
         self.comments = []

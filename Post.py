@@ -29,7 +29,7 @@ from Reference import Reference
 __version__ = "$Revision: 0.1 $"
 
 
-def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, REQUEST=None):
+def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(), publish=1, comment_allowed=1, not_clean=0, sendping=1, REQUEST=None):
     """ Called from ZMI when creating new posts """
     if not title:
         return REQUEST.RESPONSE.redirect('%s/post?msg=%s' % (self.blogurl(), 'You must provide at least the title of the post'))
@@ -37,7 +37,10 @@ def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comm
     newid = self.createId(title)
     newtitle = clean(title)
     newauthor = clean(author)
-    newbody = cleanBody(self, body)
+    if not_clean:
+        newbody = body
+    else:
+        newbody = cleanBody(self, body)
     newtags = prepareTags(tags)
     newdate = DateTime.DateTime(date)
 
@@ -48,9 +51,11 @@ def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comm
       
     self._setObject(str(newid), post)
     post = self.get(newid)
-    pingbackresults = post.postPingBacks(newbody) 
-    res = post.sendPing()    
     
+    if sendping:
+        pingbackresults = post.postPingBacks(newbody) 
+        res = post.sendPing()    
+
     if self.inCommunity():
         # We are in a Bitakora Community, so catalog the post there
         cat = self.getParentNode().get('Catalog', 'None')
@@ -63,7 +68,7 @@ def manage_addPost(self, title, author, body, tags=[], date=u'', publish=1, comm
     if REQUEST is not None:
         return REQUEST.RESPONSE.redirect('%s/admin?msg=%s' % (self.absolute_url(), 'Post added succesfully'))
 
-    return self.manage_main(self, REQUEST)
+    return newid
 
 class Post(CatalogPathAware, BTreeFolder2):
     """ Post class """

@@ -18,13 +18,13 @@ from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, clean
 
 __version__ = "$Revision: 0.1 $"
 
-def manage_addComment(self, author, body, url='', email='', REQUEST=None):
+def manage_addComment(self, author, body, url='', email='', date=DateTime.DateTime(), REQUEST=None):
     """ Called from HTML form when commenting """
     newauthor = clean(author)
     newbody = cleanBody(self, body)
     newurl = cleanURL(url)
     newemail = cleanEmail(email)
-    newdate = DateTime.DateTime()
+    newdate = DateTime.DateTime(date)           
     newid = self.createCommentId()
     publish = 1
     if self.commentsModerated():
@@ -47,7 +47,7 @@ def manage_addComment(self, author, body, url='', email='', REQUEST=None):
     if REQUEST is not None:
         return REQUEST.RESPONSE.redirect(self.absolute_url())
 
-    return self.manage_main(self, REQUEST)
+    return newid
 
 class Comment(CatalogPathAware, SimpleItem):
     """ Comment class """
