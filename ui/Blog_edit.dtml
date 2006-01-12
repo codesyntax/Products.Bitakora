@@ -52,4 +52,14 @@
     <li><a href="<dtml-var blogurl>/downloadTXT"><dtml-var "gettext('Download in TXT')"></a></li>
 </ul>
 
+<h1><dtml-var "gettext('Upload a XML file with blog data')"></h1>
+
+<p><dtml-var "gettext('You can create an XML file with your blog data in the format explained in IMPORT.txt file.')"></p>
+
+<form action="importXML" method="post" enctype="multipart/form-data">
+<input type="file" name="file" size="20" />
+<input type="submit" value="<dtml-var "gettext('Upload')">" />
+
+</form>
+
 <dtml-var standard_html_footer>
