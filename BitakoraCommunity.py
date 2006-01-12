@@ -243,8 +243,27 @@ class BitakoraCommunity(BTreeFolder2):
     security.declarePublic('cleanHTML')
     def cleanHTML(self, html):
         """ clean html from posts """
+    	# Which one is more efficient?
+
+        # One way...
+        
         from EpozPostTidy import cleanHTML as clean
         return clean(html)
+        """
+        # Another way... (from Zopelabs)
+    	intag = [False]
+    	
+    	def chk(c):
+    		if intag[0]:
+    			intag[0] = (c != '>')
+    			return False
+    		elif c == '<':
+    			intag[0] = True
+    			return False
+    		return True
+    	
+    	return ''.join([c for c in html if chk(c)])
+    	"""
         
     security.declarePublic('community')        
     def community(self):
