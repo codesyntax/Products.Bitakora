@@ -8,22 +8,24 @@
     <dtml-else>
         <p><dtml-var "gettext('No entries.')"></p>
     </dtml-in>
+    <p>
      <dtml-in "communityLastPosts(start=1)" size=10 start=ndx>
       <dtml-if next-sequence>
-        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var next-sequence-start-number>" class="next"><dtml-var "gettext('Previous posts')"></a>
+        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var next-sequence-start-number>" class="next"><dtml-var "gettext('Previous posts')"> <strong>&raquo;</strong></a>
       </dtml-if>
       <dtml-if previous-sequence>
-        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var previous-sequence-start-number>" class="previous"><dtml-var "gettext('Next posts')"></a> 
+        <a href="<dtml-var URL><dtml-var sequence-query html_quote>ndx=<dtml-var previous-sequence-start-number>" class="previous"><strong>&laquo;</strong> <dtml-var "gettext('Next posts')"> </a> 
       </dtml-if>
     </dtml-in>
+    </p>
 <dtml-else>
-    <dtml-in communityLastPosts> 
+    <dtml-in "communityLastPosts(start=1)" size=10> 
         <dtml-with getObject>
         <dtml-var entry_body_community>
         </dtml-with>  
-       <dtml-if sequence-end>  
-       <p><a href="<dtml-var URL>?ndx=11" class="next"><dtml-var "gettext('Next posts')"></a> </p>
-       </dtml-if>
+        <dtml-if next-sequence>
+         <p><a href="<dtml-var URL>?ndx=11" class="next"><dtml-var "gettext('Previous posts')"> <strong>&raquo;</strong></a> </p>
+        </dtml-if>
     <dtml-else>
         <p><dtml-var "gettext('No entries.')"></p>
     </dtml-in>
