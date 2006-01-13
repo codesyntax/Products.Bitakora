@@ -62,9 +62,9 @@
 <input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "_.unicode(_.DateTime()).encode('utf-8')">"/>
 </p>
 
-<input type="submit" value=" <dtml-var "gettext('Add')"> " name="../manage_addPost:method" "/>
+<input type="submit" value=" <dtml-var "gettext('Add')"> " name="../manage_addPost:method" />
 
-<input type="submit" value="<dtml-var "gettext('Preview')">" name=".:method" "/>
+<input type="submit" value="<dtml-var "gettext('Preview')">" name=".:method" />
 
 </form>
 
