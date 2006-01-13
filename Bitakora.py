@@ -397,11 +397,11 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
     security.declarePublic('lastComments')
     def lastComments(self, size=10):
-        return self.Catalog.searchResults(meta_type='Comment', sort_on='date', sort_order='reverse', published=1)
+        return self.Catalog.searchResults(meta_type='Comment', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
 
     security.declarePublic('lastReferences')
     def lastReferences(self, size=10):
-        return self.Catalog.searchResults(meta_type='Reference', sort_on='date', sort_order='reverse', published=1)
+        return self.Catalog.searchResults(meta_type='Reference', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
 
     security.declarePrivate('blog')
     def blog(self):
