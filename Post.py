@@ -29,7 +29,7 @@ from Reference import Reference
 __version__ = "$Revision: 0.1 $"
 
 
-def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(), publish=1, comment_allowed=1, not_clean=0, sendping=1, REQUEST=None):
+def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(), publish=1, comment_allowed=1, not_clean=0, sendping=0, REQUEST=None):
     """ Called from ZMI when creating new posts """
     if not title:
         return REQUEST.RESPONSE.redirect('%s/post?msg=%s' % (self.blogurl(), 'You must provide at least the title of the post'))
