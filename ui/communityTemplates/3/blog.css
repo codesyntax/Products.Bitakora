@@ -1,5 +1,5 @@
 body {
-	margin: 0px 0px 0px 0px;
+	margin: 0;
 	text-align: center;
 	background: #fff url(img/3edukibe.gif) no-repeat bottom;
 	font-size: small;
@@ -84,7 +84,10 @@ a#banner-img {
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	font-size: 0.9em;
 }
-
+.content h1{	
+	font-size: 1.7em;
+	margin: 15px 0 10px 0;
+}
 #right {
 	float: left;
 	font-size: 0.85em;
@@ -110,7 +113,7 @@ a#banner-img {
 
 .content h2 {
 	font-family: Verdana,'Trebuchet MS', sans-serif;
-	font-size: 0.90em;
+	font-size: 0.9em;
 	border-bottom: 1px solid #fff;
 	background: url(img/3lainoa.gif) no-repeat left bottom;
 	text-align: right;
@@ -124,9 +127,7 @@ a#banner-img {
 	text-align: left;
 	margin-bottom: 10px;
 }
-*html .content p {
-	font-size: x-small;
-}
+
 
 .content .storycontent h3{
 	font-size:120%;
@@ -134,9 +135,7 @@ a#banner-img {
 	margin:0;
 	padding:0;
 }
-*html .content .storycontent h3{
-	font-size:100%;
-}
+
 
 .content p.posted {
 	color: #999999;
@@ -194,9 +193,6 @@ a#banner-img {
 	text-transform: uppercase;
 	letter-spacing: .3em;
 }
-*html .sidebar h2 {
-	letter-spacing: .1em;
-}
 
 .sidebar ul {
 	padding-left: 0px;
@@ -235,7 +231,7 @@ a#banner-img {
 	line-height: 150%;
 	text-align: left;
 	color: #666666;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 #comment-data {
@@ -249,4 +245,16 @@ a#banner-img {
 
 textarea[id="comment-text"] {
 	width: 80%;
+}
+
+td, th{
+	padding: 2px 3px;
+	border: 1px solid #fff;
+}
+table{
+	margin-bottom: 10px;
+}
+
+#tags{
+	margin-bottom: 10px;
 }
