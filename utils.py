@@ -84,10 +84,8 @@ def prepareTags(tags=[]):
         #t = unicode(t)
         t = t.lower()
         newtags.append(t)
-        
-        
-    return list(set(newtags))
 
+    return list(set(newtags))
 
 def cleanEmail(email):
     """ clean email """
@@ -96,6 +94,12 @@ def cleanEmail(email):
 def cleanURL(url):
     """ clean url """
     return url
+
+
+def notifyByEmail(mailhost, mTo, mFrom, mSubj, mMsg):
+    mailhost.send(mMsg, mTo, mFrom, mSubj)
+
+
 
 def fillMessageCatalog(gettext):
     locales = ['eu', 'es']
