@@ -395,14 +395,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
         return hiz
 
-    security.declarePublic('lastComments')
-    def lastComments(self, size=10):
-        return self.Catalog.searchResults(meta_type='Comment', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
-
-    security.declarePublic('lastReferences')
-    def lastReferences(self, size=10):
-        return self.Catalog.searchResults(meta_type='Reference', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
-
     security.declarePrivate('blog')
     def blog(self):
         return self
@@ -530,12 +522,76 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         if users:
             return users[0]
         return ''
-     
+
+    """ 
+    security.declarePublic('lastComments')
+    def lastComments(self, size=10):
+         return last comments
+        return self.Catalog.searchResults(meta_type='Comment', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
+    """
+    """
+    security.declarePublic('lastReferences')
+    def lastReferences(self, size=10):
+         return last references 
+        return self.Catalog.searchResults(meta_type='Reference', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
+    """          
+    """
     security.declarePublic('blogComments')
     def blogComments(self):
-        """ return catalogged comments """
+        return catalogged comments 
         return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending')
 
+    """
+
+    security.declarePublic('getUnpublishedComments')
+    def getUnpublishedComments(self, size=None):
+        """ get unpublished comments """
+        if size is not None:
+            return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending', sort_limit=size)            
+        else:
+            return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending')
+        
+    security.declarePublic('getPublishedComments')
+    def getPublishedComments(self, size=None):
+        """ get published comments """
+        if size is not None:
+            return self.Catalog(meta_type='Comment', published=1, sort_on='date', sort_order='descending', sort_limit=size)
+        else:
+            return self.Catalog(meta_type='Comment', published=1, sort_on='date', sort_order='descending')
+                
+    security.declarePublic('getComments')
+    def getComments(self, size=None):
+        """ get comments """
+        if size is not None:
+            return self.Catalog(meta_type='Comment', sort_on='date', sort_order='descending', sort_limit=size)
+        else:
+            return self.Catalog(meta_type='Comment', sort_on='date', sort_order='descending')
+       
+    security.declarePublic('getUnpublishedReference')
+    def getUnpublishedReferences(self, size=None):
+        """ get unpublished References """
+        if size is not None:
+            return self.Catalog(meta_type='Reference', published=0, sort_on='date', sort_order='descending', sort_limit=size)            
+        else:
+            return self.Catalog(meta_type='Reference', published=0, sort_on='date', sort_order='descending')
+        
+    security.declarePublic('getPublishedReferences')
+    def getPublishedReferences(self, size=None):
+        """ get published References """
+        if size is not None:
+            return self.Catalog(meta_type='Reference', published=1, sort_on='date', sort_order='descending', sort_limit=size)
+        else:
+            return self.Catalog(meta_type='Reference', published=1, sort_on='date', sort_order='descending')
+                
+    security.declarePublic('getReferences')
+    def getComments(self, size=None):
+        """ get References """
+        if size is not None:
+            return self.Catalog(meta_type='Reference', sort_on='date', sort_order='descending', sort_limit=size)
+        else:
+            return self.Catalog(meta_type='Reference', sort_on='date', sort_order='descending')
+    
+        
         
     def createId(self, title):
         """ Create an id for a post based on its title """
