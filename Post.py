@@ -63,8 +63,7 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
             cat.catalog_object(post, '/'.join(post.getPhysicalPath()))
 
     self.postcount = self.postcount + 1
-
-
+    
     if REQUEST is not None:
         return REQUEST.RESPONSE.redirect('%s/admin?msg=%s' % (self.absolute_url(), 'Post added succesfully'))
 
@@ -265,7 +264,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     def commentList(self, all=0):
         """ get the comments of this post ordered by date"""
         if all:
-            comlist = self.objectValues('Comment')
+            comlist = self.objectValues('Comment')[:]
         else:
             comlist = [com for com in self.objectValues('Comment') if com.published]
         
@@ -276,7 +275,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     def referenceList(self, all=0):
         """ get the references of this post ordered by date """
         if all:
-            reflist = self.objectValues('Reference')
+            reflist = self.objectValues('Reference')[:]
         else:
             reflist = [com for com in self.objectValues('Reference') if com.published]
 
