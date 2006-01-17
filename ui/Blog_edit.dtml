@@ -50,6 +50,7 @@
 
 <ul>
     <li><a href="<dtml-var blogurl>/downloadTXT"><dtml-var "gettext('Download in TXT')"></a></li>
+    <li><a href="<dtml-var blogurl>/downloadXML"><dtml-var "gettext('Download in XML')"></a></li>    
 </ul>
 
 <h1><dtml-var "gettext('Upload a XML file with blog data')"></h1>

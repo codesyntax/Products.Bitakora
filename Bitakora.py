@@ -121,6 +121,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     about = HTMLFile('ui/about', globals())
     contents = HTMLFile('ui/contents', globals())
     downloadTXT = HTMLFile('ui/downloadTXT', globals())
+    downloadXML = HTMLFile('ui/downloadXML', globals())
     logged_in = HTMLFile('ui/logged_in', globals())
     logged_out = HTMLFile('ui/logged_out', globals())
     login_form = HTMLFile('ui/login_form', globals())
