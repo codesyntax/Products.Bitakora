@@ -15,6 +15,7 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 # Other stuff
 import DateTime
 from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
+from utils import notifyByEmail
 
 __version__ = "$Revision: 0.1 $"
 
@@ -32,6 +33,40 @@ def manage_addComment(self, author, body, url='', email='', date=DateTime.DateTi
     comment = Comment(newid, newauthor, newemail, newurl, newbody, newdate, self.getId(), publish)
 
     self._setObject(str(newid), comment)
+    
+    comment = getattr(self, str(newid))
+    
+    try:
+        mailhost=getattr(self,self.superValues('Mail Host')[0].id)
+        from EpozPostTidy import cleanHTML
+        
+        mTo = self.contact_mail
+        if self.inCommunity():
+            mFrom = self.admin_mail
+        else:
+            mFrom = self.contact_mail
+        mSubj = self.gettext('New comment in your blog!') 
+        mMsg = self.gettext("""
+To: %s
+From: %s
+Mime-Version: 1.0
+Content-Type: text/plain;
+
+Comment author :%s
+Author's url   :%s
+Author's email :%s
+Comm. Address  :%s
+Comment body   :
+%s
+
+""") % (mTo.encode('utf-8'), mFrom.encode('utf-8'), newauthor.encode('utf-8'), newurl.encode('utf-8'), newemail.encode('utf-8'), comment.absolute_url(), cleanHTML(newbody).encode('utf-8'))
+
+        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)
+    except:
+        # If there is no MailHost, or other error happened
+        # there won't be e-mail notifications
+        pass
+    
 
     #set cookie
     if REQUEST and REQUEST.form.has_key('setcookie'):
