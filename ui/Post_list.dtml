@@ -11,7 +11,7 @@
 </dtml-if>
 
 
-<dtml-if "Catalog.searchResults(meta_type='Post')">
+<dtml-if "Catalog.searchResults(meta_type='Post' sort_on='date', sort_order='descending')">
     
 <form action="manage_delPosts" onsubmit="javascript:return confirm('<dtml-var "gettext('Are you sure?')">');">
 
