@@ -85,7 +85,13 @@ a#banner-img {
 	padding: 0px 30px 5px 20px;
 	color: #4b4b4b;
 	}
-
+.content textarea{
+	width: 450px;
+	}
+.content table{
+	width: 450px;
+font-size: 0.85em;
+	}
 
 #right {
 	float: left;
@@ -128,7 +134,12 @@ a#banner-img {
 	text-align: left;
 	font-weight: bold;
 	margin-bottom: 10px;
+line-height: 110%;
 }
+.content h3 a{
+	text-decoration: none;
+}
+
 
 .content p.posted {
 	color: #999999;
@@ -140,7 +151,6 @@ a#banner-img {
 	padding: 3px;
 }
 .content .storycontent h3{
-	font-size:110%;
 	margin:0;
 	padding:0;
 }
@@ -179,16 +189,17 @@ a#banner-img {
 	}
 
 .sidebar {
-	padding: 15px;
+	padding: 5px;
 }
 
 .sidebar h2 {
-	color: #963D16;
-	font-size: 0.80em;
-	background: url(img/2borobila.gif) no-repeat  left;
-	padding-left:25px;
+	color: #fff;
+	font-size: 0.85em;
+	background: url(img/2borobila.gif) no-repeat top left;
+	padding-left:15px;
 	text-align: left;
 	font-weight: bold;
+text-transform: uppercase;
 }
 
 .sidebar ul {
@@ -203,14 +214,15 @@ a#banner-img {
 	line-height: 120%;
 	margin-top: 10px;
 	list-style-type: none;
-	font-weight: bold;
-	padding-left:25px;
-	background: url(img/2fletxamenu.gif) no-repeat  left;
+	/*font-weight: bold;*/
+	padding-left:15px;
+	background: url(img/2fletxamenu.gif) no-repeat top left;
 	}
 
 .sidebar a {
 	text-decoration:none;
-	color: #fff;
+        font-weight: bold;
+	/*color: #fff;*/
 }
 
 .sidebar a:hover {
@@ -219,7 +231,7 @@ a#banner-img {
 }
 
 .sidebar img {
-	border: 3px solid #FFFFFF;
+	border: 3px solid #fff;
 }
 
 .photo {
