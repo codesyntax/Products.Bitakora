@@ -1,0 +1,27 @@
+<dtml-call "REQUEST.set('fname','Bitakora_Export.xml')"><dtml-call "RESPONSE.setHeader('content-type', 'text/xml; charset=UTF-8')"><dtml-call "RESPONSE.setHeader('Content-Disposition','attachment;filename='+fname)"><?xml version="1.0" encoding="UTF-8"?>
+<posts>
+ <dtml-in "Catalog.searchResults(meta_type='Post', sort_on='date', sort_order='descending')">
+ <dtml-with getObject>
+  <post>
+    <author><dtml-var showAuthor></author>
+    <title><![CDATA[<dtml-var showTitle>]]></title>
+    <date><dtml-var showDate></date>
+    <body><![CDATA[<dtml-var showBody>]]></body>
+    <tags><![CDATA[<dtml-var "';'.join(tagList())">]]></tags>
+    <comments>
+      <dtml-in "commentList(all=1)">
+      <dtml-with getObject>
+      <comment>
+        <author><![CDATA[<dtml-var showAuthor>]]> </author>
+        <date><dtml-var showDate></date>
+        <body><![CDATA[<dtml-var showBody>]]></body>
+        <url><![CDATA[<dtml-var showURL>]]></url>
+        <email><![CDATA[<dtml-var showEmail>]]</email>
+      </comment>
+      </dtml-with>
+      </dtml-in>
+    </comments>
+  </post>
+ </dtml-with>
+ </dtml-in>
+</posts>
