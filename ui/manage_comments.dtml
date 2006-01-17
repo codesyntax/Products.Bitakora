@@ -27,7 +27,7 @@
 
 <p><dtml-var "gettext('Comments awaiting moderation')"></p>
 
-<dtml-in blogComments>
+<dtml-in getUnpublishedComments>
 <dtml-with getObject>
 <dtml-let commid="getId()">
 <form action="<dtml-var "getParentNode().absolute_url()">/<dtml-var commid>" method="post">

@@ -263,19 +263,25 @@ class Post(CatalogPathAware, BTreeFolder2):
 
     security.declareProtected('View', 'commentList')
     def commentList(self, all=0):
-        """ get the comments of this post """
+        """ get the comments of this post ordered by date"""
         if all:
-            return self.objectValues('Comment')
+            comlist = self.objectValues('Comment')
         else:
-            return [com for com in self.objectValues('Comment') if com.published]
+            comlist = [com for com in self.objectValues('Comment') if com.published]
+        
+        comlist.sort(lambda x,y:cmp(x.date,y.date))
+        return comlist
 
     security.declareProtected('View', 'referenceList')
     def referenceList(self, all=0):
-        """ get the references of this post """
+        """ get the references of this post ordered by date """
         if all:
-            return self.objectValues('Reference')
+            reflist = self.objectValues('Reference')
         else:
-            return [com for com in self.objectValues('Reference') if com.published]
+            reflist = [com for com in self.objectValues('Reference') if com.published]
+
+        reflist.sort(lambda x,y:cmp(x.date,y.date))
+        return reflist          
 
     security.declarePrivate('createCommentId')
     def createCommentId(self):
