@@ -138,7 +138,7 @@ class XMLImporter(ContentHandler):
         post['author'] = self.author
         post['fmt'] = self.fmt
         post['body'] = self.body
-        post['tags'] = self.tags.split(' ')
+        post['tags'] = self.tags.split(';')
         post['date'] = self.date
         post['comments'] = self.comments[:]
         self.comments = []
