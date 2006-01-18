@@ -1,0 +1,26 @@
+===========
+CHANGES.txt
+===========
+
+v. 0.1.3 (not public yet)
+=========================
+- Bug in XML exporting
+
+v. 0.1.2 (not public, for testing at atxukale.com)
+=====================
+- Some methods refactored
+- Bug: Recent comments menu showed all comments, now is limited to 10
+- Bug: Comment author's e-mail was shown.
+- Add, now it's possible to export a XML file with blog data
+- Change, CSS styles both in community and blogs fixed for IE
+
+
+v. 0.1.1 (not public, for testing at atxukale.com)
+=====================
+- Add, posibility to import XML file with blog data
+- Add, parameter to signal wether pinging and HTML cleaning is wanted: pinging disabled by default and HTML cleaning enabled
+- Changed, Pingback disabled when adding posts
+
+
+v. 0.1 - Initial Release
+========================
