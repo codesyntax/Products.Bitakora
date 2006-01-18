@@ -16,7 +16,7 @@
         <date><dtml-var showDate></date>
         <body><![CDATA[<dtml-var showBody>]]></body>
         <url><![CDATA[<dtml-var showURL>]]></url>
-        <email><![CDATA[<dtml-var showEmail>]]</email>
+        <email><![CDATA[<dtml-var showEmail>]]></email>
       </comment>
       </dtml-with>
       </dtml-in>
