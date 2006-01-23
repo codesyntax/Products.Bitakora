@@ -19,13 +19,16 @@ from utils import notifyByEmail
 
 __version__ = "$Revision: 0.1 $"
 
-def manage_addComment(self, author, body, url='', email='', date=DateTime.DateTime(), REQUEST=None):
+def manage_addComment(self, author, body, url='', email='', date=None, REQUEST=None):
     """ Called from HTML form when commenting """
     newauthor = clean(author)
     newbody = cleanBody(self, body)
     newurl = cleanURL(url)
     newemail = cleanEmail(email)
-    newdate = DateTime.DateTime(date)           
+    if date is None:
+        newdate = DateTime.DateTime()
+    else:
+        newdate = DateTime.DateTime(date)           
     newid = self.createCommentId()
     publish = 1
     if self.commentsModerated():
