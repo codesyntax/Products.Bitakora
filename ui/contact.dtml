@@ -1,0 +1,42 @@
+<dtml-var standard_html_header>
+
+<dtml-if "REQUEST.has_key('body')">
+
+  <dtml-call "send_contact_mail(name, email, subject, body)">
+  <h3><dtml-var "gettext('Thank you')"></h3>
+  <p><dtml-var "gettext('Your message has been sent correctly')"></p>
+  <p><a href="<dtml-var blogurl>"><dtml-var "gettext('Return to main page')"></a></p>
+
+<dtml-else>
+
+<h3><dtml-var "gettext('Contact with me')"></h3>
+
+<p><dtml-var "gettext('You can get it touch with me filling and sending this form. If you want me to reply, please provide an email address so I can answer you. Thank you.')"></p>
+
+
+<form method="post" action="">
+
+<p>
+<label for="name"><dtml-var "gettext('Name:')"></label><br/>
+<input type="text" id="name" name="name:utf8:ustring" size="40"/>
+</p>
+<p>
+<label for="email"><dtml-var "gettext('Email Address:')"></label><br/>
+<input type="text" id="email" name="email:utf8:ustring" size="40"/>
+</p>
+<p>
+<label for="subject"><dtml-var "gettext('Subject')"></label><br/>
+<input type="text" id="subject" name="subject:utf8:ustring" size="40"/>
+</p>
+<p>
+<label for="body"><dtml-var "gettext('Comments:')"></label><br/>
+<textarea name="body:utf8:utext" id="body" rows="10" cols="40"></textarea>
+</p>
+<p>
+<input type="submit" value="<dtml-var "gettext('Send your comments')">"/>
+</p>
+</form>
+
+</dtml-if>
+
+<dtml-var standard_html_footer>

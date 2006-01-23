@@ -4,5 +4,6 @@
     <li><a href="<dtml-var blogurl>/archive"><dtml-var "gettext('Archive')"></a></li>
     <li><a href="<dtml-var blogurl>/tag"><dtml-var "gettext('Tags')"></a></li>
     <li><a href="<dtml-var blogurl>/feed.xml" class="xml"><dtml-var "gettext('RSS')"></a></li>
+    <li><a href="<dtml-var blogurl>/contact"><dtml-var "gettext('Contact')"></a></li>
     <li><a href="http://www.codesyntax.com/bitakora"><dtml-var "gettext('Powered by Bitakora')"></a></li>
 </ul>
