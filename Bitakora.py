@@ -86,6 +86,7 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
 class Bitakora(BTreeFolder2, CatalogPathAware):
     """ Bitakora is a new blog product for Zope """
     from Post import manage_addPost
+    from utils import send_contact_mail
     
     meta_type = 'Bitakora'  
 
@@ -110,6 +111,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                     {'label':'Security', 'action':'manage_access'},
                     {'label':'Undo', 'action':'manage_UndoForm'},)
 
+    contact = HTMLFile('ui/contact', globals())
     archive = HTMLFile('ui/archive', globals())
     comment_body = HTMLFile('ui/comment_body', globals())
     comment_form = HTMLFile('ui/comment_form', globals())

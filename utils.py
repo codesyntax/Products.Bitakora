@@ -100,6 +100,37 @@ def notifyByEmail(mailhost, mTo, mFrom, mSubj, mMsg):
     mailhost.send(mMsg, mTo, mFrom, mSubj)
 
 
+def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u''):
+    try:
+        mailhost = getattr(context,context.superValues('Mail Host')[0].id)
+        from EpozPostTidy import cleanHTML
+        
+        mTo = context.contact_mail
+        if context.inCommunity():
+            mFrom = context.admin_mail
+        else:
+            mFrom = context.contact_mail
+        mSubj = context.gettext('New message from your blog!') 
+        mMsg = context.gettext("""
+    To: %s
+    From: %s
+    Mime-Version: 1.0
+    Content-Type: text/plain; charset=UTF-8
+    
+    Comment author :%s
+    Author's email :%s
+    Comment subject:%s
+    Comment body   :
+    %s
+    
+    """) % (mTo.encode('utf-8'), mFrom.encode('utf-8'), name.encode('utf-8'), email.encode('utf-8'), subject.encode('utf-8'), cleanHTML(body).encode('utf-8'))
+    
+        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
+    except:
+        # If there is no MailHost, or other error happened
+        # there won't be e-mail notifications
+        pass
+
 
 def fillMessageCatalog(gettext):
     locales = ['eu', 'es']
