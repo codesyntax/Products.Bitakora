@@ -593,9 +593,8 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog(meta_type='Reference', sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog(meta_type='Reference', sort_on='date', sort_order='descending')
-    
-        
-        
+           
+    security.declarePrivate('createId')    
     def createId(self, title):
         """ Create an id for a post based on its title """
         from string import maketrans
@@ -625,6 +624,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     
         return u'-'.join(id.split(' '))
       
+    security.declarePrivate('createNewId')
     def createNewId(self, oldid):
         """ Create a new id if the previous one was taken """
         if oldid[-1].isdigit():
@@ -634,11 +634,13 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         else:
             return oldid+'-1'           
             
+    security.declarePublic('prepareTags')            
     def prepareTags(self, tags):
         """ return tags to add and edit interfaces preview """
         from utils import prepareTags as prepTags
         return prepTags(tags)
         
+    security.declareProtected('Manage Bitakora', 'importXML')        
     def importXML(self, file, REQUEST=None):
         """ upload XML file with blog data """
         from XMLImporter import importXML as imp
@@ -651,7 +653,8 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                 
                 
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.absolute_url(), 'XML file imported succesfully'))            
-         
+            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.absolute_url(), 'XML file imported succesfully'))   
+            
+        
 
 Globals.InitializeClass(Bitakora)
