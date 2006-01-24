@@ -499,9 +499,12 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         '11' : 'November',
         '12' : 'December'
         }
-        year = yearmonth[:4]
-        month = yearmonth[4:]
-        return (self.gettext('%(month)s %(year)s') % {'month':self.gettext(months[month]), 'year':year})
+
+        #ym = yearmonth.encode('utf-8')
+        ym = yearmonth
+        year = ym[:4]
+        month = ym[4:]
+        return self.gettext('%(year)s %(month)s')  % {'month':self.gettext(months[month]), 'year':year}
      
     security.declarePublic('commentsAllowed')
     def commentsAllowed(self):
