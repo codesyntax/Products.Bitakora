@@ -47,7 +47,8 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
         ext = image.filename.split('.')[-1]
         imgid = 'image.%s' % ext
         sq.manage_addImage(imgid, REQUEST.get('image'))
-        sq.imageUrl = '%s/%s' % (sq.absolute_url(), imgid)
+        #sq.imageUrl = '%s/%s' % (sq.absolute_url(), imgid)
+        sq.imagename = imgid
     
     elif REQUEST is None or not REQUEST.has_key('image'):
         from random import random
@@ -62,7 +63,8 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
         tlen = len(contents)
         imgid = 'image.gif'
         new_id = sq.manage_addImage(imgid,contents,title=title)
-        sq.imageUrl = '%s/%s' % (sq.absolute_url(), imgid)
+        #sq.imageUrl = '%s/%s' % (sq.absolute_url(), imgid)
+        sq.imagename = imgid
 
     perms = {}
     perms['Anonymous'] = ['Add Bitakora Comment']
@@ -180,7 +182,8 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         self._links = IOBTree()
         # if 0 not allowed, 1 allowed, 2 allowed but moderated
         self.comment_allowed = 1
-        self.imageUrl = None
+        #self.imageUrl = None
+        self.imagename = ''
         
     security.declareProtected('View', 'searchResults')
     def searchResults(self, **kw):
@@ -205,7 +208,8 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
             ext = image.filename.split('.')[-1]
             imgid = 'image.%s' % ext
-            original_id = self.imageUrl.split('/')[-1]
+            #original_id = self.imageUrl.split('/')[-1]
+            original_id = self.imagename
             original_img = self.get(original_id).data
             self._delObject(original_id)
         
@@ -216,11 +220,13 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             if img.height > 65 and img.width > 65:
                 self._delObject(imgid)
                 self.manage_addImage(original_id, original_img)
-                self.imageUrl = '%s/%s' % (self.absolute_url(), original_id)
+                #self.imageUrl = '%s/%s' % (self.absolute_url(), original_id)
+                self.imagename = original_id
                 if REQUEST is not None:
                     return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Your image is too large. Try with a smaller one'))
             
-            self.imageUrl = '%s/%s' % (self.absolute_url(), imgid)
+            #self.imageUrl = '%s/%s' % (self.absolute_url(), imgid)
+            self.imagename = imgid
                         
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Preferences edited succesfully'))
@@ -368,6 +374,32 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def blogurl(self):
         """ blog url """
         return self.absolute_url()
+        
+    security.declarePublic('getImageUrl')
+    def getImageUrl(self):
+        """ return image's url """
+        try:
+            self.imagename
+        except:
+            # For backwards compatibility :
+            # image url wasn't created dinamically, but statically when saving
+            # and if blog changed the url, the image wasn't shown.
+            imgid = self.imageUrl.split('/')[-1]
+            if self.get(imgid, None):
+                self.imagename = imgid
+            else:
+                # Ups, something else happened here...
+                imgs = [img for img in self.objectIds() if img.startswith('image')]
+                if len(imgs) == 1:
+                    # Well done! We have an image. The images is always
+                    # saved with name 'image' and the corresponding extension
+                    self.imagename = imgs[0]
+                else:
+                    # Two images? No..... Load a new one please...
+                    self.imagename = ''
+
+        return self.blogurl()+'/'+self.imagename
+
 
     security.declarePublic('tagsAndPixels')
     def tagsAndPixels(self):
