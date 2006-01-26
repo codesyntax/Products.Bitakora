@@ -111,19 +111,18 @@ def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u''):
         else:
             mFrom = context.contact_mail
         mSubj = context.gettext('New message from your blog!') 
-        mMsg = context.gettext("""
-    To: %s
-    From: %s
-    Mime-Version: 1.0
-    Content-Type: text/plain; charset=UTF-8
+        mMsg = context.gettext("""To: %s
+From: %s
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+
+Comment author :%s
+Author's email :%s
+Comment subject:%s
+Comment body   :
+%s
     
-    Comment author :%s
-    Author's email :%s
-    Comment subject:%s
-    Comment body   :
-    %s
-    
-    """) % (mTo.encode('utf-8'), mFrom.encode('utf-8'), name.encode('utf-8'), email.encode('utf-8'), subject.encode('utf-8'), cleanHTML(body).encode('utf-8'))
+""") % (mTo.encode('utf-8'), mFrom.encode('utf-8'), name.encode('utf-8'), email.encode('utf-8'), subject.encode('utf-8'), cleanHTML(body).encode('utf-8'))
     
         notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
     except:
