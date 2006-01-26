@@ -49,8 +49,7 @@ def manage_addComment(self, author, body, url='', email='', date=None, REQUEST=N
         else:
             mFrom = self.contact_mail
         mSubj = self.gettext('New comment in your blog!') 
-        mMsg = self.gettext("""
-To: %s
+        mMsg = self.gettext("""To: %s
 From: %s
 Mime-Version: 1.0
 Content-Type: text/plain;
