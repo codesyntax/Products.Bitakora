@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Project-Id-Version: \n"
-"POT-Creation-Date: 2005-12-19 11:12+CET\n"
-"PO-Revision-Date: 2005-12-19 11:12+CET\n"
+"POT-Creation-Date: 2006-01-26 09:01+CET\n"
+"PO-Revision-Date: 2006-01-26 09:01+CET\n"
 "Last-Translator:  <>\n"
 "Language-Team: eu <>\n"
 "MIME-Version: 1.0\n"
@@ -11,6 +11,9 @@ msgstr "Project-Id-Version: \n"
 
 msgid "#"
 msgstr "#"
+
+msgid "%(year)s %(month)s"
+msgstr "%(month)s, %(year)s "
 
 msgid "1st step: Create an account"
 msgstr "1. urratsa: Kontua ireki"
@@ -44,6 +47,9 @@ msgstr "Ziur zaude?"
 
 msgid "Are you sure?"
 msgstr "Ziur zaude?"
+
+msgid "August"
+msgstr "Abuztua"
 
 msgid "Author"
 msgstr "Egilea"
@@ -123,11 +129,17 @@ msgstr "Erantzunak:"
 msgid "Congratulations!"
 msgstr "Zorionak"
 
+msgid "Contact"
+msgstr "Kontaktua"
+
 msgid "Contact email"
 msgstr "Konkturako e-posta"
 
 msgid "Contact mail"
 msgstr "Kontakturako e-posta"
+
+msgid "Contact with me"
+msgstr "Idatz iezaidazu"
 
 msgid "Contents"
 msgstr "Edukiak"
@@ -147,6 +159,9 @@ msgstr "Sortu zure bloga"
 msgid "Date"
 msgstr "Data"
 
+msgid "December"
+msgstr "Abendua"
+
 msgid "Delete"
 msgstr "Ezabatu"
 
@@ -158,6 +173,9 @@ msgstr "Ezabatu esteka"
 
 msgid "Download in TXT"
 msgstr "Jaitsi TXT eran"
+
+msgid "Download in XML"
+msgstr "XML formatuan jaitsi"
 
 msgid "Download your blog"
 msgstr "Jaitsi zure blogeko edukia"
@@ -219,6 +237,9 @@ msgstr "irudia, 65x65 pixel"
 msgid "Invalid email address"
 msgstr "E-posta okerra"
 
+msgid "January"
+msgstr "Urtarrila"
+
 msgid "Just for registered users"
 msgstr "Baimendutako erabiltzaileentzat"
 
@@ -255,6 +276,12 @@ msgstr "Kudeatu zure bloga"
 msgid "Name:"
 msgstr "Izena:"
 
+msgid "New comment in your blog!"
+msgstr "Erantzun berria zure blogean!"
+
+msgid "New message from your blog!"
+msgstr "Mezu berria dator blogetik!"
+
 msgid "New password"
 msgstr "Pasahitz berria"
 
@@ -269,6 +296,12 @@ msgstr "Artikulurik ez."
 
 msgid "No links yet !"
 msgstr "Estekarik ez oraingoz"
+
+msgid "November"
+msgstr "Azaroa"
+
+msgid "October"
+msgstr "Urria"
 
 msgid "Ok. An email was sent!"
 msgstr "Egina. E-postaz mezua bidali dizugu!"
@@ -345,6 +378,9 @@ msgstr "Gogoratu datuak cookie batean?"
 msgid "Repeat your new password"
 msgstr "Errepika ezazu pasahitz berria"
 
+msgid "Return to main page"
+msgstr "Hasierara itzuli"
+
 msgid "Retype your password"
 msgstr "Errepika ezazu pasahitza"
 
@@ -375,6 +411,12 @@ msgstr "Bidali"
 msgid "Send your comment"
 msgstr "Erantzun"
 
+msgid "Send your comments"
+msgstr "Bidali zure iruzkinak"
+
+msgid "September"
+msgstr "Iraila"
+
 msgid "Sidebar management"
 msgstr "Albo-zutabearen kudeaketa"
 
@@ -390,6 +432,9 @@ msgstr "Ekin blogari!"
 msgid "Status"
 msgstr "Estatusa"
 
+msgid "Subject"
+msgstr "Gaia"
+
 msgid "Subtitle"
 msgstr "Leloa"
 
@@ -404,6 +449,9 @@ msgstr "Diseinua egoki aldatua"
 
 msgid "Template management"
 msgstr "Diseinua kudeatu"
+
+msgid "Thank you"
+msgstr "Eskerrik asko"
 
 msgid "There are no comments yet!"
 msgstr "Erantzunik ez oraingoz"
@@ -429,6 +477,12 @@ msgstr "Erabiltzaile izen hori okupatua dago"
 msgid "Title"
 msgstr "Izenburua"
 
+msgid "To: %s\n    From: %s\n    Mime-Version: 1.0\n    Content-Type: text/plain; charset=UTF-8\n    \n    Comment author :%s\n    Author's email :%s\n    Comment subject:%s\n    Comment body   :\n    %s"
+msgstr ""
+
+msgid "To: %s\nFrom: %s\nMime-Version: 1.0\nContent-Type: text/plain;\n\nComment author :%s\nAuthor's url   :%s\nAuthor's email :%s\nComm. Address  :%s\nComment body   :\n%s"
+msgstr ""
+
 msgid "URL"
 msgstr "URL"
 
@@ -437,6 +491,12 @@ msgstr "URL"
 
 msgid "Unpublished"
 msgstr "Ezkutuan"
+
+msgid "Upload"
+msgstr "Igo"
+
+msgid "Upload a XML file with blog data"
+msgstr "XML fitxategi bat igo blog bateko datuekin"
 
 msgid "User"
 msgstr "Erabiltzailea"
@@ -465,6 +525,9 @@ msgstr "Diseinu hau aukeratzean, aurreko CSS-a ezabatuko duzun, eta hartan agian
 msgid "Write a new post"
 msgstr "Artikulu berria idatzi"
 
+msgid "XML file imported succesfully"
+msgstr "XML fitxategia ondo inportatu da."
+
 msgid "Yes"
 msgstr "Bai"
 
@@ -483,6 +546,12 @@ msgstr "Albo-zutabeko esteken atalean zure gogokoenak gehi ditzakezu."
 msgid "You can change your template here, editing the CSS file. Template is compatible with MovableType 3.1 stylesheets"
 msgstr "Zure diseinua alda dezakezu hemen, CSS fitxategia alegia. Diseinua bateragarria da MovableType 3.1 estilo orriekin."
 
+msgid "You can create an XML file with your blog data in the format explained at http://www.codesyntax.com/bitakora/en/download and import to Bitakora using this form."
+msgstr "XML fitxategi bat sortzen baduzu <a href=\"http://www.codesyntax.com/bitakora/en/download\">hemen</a>\r\ndeskribatzen den formatuan, Bitakorara igo ahal izango duzu orri honetatik."
+
+msgid "You can get it touch with me filling and sending this form. If you want me to reply, please provide an email address so I can answer you. Thank you."
+msgstr "Hurrengo datuak bete eta kontaktuan jar zaitez blogaren gilearekin. E-posta helbide bat utzi, erantzuna izan nahi baduzu. Mila esker."
+
 msgid "You can't change this password"
 msgstr "Ezin duzu pasahitz hori aldatu"
 
@@ -497,6 +566,9 @@ msgstr "Orain duzun irudia"
 
 msgid "Your image is too large. Try with a smaller one"
 msgstr "Irudi handiegia kargatzen saiatu zara. 65x65 pixeleko irudi batekin saia zaitez, jpg, png edo gif formatuetan."
+
+msgid "Your message has been sent correctly"
+msgstr "Mezua ondo bidali du sistemak."
 
 msgid "Your new blog is ready. Now you just have to log-in and start blogging !"
 msgstr "Bloga prest daukazu. Orain sartu erabiltzaile-izen eta pasahitzarekin, eta ekin blogean idazteari!"
