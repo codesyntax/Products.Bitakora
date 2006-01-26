@@ -10,7 +10,7 @@
 tags = container.Catalog.uniqueValuesFor('tags')
 zenbat = {}
 for tag in tags:
-    tagkop = container.Catalog.searchResults(tags=tag)
+    tagkop = container.Catalog.searchResults(tags=tag, meta_type='Post')
     zenbat[tag] = len(tagkop)
 
 maxpx = 2.00
