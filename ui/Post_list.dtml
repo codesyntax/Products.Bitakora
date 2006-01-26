@@ -29,7 +29,7 @@
 <dtml-with getObject>
 <tr>
     <td><input type="checkbox" name="ids:list" value="<dtml-var id>"/></td>
-    <td><a href="<dtml-var getId>/edit"><dtml-var showTitle></a> <a href="<dtml-var getId>"><dtml-var "gettext('View')"></a></td>
+    <td><a href="<dtml-var getId>/edit"><dtml-var showTitle></a> <strong><a href="<dtml-var getId>">(<dtml-var "gettext('View')">)</a></strong></td>
 
     <td><dtml-var showDate></td>
     <td><dtml-var showTags></td>
