@@ -1,8 +1,8 @@
 body {
-	margin: 0px 0px 0px 0px;
+	margin: 0;
 	text-align: center;
 	background: #fff url(img/3edukibe.gif) no-repeat bottom;
-	font-size: small;
+	font:small Verdana, Arial, sans-serif;
 }
 
 a {
@@ -40,12 +40,13 @@ h1, h2, h3 {
 	width: 700px;
 	border: 1px solid transparent;
 }
+
 *html #container {
 	width: 701px;
 	border:none;
 }
+
 #banner {
-	font-family: Verdana, Arial, sans-serif;
 	color: #FFFFFF;
 	text-align: left;
 	padding: 0px;
@@ -81,8 +82,12 @@ a#banner-img {
 .content {
 	padding: 0px 30px 0px 20px;
 	color: #666666;
-	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	font-size: 0.9em;
+	line-height: 160%;
+}
+.content h1{	
+	font-size: 1.7em;
+	margin: 15px 0 10px 0;
 }
 
 #right {
@@ -94,23 +99,16 @@ a#banner-img {
 
 .content p {
 	color: #666666;
-	font-family: Verdana,'Trebuchet MS', sans-serif;
-	line-height: 140%;
 	text-align: left;
 	margin-bottom: 10px;
 }
 
-.content blockquote {
-	line-height: 140%;
-}
-
-.content li {
-	line-height: 140%;
-}
+.content textarea{
+	width: 450px;
+	}
 
 .content h2 {
-	font-family: Verdana,'Trebuchet MS', sans-serif;
-	font-size: 0.90em;
+	font-size: 0.9em;
 	border-bottom: 1px solid #fff;
 	background: url(img/3lainoa.gif) no-repeat left bottom;
 	text-align: right;
@@ -119,23 +117,18 @@ a#banner-img {
 
 .content h3 {
 	color: #C27609;
-	font-family: Verdana,'Trebuchet MS', sans-serif;
 	font-size: 20px;
 	text-align: left;
 	margin-bottom: 10px;
+	line-height: 110%;
 }
-*html .content p {
-	font-size: x-small;
-}
+
 
 .content .storycontent h3{
 	font-size:120%;
 	font-weight:bold;
 	margin:0;
 	padding:0;
-}
-*html .content .storycontent h3{
-	font-size:100%;
 }
 
 .content p.posted {
@@ -150,7 +143,6 @@ a#banner-img {
 #calendar {
 	line-height: 140%;
 	color: #666666;
-	font-family: Verdana, Arial, sans-serif;
 	padding: 2px;
 	text-align: center;
 	margin-bottom: 30px;
@@ -165,7 +157,6 @@ a#banner-img {
 
 #calendar caption {
 	color: #666666;
-	font-family: Verdana, Arial, sans-serif;
 	text-align: center;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -188,14 +179,10 @@ a#banner-img {
 
 .sidebar h2 {
 	color: #FEF1ED;
-	font-family: Verdana, Arial, sans-serif;
 	font-size: 0.85em;
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: .3em;
-}
-*html .sidebar h2 {
-	letter-spacing: .1em;
 }
 
 .sidebar ul {
@@ -206,13 +193,14 @@ a#banner-img {
 
 .sidebar li {
 	color: #666666;
-	font-family: Verdana, Arial, sans-serif;
 	margin-top: 10px;
 	list-style-type: none;
 }
+
 *html .sidebar li {
 	margin-top: 0;
 }
+
 .sidebar img {
 	border: 3px solid #FFFFFF;
 }
@@ -223,7 +211,6 @@ a#banner-img {
 }
 
 .link-note {
-	font-family: Verdana, Arial, sans-serif;
 	line-height: 150%;
 	text-align: left;
 	padding: 2px;
@@ -231,11 +218,10 @@ a#banner-img {
 }
 
 #powered {
-	font-family: Verdana, Arial, sans-serif;
 	line-height: 150%;
 	text-align: left;
 	color: #666666;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 #comment-data {
@@ -249,4 +235,17 @@ a#banner-img {
 
 textarea[id="comment-text"] {
 	width: 80%;
+}
+
+td, th{
+	padding: 2px 3px;
+	border: 1px solid #fff;
+}
+
+table{
+	margin-bottom: 10px;
+}
+
+#tags{
+	margin-bottom: 10px;
 }
