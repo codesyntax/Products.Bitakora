@@ -2,7 +2,7 @@
 <h3><dtml-var "REQUEST.get('title')"></h3>
 
 <div class="storycontent">
-    <dtml-var "REQUEST.get('body')">
+    <dtml-var "cleanBody(REQUEST.get('body'))">
 </div>
 
 <p class="posted">

@@ -88,7 +88,7 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
 class Bitakora(BTreeFolder2, CatalogPathAware):
     """ Bitakora is a new blog product for Zope """
     from Post import manage_addPost
-    from utils import send_contact_mail
+    from utils import send_contact_mail, cleanBody
     
     meta_type = 'Bitakora'  
 
@@ -466,12 +466,17 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declarePublic('showLinks')
     def showLinks(self):
         """ show links """
+        
+        def sortByKey(el1, el2):
+            return cmp(el1['key'], el2['key'])
+
         elems = []
         for key in self._links.keys():
             url = self._links.get(key)[0]
             title = self._links.get(key)[1]
             elems.append({'url':url, 'title':title, 'key':key})
 
+        elems.sort(sortByKey)
         return elems
         
     security.declareProtected('Manage Bitakora', 'save_sidebar_html')
