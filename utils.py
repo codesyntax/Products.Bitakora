@@ -74,7 +74,8 @@ def prepareTags(tags=[]):
     from sets import Set as set    
     import string
     
-    mt = string.maketrans(unicode(string.punctuation), unicode(' '*(len(string.punctuation))))
+    sep = '!"#$%&\'()*+,./:;<=>?@[\\]^`{|}~'
+    mt = string.maketrans(unicode(sep), unicode(' '*(len(sep))))
     mt = unicode(mt, 'iso-8859-1')
     newtags = []
     for tag in tags:
