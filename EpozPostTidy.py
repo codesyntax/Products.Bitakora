@@ -15,11 +15,11 @@ blocktags = ['p', 'pre', 'div',
              
 allowedtags = ['p', 'pre', 'table', 'tr', 'th', 'td', 'thead', 'tbody', 'tfoot',
              'ul','ol','li','h3', 'h4', 'h5', 'h6', 'blockquote', 'q', 'cite', 'b', 'i',
-             'strong', 'em', 'a', 'iframe']
+             'strong', 'em', 'a', 'iframe', 'object', 'param', 'embed']
              
 replaceabletags = {'b':'strong', 'i':'em'}             
 
-allowedattrs = ['href', 'src', 'alt', 'title']             
+allowedattrs = ['href', 'src', 'alt', 'title', 'width', 'height', 'name', 'value', 'type']             
 
 # Just a simple htmlparser
 class aHTMLParser(HTMLParser):
