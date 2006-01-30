@@ -29,9 +29,9 @@ from Reference import Reference
 __version__ = "$Revision: 0.1 $"
 
 
-def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(), publish=1, comment_allowed=1, not_clean=0, sendping=0, REQUEST=None):
+def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(), publish=1, comment_allowed=1, not_clean=0, sendping=1, REQUEST=None):
     """ Called from ZMI when creating new posts """
-    if not title:
+    if not title and REQUEST is not None:
         return REQUEST.RESPONSE.redirect('%s/post?msg=%s' % (self.blogurl(), 'You must provide at least the title of the post'))
         
     newid = self.createId(title)
@@ -53,8 +53,9 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
     post = self.get(newid)
     
     if sendping:
-        pingbackresults = post.postPingBacks(newbody) 
+        #pingbackresults = post.postPingBacks(newbody) 
         res = post.sendPing()    
+        
 
     if self.inCommunity():
         # We are in a Bitakora Community, so catalog the post there
