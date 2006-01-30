@@ -38,7 +38,7 @@ this_username=context.REQUEST.get('__ac_name','')
 if acl.getUser(this_username):
     blog = context.usersBlog(this_username, blog=1)
 
-    email = blog.getProperty('contact_mail', '')
+    email = getattr(blog, 'contact_mail', '')
 
     if validEmail(email):
         key = generateKey()
