@@ -566,26 +566,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return users[0]
         return ''
 
-    """ 
-    security.declarePublic('lastComments')
-    def lastComments(self, size=10):
-         return last comments
-        return self.Catalog.searchResults(meta_type='Comment', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
-    """
-    """
-    security.declarePublic('lastReferences')
-    def lastReferences(self, size=10):
-         return last references 
-        return self.Catalog.searchResults(meta_type='Reference', sort_on='date', sort_order='reverse', published=1, sort_limit=size)
-    """          
-    """
-    security.declarePublic('blogComments')
-    def blogComments(self):
-        return catalogged comments 
-        return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending')
-
-    """
-
     security.declarePublic('getUnpublishedComments')
     def getUnpublishedComments(self, size=None):
         """ get unpublished comments """
