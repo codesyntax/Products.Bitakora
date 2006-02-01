@@ -273,7 +273,7 @@ class BitakoraCommunity(BTreeFolder2):
     security.declarePublic('communityTitle')        
     def communityTitle(self):
         """ return the title """
-        return self.title.encode('utf-8')
+        return self.title
         
     security.declarePublic('communityUrl')
     def communityUrl(self):
@@ -288,12 +288,5 @@ class BitakoraCommunity(BTreeFolder2):
         else:
             return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
             
-    security.declareProtected('Manage BitakoraCommunity', 'fix')
-    def fix(self):
-        """ Fix things """
-        for blog in self.objectValues('Bitakora'):
-            blog.fix()
-            
-        return 'Ok'
         
 Globals.InitializeClass(BitakoraCommunity)        
