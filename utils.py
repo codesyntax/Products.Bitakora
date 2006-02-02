@@ -84,7 +84,8 @@ def prepareTags(tags=[]):
         t = t.strip()
         #t = unicode(t)
         t = t.lower()
-        newtags.append(t)
+        if t:
+            newtags.append(t)
 
     return list(set(newtags))
 

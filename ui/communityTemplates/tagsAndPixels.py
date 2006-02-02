@@ -7,7 +7,7 @@
 ##parameters=
 ##title=
 ##
-tags = container.Catalog.uniqueValuesFor('tags')
+tags = [tag for tag in container.Catalog.uniqueValuesFor('tags') if tag.strip()]
 zenbat = {}
 for tag in tags:
     tagkop = container.Catalog.searchResults(tags=tag, meta_type='Post')

@@ -406,7 +406,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ returns a dictionary with (tag, pixelSize) pairs
             based on number of posts cataloged with the tags """
 
-        tags = self.Catalog.uniqueValuesFor('tags')
+        tags = [tag for tag in self.Catalog.uniqueValuesFor('tags') if tag.strip()]
         zenbat = {}
         for tag in tags:
             tagkop = self.Catalog.searchResults(tags=tag, meta_type='Post')
