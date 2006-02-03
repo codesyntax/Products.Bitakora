@@ -132,10 +132,11 @@ a#banner-img {
 .content p.posted {
 	color: #999;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
-	border-top: 1px solid #e5e5e5;
+	border-top: 1px solid #ccc;
 	text-align: left;
 	margin-bottom: 25px;
 	padding: 3px;
+        margin-right: 20px;
 }
 
 #calendar {
