@@ -3,26 +3,29 @@ body {
 	text-align: center;
 	background: #fff url(img/3edukibe.gif) no-repeat bottom;
 	font:small Verdana, Arial, sans-serif;
+	color: #333;
 }
 
-a {
-	text-decoration: underline;
-}
 
-a:link {
+a{
 	color: #C27609;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 a:visited {
-	color: #666;
+	color: #CE913A;
+	text-decoration: none;
 }
 
 a:active {
 	color: #C27609;
+	text-decoration: none;
 }
 
 a:hover {
 	color: #888;
+	text-decoration: none;
 }
 
 h1, h2, h3 {
@@ -47,8 +50,7 @@ h1, h2, h3 {
 }
 
 #banner {
-	color: #FFFFFF;
-	text-align: left;
+	color: #FFF;
 	padding: 0px;
 	height: 140px;
 	background: #fff url(img/3goikoa.gif) no-repeat top;
@@ -81,7 +83,6 @@ a#banner-img {
 
 .content {
 	padding: 0px 30px 0px 20px;
-	color: #666666;
 	font-size: 0.9em;
 	line-height: 160%;
 }
@@ -98,8 +99,6 @@ a#banner-img {
 }
 
 .content p {
-	color: #666666;
-	text-align: left;
 	margin-bottom: 10px;
 }
 
@@ -118,7 +117,6 @@ a#banner-img {
 .content h3 {
 	color: #C27609;
 	font-size: 20px;
-	text-align: left;
 	margin-bottom: 10px;
 	line-height: 110%;
 }
@@ -132,7 +130,7 @@ a#banner-img {
 }
 
 .content p.posted {
-	color: #999999;
+	color: #999;
 	font-family: 'Trebuchet MS', Verdana, sans-serif;
 	border-top: 1px solid #e5e5e5;
 	text-align: left;
@@ -212,15 +210,13 @@ a#banner-img {
 
 .link-note {
 	line-height: 150%;
-	text-align: left;
-	padding: 2px;
 	margin-bottom: 15px;
 }
 
 #powered {
 	line-height: 150%;
 	text-align: left;
-	color: #666666;
+	color: #666;
 	margin-top: 30px;
 }
 
@@ -233,13 +229,11 @@ a#banner-img {
 	border-right: 1px dotted #BBB;
 }
 
-textarea[id="comment-text"] {
-	width: 80%;
-}
 
 td, th{
 	padding: 2px 3px;
 	border: 1px solid #fff;
+	vertical-align: top;
 }
 
 table{
