@@ -55,9 +55,9 @@
 <label for="body"><dtml-var "gettext('Body')"></label><br/>
 <dtml-if preview>
 <textarea id="body" name="body:utf8:text" rows="10" cols="50"><dtml-var "REQUEST.get('body', '') and cleanBody(body) or ''"></textarea>
-
 <dtml-else>
 <textarea id="body" name="body:utf8:text" rows="10" cols="50"><dtml-var showBody></textarea>
+</dtml-if>
 </p>
 
 <p>
