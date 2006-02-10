@@ -3,10 +3,10 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
-#$Id: coreblog2.py 152 2005-12-31 11:30:31Z ats $
+#$Id: $
 #$URL$
-#$Rev: 152 $
-#$Date: 2005-12-31 20:30:31 +0900 (土, 31 12 2005) $
+#$Rev: $
+#$Date: $
 
 # Zope modules
 from Globals import HTMLFile
