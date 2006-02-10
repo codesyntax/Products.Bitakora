@@ -9,9 +9,6 @@
 ##
 
 #$Id$
-#$URL$
-#$Rev$
-#$Date$
 
 REQUEST = context.REQUEST
 
