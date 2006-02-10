@@ -1,7 +1,4 @@
 #$Id$
-#$URL$
-#$Rev$
-#$Date$
 
 ====
 BUGS

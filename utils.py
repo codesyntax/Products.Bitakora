@@ -6,6 +6,8 @@
 #
 # See also LICENSE.txt
 
+#$Id$
+
 # Importing
 from Products.PythonScripts.PythonScript import manage_addPythonScript
 

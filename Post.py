@@ -8,10 +8,6 @@
 
 
 #$Id$
-#$URL$
-#$Rev$
-#$Date$
-
 
 # Zope modules
 from Globals import package_home, Persistent, HTMLFile

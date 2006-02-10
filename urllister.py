@@ -6,9 +6,6 @@ latest version.
 """
 
 #$Id$
-#$URL$
-#$Rev$
-#$Date$
 
 __author__ = "Mark Pilgrim (mark@diveintopython.org)"
 __version__ = "$Revision$"

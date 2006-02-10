@@ -4,9 +4,6 @@
 # See also LICENSE.txt
 
 #$Id$
-#$URL$
-#$Rev$
-#$Date$
 
 # Zope modules
 from OFS.SimpleItem import SimpleItem
