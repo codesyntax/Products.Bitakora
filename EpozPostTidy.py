@@ -4,6 +4,11 @@
 #          Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 from HTMLParser import HTMLParser
 import re
 

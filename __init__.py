@@ -3,6 +3,11 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 import Bitakora, BitakoraCommunity
 
 def initialize(context):

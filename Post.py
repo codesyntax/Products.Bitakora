@@ -7,6 +7,11 @@
 # See also LICENSE.txt
 
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 
 # Zope modules
 from Globals import package_home, Persistent, HTMLFile
@@ -26,7 +31,7 @@ from urllister import URLLister
 from Comment import Comment
 from Reference import Reference
 
-__version__ = "$Revision: 0.1 $"
+__version__ = "$Revision$"
 
 
 def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(), publish=1, comment_allowed=1, not_clean=0, sendping=1, REQUEST=None):

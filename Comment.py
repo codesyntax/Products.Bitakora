@@ -3,6 +3,11 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 # Zope modules
 from Globals import package_home
 import Globals
@@ -17,7 +22,7 @@ import DateTime
 from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
 from utils import notifyByEmail
 
-__version__ = "$Revision: 0.1 $"
+__version__ = "$Revision$"
 
 def manage_addComment(self, author, body, url='', email='', date=None, REQUEST=None):
     """ Called from HTML form when commenting """

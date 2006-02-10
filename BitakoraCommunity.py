@@ -3,11 +3,14 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
-
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
 
 """ Bitakora community """
 
-__version__ = "$Revision: 0.1 $"
+__version__ = "$Revision$"
 
 # Zope modules
 from AccessControl import ClassSecurityInfo
