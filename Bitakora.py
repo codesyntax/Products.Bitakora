@@ -31,7 +31,7 @@ from PingMethodContainer import PingMethodContainer
 
 
 
-__version__ = "$Revision: 0.1 $"
+__version__ = "$Revision$"
 
 manage_addBitakoraForm = HTMLFile('ui/Bitakora_add', globals())
 
