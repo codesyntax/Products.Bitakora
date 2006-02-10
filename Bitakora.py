@@ -3,6 +3,11 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 # Zope modules
 from Globals import HTMLFile
 import Globals
