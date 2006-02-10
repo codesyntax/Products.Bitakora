@@ -7,6 +7,12 @@
 ##parameters=
 ##title=
 ##
+
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 REQUEST = context.REQUEST
 
 ts = REQUEST.get('traverse_subpath', '')

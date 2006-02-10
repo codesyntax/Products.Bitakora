@@ -1,3 +1,8 @@
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
  
  Copyright (c) 2005 CodeSyntax
  All rights reserved. 

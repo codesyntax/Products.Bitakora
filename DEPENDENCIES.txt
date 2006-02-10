@@ -1,3 +1,8 @@
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 DEPENDENCIES.txt
 
  - Epoz (we use 2.0.1)

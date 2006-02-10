@@ -3,6 +3,11 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 from xml.sax.handler import ContentHandler
 from xml.sax import make_parser
 

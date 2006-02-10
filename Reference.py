@@ -3,6 +3,11 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 # Zope modules
 from Globals import package_home
 import Globals
@@ -15,7 +20,7 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 # Other stuff
 import DateTime
 from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
-__version__ = "$Revision: 0.1 $"
+__version__ = "$Revision$"
 
 def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
     """ Add a pingback """

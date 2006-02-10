@@ -1,3 +1,8 @@
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 README.txt
 
   Copy this folder in your $INSTANCE_HOME/Products folder, install the products indicated by DEPENDENCIES.txt file and restart Zope.

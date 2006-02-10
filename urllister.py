@@ -5,9 +5,14 @@ experienced programmers.  Visit http://diveintopython.org/ for the
 latest version.
 """
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 __author__ = "Mark Pilgrim (mark@diveintopython.org)"
-__version__ = "$Revision: 1.2 $"
-__date__ = "$Date: 2004/05/05 21:57:19 $"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2001 Mark Pilgrim"
 __license__ = "Python"
 

@@ -3,6 +3,11 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
 # Zope modules
 from OFS.SimpleItem import SimpleItem
 from OFS.Traversable import Traversable
@@ -16,7 +21,7 @@ except:
     
 from urllister import URLLister
 
-__version__ = "$Revision: 0.1 $"
+__version__ = "$Revision$"
 
 class PingMethodContainer(Persistent, SimpleItem, Implicit, Traversable):
     """ An object to provide 'ping' method for pingbacks  """

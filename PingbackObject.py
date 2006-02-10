@@ -3,6 +3,12 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
+#$Id$
+#$URL$
+#$Rev$
+#$Date$
+
+
 # Zope modules
 from OFS.ObjectManager import ObjectManager
 from OFS.Folder import Folder
@@ -11,7 +17,7 @@ from PingMethodContainer import PingMethodContainer
 from AccessControl import ClassSecurityInfo
 from Globals import Persistent
 
-__version__ = "$Revision: 0.1 $"
+__version__ = "$Revision$"
 
 class PingbackObject(Folder):
     """ asdfsaf """
