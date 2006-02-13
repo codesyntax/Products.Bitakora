@@ -17,7 +17,7 @@ blocktags = ['p', 'pre', 'div',
              
 allowedtags = ['p', 'pre', 'table', 'tr', 'th', 'td', 'thead', 'tbody', 'tfoot',
              'ul','ol','li','h3', 'h4', 'h5', 'h6', 'blockquote', 'q', 'cite', 'b', 'i',
-             'strong', 'em', 'a', 'iframe', 'object', 'param', 'embed']
+             'strong', 'em', 'a', 'iframe', 'object', 'param', 'embed', 'del', 'u']
              
 replaceabletags = {'b':'strong', 'i':'em'}             
 
