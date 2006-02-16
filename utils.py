@@ -186,6 +186,7 @@ def discoverPingbackUrl(url):
 
 def makeXMLRPCCall(serverURI, sourceURI, targetURI):
     server = xmlrpclib.Server(serverURI)
+    res = ''
     try:
         res = server.pingback.ping(sourceURI, targetURI)
     except:

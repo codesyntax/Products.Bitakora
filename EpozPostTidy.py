@@ -105,6 +105,50 @@ class cleanHTMLParser(HTMLParser):
     def handle_comment(self, data):
         pass
 
+class pingbackHTMLParser(HTMLParser):
+    res = u''
+    allowedtags = ['strong', 'em', 'a', 'b', 'i']
+    allowedattrs = ['href']
+    
+    def handle_starttag(self, tag, attrs):
+        if tag in ['br', 'hr', 'img']:
+            self.handle_startendtag(tag, attrs)
+        elif tag in self.allowedtags:
+            attributes= u""
+            for (key,value) in attrs:
+                if key in self.allowedattrs:
+                    attributes += u' %s="%s"' % (key,value)
+
+            if tag in replaceabletags.keys():
+                self.res += u"<%s%s>" % (replaceabletags[tag], attributes)
+            else:
+                self.res += u"<%s%s>" % (tag, attributes)
+
+    def handle_startendtag(self, tag, attrs):
+        return 1
+        
+    def handle_endtag(self, tag):
+        if tag in self.allowedtags:
+            if tag in replaceabletags.keys():
+                self.res += u"</%s>" % (replaceabletags[tag],)
+            else:
+                self.res += u"</%s>" % (tag,)
+            # Some pretty-nice-printing for block-elements
+            if tag in blocktags:
+                self.res += u"\n"
+        
+    def handle_data(self, data):
+        self.res += unicode(data, 'utf-8')
+        
+    def handle_charref(self, data):
+        self.res += u"&%s;" % data
+
+    def handle_entityref(self, data):
+        self.res += u"&%s;" % data
+
+    def handle_comment(self, data):
+        pass
+
 
 
 def EpozPostTidy(self, html, pageurl):
@@ -139,3 +183,14 @@ def cleanHTML(html):
     htmlres = re.sub("[\n]+","\n", htmlres)
     
     return htmlres
+    
+    
+def pingbackHTML(html):
+    parser = pingbackHTMLParser()
+    parser.feed(html)
+    parser.close()
+    htmlres = parser.res   
+    htmlres = re.sub("[ ]+"," ",htmlres)
+    htmlres = re.sub("[\n]+","\n", htmlres)
+    return htmlres
+    
