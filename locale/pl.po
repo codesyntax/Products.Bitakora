@@ -1,0 +1,601 @@
+msgid ""
+msgstr "Project-Id-Version: \n"
+"POT-Creation-Date: 2006-02-16 12:02+CET\n"
+"PO-Revision-Date: 2006-02-16 12:02+CET\n"
+"Last-Translator:  <>\n"
+"Language-Team: pl <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "#"
+msgstr "#"
+
+msgid "%(year)s %(month)s"
+msgstr "%(lata) %(miesiąc)e"
+
+msgid "1st step: Create an account"
+msgstr "1 krok: Stwórz konto"
+
+msgid "2nd step: Name your blog"
+msgstr "2 krok: Nazwa twojego blogu"
+
+msgid "3rd step: choose a template"
+msgstr "3 krok: Wybierz szablon"
+
+msgid "About this"
+msgstr "Wszystko o blogu"
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Add a new link"
+msgstr "Dodaj nowy link"
+
+msgid "Add a new post"
+msgstr "Dodaj nową notke"
+
+msgid "Add your first post using <strong>post</strong> tab"
+msgstr "dodaj swoja pierwszą notke używając <strong>post</strong> etykiety"
+
+msgid "Archive"
+msgstr "Archiwum"
+
+msgid "Are you sure"
+msgstr "Jesteś pewien"
+
+msgid "Are you sure?"
+msgstr "Jesteś pewny?"
+
+msgid "August"
+msgstr "Sierpień"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Blog description"
+msgstr "Opis blogu"
+
+msgid "Blog id"
+msgstr "Blog id"
+
+msgid "Blog subtitle"
+msgstr "Podtytuł bloga"
+
+msgid "Blog title"
+msgstr "Tytuł bloga"
+
+msgid "Blogs deleted successfully"
+msgstr "Usunięcie bloga zakończone pomyślnie"
+
+msgid "Body"
+msgstr "Wygląd"
+
+msgid "CSS edited succesfully"
+msgstr "Edytowanie CSS zakończone sukcesem"
+
+msgid "Change"
+msgstr "Zmień"
+
+msgid "Change password in blog community"
+msgstr "Zmień hasło w wspólnocie  blogu"
+
+msgid "Change your password"
+msgstr "Zmień swoje hasło"
+
+msgid "Come again whenever you want!"
+msgstr "Zapraszamy ponownie kiedy tylko zechcesz!"
+
+msgid "Comment deleted succesfully"
+msgstr "Komentarz został usuniety pomyślnie"
+
+msgid "Comment does not exists"
+msgstr "Komentarz nie istnieje"
+
+msgid "Comment edited succesfully"
+msgstr "Edycja komentarza zakończona pomyślnie"
+
+msgid "Comment management"
+msgstr "Zarządzanie komentarzami"
+
+msgid "Comment policy"
+msgstr "Komentarz gościnny"
+
+msgid "Comment policy edited succesfully"
+msgstr "Edycja komentarza gościnnego zakończona pomyślnie"
+
+msgid "Comments"
+msgstr "Komentarze"
+
+msgid "Comments allowed"
+msgstr "Komentarz dopuszczony do publikacji"
+
+msgid "Comments allowed but moderated"
+msgstr "Komentarz dopuszczony do publikacji, ale po modernizacji"
+
+msgid "Comments awaiting moderation"
+msgstr "Komentarz czeka na na dopuszczenie do publokacji"
+
+msgid "Comments not allowed"
+msgstr "Komentarz nie dopusczony do publikacji"
+
+msgid "Comments:"
+msgstr "Komentarze:"
+
+msgid "Congratulations!"
+msgstr "Gratulacje!"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Contact email"
+msgstr "Kontakt email"
+
+msgid "Contact mail"
+msgstr "kontakt mail"
+
+msgid "Contact with me"
+msgstr "Kontakt ze mną"
+
+msgid "Contents"
+msgstr "Zawartość"
+
+msgid "Create a blog"
+msgstr "Stwórz  bloga"
+
+msgid "Create a new blog"
+msgstr "Stwórz nowego bloga"
+
+msgid "Create your account"
+msgstr "Stwórz swoje konto"
+
+msgid "Create your blog"
+msgstr "Stwórz swojego bloga"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "December"
+msgstr "Grudzień"
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Delete comment"
+msgstr "Usuń komentarz"
+
+msgid "Delete link"
+msgstr "Usuń link"
+
+msgid "Download in TXT"
+msgstr "Ściągnij plik w TXT"
+
+msgid "Download in XML"
+msgstr "Ściagnij plik w XML"
+
+msgid "Download your blog"
+msgstr "Ściągnij swojego bloga"
+
+msgid "Edit"
+msgstr "Edycja"
+
+msgid "Edit Comment"
+msgstr "Edytuj komentarz"
+
+msgid "Edit comments"
+msgstr "Edytuj komentarze"
+
+msgid "Edit here your HTML"
+msgstr "Edytuj tutaj swoje HTML"
+
+msgid "Edit policy"
+msgstr "Edytuj gościnne"
+
+msgid "Edit this post"
+msgstr "Edytuj tą notke"
+
+msgid "Email Address:"
+msgstr "Adres email:"
+
+msgid "Email address"
+msgstr "Adres email"
+
+msgid "Enter to write in your blog"
+msgstr "Wejdz, aby napisać notke w swoim blogu"
+
+msgid "Enter your username and you will receive an email to choose a new password."
+msgstr "Wprowadź swoje imię użytkownika i otrzymasz email zwrotny aby wybrać nowe hasło."
+
+msgid "Error when deleting selected link"
+msgstr "Błąd podczas usuwania zaznaczonego linku"
+
+msgid "Forget personal info"
+msgstr "Zapomniałeś danych personalnych"
+
+msgid "Forgot your password?"
+msgstr "Zapomniałes hasła"
+
+msgid "HTML block"
+msgstr "HTML zablokowany"
+
+msgid "HTML saved succesfully"
+msgstr "HTML zapisany z powodzeniem"
+
+msgid "Hello %(user)s"
+msgstr "Witaj %(user)s"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "Image 65x65 pixels"
+msgstr "Zdjęcie 65x65 pikseli"
+
+msgid "Invalid email address"
+msgstr "Niepoprawny adres email"
+
+msgid "January"
+msgstr "Styczeń"
+
+msgid "Just for registered users"
+msgstr "Tylko dla zarejestrowanych użytkowników"
+
+msgid "Last posts"
+msgstr "Ostatnie notki"
+
+msgid "Link added succesfully"
+msgstr "Link dodany pomyślnie"
+
+msgid "Links"
+msgstr "Linki"
+
+msgid "Log in to your blog"
+msgstr "Logowanie do Twojego blogu"
+
+msgid "Logged out"
+msgstr "Wylogowany"
+
+msgid "Login"
+msgstr "Zaloguj się"
+
+msgid "Login failure"
+msgstr "Logowanie nie udane"
+
+msgid "Logout"
+msgstr "Wyloguj"
+
+msgid "Lost your password?"
+msgstr "Zapomniałes hasła?"
+
+msgid "Manage your blog"
+msgstr "Zarządzaj blogiem"
+
+msgid "Name:"
+msgstr "Imię:"
+
+msgid "New comment in your blog!"
+msgstr "Nowy komentarz na twoim blogu"
+
+msgid "New message from your blog!"
+msgstr "Nowa wiadomość z twojego blogu!"
+
+msgid "New password"
+msgstr "Nowe hasło"
+
+msgid "Next posts"
+msgstr "Następna notki"
+
+msgid "No"
+msgstr "Nie"
+
+msgid "No entries."
+msgstr "Nie ma wejścia"
+
+msgid "No links yet !"
+msgstr "Nie ma jeszcze żadnego linku!"
+
+msgid "November"
+msgstr "Listopad"
+
+msgid "October"
+msgstr "Październik"
+
+msgid "Ok. An email was sent!"
+msgstr "Ok. email został wysłany!"
+
+msgid "Oooooops"
+msgstr "Oooooops"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Passwords do not match"
+msgstr "Hasło jest niepoprawne"
+
+msgid "Paste here your css"
+msgstr "Wklej tutaj swoje css"
+
+msgid "Permalink"
+msgstr "Stały link"
+
+msgid "Please try again"
+msgstr "Prosze sprobuj ponownie"
+
+msgid "Post a comment"
+msgstr "Notka została skomentowana"
+
+msgid "Post added succesfully"
+msgstr "Notka została dodana pomyślnie"
+
+msgid "Post deleted succesfully"
+msgstr "Notka została usunieta pomyślnie"
+
+msgid "Post edited succesfully"
+msgstr "Notka została wyedytowana pomyślnie"
+
+msgid "Post list"
+msgstr "Lista notek"
+
+msgid "Posted by:"
+msgstr "Napisane przez:"
+
+msgid "Powered by Bitakora"
+msgstr "Uruchomione przez Bitakore"
+
+msgid "Preferences edited succesfully"
+msgstr "Edycja opcji zakończona pomyślnie"
+
+msgid "Preview"
+msgstr "Zapowiedz"
+
+msgid "Previous posts"
+msgstr "Poprzedna notka"
+
+msgid "Published"
+msgstr "Opublikuj"
+
+msgid "RSS"
+msgstr "RSS"
+
+msgid "Recent Comments"
+msgstr "Nowy/ostatni komentarz"
+
+msgid "Reference by:"
+msgstr "Odnośnik do:"
+
+msgid "References"
+msgstr "Odnośnik"
+
+msgid "Remember my name"
+msgstr "Pamiętaj moje imię"
+
+msgid "Remember your info. on cookie?"
+msgstr "Zapamiętać twoje dane w pliku cookie??"
+
+msgid "Repeat your new password"
+msgstr "Powtórz swoje nowe hasło"
+
+msgid "Return to main page"
+msgstr "Powróć na moją strone"
+
+msgid "Retype your password"
+msgstr "Zmień swoje hasło"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Save Changes"
+msgstr "Zachowaj zmiany"
+
+msgid "Select the blogs you want to delete. With the blog, the users defined in each blog will be deleted."
+msgstr "Wybierz blog który chcesz usunąć. Wraz z usunięciem bloga, użytkownik również zostanie usunięty."
+
+msgid "Select the users you want to delete."
+msgstr "Wybierz użytkownika którego chcesz usunąć."
+
+msgid "Select this template"
+msgstr "Wybierz ten szblon"
+
+msgid "Selected link was removed succesfully"
+msgstr "Wybrany link został usunięty pomyślnie"
+
+msgid "Selected template does not exist"
+msgstr "Wybrany szablon nie istnieje"
+
+msgid "Send"
+msgstr "Wyślij"
+
+msgid "Send your comment"
+msgstr "Wyślij komentarz"
+
+msgid "Send your comments"
+msgstr "Wyślij komentarze"
+
+msgid "September"
+msgstr "Wrzesień"
+
+msgid "Sidebar management"
+msgstr "Zarządzanie bocznym panelem"
+
+msgid "Some error happened of the resource you were looking for does not exist. Try again please."
+msgstr "Pewne błędy sprawiły, że wyniki Twoich poszukiwań nie mogą zostać ukazane. Prosze spróbować ponownie."
+
+msgid "Start blogging now !!"
+msgstr "Zacznij blogować teraz!"
+
+msgid "Start blogging!"
+msgstr "Zacznij blogować!"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Subject"
+msgstr "Temat"
+
+msgid "Subtitle"
+msgstr "Podtytuł"
+
+msgid "Tag: <em>%(tagname)s</em>"
+msgstr "Etykieta: <em>%(tagname)s</em>"
+
+msgid "Tags"
+msgstr "Etykiety"
+
+msgid "Template changed succesfully"
+msgstr "Zmiana szablonu zakończona powodzeniem"
+
+msgid "Template management"
+msgstr "Zarządznie szablonem"
+
+msgid "Thank you"
+msgstr "Dziękujemy"
+
+msgid "There are no comments yet!"
+msgstr "Nie ma jeszcze żadnych komentarzy!"
+
+msgid "There are no entries."
+msgstr "Nie było jeszcze żadnych wejść."
+
+msgid "There are no posts tagged <em>%(tagname)s</em>"
+msgstr "Nie ma żadnych notek pod etykietą <em>%(tagname)s</em>"
+
+msgid "This BitakoraCommunity object, can handle with many Bitakoras, and create a community."
+msgstr "Objekt BitakoraCommunity, może przetrzymywać wiele Bitakoras i tworzyć wspólnoty."
+
+msgid "This id contains illegal characters"
+msgstr "To id zawiera nielegalny charakter"
+
+msgid "This id is already in use"
+msgstr "To id jest w tym momencie w użyciu"
+
+msgid "This username already exists"
+msgstr "Ta nazwa użytkownika już istnieje"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "To: %s\n    From: %s\n    Mime-Version: 1.0\n    Content-Type: text/plain; charset=UTF-8\n    \n    Comment author :%s\n    Author's email :%s\n    Comment subject:%s\n    Comment body   :\n    %s"
+msgstr "Do: %s\n    Od: %s\n    wersja: 1.0\n    Typ zawartośći: text/plain; charset=UTF-8\n    \n    Autor Komentarza :%s\n    E-mail autora :%s\n    Temat komentarza:%s\n    Wygląd komentarza   :\n    %s"
+
+msgid "To: %s\nFrom: %s\nMime-Version: 1.0\nContent-Type: text/plain;\n\nComment author :%s\nAuthor's url   :%s\nAuthor's email :%s\nComm. Address  :%s\nComment body   :\n%s"
+msgstr "Do: %s\nOd: %s\nWersja: 1.0\nTyp zawartości: text/plain;\n\nAutor komentarza :%s\nStrona www autora :%s\nEmail Autora :%s\nAdres komentującego  :%s\nWygląd komentarza   :\n%s"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "URL:"
+msgstr "URL:"
+
+msgid "Unpublished"
+msgstr "Opublokowane"
+
+msgid "Upload"
+msgstr "Wyślij"
+
+msgid "Upload a XML file with blog data"
+msgstr "Wyślij plik XML na blog"
+
+msgid "User"
+msgstr "Użytkownik"
+
+msgid "Username"
+msgstr "Imię użytkownika"
+
+msgid "Users deleted successfully"
+msgstr "Usunięcie użytkowników zakończone powodzeniem"
+
+msgid "View"
+msgstr "Zobacz"
+
+msgid "View original post"
+msgstr "Zobacz oryginalną notke"
+
+msgid "Welcome!"
+msgstr "Witamy!"
+
+msgid "What?"
+msgstr "Co?"
+
+msgid "When selecting this template, the css you have edited (if you did so) will be lost. Are you sure?"
+msgstr "W momencie wybierania szablonu, css która edytowałeś (o ile ją edytowałeś) zostanie stracona. Jesteś pewien?"
+
+msgid "Write a new post"
+msgstr "Napisz nową notke"
+
+msgid "XML file imported succesfully"
+msgstr "Import pliku XML zsotał zakończony powodzeniem"
+
+msgid "Yes"
+msgstr "Tak"
+
+msgid "You are logged in using HTTP authentication.  You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>"
+msgstr "Jesteś zalogowany/a używając identyfikacji HTTP. Może będziesz potrzebował/a <a href=/manage_zmi_logout> ,zarządzać interfejsem Zope, aby się wylogować<a/>"
+
+msgid "You are logged in using HTTP authentication. You may need to <a href=/manage_zmi_logout> log out of the Zope management interface</a>"
+msgstr "Jesteś zalogowany/a używając identyfikacji HTTP. Może będziesz potrzebował/a <a href=/manage_zmi_logout> ,zarządzać interfejsem Zope, aby się wylogować<a/>"
+
+msgid "You can add some HTML to your sidebar. You can paste there javascripts for Flickr photos, the del.icio.us tagroll, your bloglines subscriptions, whatever..."
+msgstr "Możesz dodać jakieś pliki HTML do swojego bocznego panelu. Możesz wkleić je tam jako javascripts dla flickr phots, internetowego albumu zdjęc ao.pl i dla wszystkich innych stronek jakie Ci wpadną do głowy..."
+
+msgid "You can add some websites to your link list on the sidebar. Links on this list will be shown in the sidebar of your blog"
+msgstr "Możesz dodać jakieś strony internetowe do listy Twoich linków do bocznego panelu. Linki z tej listy będą ukazane na stronie głownej Twojego blogu."
+
+msgid "You can change your template here, editing the CSS file. Template is compatible with MovableType 3.1 stylesheets"
+msgstr "Możesz zmieniś swój szablon tutaj, edytując plik CSS. Szblon jest kompatybilny z Movabletype3.1"
+
+msgid "You can create an XML file with your blog data in the format explained at http://www.codesyntax.com/bitakora/en/download and import to Bitakora using this form."
+msgstr "Możesz stworzyć plik XML z danymi z twojego bloga. więcj pod adresem http://www.codesyntax.com/bitakora/en/download i zimportować do Bitakory używając tej formy."
+
+msgid "You can get it touch with me filling and sending this form. If you want me to reply, please provide an email address so I can answer you. Thank you."
+msgstr "Możesz to zdobyć, wystarczy wypełnić i wysłać w tej formie. Jeśłi chcesz żebym powtórzył, prosze podac adres email, na który Ci odpowiem. Dziękuje"
+
+msgid "You can't change this password"
+msgstr "Nie możesz zmienić tego hasła"
+
+msgid "You must provide at least the title of the post"
+msgstr "Musisz wprowadzić ostatecznie tytuł notki."
+
+msgid "You tried to upload something that is not a valid picture image. Try with a 65x65 pixel sized jpg, png or gif."
+msgstr "Probowałeś wysłać fotke, która jest za duża, lub ma niepoprawne roszerzenie. Spróbuj z fotka 65x65 pikseli o rozszerzeniach jpg, png  lub gif."
+
+msgid "Your current image"
+msgstr "Twoje aktualne zdjęcie"
+
+msgid "Your image is too large. Try with a smaller one"
+msgstr "Twoje zdjęcie jest za duże. Spróbuj umieścić mniejsze."
+
+msgid "Your message has been sent correctly"
+msgstr "Twoja wiadomość została wysłana poprawnie"
+
+msgid "Your new blog is ready. Now you just have to log-in and start blogging !"
+msgstr "Twój nowy blog jest już gotowy. Teraz wystarczy się zalogujesz i już mozesz rozpocząć pisanie bloga!"
+
+msgid "Your password has been changed"
+msgstr "Twoje hasło zostało zmienione"
+
+msgid "Your password must be at least 4 characters long"
+msgstr "Twoje hasło musi posiadać conamniej 4 znaki"
+
+msgid "admin"
+msgstr "administrator"
+
+msgid "comments"
+msgstr "komentarze"
+
+msgid "post"
+msgstr "notka"
+
+msgid "prefs"
+msgstr "Opcje"
+
+msgid "sidebar"
+msgstr "boczny panel"
+
+msgid "tag"
+msgstr "etykieta"
+
+msgid "template"
+msgstr "szablonowa budowa stronki"
