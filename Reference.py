@@ -6,7 +6,6 @@
 #$Id$
 
 # Zope modules
-from Globals import package_home
 import Globals
 from OFS.SimpleItem import SimpleItem
 from AccessControl import ClassSecurityInfo
@@ -16,7 +15,7 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 
 # Other stuff
 import DateTime
-from utils import addDTML, addPythonScript, clean, cleanBody, prepareTags, cleanEmail, cleanURL, ok_chars
+from utils import clean
 __version__ = "$Revision$"
 
 def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
