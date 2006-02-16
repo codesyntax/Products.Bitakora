@@ -4,5 +4,6 @@
 BUGS
 ====
 
+- Pingback system doesn't work correctly due to Zope transactional model: until the transaction is commited no objects is created in ZODB, so if the pingback receiver checks the existence of the post, it will reject the pingback. The solution is to edit the recently created post to send the pingback again. Perhaps an 'addAfterCommitHook' or something like that would help us: http://mail.zope.org/pipermail/zodb-dev/2005-September/009233.html
 - Email notifications on Comments and through the contact form, are i18ned, but they are buggy if you localise them.
 - With CMF's Cookie Crumbler, sometimes it works correctly, and sometimes no...
