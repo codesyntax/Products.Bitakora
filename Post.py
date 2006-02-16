@@ -52,11 +52,10 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
       
     self._setObject(str(newid), post)
     post = self.get(newid)
-    
+        
     if sendping:
         pingbackresults = post.postPingBacks(newbody) 
-        res = post.sendPing()    
-        
+        res = post.sendPing()        
 
     if self.inCommunity():
         # We are in a Bitakora Community, so catalog the post there
@@ -113,7 +112,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.reference_allowed = reference_allowed
         self.published = publish
         self.reindex_object()
-        res = post.sendPing()    
+        res = self.sendPing()    
         pingbackresults = self.postPingBacks(self.body) 
         
         if self.inCommunity():
@@ -236,6 +235,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     def canReference(self):
         """ Are the references (trackbacks, pingbacks, ...)
             on this post allowed? """
+        return 1
         return self.reference_allowed
         
     security.declarePublic('commentsModerated')
@@ -299,7 +299,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         if len(self.referenceList()) == 0:
             return 'r1'
         else:
-            return 'r'+len(self.referenceList())
+            return 'r' + str(len(self.referenceList()) + 1)
 
     security.declareProtected('View', 'numberOfComments')
     def numberOfComments(self):

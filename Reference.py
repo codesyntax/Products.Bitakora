@@ -21,12 +21,14 @@ __version__ = "$Revision$"
 
 def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
     """ Add a pingback """
+
     id = self.createReferenceId()
     newTitle = clean(sourceTitle)
     newURI = clean(sourceURI)
     newExcerpt = clean(sourceExcerpt)
     pingback = Reference(id, newTitle, newURI, newExcerpt, self.getId())
     self._setObject(id, pingback)
+    return 1
         
 
 class Reference(CatalogPathAware, SimpleItem):
