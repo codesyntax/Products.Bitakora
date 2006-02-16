@@ -1,6 +1,9 @@
 #$Id$
 
+==========
 IMPORT.txt
+==========
+
 
 You can import your actual blog to Bitakora preparing an XML file with this format:
 
