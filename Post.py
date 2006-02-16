@@ -54,7 +54,7 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
     post = self.get(newid)
     
     if sendping:
-        #pingbackresults = post.postPingBacks(newbody) 
+        pingbackresults = post.postPingBacks(newbody) 
         res = post.sendPing()    
         
 
@@ -113,6 +113,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.reference_allowed = reference_allowed
         self.published = publish
         self.reindex_object()
+        res = post.sendPing()    
         pingbackresults = self.postPingBacks(self.body) 
         
         if self.inCommunity():

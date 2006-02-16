@@ -135,10 +135,12 @@ class PingMethodContainer(Persistent, SimpleItem, Implicit, Traversable):
 
     security.declarePrivate('extractExcerpt')
     def extractExcerpt(self, targetURI, html):
+        from EpozPostTidy import cleanHTML
         pos = html.find(targetURI)
         start = pos - 150
         end = pos + 150
         excerpt = html[start:end]
+        excerpt = cleanHTML(html)
         return unicode('...'+excerpt+'...')
 
     security.declarePrivate('extractTitle')
