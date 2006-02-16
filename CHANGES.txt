@@ -4,10 +4,15 @@
 CHANGES.txt
 ===========
 
+v. 0.1.6
+========
+- New Polish translation
+- Pingback system re-enabled and fixed
+
 v. 0.1.5
 ========
 - 'u' and 'del' tags allowed in HTML
-- Changed community CSS files, now they are GIF instead of JPEG
+- Changed community CSS file images, now they are GIF instead of JPEG
 
 
 v. 0.1.4
