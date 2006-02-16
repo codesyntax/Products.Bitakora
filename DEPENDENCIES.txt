@@ -1,10 +1,12 @@
 #$Id$
 
+================
 DEPENDENCIES.txt
+================
 
- - Epoz (we use 2.0.1)
+- Epoz (we use 2.0.1)
 
-- Localizer (we use 1.1.1)
+- Localizer (we use 1.1.1) (install itools and iHotfix too, they are Localizer dependencies)
 
 - TextIndexNG2 (we use 2.2.0)
 
