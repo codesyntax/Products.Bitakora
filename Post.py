@@ -235,7 +235,6 @@ class Post(CatalogPathAware, BTreeFolder2):
     def canReference(self):
         """ Are the references (trackbacks, pingbacks, ...)
             on this post allowed? """
-        return 1
         return self.reference_allowed
         
     security.declarePublic('commentsModerated')
