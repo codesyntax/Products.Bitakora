@@ -128,7 +128,12 @@ class PingMethodContainer(Persistent, SimpleItem, Implicit, Traversable):
 
     security.declarePrivate('targetExists')
     def targetExists(self, targetURI):
-        return 1
+        try:
+            sock = urllib.urlopen(targetURI)
+            sock.close()
+            return 1          
+        except:
+            return 0
         
     security.declarePrivate('getPostFromURI')
     def getPostFromURI(self, uri):
