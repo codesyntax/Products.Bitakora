@@ -10,7 +10,7 @@
 #$Id$
 
 # Zope modules
-from Globals import package_home, Persistent, HTMLFile
+from Globals import HTMLFile
 import Globals
 from AccessControl import ClassSecurityInfo
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
@@ -20,12 +20,10 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 
 # Other stuff
 import DateTime
-from utils import addDTML, clean, cleanBody, cleanEmail, cleanURL, discoverPingbackUrl, makeXMLRPCCall
+from utils import clean, cleanBody, discoverPingbackUrl, makeXMLRPCCall
 from utils import addPythonScript, prepareTags, ok_chars
 
 from urllister import URLLister
-from Comment import Comment
-from Reference import Reference
 
 __version__ = "$Revision$"
 
@@ -340,7 +338,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     security.declarePrivate('send_ping')
     def send_ping(self, serverurl, blogtitle, url):
         """ """
-        from xmlrpclib import Server, Transport
+        from xmlrpclib import Server
         version_str = 'Bitakora 0.1'
         title = blogtitle.encode('utf-8')
         svr = Server(serverurl)

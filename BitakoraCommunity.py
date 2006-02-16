@@ -17,7 +17,6 @@ from Globals import HTMLFile
 # Modules from Localizer
 from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog
-from Products.Localizer.LocalPropertyManager import LocalPropertyManager
 from Products.Localizer.LocalContent import LocalContent
 
 # ZCatalog

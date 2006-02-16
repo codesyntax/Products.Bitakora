@@ -24,10 +24,10 @@ from Products.Localizer.MessageCatalog import MessageCatalog
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
 # Other stuff
-import DateTime, string
+import DateTime
 
 # Own modules
-from utils import addDTML, addPythonScript
+from utils import addDTML
 from utils import fillMessageCatalog, prepareTags, ok_chars
 from PingMethodContainer import PingMethodContainer
 
@@ -618,7 +618,6 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declarePrivate('createId')    
     def createId(self, title):
         """ Create an id for a post based on its title """
-        from string import maketrans
         s1 = unicode(r"'\;/ &:ÀÁÂÄÇÈÊÉËÌÎÍÏÒÔÓÖÙÛÚÜÝŸàâáäçèêéëìîíïòôóöùûúüýÿÑñ", 'utf-8')
         s2 = unicode(r'-------aaaaceeeeiiiioooouuuuyyaaaaceeeeiiiioooouuuuyyNn', 'utf-8')
 
