@@ -67,7 +67,7 @@ class Reference(CatalogPathAware, SimpleItem):
         self.getParentNode()._delObject(self.id)
         if REQUEST is not None:
             url = REQUEST.HTTP_REFERER.split('?')[0]
-            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Comment deleted successfully')
+            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Reference deleted successfully')
 
     security.declarePublic('index_html')
     def index_html(self,REQUEST=None):
