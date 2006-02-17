@@ -1,0 +1,10 @@
+<dtml-if "getPublishedReferences(size=10)">
+<h2><dtml-var "gettext('Recent references')"></h2>
+<ul>
+  <dtml-in "getPublishedReferences(size=10)">
+   <dtml-with getObject>
+   <li><a href="<dtml-var absolute_url>"><dtml-var showTitle></a></li>
+   </dtml-with>
+  </dtml-in>
+</ul>
+</dtml-if>

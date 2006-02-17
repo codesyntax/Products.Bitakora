@@ -48,18 +48,36 @@ class Reference(CatalogPathAware, SimpleItem):
         self.postid = postid
         self.date = DateTime.DateTime()
 
-    security.declarePrivate('edit')
-    def edit(self, title, uri, excerpt, publish=1):
+    security.declareProtected('Manage Bitakora', 'edit')
+    def edit(self, title, uri, excerpt, publish=1, REQUEST=None):
         """ Editor """
         self.title = title
         self.uri = uri
         self.excerpt = excerpt
         self.published = publish
+        self.reindex_object()
+        if REQUEST is not None:
+            url = REQUEST.HTTP_REFERER.split('?')[0]
+            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Reference edited successfully')
+
+    security.declareProtected('Manage bitakora', 'delete')
+    def delete(self, REQUEST):
+        """ delete this comment """
+        REQUEST['delete'] = 1
+        self.getParentNode()._delObject(self.id)
+        if REQUEST is not None:
+            url = REQUEST.HTTP_REFERER.split('?')[0]
+            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Comment deleted successfully')
 
     security.declarePublic('index_html')
     def index_html(self,REQUEST=None):
         """ Each post is rendered usint Reference_body template """
         return self.getParentNode().index_html(REQUEST)
+
+    security.declarePublic('hidden')
+    def hidden(self):
+        """ return true if this comment is not published """
+        return not self.published
 
     security.declarePublic('showTitle')
     def showTitle(self):
@@ -89,6 +107,6 @@ class Reference(CatalogPathAware, SimpleItem):
     security.declarePublic('absolute_url')
     def absolute_url(self):
         """ """
-        return self.getParentNode().absolute_url()+'#reference'+self.id
+        return self.getParentNode().absolute_url()+'#'+self.id
         
 Globals.InitializeClass(Reference)

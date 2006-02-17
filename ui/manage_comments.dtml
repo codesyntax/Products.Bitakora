@@ -10,7 +10,7 @@
 </div>
 </dtml-if>
 
-<h2><dtml-var "gettext('Comment policy')"></h2>
+<h2><dtml-var "gettext('Comment and References policy')"></h2>
 
 <form action="editCommentPolicy" method="post">
 <p>
@@ -67,5 +67,43 @@
 </dtml-let>
 </dtml-with>
 </dtml-in>
+
+<h2><dtml-var "gettext('Reference management')"></h2>
+
+<p><dtml-var "gettext('References awaiting moderation')"></p>
+
+<dtml-in getUnpublishedReferences>
+<dtml-with getObject>
+<dtml-let commid="getId()">
+<form action="<dtml-var "getParentNode().absolute_url()">/<dtml-var commid>" method="post">
+<fieldset>
+<h3><a href="<dtml-var "getParentNode().absolute_url()">"><dtml-var "gettext('View original post')"></a></h3>
+<p>
+<label for="uri<dtml-var commid>"><dtml-var "gettext('URI:')"></label><br/>
+<input id="uri<dtml-var commid>" name="uri:utf8:ustring" size="30" value="<dtml-var showURI>" />
+</p>
+<p>
+<label for="title<dtml-var commid>"><dtml-var "gettext('Title:')"></label><br/>
+<input id="title<dtml-var commid>" name="title:utf8:ustring" size="30" value="<dtml-var showTitle>" />
+</p>
+<p>
+<label for="excerpt<dtml-var commid>"><dtml-var "gettext('Excerpt:')"></label><br/>
+<textarea id="excerpt<dtml-var commid>" name="excerpt:utf8:ustring" rows="10" cols="50"><dtml-var showExcerpt></textarea>
+</p>
+
+<p>
+<label><dtml-var "gettext('Status')"></label><br/>
+<input type="radio" name="publish:int" id="yes<dtml-var commid>" value="1" <dtml-if published>checked="checked"</dtml-if> /> <label for="yes<dtml-var commid>"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no<dtml-var commid>" value="0" <dtml-if hidden>checked="cheked"</dtml-if> /> <label for="no<dtml-var commid>"><dtml-var "gettext('Unpublished')"></label>
+</p>
+<input type="hidden" name="id" value="<dtml-var getId>"/>
+<input type="submit" value="<dtml-var "gettext('Edit Comment')">" name="edit:method"/>
+<input type="submit" value="<dtml-var "gettext('Delete comment')">" name="delete:method" onclick="javascript:return confirm('<dtml-var "gettext('Are you sure?')">');"/>
+</fieldset>
+</form>
+</dtml-let>
+</dtml-with>
+</dtml-in>
+
 
 <dtml-var standard_html_footer>

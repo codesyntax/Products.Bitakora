@@ -3,7 +3,7 @@
 <ul>
   <dtml-in "getPublishedComments(size=10)">
    <dtml-with getObject>
-   <li><a href="<dtml-var blogurl>/<dtml-var postid>#comment<dtml-var getId>"> <dtml-var postTitle></a><br /><dtml-var showAuthor></li>
+   <li><a href="<dtml-var absolute_url>"> <dtml-var postTitle></a><br /><dtml-var showAuthor></li>
    </dtml-with>
   </dtml-in>
 </ul>

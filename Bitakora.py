@@ -132,6 +132,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     login_form = HTMLFile('ui/login_form', globals())
     posting_html = HTMLFile('ui/posting_html', globals())
     recent_comments = HTMLFile('ui/recent_comments', globals())
+    recent_references = HTMLFile('ui/recent_references', globals())
     reference_body = HTMLFile('ui/reference_body', globals())
     bitakora_comment_js = HTMLFile('ui/bitakora_comment.js', globals())
     bitakora_edit_js = HTMLFile('ui/bitakora_edit.js', globals())
@@ -183,6 +184,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         self._links = IOBTree()
         # if 0 not allowed, 1 allowed, 2 allowed but moderated
         self.comment_allowed = 1
+        self.reference_allowed = 1
         #self.imageUrl = None
         self.imagename = ''
         
@@ -236,6 +238,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def editCommentPolicy(self, comment_allowed, REQUEST=None):
         """ edit comment policy """
         self.comment_allowed = comment_allowed
+        self.reference_allowed = comment_allowed
         
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/comments?msg=%s' % (self.blogurl(), 'Comment policy edited succesfully'))
@@ -558,7 +561,11 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def commentsNotAllowed(self):
         """ Are not comments allowed? """
         return not self.comment_allowed
-     
+            
+    referencesAllowed = commentsAllowed
+    referencesModerated = commentsModerated
+    referencesNotAllowed = commentsNotAllowed
+    
     security.declareProtected('Manage Bitakora', 'users')
     def users(self):
         """ Users """
@@ -608,7 +615,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog(meta_type='Reference', published=1, sort_on='date', sort_order='descending')
                 
     security.declarePublic('getReferences')
-    def getComments(self, size=None):
+    def getReferences(self, size=None):
         """ get References """
         if size is not None:
             return self.Catalog(meta_type='Reference', sort_on='date', sort_order='descending', sort_limit=size)
