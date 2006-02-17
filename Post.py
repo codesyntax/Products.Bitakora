@@ -82,7 +82,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     edit = HTMLFile('ui/Post_edit', globals())
 
     security.declarePrivate('__init__')
-    def __init__(self, id, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, reference_allowed=1):
+    def __init__(self, id, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1):
         """ """
         BTreeFolder2.__init__(self, id)
         self.id = str(id)
@@ -92,13 +92,13 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.tags = tags
         self.date = date
         self.comment_allowed = comment_allowed
-        self.reference_allowed = reference_allowed
+        self.reference_allowed = comment_allowed
         self.published = publish
         self.reindex_object()
         
 
     security.declareProtected('Manage Bitakora', 'manage_editPost')
-    def manage_editPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, reference_allowed=1, REQUEST=None):
+    def manage_editPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, REQUEST=None):
         """ Editor """
 
         self.title = title
@@ -107,7 +107,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.tags = prepareTags(tags)
         self.date = DateTime.DateTime(date)
         self.comment_allowed = comment_allowed
-        self.reference_allowed = reference_allowed
+        self.reference_allowed = comment_allowed
         self.published = publish
         self.reindex_object()
         res = self.sendPing()    
@@ -239,6 +239,8 @@ class Post(CatalogPathAware, BTreeFolder2):
     def commentsModerated(self):
         """ Return whether comments are moderated (coment_allowed == 2) or not """
         return self.comment_allowed == 2
+        
+    referencesModerated = commentsModerated
 
     security.declarePublic('hidden')
     def hidden(self):

@@ -12,6 +12,8 @@
 
 <dtml-var recent_comments missing="">
 
+<dtml-var recent_references missing="">
+
 <dtml-var recent_entries missing="">
 
 <dtml-var recent_trackbacks missing="">
