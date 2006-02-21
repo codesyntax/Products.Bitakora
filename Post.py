@@ -327,7 +327,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         ret_l = []
         url = self.absolute_url()
         blog_name = self.blog_title()
-        ping_servers = ['http://rpc.pingomatic.com']
+        ping_servers = ['http://rpc.pingomatic.com', 'http://rpc.technorati.com/rpc/ping']
         for pingurl in ping_servers:
             try:
                 resp = self.send_ping(pingurl, blog_name, url)
@@ -335,6 +335,8 @@ class Post(CatalogPathAware, BTreeFolder2):
                 resp = {}
                 resp["message"] = str(e)
                 ret_l.append( {"url":pingurl,"message":resp["message"]} )
+        from zLOG import LOG, INFO
+        LOG('sendPing', INFO, ret_l)                
         return ret_l
 
     security.declarePrivate('send_ping')
@@ -344,7 +346,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         version_str = 'Bitakora 0.1'
         title = blogtitle.encode('utf-8')
         svr = Server(serverurl)
-        Transport.user_agent = version_str
+        svr.Transport.user_agent = version_str
         resp = svr.weblogUpdates.ping(title, url)
         return resp
 
