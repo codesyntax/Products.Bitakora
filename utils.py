@@ -67,13 +67,22 @@ def clean(text):
 
 def cleanBody(self, text):
     """ clean the text to delete all unwanted HTML """
-    from EpozPostTidy import EpozPostTidy
+    try:
+        from EpozPostTidy import EpozPostTidy
+    except:
+        def EpozPostTidy(self, text, s=''):
+            return text
     
     return EpozPostTidy(self, text, '')
 
 def prepareTags(tags=[]):
     """ prepare the tags deleting all unwanted things """
-    from sets import Set as set    
+    try:
+        from sets import Set as set    
+    except:
+        def set(li):
+            return li
+            
     import string
     
     sep = '!"#$%&\'()*+,./:;<=>?@[\\]^`{|}~'
@@ -107,7 +116,11 @@ def notifyByEmail(mailhost, mTo, mFrom, mSubj, mMsg):
 def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u''):
     try:
         mailhost = getattr(context,context.superValues('Mail Host')[0].id)
-        from EpozPostTidy import cleanHTML
+        try:
+            from EpozPostTidy import cleanHTML
+        except ImportError:
+            def cleanHTML(text):
+                return text
         
         mTo = context.contact_mail
         if context.inCommunity():
