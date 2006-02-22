@@ -37,6 +37,12 @@ from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 from utils import addDTML, addPythonScript, addImage, addFile, fillMessageCatalog
 import DateTime
 
+try:
+    True
+except:
+    True = 1
+    False = 0
+
 manage_addBitakoraCommunityForm = HTMLFile('ui/BitakoraCommunity_add', globals())
 
 def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
@@ -245,24 +251,25 @@ class BitakoraCommunity(BTreeFolder2):
     	# Which one is more efficient?
 
         # One way...
-        
-        from EpozPostTidy import cleanHTML as clean
-        return clean(html)
-        """
-        # Another way... (from Zopelabs)
-    	intag = [False]
-    	
-    	def chk(c):
-    		if intag[0]:
-    			intag[0] = (c != '>')
-    			return False
-    		elif c == '<':
-    			intag[0] = True
-    			return False
-    		return True
-    	
-    	return ''.join([c for c in html if chk(c)])
-    	"""
+        try:
+            from EpozPostTidy import cleanHTML as clean
+            return clean(html)
+        except:
+            # perhaps more efficient but needed for old Zopes
+            # Another way... (from Zopelabs)
+        	intag = [False]
+        	
+        	def chk(c, intag):
+        		if intag[0]:
+        			intag[0] = (c != '>')
+        			return False
+        		elif c == '<':
+        			intag[0] = True
+        			return False
+        		return True
+        	
+        	return ''.join([c for c in html if chk(c, intag)])
+        	
         
     security.declarePublic('community')        
     def community(self):
