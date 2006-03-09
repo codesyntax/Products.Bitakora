@@ -149,7 +149,7 @@ Comment body   :
 
 
 def fillMessageCatalog(gettext):
-    locales = ['eu', 'es']
+    locales = ['eu', 'es', 'pl']
     file_path = Globals.package_home(globals())
     log = []
     for locale in locales:
