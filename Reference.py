@@ -87,7 +87,7 @@ class Reference(CatalogPathAware, SimpleItem):
     security.declarePublic('showDate')
     def showDate(self):
         """ get the date """
-        return self.date
+        return unicode(str(self.date))
 
     security.declarePublic('showBody')
     def showURI(self):
