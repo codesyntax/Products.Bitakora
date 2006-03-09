@@ -26,8 +26,8 @@
 
 <p>
 <label for="author"><dtml-var "gettext('Author')"></label><br/>
-<dtml-if preview>
-<input type="text" id="author" name="author:utf8:ustring" value="<dtml-var "REQUEST.get('author')">" size="50"/>
+<dtml-if REQUEST.preview>
+<input type="text" id="author" name="author:utf8:ustring" value="<dtml-var "REQUEST.get('author', '')">" size="50"/>
 <dtml-else>
 <input type="text" id="author" name="author:utf8:ustring" value="<dtml-var showAuthor>" size="50"/>
 </dtml-if>
@@ -35,8 +35,8 @@
 
 <p>
 <label for="title"><dtml-var "gettext('Title')"></label><br/>
-<dtml-if preview>
-<input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('title')">"/>
+<dtml-if REQUEST.preview>
+<input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('title', '')">"/>
 <dtml-else>
 <input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var showTitle>"/>
 </dtml-if>
@@ -44,8 +44,8 @@
 
 <p>
 <label for="tags"><dtml-var "gettext('Tags')"></label><br/>
-<dtml-if preview>
-<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(prepareTags(tags=REQUEST.get('tags')))">"/>
+<dtml-if REQUEST.preview>
+<input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(prepareTags(tags=REQUEST.get('tags', [])))">"/>
 <dtml-else>
 <input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var showTags>"/>
 </dtml-if>
@@ -53,7 +53,7 @@
 
 <p>
 <label for="body"><dtml-var "gettext('Body')"></label><br/>
-<dtml-if preview>
+<dtml-if REQUEST.preview>
 <dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', '') and cleanBody(body) or '', toolbox='', lang='en',
             path='', widget='bitakora_edit_js',
             style='width: 440px; height: 250px; border: 1px solid #000000;', 
@@ -70,9 +70,9 @@
 
 <p>
 <label><dtml-var "gettext('Status')"></label><br/>
-<dtml-if preview>
-<input type="radio" name="publish:int" id="yes" value="1" <dtml-if "REQUEST.get('publish')==1">checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
-<input type="radio" name="publish:int" id="no" value="0" <dtml-if "REQUEST.get('publish') ==0">checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
+<dtml-if REQUEST.preview>
+<input type="radio" name="publish:int" id="yes" value="1" <dtml-if "REQUEST.get('publish', 0)==1">checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
+<input type="radio" name="publish:int" id="no" value="0" <dtml-if "REQUEST.get('publish', 1) ==0">checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
 <dtml-else>
 <input type="radio" name="publish:int" id="yes" value="1" <dtml-if published>checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
 <input type="radio" name="publish:int" id="no" value="0" <dtml-if hidden>checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
@@ -81,8 +81,8 @@
 
 <p>
 <label for="date"><dtml-var "gettext('Date')"></label><br/>
-<dtml-if preview>
-<input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('date')">"/>
+<dtml-if REQUEST.preview>
+<input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('date', '')">"/>
 <dtml-else>
 <input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var showDate>"/>
 </dtml-if>

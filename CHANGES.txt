@@ -4,6 +4,10 @@
 CHANGES.txt
 ===========
 
+v. 0.1.7
+========
+- Fixed bug in post edit form. If a method called 'preview' existed, it was not posible to edit a post.
+
 v. 0.1.6
 ========
 - New Polish translation

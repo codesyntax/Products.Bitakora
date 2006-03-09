@@ -662,7 +662,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return oldid+'-1'           
             
     security.declarePublic('prepareTags')            
-    def prepareTags(self, tags):
+    def prepareTags(self, tags=[]):
         """ return tags to add and edit interfaces preview """
         from utils import prepareTags as prepTags
         return prepTags(tags)
