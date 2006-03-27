@@ -413,7 +413,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         tags = [tag for tag in self.Catalog.uniqueValuesFor('tags') if tag.strip()]
         zenbat = {}
         for tag in tags:
-            tagkop = self.Catalog.searchResults(tags=tag, meta_type='Post')
+            tagkop = self.Catalog.searchResults(tags=tag, meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'})
             zenbat[tag] = len(tagkop)
 
         maxpx = 2.30
