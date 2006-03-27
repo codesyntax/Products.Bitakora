@@ -5,7 +5,7 @@
 <h2><dtml-var "gettext('Tags')"></h2>
 
 <dtml-if "REQUEST.has_key('id')">
-<dtml-in "Catalog.searchResults(tags=_.unicode(REQUEST.get('id'), 'utf-8'), meta_type='Post', sort_on='date', sort_order='reverse')">
+<dtml-in "Catalog.searchResults(tags=_.unicode(REQUEST.get('id'), 'utf-8'), meta_type='Post', sort_on='date', sort_order='reverse', date={'query':_.DateTime(), 'range':'max'}, published=1)">
 <dtml-if sequence-start>
     <h3><dtml-var "gettext('Tag: <em>%(tagname)s</em>') % {'tagname':_.unicode(REQUEST.get('id'), 'utf-8')}"></h3>
 </dtml-if>
