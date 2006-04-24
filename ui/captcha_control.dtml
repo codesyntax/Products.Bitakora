@@ -1,4 +1,3 @@
-<dtml-if CAPTCHA_ENABLED>
 <dtml-let capt="getCaptchaImage()">
 <dtml-if "REQUEST.has_key('msg')">
 <div class="system-msg"><dtml-var "REQUEST.get('msg')"></div>
@@ -10,7 +9,5 @@
 <input type="text" name="bitakora_cpt" size="15" />
 </p>
 <input type="hidden" name="random_cpt" value="<dtml-var "capt[0]">" />
-<input type="hidden" name="captcha_zz" value="1" />
 </div>
 </dtml-let>
-</dtml-if>

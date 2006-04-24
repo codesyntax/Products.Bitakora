@@ -22,6 +22,9 @@ import re
 import xmlrpclib
 
 ok_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_ '
+CAPTCHAS_NET_USER = 'bitakora'
+CAPTCHAS_NET_SECRET = 'HmE2OawsnKWxzHpgQRNmW9RuR5Ea8zV2Sn5eRzrT'
+
 
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
 
@@ -228,3 +231,27 @@ def makeXMLRPCCall(serverURI, sourceURI, targetURI):
 
     else:
         return res
+
+
+def getCaptchaImage(self):
+    """ Get a captcha image from Captchas.net service, using bitakora's user and password"""
+    from CaptchasDotNet import CaptchasDotNet
+       
+    captcha = CaptchasDotNet(client=CAPTCHAS_NET_USER, secret=CAPTCHAS_NET_SECRET)
+    
+    rnd = captcha.random()
+    img = captcha.image()
+    
+    return rnd, img
+    
+def checkCaptchaValue(random, input):
+    """ Check the captcha using Captchas.net service """
+    from CaptchasDotNet import CaptchasDotNet
+    
+    captcha = CaptchasDotNet(client=CAPTCHAS_NET_USER, secret=CAPTCHAS_NET_SECRET)
+    return captcha.verify(input, random)
+    
+        
+    
+    
+    
