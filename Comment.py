@@ -12,6 +12,7 @@ from AccessControl import ClassSecurityInfo
 
 # Catalog
 from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
+from Products.PythonScripts.standard import url_quote
 
 # Other stuff
 import DateTime
@@ -19,8 +20,15 @@ from utils import clean, cleanBody, cleanEmail, cleanURL, notifyByEmail
 
 __version__ = "$Revision$"
 
-def manage_addComment(self, author, body, url='', email='', date=None, REQUEST=None):
+def manage_addComment(self, author, body, url='', email='', date=None, bitakora_cpt='', random_cpt='', REQUEST=None):
     """ Called from HTML form when commenting """
+    from utils import checkCaptchaValue
+    if not checkCaptchaValue(random_cpt, bitakora_cpt):
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
+        
+        return None
+        
     newauthor = clean(author)
     newbody = cleanBody(self, body)
     newurl = cleanURL(url)
@@ -77,9 +85,9 @@ Comment body   :
         gtime = DateTime.DateTime() + 365
         exp = gtime.strftime('%A, %d-%b-%y %H:%M:%S GMT')
 
-        resp.setCookie('comment_author',author,expires=exp,path=path)
-        resp.setCookie('comment_email',email,expires=exp,path=path)
-        resp.setCookie('comment_url',url,expires=exp,path=path)
+        resp.setCookie('comment_author',author.encode('utf-8'),expires=exp,path=path)
+        resp.setCookie('comment_email',email.encode('utf-8'),expires=exp,path=path)
+        resp.setCookie('comment_url',url.encode('utf-8'),expires=exp,path=path)
 
     if REQUEST is not None:
         return REQUEST.RESPONSE.redirect(self.absolute_url())
