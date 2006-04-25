@@ -325,7 +325,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     def sendPing(self):
         """ send Update nortifications for PING Servers """
         ret_l = []
-        url = self.absolute_url()
+        url = self.blogurl()
         blog_name = self.blog_title()
         ping_servers = ['http://rpc.pingomatic.com', 'http://rpc.technorati.com/rpc/ping']
         for pingurl in ping_servers:
