@@ -323,7 +323,7 @@ class Post(CatalogPathAware, BTreeFolder2):
 
     security.declareProtected('Manage Bitakora', 'sendPing')
     def sendPing(self):
-        """ send Update nortifications for PING Servers """
+        """ send Update notifications for PING Servers """
         ret_l = []
         url = self.blogurl()
         blog_name = self.blog_title()
