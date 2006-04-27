@@ -227,7 +227,7 @@ class BitakoraCommunity(BTreeFolder2):
             del_users.extend([user for user,roles in rol])
             self._delObject(id)
             
-        self.acl_users.userFolderDelUsers(del_users)            
+        #self.acl_users.userFolderDelUsers(del_users)            
         self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
