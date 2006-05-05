@@ -677,7 +677,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             id = self.manage_addPost(title=post['title'], author=post['author'], body=post['body'], tags=post['tags'], date=post['date'], not_clean=1, sendping=0)
             posta = self.get(id)
             for comment in post.get('comments', []):
-                posta.manage_addComment(author=comment['author'], body=comment['body'], url=comment['url'], email=comment['email'], date=comment['date'])
+                posta.manage_addComment(author=comment['author'], body=comment['body'], url=comment['url'], email=comment['email'], date=comment['date'], captcha_zz=1)
                 
                 
         if REQUEST is not None:
