@@ -1,0 +1,13 @@
+<dtml-call "REQUEST.RESPONSE.setHeader('Content-Type', 'text/plain;; charset=UTF-8')">
+To:<dtml-var to>
+From:<dtml-var from>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+
+<dtml-var "gettext('Comment author')">: <dtml-var comment_author>
+<dtml-var "gettext('Author email')">: <dtml-var comment_email>
+<dtml-var "gettext('Author URL')">: <dtml-var comment_url>
+<dtml-var "gettext('Comment address')">: <dtml-var comment_address>
+<dtml-var "gettext('Comment body')">:
+<dtml-var comment_body>
+

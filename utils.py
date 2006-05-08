@@ -130,25 +130,23 @@ def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u''):
             mFrom = context.admin_mail
         else:
             mFrom = context.contact_mail
+            
+        variables = {}            
+        variables['from'] = mFrom.encode('utf-8')
+        variables['to'] = mTo.encode('utf-8')
+        variables['comment_author'] = name.encode('utf-8')
+        variables['comment_email'] = email.encode('utf-8')
+        variables['comment_subject'] = subject.encode('utf-8')
+        variables['comment_body'] = body.encode('utf-8')
         mSubj = context.gettext('New message from your blog!') 
-        mMsg = context.gettext("""To: %s
-From: %s
-Mime-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-
-Comment author :%s
-Author's email :%s
-Comment subject:%s
-Comment body   :
-%s
-    
-""") % (mTo.encode('utf-8'), mFrom.encode('utf-8'), name.encode('utf-8'), email.encode('utf-8'), subject.encode('utf-8'), cleanHTML(body).encode('utf-8'))
+        mMsg = context.contact_email_template(context, **variables)
     
         notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
     except:
         # If there is no MailHost, or other error happened
         # there won't be e-mail notifications
         pass
+
 
 
 def fillMessageCatalog(gettext):

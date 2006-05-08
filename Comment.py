@@ -57,20 +57,18 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
             mFrom = self.admin_mail
         else:
             mFrom = self.contact_mail
+            
+        variables = {}            
+        variables['from'] = mFrom.encode('utf-8')
+        variables['to'] = mTo.encode('utf-8')
+        variables['comment_author'] = newauthor.encode('utf-8')
+        variables['comment_email'] = newemail.encode('utf-8')
+        variables['comment_url'] = newurl.encode('utf-8')
+        variables['comment_body'] = cleanHTML(newbody).encode('utf-8')
+        variables['comment_address'] = comment.absolute_url()
+            
         mSubj = self.gettext('New comment in your blog!') 
-        mMsg = self.gettext("""To: %s
-From: %s
-Mime-Version: 1.0
-Content-Type: text/plain;
-
-Comment author :%s
-Author's url   :%s
-Author's email :%s
-Comm. Address  :%s
-Comment body   :
-%s
-
-""") % (mTo.encode('utf-8'), mFrom.encode('utf-8'), newauthor.encode('utf-8'), newurl.encode('utf-8'), newemail.encode('utf-8'), comment.absolute_url(), cleanHTML(newbody).encode('utf-8'))
+        mMsg = self.comment_email_template(self, **variables)
 
         notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)
     except:

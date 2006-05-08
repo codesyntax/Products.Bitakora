@@ -3,6 +3,7 @@
 <dtml-if "REQUEST.has_key('body')">
 
   <dtml-call "send_contact_mail(name, email, subject, body)">
+  <dtml-call "RESPONSE.setHeader('content-type', 'text/html; charset=UTF-8')">  
   <h3><dtml-var "gettext('Thank you')"></h3>
   <p><dtml-var "gettext('Your message has been sent correctly')"></p>
   <p><a href="<dtml-var blogurl>"><dtml-var "gettext('Return to main page')"></a></p>
