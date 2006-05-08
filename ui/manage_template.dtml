@@ -25,7 +25,7 @@
 <dtml-if inCommunity>
 <dtml-in "img.templates.objectIds()">
 <form action="select_template" method="post" onsubmit="javascript:return confirm('<dtml-var "gettext('When selecting this template, the css you have edited (if you did so) will be lost. Are you sure?')">');">
-<p><a href="<dtml-var communityUrl>/img/template<dtml-var sequence-item>.gif" target="_blank"><img src="<dtml-var communityUrl>/img/template<dtml-var sequence-item>-small.gif" alt="Template<dtml-var sequence-item>" /></a>
+<p><a href="<dtml-var communityUrl>/img/template<dtml-var sequence-item>.gif" target="_blank"><img src="<dtml-var communityUrl>/img/template<dtml-var sequence-item>-small.gif" alt="Template<dtml-var sequence-item>" /></a></p>
 <input type="hidden" name="template" value="<dtml-var sequence-item>" />
 <input type="submit" value="<dtml-var "gettext('Select this template')">" />
 </form>
