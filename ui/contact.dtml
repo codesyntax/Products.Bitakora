@@ -1,8 +1,9 @@
 <dtml-var standard_html_header>
 
-<dtml-if "REQUEST.has_key('body')">
-
-  <dtml-call "send_contact_mail(name, email, subject, body)">
+<dtml-if "REQUEST.get('msg', '') == 'Ok'">
+<dtml-comment>
+  <dtml-call "send_contact_mail(name, email, subject, body, bitakora_cpt, random_cpt)">
+</dtml-comment>  
   <dtml-call "RESPONSE.setHeader('content-type', 'text/html; charset=UTF-8')">  
   <h3><dtml-var "gettext('Thank you')"></h3>
   <p><dtml-var "gettext('Your message has been sent correctly')"></p>
@@ -15,24 +16,25 @@
 <p><dtml-var "gettext('You can get it touch with me filling and sending this form. If you want me to reply, please provide an email address so I can answer you. Thank you.')"></p>
 
 
-<form method="post" action="">
+<form method="post" action="send_contact_mail" method="post">
 
 <p>
 <label for="name"><dtml-var "gettext('Name:')"></label><br/>
-<input type="text" id="name" name="name:utf8:ustring" size="40"/>
+<input type="text" id="name" name="name:utf8:ustring" size="40" value="<dtml-var "REQUEST.get('name', '')">"/>
 </p>
 <p>
 <label for="email"><dtml-var "gettext('Email Address:')"></label><br/>
-<input type="text" id="email" name="email:utf8:ustring" size="40"/>
+<input type="text" id="email" name="email:utf8:ustring" size="40" value="<dtml-var "REQUEST.get('email', '')">"/>
 </p>
 <p>
 <label for="subject"><dtml-var "gettext('Subject')"></label><br/>
-<input type="text" id="subject" name="subject:utf8:ustring" size="40"/>
+<input type="text" id="subject" name="subject:utf8:ustring" size="40" value="<dtml-var "REQUEST.get('subject', '')">"/>
 </p>
 <p>
 <label for="body"><dtml-var "gettext('Comments:')"></label><br/>
-<textarea name="body:utf8:utext" id="body" rows="10" cols="40"></textarea>
+<textarea name="body:utf8:utext" id="body" rows="10" cols="40"><dtml-var "REQUEST.get('body', '')"></textarea>
 </p>
+<dtml-var captcha_control missing="">
 <p>
 <input type="submit" value="<dtml-var "gettext('Send your comments')">"/>
 </p>

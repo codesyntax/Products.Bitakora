@@ -10,6 +10,7 @@
 
 # Importing
 from Products.PythonScripts.PythonScript import manage_addPythonScript
+from Products.PythonScripts.standard import url_quote
 
 import Globals
 
@@ -116,7 +117,15 @@ def notifyByEmail(mailhost, mTo, mFrom, mSubj, mMsg):
     mailhost.send(mMsg, mTo, mFrom, mSubj)
 
 
-def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u''):
+def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitakora_cpt='', random_cpt='', REQUEST=None):
+    """ Send a mail to blog owner """
+
+    if not checkCaptchaValue(random_cpt, bitakora_cpt):
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=%s&name=%s&email=%s&subject=%s&body=%s#bitakora_cpt_control' % (context.gettext('Are you a bot? Please try again...'), url_quote(name.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(subject.encode('utf-8')), url_quote(body.encode('utf-8'))))
+                
+        return None
+
     try:
         mailhost = getattr(context,context.superValues('Mail Host')[0].id)
         try:
@@ -146,6 +155,9 @@ def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u''):
         # If there is no MailHost, or other error happened
         # there won't be e-mail notifications
         pass
+        
+    if REQUEST is not None:
+        return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=Ok')        
 
 
 
