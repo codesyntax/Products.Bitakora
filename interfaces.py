@@ -1,7 +1,7 @@
 from zope.interface import Interface
 from zope.schema import Text, TextLine, Field, DateTime, List, URI
 
-__version__ = '$Id'
+__version__ = '$Id$'
 
 class IBitakoraCommunity(Interface):
     """ Interface for BitakoraCommunity """
