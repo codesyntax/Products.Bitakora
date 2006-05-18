@@ -14,7 +14,7 @@ def validEmail(mail):
             return 1
     return 0
     
-ok_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_ '
+ok_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'
 def validId(id):
     for letter in id:
         if letter not in ok_chars:
