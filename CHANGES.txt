@@ -4,6 +4,14 @@
 CHANGES.txt
 ===========
 
+v. 0.1.8
+========
+- Added Akismet spam control for comments and pingbacks
+- Added CAPTCHA control to comment adding and contact form. Captcha images and example code provided by http://www.captchas.net
+- Fixed: contact and new comments notifications are properly i18n-zed
+- Ping to Technorati added
+- Fixed: Ping to Technorati and Ping-o-matic. The ping must be sent with blog title and not with post title
+
 v. 0.1.7
 ========
 - Fixed bug in post edit form. If a method called 'preview' existed, it was not posible to edit a post.

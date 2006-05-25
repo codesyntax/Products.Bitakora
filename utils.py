@@ -27,6 +27,7 @@ CAPTCHAS_NET_USER = 'bitakora'
 CAPTCHAS_NET_SECRET = 'HmE2OawsnKWxzHpgQRNmW9RuR5Ea8zV2Sn5eRzrT'
 AKISMET_KEY = '5cbed64f50bb'
 AKISMET_AGENT = 'Bitakora [http://www.codesyntax.com/bitakora]'
+AKISMET_ENABLED = 0
 
 
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
@@ -264,6 +265,9 @@ def checkCaptchaValue(random, input):
     return captcha.verify(input, random)
     
 def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_url='', blogurl='', REQUEST=None):
+    if not AKISMET_ENABLED:
+        return 0
+
     from akismet import Akismet
     ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
     data = {}
@@ -280,6 +284,9 @@ def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_
     return ak.comment_check(comment=comment_body, data=data)
 
 def isPingbackSpam(title='', url='', excerpt='', blogurl='', REQUEST=None):
+    if not AKISMET_ENABLED:
+        return 0
+
     from akismet import Akismet
     ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
     data = {}
