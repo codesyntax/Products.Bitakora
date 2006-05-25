@@ -32,9 +32,6 @@ from utils import fillMessageCatalog, prepareTags, ok_chars
 from PingMethodContainer import PingMethodContainer
 
 
-
-__version__ = "$Revision$"
-
 manage_addBitakoraForm = HTMLFile('ui/Bitakora_add', globals())
 
 def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'', REQUEST=None):
@@ -679,12 +676,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             id = self.manage_addPost(title=post['title'], author=post['author'], body=post['body'], tags=post['tags'], date=post['date'], not_clean=1, sendping=0)
             posta = self.get(id)
             for comment in post.get('comments', []):
-                posta.manage_addComment(author=comment['author'], body=comment['body'], url=comment['url'], email=comment['email'], date=comment['date'], captcha_zz=1)
+                posta.manage_addComment(author=comment['author'], body=comment['body'], url=comment['url'], email=comment['email'], date=comment['date'])
                 
                 
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.absolute_url(), 'XML file imported succesfully'))   
-            
-        
 
 Globals.InitializeClass(Bitakora)

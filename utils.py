@@ -29,9 +29,7 @@ AKISMET_KEY = '5cbed64f50bb'
 AKISMET_AGENT = 'Bitakora [http://www.codesyntax.com/bitakora]'
 AKISMET_ENABLED = 0
 
-
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
-
 
 def addDTML(obj,id,title,file): 
     file_path = Globals.package_home(globals())
