@@ -25,6 +25,8 @@ import xmlrpclib
 ok_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_ '
 CAPTCHAS_NET_USER = 'bitakora'
 CAPTCHAS_NET_SECRET = 'HmE2OawsnKWxzHpgQRNmW9RuR5Ea8zV2Sn5eRzrT'
+AKISMET_KEY = '5cbed64f50bb'
+AKISMET_AGENT = 'Bitakora [http://www.codesyntax.com/bitakora]'
 
 
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
@@ -216,7 +218,7 @@ def makeXMLRPCCall(serverURI, sourceURI, targetURI):
     try:
         res = server.pingback.ping(sourceURI, targetURI)
     except:
-        return """ Ezin da """
+        return """ Ezin da: %s, %s, %s""" % (sourceURI, targetURI, serverURI)
     if res == '0':
         return """ A generic fault code. Servers MAY use this error code instead of any of the others if they do not have a way of determining the correct fault code."""
 
@@ -261,7 +263,37 @@ def checkCaptchaValue(random, input):
     captcha = CaptchasDotNet(client=CAPTCHAS_NET_USER, secret=CAPTCHAS_NET_SECRET)
     return captcha.verify(input, random)
     
-        
+def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_url='', blogurl='', REQUEST=None):
+    from akismet import Akismet
+    ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
+    data = {}
+    data['blog'] = blogurl
+    data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
+    data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
+    data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
+    data['comment_type'] = 'comment'
+    data['comment_author'] = comment_author
+    data['comment_author_email'] = comment_email
+    data['comment_author_url'] = comment_url
+    data.update(REQUEST)
     
+    return ak.comment_check(comment=comment_body, data=data)
+
+def isPingbackSpam(title='', url='', excerpt='', blogurl='', REQUEST=None):
+    from akismet import Akismet
+    ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
+    data = {}
+    data['blog'] = blogurl
+    data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
+    data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
+    data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
+    data['comment_type'] = 'pingback'
+    data['comment_author'] = title
+    data['comment_author_email'] = url
+    data['comment_author_url'] = url
+    data.update(REQUEST)   
+
+    return ak.comment_check(comment=excerpt, data=data, DEBUG=True)
+
     
     

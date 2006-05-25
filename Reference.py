@@ -21,6 +21,11 @@ __version__ = "$Revision$"
 def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
     """ Add a pingback """
 
+    from utils import isPingbackSpam
+    
+    if isPingbackSpam(sourceTitle, sourceURI, sourceExcerpt, self.blogurl(), self.REQUEST):
+        return REQUEST.RESPONSE.redirect('http://www.google.com')
+
     id = self.createReferenceId()
     newTitle = clean(sourceTitle)
     newURI = clean(sourceURI)
