@@ -1,3 +1,4 @@
+<dtml-if CAPTCHA_ENABLED>
 <dtml-let capt="getCaptchaImage()">
 <dtml-if "REQUEST.has_key('msg')">
 <div class="system-msg"><dtml-var "REQUEST.get('msg')"></div>
@@ -11,3 +12,4 @@
 <input type="hidden" name="random_cpt" value="<dtml-var "capt[0]">" />
 </div>
 </dtml-let>
+</dtml-if>
