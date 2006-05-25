@@ -23,7 +23,7 @@ __version__ = "$Revision$"
 def manage_addComment(self, author, body, url='', email='', date=None, bitakora_cpt='', random_cpt='', captcha_zz=0, REQUEST=None):
     """ Called from HTML form when commenting """
     from utils import checkCaptchaValue, isCommentSpam
-    if not captcha_zz:
+    if captcha_zz:
         if not checkCaptchaValue(random_cpt, bitakora_cpt):
             if REQUEST is not None:
                 return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
