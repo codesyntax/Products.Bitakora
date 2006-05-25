@@ -112,7 +112,6 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.reindex_object()
         res = self.sendPing()    
         pingbackresults = self.postPingBacks(self.body) 
-        
         if self.inCommunity():
             # We are in a Bitakora Community, so catalog the post there
             cat = self.getParentNode().getParentNode().get('Catalog', 'None')
@@ -335,8 +334,6 @@ class Post(CatalogPathAware, BTreeFolder2):
                 resp = {}
                 resp["message"] = str(e)
                 ret_l.append( {"url":pingurl,"message":resp["message"]} )
-        from zLOG import LOG, INFO
-        LOG('sendPing', INFO, ret_l)                
         return ret_l
 
     security.declarePrivate('send_ping')
