@@ -102,7 +102,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                    #{'id':'subtitle', 'type':'ustring', 'mode':'w'},
                    #{'id':'contact_mail', 'type':'ustring', 'mode':'w'},
                    {'id':'management_page_charset','type':'string', 'mode':'w'},
-                   #{'id':'sidebar_html', 'type':'utext', 'mode':'w'},
+                   {'id':'CAPTCHA_ENABLED', 'type':'int'},
                    #{'id':'description', 'type':'utext', 'mode':'w'}
                    )
 
@@ -187,6 +187,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         self.reference_allowed = 1
         #self.imageUrl = None
         self.imagename = ''
+        self.CAPTCHA_ENABLED = 1
         
     security.declareProtected('View', 'searchResults')
     def searchResults(self, **kw):

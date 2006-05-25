@@ -6,6 +6,8 @@ CHANGES.txt
 
 v. 0.1.8
 ========
+- CAPTCHA control is enabled by defatul. To disable add a property called CAPTCHA_ENABLED and set it to 0 (property type: int)
+- Akismet plugin is disabled by default. To enable change utils.py
 - Added Akismet spam control for comments and pingbacks
 - Added CAPTCHA control to comment adding and contact form. Captcha images and example code provided by http://www.captchas.net
 - Fixed: contact and new comments notifications are properly i18n-zed
