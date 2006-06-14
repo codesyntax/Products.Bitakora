@@ -27,7 +27,7 @@ CAPTCHAS_NET_USER = 'bitakora'
 CAPTCHAS_NET_SECRET = 'HmE2OawsnKWxzHpgQRNmW9RuR5Ea8zV2Sn5eRzrT'
 AKISMET_KEY = '5cbed64f50bb'
 AKISMET_AGENT = 'Bitakora [http://www.codesyntax.com/bitakora]'
-AKISMET_ENABLED = 0
+AKISMET_ENABLED = 1
 
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
 
@@ -266,21 +266,54 @@ def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_
     if not AKISMET_ENABLED:
         return 0
 
-    from akismet import Akismet
+    from akismet import Akismet, AkismetError, APIKeyError
+    from urllib2 import URLError, HTTPError
+    from socket import timeout
     ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
     data = {}
     data['blog'] = blogurl
-    data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
-    data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
-    data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
+    try:
+        data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
+        data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
+        data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
+    except:
+        data['user_ip'] = '192.168.0.1'
+        data['user_agent'] = 'Mozilla'
+        data['referrer'] = 'unknown'
+        
     data['comment_type'] = 'comment'
     data['comment_author'] = comment_author
     data['comment_author_email'] = comment_email
     data['comment_author_url'] = comment_url
-    data.update(REQUEST)
+    try:
+        data.update(REQUEST)
+    except:
+        pass
+    from zLOG import LOG, INFO
+    try:
+        return ak.comment_check(comment=comment_body, data=data)
+    except AkismetError:
+        # Something happened with an argument
+        LOG('isCommentSpam', INFO, 'Argument error')
+        return 0
+    except URLError, HTTPError:
+        # Something happended with the conection
+        LOG('isCommentSpam', INFO, 'Connection error')
+        return 0
+    except APIKeyError:
+        # Something happened with the API Key
+        LOG('isCommentSpam', INFO, 'APIKeyError')
+        return 0
+    except timeout:
+        # Aghhhh, connection time out
+        LOG('isCommentSpam', INFO, 'Connection timeout')
+        return 0
+    except:
+        # What the hell happened?
+        
+        LOG('isCommentSpam', INFO, 'Unknown error: %s' % comment_body)
+        return 0
     
-    return ak.comment_check(comment=comment_body, data=data)
-
 def isPingbackSpam(title='', url='', excerpt='', blogurl='', REQUEST=None):
     if not AKISMET_ENABLED:
         return 0
@@ -289,16 +322,23 @@ def isPingbackSpam(title='', url='', excerpt='', blogurl='', REQUEST=None):
     ak = Akismet(key=AKISMET_KEY, blog_url=blogurl, agent=AKISMET_AGENT)
     data = {}
     data['blog'] = blogurl
-    data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
-    data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
-    data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
+    try:
+        data['user_ip'] = REQUEST.get('REMOTE_ADDR', '')
+        data['user_agent'] = REQUEST.get('HTTP_USER_AGENT', '')
+        data['referrer'] = REQUEST.get('HTTP_REFERER', 'unknown')
+    except:
+        pass
+    
     data['comment_type'] = 'pingback'
     data['comment_author'] = title
     data['comment_author_email'] = url
     data['comment_author_url'] = url
-    data.update(REQUEST)   
+    try:
+        data.update(REQUEST)   
+    except:
+        pass
 
-    return ak.comment_check(comment=excerpt, data=data, DEBUG=True)
+    return ak.comment_check(comment=excerpt, data=data)
 
     
     
