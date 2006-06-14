@@ -54,12 +54,12 @@
 <p>
 <label for="body"><dtml-var "gettext('Body')"></label><br/>
 <dtml-if REQUEST.preview>
-<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', '') and cleanBody(body) or '', toolbox='', lang='en',
+<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', '') and cleanBody(body) or '', toolbox='', lang=Localizer.get_selected_language(),
             path='', widget='bitakora_edit_js',
             style='width: 440px; height: 250px; border: 1px solid #000000;', 
             button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
 <dtml-else>
-<dtml-var "Epoz('body:utf8:utext', data=showBody(), toolbox='', lang='es',
+<dtml-var "Epoz('body:utf8:utext', data=showBody(), toolbox='', lang=Localizer.get_selected_language(),
             path='', widget='bitakora_edit_js',
             style='width: 440px; height: 250px; border: 1px solid #000000;', 
             button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
