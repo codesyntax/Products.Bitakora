@@ -16,7 +16,7 @@
 </p>
 <p>
 <label><dtml-var "gettext('Comments:')"></label><br/>
-<dtml-var "Epoz('body:utf8:ustring', data=REQUEST.form.get('body', '').decode('utf-8'), toolbox='', lang='en',
+<dtml-var "Epoz('body:utf8:ustring', data=REQUEST.form.get('body', '').decode('utf-8'), toolbox='', lang=Localizer.get_selected_language(),
             path='', widget='bitakora_comment_js',
             style='width: 440px; height: 250px; border: 1px solid #000000;',
             button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;',
