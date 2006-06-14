@@ -31,7 +31,12 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
             return None
 
     if isCommentSpam(body, author, email, url, self.blogurl(), REQUEST):
-        return REQUEST.RESPONSE.redirect('http://www.google.com')
+        from zLOG import LOG, INFO
+        LOG('manage_addComment', INFO, 'Spam: %s' % body)
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect('http://www.google.com')
+        
+        return 0
         
     newauthor = clean(author)
     newbody = cleanBody(self, body)
