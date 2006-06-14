@@ -24,7 +24,10 @@ def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
     from utils import isPingbackSpam
     
     if isPingbackSpam(sourceTitle, sourceURI, sourceExcerpt, self.blogurl(), self.REQUEST):
-        return REQUEST.RESPONSE.redirect('http://www.google.com')
+        try:
+            return REQUEST.RESPONSE.redirect('http://www.google.com')
+        except:
+            return 0
 
     id = self.createReferenceId()
     newTitle = clean(sourceTitle)
