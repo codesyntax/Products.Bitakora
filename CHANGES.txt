@@ -4,6 +4,10 @@
 CHANGES.txt
 ===========
 
+v. 0.1.9
+========
+- Allow more attributes in HTML
+
 v. 0.1.8
 ========
 - CAPTCHA control is enabled by defatul. To disable add a property called CAPTCHA_ENABLED and set it to 0 (property type: int)
