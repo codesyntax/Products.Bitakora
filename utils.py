@@ -118,45 +118,45 @@ def notifyByEmail(mailhost, mTo, mFrom, mSubj, mMsg):
     mailhost.send(mMsg, mTo, mFrom, mSubj)
 
 
-def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitakora_cpt='', random_cpt='', REQUEST=None):
+def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitakora_cpt='', random_cpt='', captcha_zz=0, REQUEST=None):
     """ Send a mail to blog owner """
+    if captcha_zz:
+        if not checkCaptchaValue(random_cpt, bitakora_cpt):
+            if REQUEST is not None:
+                return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=%s&name=%s&email=%s&subject=%s&body=%s#bitakora_cpt_control' % (context.gettext('Are you a bot? Please try again...'), url_quote(name.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(subject.encode('utf-8')), url_quote(body.encode('utf-8'))))
 
-    if not checkCaptchaValue(random_cpt, bitakora_cpt):
-        if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=%s&name=%s&email=%s&subject=%s&body=%s#bitakora_cpt_control' % (context.gettext('Are you a bot? Please try again...'), url_quote(name.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(subject.encode('utf-8')), url_quote(body.encode('utf-8'))))
-                
-        return None
+            return None
 
-    try:
-        mailhost = getattr(context,context.superValues('Mail Host')[0].id)
         try:
-            from EpozPostTidy import cleanHTML
-        except ImportError:
-            def cleanHTML(text):
-                return text
-        
-        mTo = context.contact_mail
-        if context.inCommunity():
-            mFrom = context.admin_mail
-        else:
-            mFrom = context.contact_mail
-            
-        variables = {}            
-        variables['from'] = mFrom.encode('utf-8')
-        variables['to'] = mTo.encode('utf-8')
-        variables['comment_author'] = name.encode('utf-8')
-        variables['comment_email'] = email.encode('utf-8')
-        variables['comment_subject'] = subject.encode('utf-8')
-        variables['comment_body'] = body.encode('utf-8')
-        mSubj = context.gettext('New message from your blog!') 
-        mMsg = context.contact_email_template(context, **variables)
-    
-        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
-    except:
-        # If there is no MailHost, or other error happened
-        # there won't be e-mail notifications
-        pass
-        
+            mailhost = getattr(context,context.superValues('Mail Host')[0].id)
+            try:
+                from EpozPostTidy import cleanHTML
+            except ImportError:
+                def cleanHTML(text):
+                    return text
+
+            mTo = context.contact_mail
+            if context.inCommunity():
+                mFrom = context.admin_mail
+            else:
+                mFrom = context.contact_mail
+
+            variables = {}            
+            variables['from'] = mFrom.encode('utf-8')
+            variables['to'] = mTo.encode('utf-8')
+            variables['comment_author'] = name.encode('utf-8')
+            variables['comment_email'] = email.encode('utf-8')
+            variables['comment_subject'] = subject.encode('utf-8')
+            variables['comment_body'] = body.encode('utf-8')
+            mSubj = context.gettext('New message from your blog!') 
+            mMsg = context.contact_email_template(context, **variables)
+
+            notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
+        except:
+            # If there is no MailHost, or other error happened
+            # there won't be e-mail notifications
+            pass
+
     if REQUEST is not None:
         return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=Ok')        
 
