@@ -15,7 +15,7 @@
 <div id="container">
  <div id="header">
  <div id="blogtitle">
-    <h1><a href="<dtml-var communityUrl>"><dtml-if "'logo.gif' in img.objectIds()"><img src="/img/logo.gif" alt="<dtml-var communityTitle>" title="<dtml-var communityTitle>" /><dtml-else><dtml-var communityTitle></dtml-if></a></h1>
+    <h1><a href="<dtml-var communityUrl>"><dtml-if "'logo.gif' in img.objectIds()"><img src="<dtml-var communityUrl>/img/logo.gif" alt="<dtml-var communityTitle>" title="<dtml-var communityTitle>" /><dtml-else><dtml-var communityTitle></dtml-if></a></h1>
  </div>
  
  </div>
