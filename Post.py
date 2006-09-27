@@ -1,4 +1,4 @@
-m# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 #
