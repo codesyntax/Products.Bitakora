@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+m# -*- coding: utf-8 -*-
 # (c) Copyright 2005, CodeSyntax <http://www.codesyntax.com>
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 #
@@ -98,7 +98,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         
 
     security.declareProtected('Manage Bitakora', 'manage_editPost')
-    def manage_editPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, REQUEST=None):
+    def manage_editPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, sendping=1, REQUEST=None):
         """ Editor """
 
         self.title = title
@@ -110,8 +110,9 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.reference_allowed = comment_allowed
         self.published = publish
         self.reindex_object()
-        res = self.sendPing()    
-        pingbackresults = self.postPingBacks(self.body) 
+        if sendping:
+            res = self.sendPing()    
+            pingbackresults = self.postPingBacks(self.body) 
         if self.inCommunity():
             # We are in a Bitakora Community, so catalog the post there
             cat = self.getParentNode().getParentNode().get('Catalog', 'None')
