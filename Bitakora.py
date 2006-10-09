@@ -572,7 +572,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ Users """
         users = self.users_with_local_role('Blogger')
         if users:
-            return users[0]
+            return users
         return ''
 
     security.declarePublic('getUnpublishedComments')
