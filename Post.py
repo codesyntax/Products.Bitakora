@@ -287,11 +287,14 @@ class Post(CatalogPathAware, BTreeFolder2):
     security.declarePrivate('createCommentId')
     def createCommentId(self):
         """ create id """
-        if len(self.commentList(all=1)) == 0:
+        l = self.commentList(all=1)
+        if len(l) == 0:
             return 0
         else:
-            return len(self.commentList(all=1))
-
+            l.sort(lambda x,y:cmp(int(x.id), int(y.id)))
+            last_c_id = l[-1].getId()
+            return int(last_c_id) + 1
+                           
     security.declarePrivate('createReferenceId')
     def createReferenceId(self):
         """ create id """
