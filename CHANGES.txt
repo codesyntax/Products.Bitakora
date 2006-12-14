@@ -4,6 +4,11 @@
 CHANGES.txt
 ===========
 
+v. 0.1.10
+=========
+- Fixed bug, when creating comment ids
+
+
 v. 0.1.9
 ========
 - Allow more attributes in HTML
