@@ -9,6 +9,7 @@
      <item>
       <title><dtml-var showTitle html_quote></title>
       <link><dtml-var blogurl>/<dtml-var getId></link>
+      <guid><dtml-var blogurl>/<dtml-var getId></guid>
       <description><![CDATA[
         <dtml-var showBody>
        ]]></description>
