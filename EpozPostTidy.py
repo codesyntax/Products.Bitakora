@@ -22,7 +22,7 @@ allowedtags = ['p', 'pre', 'table', 'tr', 'th', 'td', 'thead', 'tbody', 'tfoot',
 replaceabletags = {'b':'strong', 'i':'em'}             
 
 allowedattrs = ['href', 'src', 'alt', 'title', 'width', 'height',
-                'name', 'value', 'type', 'classid', 'codebase']             
+                'name', 'value', 'type', 'classid', 'codebase','flashvars']             
 
 # Just a simple htmlparser
 class aHTMLParser(HTMLParser):
