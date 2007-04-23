@@ -2,7 +2,7 @@
 
 <dtml-if "REQUEST.get('msg', '') == 'Ok'">
 <dtml-comment>
-  <dtml-call "send_contact_mail(name, email, subject, body, bitakora_cpt, random_cpt)">
+  <dtml-call "send_contact_mail(name, email, subject, body, bitakora_cpt, random_cpt, 1)">
 </dtml-comment>  
   <dtml-call "RESPONSE.setHeader('content-type', 'text/html; charset=UTF-8')">  
   <h3><dtml-var "gettext('Thank you')"></h3>
@@ -17,7 +17,6 @@
 
 
 <form method="post" action="send_contact_mail" method="post">
-
 <p>
 <label for="name"><dtml-var "gettext('Name:')"></label><br/>
 <input type="text" id="name" name="name:utf8:ustring" size="40" value="<dtml-var "REQUEST.get('name', '')">"/>
