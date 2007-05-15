@@ -15,9 +15,11 @@ blocktags = ['p', 'pre', 'div',
              'ul','ol','li',
              'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
              
-allowedtags = ['p', 'pre', 'table', 'tr', 'th', 'td', 'thead', 'tbody', 'tfoot',
-             'ul','ol','li','h3', 'h4', 'h5', 'h6', 'blockquote', 'q', 'cite', 'b', 'i',
-             'strong', 'em', 'a', 'iframe', 'object', 'param', 'embed', 'del', 'u']
+allowedtags = ['p', 'pre', 'table', 'tr', 'th', 'td', 'thead',
+             'tbody', 'tfoot', 'ul','ol','li','h3', 'h4', 'h5', 'h6',
+             'blockquote', 'q', 'cite', 'b', 'i', 'strong', 'em',
+             'a', 'iframe', 'object', 'param', 'embed', 'del', 'u',
+             'strike']
              
 replaceabletags = {'b':'strong', 'i':'em'}             
 

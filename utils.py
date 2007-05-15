@@ -28,6 +28,7 @@ CAPTCHAS_NET_SECRET = 'HmE2OawsnKWxzHpgQRNmW9RuR5Ea8zV2Sn5eRzrT'
 AKISMET_KEY = '5cbed64f50bb'
 AKISMET_AGENT = 'Bitakora [http://www.codesyntax.com/bitakora]'
 AKISMET_ENABLED = 1
+PARSE_ENABLED = 0
 
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
 
@@ -72,6 +73,9 @@ def clean(text):
 
 def cleanBody(self, text):
     """ clean the text to delete all unwanted HTML """
+    if not PARSE_ENABLED:
+        return text
+    
     try:
         from EpozPostTidy import EpozPostTidy
     except:
@@ -128,7 +132,7 @@ def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitak
             return None
 
         try:
-            mailhost = getattr(context,context.superValues('Mail Host')[0].id)
+            mailhost = context.MailHost
             try:
                 from EpozPostTidy import cleanHTML
             except ImportError:
@@ -152,10 +156,12 @@ def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitak
             mMsg = context.contact_email_template(context, **variables)
 
             notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
-        except:
+        except Exception, e:
             # If there is no MailHost, or other error happened
             # there won't be e-mail notifications
-            pass
+            from logging import getLogger
+            log = getLogger('send_contact_mail')
+            log.info(e)
 
     if REQUEST is not None:
         return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=Ok')        

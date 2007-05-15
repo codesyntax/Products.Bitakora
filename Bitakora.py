@@ -77,6 +77,7 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
     # the messages
 
     if self.meta_type == 'BitakoraCommunity':
+        sq._delObject('Localizer')
         sq._delObject('gettext')
         self.Catalog.catalog_object(sq, '/'.join(sq.getPhysicalPath()))
 
@@ -274,6 +275,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ Just to have all methods adding something extra
             to the ZMI together """
         file_path = Globals.package_home(globals())
+
+        localizer = Localizer('Localizer', ('en', 'es', 'eu',))
+        localizer._v_hook = 1
+        self._setObject('Localizer', localizer)
 
         try:
             # old MessageCatalog
