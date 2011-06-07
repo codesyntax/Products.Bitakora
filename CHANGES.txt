@@ -4,6 +4,22 @@
 CHANGES.txt
 ===========
 
+v. 0.1.19
+==========
+
+- Re-add HTML parsing for comments to avoid arbitrary JavaScript to be added in the comments. Thanks to Iker Mendilibar. [erral]
+
+v. 0.1.16
+=========
+- Use string interpolation in community templates
+
+- Add error control when an user asks password reminder twice.
+
+
+v. 0.1.15
+==========
+- Modified the way to handle pings. Now the pings are handled making Future calls, creating new threads to make the pings
+
 v. 0.1.10
 =========
 - Fixed bug, when creating comment ids

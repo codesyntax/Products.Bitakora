@@ -16,7 +16,7 @@ from Products.PythonScripts.standard import url_quote
 
 # Other stuff
 import DateTime
-from utils import clean, cleanBody, cleanEmail, cleanURL, notifyByEmail
+from utils import clean, cleanCommentBody, cleanEmail, cleanURL, notifyByEmail
 
 __version__ = "$Revision$"
 
@@ -29,17 +29,21 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
                 return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
             
             return None
+    
+    # Publish the comment by default
+    publish = 1
 
     if isCommentSpam(body, author, email, url, self.blogurl(), REQUEST):
         from zLOG import LOG, INFO
         LOG('manage_addComment', INFO, 'Spam: %s' % body)
-        if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('http://www.google.com')
         
+        if REQUEST is not None:
+            return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
+
         return 0
         
     newauthor = clean(author)
-    newbody = cleanBody(self, body)
+    newbody = cleanCommentBody(self, body)
     newurl = cleanURL(url)
     newemail = cleanEmail(email)
     if date is None:
@@ -47,7 +51,7 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
     else:
         newdate = DateTime.DateTime(date)           
     newid = self.createCommentId()
-    publish = 1
+
     if self.commentsModerated():
         publish = 0
           
@@ -98,9 +102,14 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
         resp.setCookie('comment_url',url.encode('utf-8'),expires=exp,path=path)
 
     if REQUEST is not None:
-        return REQUEST.RESPONSE.redirect(self.absolute_url())
+        url = self.absolute_url()
+        if publish == 0:
+            msg = '?msg=%s' % self.gettext('Your message is moderated and waiting for aproval')
+            url = url + msg
 
-    return newid
+        return REQUEST.RESPONSE.redirect(url)
+    else:
+        return newid
 
 class Comment(CatalogPathAware, SimpleItem):
     """ Comment class """
@@ -126,7 +135,7 @@ class Comment(CatalogPathAware, SimpleItem):
         self.author = author
         self.email = email
         self.url = url
-        self.body = cleanBody(self, body)
+        self.body = cleanCommentBody(self, body)
         self.date = DateTime.DateTime(date)
         self.published = publish
         self.reindex_object()

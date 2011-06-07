@@ -19,6 +19,7 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 # To add ZCatalog FieldIndex and TextIndexNG2
 from ZPublisher.HTTPRequest import record
 # Localizer   
+from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog
 # BTreeFolder2
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2

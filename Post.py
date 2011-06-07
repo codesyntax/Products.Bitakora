@@ -20,10 +20,11 @@ from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
 
 # Other stuff
 import DateTime
-from utils import clean, cleanBody, discoverPingbackUrl, makeXMLRPCCall
+from utils import clean, cleanBody, cleanCommentBody
 from utils import addPythonScript, prepareTags, ok_chars
-
-from urllister import URLLister
+from utils import sendPing, postPingBacks
+from future import Future
+import os
 
 __version__ = "$Revision$"
 
@@ -51,10 +52,6 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
     self._setObject(str(newid), post)
     post = self.get(newid)
         
-    if sendping:
-        pingbackresults = post.postPingBacks(newbody) 
-        res = post.sendPing()        
-
     if self.inCommunity():
         # We are in a Bitakora Community, so catalog the post there
         cat = self.getParentNode().get('Catalog', 'None')
@@ -63,6 +60,10 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
 
     self.postcount = self.postcount + 1
     
+    if sendping:
+        tech_pings = Future(sendPing, self.absolute_url(), self.blog_title())
+        pingbacks = Future(postPingBacks, newbody, post.absolute_url())
+
     if REQUEST is not None:
         return REQUEST.RESPONSE.redirect('%s/admin?msg=%s' % (self.absolute_url(), 'Post added succesfully'))
 
@@ -110,14 +111,16 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.reference_allowed = comment_allowed
         self.published = publish
         self.reindex_object()
-        if sendping:
-            res = self.sendPing()    
-            pingbackresults = self.postPingBacks(self.body) 
+
         if self.inCommunity():
             # We are in a Bitakora Community, so catalog the post there
             cat = self.getParentNode().getParentNode().get('Catalog', 'None')
             if cat is not None:
                 cat.catalog_object(self, '/'.join(self.getPhysicalPath()))                
+
+        if sendping:
+            tech_pings = Future(sendPing, self.absolute_url(), self.blog_title())
+            pingbacks = Future(postPingBacks, self.body, self.absolute_url())
 
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/edit?msg=%s' % (self.absolute_url(), 'Post edited succesfully'))
@@ -142,32 +145,6 @@ class Post(CatalogPathAware, BTreeFolder2):
 
             if REQUEST is not None:
                 return REQUEST.RESPONSE.redirect('%s/edit?msg=%s' % (self.absolute_url(), 'Comment edited succesfully'))
-
-    security.declarePrivate('postPingBacks')
-    def postPingBacks(self, newbody):
-        """ pingback """
-        pingbackresults = []
-        parser = URLLister()
-        parser.feed(newbody)
-        parser.close()
-        urls = parser.urls
-    
-        for url in urls:
-            url = str(url)
-            result = self.sendPingback(url)
-            pingbackresults.append((url, result))
-
-        return pingbackresults
-
-    security.declarePrivate('sendPingback')
-    def sendPingback(self, url):
-        pburl = discoverPingbackUrl(url)
-        if pburl is not None:
-            code = makeXMLRPCCall(serverURI=pburl, sourceURI=self.absolute_url(), targetURI=url)
-            return code
-        else:
-            # No pingback is possible
-            return 2
 
     security.declarePrivate('hasPingback')
     def hasPingback(self, sourceURI):
@@ -323,33 +300,6 @@ class Post(CatalogPathAware, BTreeFolder2):
             return u'%d%02d' % (year, month)
         except:
             return u''
-
-    security.declareProtected('Manage Bitakora', 'sendPing')
-    def sendPing(self):
-        """ send Update notifications for PING Servers """
-        ret_l = []
-        url = self.blogurl()
-        blog_name = self.blog_title()
-        ping_servers = ['http://rpc.pingomatic.com', 'http://rpc.technorati.com/rpc/ping']
-        for pingurl in ping_servers:
-            try:
-                resp = self.send_ping(pingurl, blog_name, url)
-            except Exception,e:
-                resp = {}
-                resp["message"] = str(e)
-                ret_l.append( {"url":pingurl,"message":resp["message"]} )
-        return ret_l
-
-    security.declarePrivate('send_ping')
-    def send_ping(self, serverurl, blogtitle, url):
-        """ """
-        from xmlrpclib import Server
-        version_str = 'Bitakora 0.1'
-        title = blogtitle.encode('utf-8')
-        svr = Server(serverurl)
-        svr.Transport.user_agent = version_str
-        resp = svr.weblogUpdates.ping(title, url)
-        return resp
 
     security.declarePublic('forgetPersonalInfo')
     def forgetPersonalInfo(self, REQUEST):

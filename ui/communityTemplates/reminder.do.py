@@ -20,8 +20,8 @@ def sendMail(email='',user='',key=''):
     """ """
     url = '%s/changepass?user=%s&key=%s' % (container.absolute_url(),user,key)
     mailhost=getattr(context,'MailHost')
-    subject= context.gettext('Change password in %s' % context.communityTitle())
-    body=context.gettext('To change password in %s, go to this url:\n%s' % (context.communityTitle(), url))
+    subject= context.gettext('Change password in %(communityname)s') % {'communityname': context.communityTitle()}
+    body=context.gettext('To change password in %(communityname)s, go to this url:\n%(url)s') % {'communityname': context.communityTitle(), 'url': url}
     mailhost.simple_send(mto=email, mfrom='%s' % context.admin_mail, subject=subject, body=body)
     return 1
 
@@ -42,9 +42,12 @@ if acl.getUser(this_username):
 
     if validEmail(email):
         key = generateKey()
-        blog.manage_addProperty('key', key, 'string')
-        sendMail(email=email,user=this_username,key=key)
-        return context.REQUEST.RESPONSE.redirect('%s/reminder.done' % context.communityUrl())
+        try:
+            blog.manage_addProperty('key', key, 'string')
+            sendMail(email=email,user=this_username,key=key)
+            return context.REQUEST.RESPONSE.redirect('%s/reminder.done' % context.communityUrl())
+        except:
+            msg = context.gettext("There was an error reseting your password. Contact site admin for more details and provide your blog's url and your username")            
 
     else:
         #haven't email

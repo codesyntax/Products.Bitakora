@@ -4,21 +4,21 @@
  <dtml-with getObject>
   <post>
     <author><dtml-var showAuthor></author>
+    <id><dtml-var id></id>
     <title><![CDATA[<dtml-var showTitle>]]></title>
     <date><dtml-var showDate></date>
     <body><![CDATA[<dtml-var showBody>]]></body>
     <tags><![CDATA[<dtml-var "';'.join(tagList())">]]></tags>
     <comments>
       <dtml-in "commentList(all=1)">
-      <dtml-with getObject>
       <comment>
         <author><![CDATA[<dtml-var showAuthor>]]> </author>
+        <id><dtml-var id></id>
         <date><dtml-var showDate></date>
         <body><![CDATA[<dtml-var showBody>]]></body>
         <url><![CDATA[<dtml-var showURL>]]></url>
         <email><![CDATA[<dtml-var showEmail>]]></email>
       </comment>
-      </dtml-with>
       </dtml-in>
     </comments>
   </post>

@@ -1,4 +1,12 @@
 <dtml-var standard_html_header>
+
+<dtml-if "REQUEST.get('msg', '')">
+<div class="system-msg" class="color: red;">
+    <dtml-var "gettext(REQUEST.get('msg'))">
+</div>
+</dtml-if>
+
+
 <dtml-call "REQUEST.set('inentry', 1)">
 <dtml-var entry_body>
 <dtml-call "REQUEST.set('inentry', 0)">

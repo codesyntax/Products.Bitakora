@@ -19,17 +19,18 @@ try:
     import urllib2 as urllib
 except:
     import urllib
-import re
+import re, os
 import xmlrpclib
+from urllister import URLLister
 
 ok_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_ '
 CAPTCHAS_NET_USER = 'bitakora'
 CAPTCHAS_NET_SECRET = 'HmE2OawsnKWxzHpgQRNmW9RuR5Ea8zV2Sn5eRzrT'
 AKISMET_KEY = '5cbed64f50bb'
 AKISMET_AGENT = 'Bitakora [http://www.codesyntax.com/bitakora]'
-AKISMET_ENABLED = 1
-PARSE_ENABLED = 0
-
+AKISMET_ENABLED = 0 
+PARSE_ENABLED = POST_PARSE_ENABLED = 0
+COMMENT_PARSE_ENABLED = 1
 # Many of these methods have been copied and personalized from Squishdot, COREBlog and CPS
 
 def addDTML(obj,id,title,file): 
@@ -71,9 +72,25 @@ def clean(text):
     """ clean the text to delete all unwanted things """
     return text
 
+
+def cleanCommentBody(self, text):
+    """ clean the text to delete all unwanted HTML """
+    if not COMMENT_PARSE_ENABLED:
+        return text
+    
+    try:
+        from EpozPostTidy import EpozPostTidy
+    except:
+        def EpozPostTidy(self, text, s=''):
+            return text
+    
+    return EpozPostTidy(self, text, '')
+
+
+
 def cleanBody(self, text):
     """ clean the text to delete all unwanted HTML """
-    if not PARSE_ENABLED:
+    if not POST_PARSE_ENABLED:
         return text
     
     try:
@@ -269,6 +286,7 @@ def checkCaptchaValue(random, input):
     return captcha.verify(input, random)
     
 def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_url='', blogurl='', REQUEST=None):
+        
     if not AKISMET_ENABLED:
         return 0
 
@@ -291,13 +309,10 @@ def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_
     data['comment_author'] = comment_author
     data['comment_author_email'] = comment_email
     data['comment_author_url'] = comment_url
-    try:
-        data.update(REQUEST)
-    except:
-        pass
+
     from zLOG import LOG, INFO
     try:
-        return ak.comment_check(comment=comment_body, data=data)
+        return ak.comment_check(comment=comment_body.encode('utf-8'), data=data)
     except AkismetError:
         # Something happened with an argument
         LOG('isCommentSpam', INFO, 'Argument error')
@@ -314,10 +329,10 @@ def isCommentSpam(comment_body='', comment_author='', comment_email='', comment_
         # Aghhhh, connection time out
         LOG('isCommentSpam', INFO, 'Connection timeout')
         return 0
-    except:
+    except Exception,e:
         # What the hell happened?
+        LOG('isCommentSpam', INFO, 'Unknown error: %s' % e)
         
-        LOG('isCommentSpam', INFO, 'Unknown error: %s' % comment_body)
         return 0
     
 def isPingbackSpam(title='', url='', excerpt='', blogurl='', REQUEST=None):
@@ -339,12 +354,57 @@ def isPingbackSpam(title='', url='', excerpt='', blogurl='', REQUEST=None):
     data['comment_author'] = title
     data['comment_author_email'] = url
     data['comment_author_url'] = url
-    try:
-        data.update(REQUEST)   
-    except:
-        pass
 
     return ak.comment_check(comment=excerpt, data=data)
 
     
+    
+def sendPing(blog_url, blog_title):
+    """ send Update notifications for PING Servers """
+    ret_l = []
+    ping_servers = ['http://rpc.pingomatic.com', 'http://rpc.technorati.com/rpc/ping']
+    for pingurl in ping_servers:
+        try:
+            resp = send_ping(pingurl, blog_title, blog_url)
+        except Exception,e:
+            resp = {}
+            resp["message"] = str(e)
+            ret_l.append( {"url":pingurl,"message":resp["message"]} )
+
+    return ret_l
+
+def send_ping(serverurl, blogtitle, url):
+    """ Make the XML RPC call with the ping """
+    from xmlrpclib import Server
+    version_str = 'Bitakora 0.1'
+    title = blogtitle.encode('utf-8')
+    svr = Server(serverurl)
+    svr.Transport.user_agent = version_str
+    resp = svr.weblogUpdates.ping(title, url)
+    return resp
+    
+
+def postPingBacks(newbody, post_url):
+    """ Make the pingback call """
+    pingbackresults = []
+    parser = URLLister()
+    parser.feed(newbody)
+    parser.close()
+    urls = parser.urls
+    for url in urls:
+        url = str(url)
+        result = sendPingback(url, post_url)
+        pingbackresults.append((url, result))
+
+    return pingbackresults
+
+def sendPingback(url, self_url):
+    """ Pingback making call """
+    pburl = discoverPingbackUrl(url)
+    if pburl is not None:
+        code = makeXMLRPCCall(serverURI=pburl, sourceURI=self_url, targetURI=url)
+        return code
+    else:
+        # No pingback is possible
+        return 2
     

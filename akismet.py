@@ -1,7 +1,7 @@
-# Version 0.1.2
-# 2005/12/04
+# Version 0.1.5
+# 2006/02/05
 
-# Copyright Michael Foord 2005
+# Copyright Michael Foord 2005 - 2007
 # akismet.py
 # Python interface to the akismet API
 
@@ -12,7 +12,7 @@
 # Please see http://www.voidspace.org.uk/python/license.shtml
 
 # For information about bugfixes, updates and support, please join the Pythonutils mailing list.
-# http://voidspace.org.uk/mailman/listinfo/pythonutils_voidspace.org.uk
+# http://groups.google.com/group/pythonutils/
 # Comments, suggestions and bug reports welcome.
 # Scripts maintained at http://www.voidspace.org.uk/python/index.shtml
 # E-mail fuzzyman@voidspace.org.uk
@@ -30,10 +30,10 @@ value.
 
 The default is : ::
 
-    Python Interface by Fuzzyman | akismet.py/0.1.0
+    Python Interface by Fuzzyman | akismet.py/0.1.3
 
 Whatever you pass in, will replace the *Python Interface by Fuzzyman* part.
-**0.1.0** will change with the version of this interface.
+**0.1.2** will change with the version of this interface.
 
 """
 import os, sys
@@ -47,7 +47,7 @@ if hasattr(socket, 'setdefaulttimeout'):
 
 isfile = os.path.isfile
 
-__version__ = '0.1.2'
+__version__ = '0.1.5'
 
 __all__ = (
     '__version__',
@@ -61,6 +61,7 @@ __author__ = 'Michael Foord <fuzzyman AT voidspace DOT org DOT uk>'
 __docformat__ = "restructuredtext en"
 
 user_agent = "%s | akismet.py/%s"
+DEFAULTAGENT = 'Python Interface by Fuzzyman/%s'
 
 class AkismetError(Exception):
     """Base class for all akismet exceptions."""
@@ -76,9 +77,10 @@ class Akismet(object):
     def __init__(self, key=None, blog_url=None, agent=None):
         """Automatically calls ``setAPIKey``."""
         if agent is None:
-            agent = 'Python Interface by Fuzzyman/%s' % __version__
+            agent = DEFAULTAGENT % __version__
         self.user_agent = user_agent % (agent, __version__)
         self.setAPIKey(key, blog_url)
+
 
     def _getURL(self):
         """
@@ -87,6 +89,17 @@ class Akismet(object):
         This comprises of api key plus the baseurl.
         """
         return 'http://%s.%s' % (self.key, self.baseurl)
+    
+    
+    def _safeRequest(self, url, data, headers):
+        try:
+            req = urllib2.Request(url, data, headers)
+            h = urllib2.urlopen(req)
+            resp = h.read()
+        except (urllib2.HTTPError, urllib2.URLError, IOError), e:
+            raise AkismetError(str(e))       
+        return resp
+
 
     def setAPIKey(self, key=None, blog_url=None):
         """
@@ -111,6 +124,7 @@ class Akismet(object):
             self.key = key
             self.blog_url = blog_url
 
+
     def verify_key(self):
         """
         This equates to the ``verify-key`` call against the akismet API.
@@ -134,9 +148,7 @@ class Akismet(object):
         # we *don't* trap the error here
         # so if akismet is down it will raise an HTTPError or URLError
         headers = {'User-Agent' : self.user_agent}
-        req = urllib2.Request(url, urlencode(data), headers)
-        h = urllib2.urlopen(req)
-        resp = h.read()
+        resp = self._safeRequest(url, urlencode(data), headers)
         if resp.lower() == 'valid':
             return True
         else:
@@ -182,6 +194,7 @@ class Akismet(object):
         data.setdefault('SERVER_SOFTWARE', os.environ.get('SERVER_SOFTWARE',
             ''))
         data.setdefault('HTTP_ACCEPT', os.environ.get('HTTP_ACCEPT', ''))
+        data.setdefault('blog', self.blog_url)
 
 
     def comment_check(self, comment, data=None, build_data=True, DEBUG=False):
@@ -265,9 +278,7 @@ class Akismet(object):
         # we *don't* trap the error here
         # so if akismet is down it will raise an HTTPError or URLError
         headers = {'User-Agent' : self.user_agent}
-        req = urllib2.Request(url, urlencode(data), headers)
-        h = urllib2.urlopen(req)
-        resp = h.read()
+        resp = self._safeRequest(url, urlencode(data), headers)
         if DEBUG:
             return resp
         resp = resp.lower()
@@ -276,8 +287,9 @@ class Akismet(object):
         elif resp == 'false':
             return False
         else:
-            # NOTE: Happens when youget a 'howdy wilbur' response !
+            # NOTE: Happens when you get a 'howdy wilbur' response !
             raise AkismetError('missing required argument.')
+
 
     def submit_spam(self, comment, data=None, build_data=True):
         """
@@ -297,9 +309,8 @@ class Akismet(object):
         # we *don't* trap the error here
         # so if akismet is down it will raise an HTTPError or URLError
         headers = {'User-Agent' : self.user_agent}
-        req = urllib2.Request(url, urlencode(data), headers)
-        h = urllib2.urlopen(req)
-        h.read()
+        self._safeRequest(url, urlencode(data), headers)
+
 
     def submit_ham(self, comment, data=None, build_data=True):
         """
@@ -318,10 +329,8 @@ class Akismet(object):
         url = '%ssubmit-ham' % self._getURL()
         # we *don't* trap the error here
         # so if akismet is down it will raise an HTTPError or URLError
-        header = {'User-Agent' : self.user_agent}
-        req = urllib2.Request(url, urlencode(data), headers)
-        h = urllib2.urlopen(req)
-        h.read()
+        headers = {'User-Agent' : self.user_agent}
+        self._safeRequest(url, urlencode(data), headers)
 
 """
 
@@ -360,24 +369,5 @@ Make the timeout adjustable ?
 Should we fill in a default value for permalink ?
 
 What about automatically filling in the 'HTTP_*' values from os.environ ?
-
-CHANGELOG
-=========
-
-2205/12/04      Version 0.1.2
------------------------------
-
-Added the ``build_data`` argument to ``comment_check``, ``submit_spam``, and
-``submit_ham``.
-
-2205/12/02      Version 0.1.1
------------------------------
-
-Corrected so that ham and spam are the right way round {sm;:-)}
-
-2005/12/01      Version 0.1.0
------------------------------
-
-Test version.
 
 """

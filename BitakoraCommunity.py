@@ -225,10 +225,13 @@ class BitakoraCommunity(BTreeFolder2):
             blog = self.get(id)
             rol = blog.get_local_roles()
             del_users.extend([user for user,roles in rol])
-            self._delObject(id)
-            
-        #self.acl_users.userFolderDelUsers(del_users)            
-        self.Catalog.refreshCatalog(1)
+            blog_path = '/'.join(blog.getPhysicalPath())
+            self.Catalog.uncatalog_object(blog_path)
+            for post in blog.published_posts(size=99999):
+                self.Catalog.uncatalog_object(post.getPath())
+
+        self.manage_delObjects(ids)
+        self.delUsers(del_users)
         
         if REQUEST is not None:
             url = REQUEST.HTTP_REFERER.split('?')[0]
@@ -239,7 +242,6 @@ class BitakoraCommunity(BTreeFolder2):
         """ delete selected blogs """   
 
         self.acl_users.userFolderDelUsers(ids)            
-        self.Catalog.refreshCatalog(1)
         
         if REQUEST is not None:
             url = REQUEST.HTTP_REFERER.split('?')[0]
