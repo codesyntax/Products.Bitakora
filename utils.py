@@ -141,7 +141,7 @@ def notifyByEmail(mailhost, mTo, mFrom, mSubj, mMsg):
 
 def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitakora_cpt='', random_cpt='', captcha_zz=0, REQUEST=None):
     """ Send a mail to blog owner """
-    if not checkCaptchaValue(random_cpt, bitakora_cpt):
+    if not checkNewCaptchaValue(context, bitakora_cpt):
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER.split('?')[0]+'?msg=%s&name=%s&email=%s&subject=%s&body=%s#bitakora_cpt_control' % (context.gettext('Are you a bot? Please try again...'), url_quote(name.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(subject.encode('utf-8')), url_quote(body.encode('utf-8'))))
 
@@ -407,3 +407,18 @@ def sendPingback(url, self_url):
         # No pingback is possible
         return 2
     
+
+
+def getCaptchaQuestion(self):
+    """ get captcha question from a property """
+    try:
+        return self.CAPTCHA_QUESTION
+    except:
+        return ''
+
+def checkNewCaptchaValue(self, input):
+    """ check the form input with the value of a property """
+    try:
+        return input == self.CAPTCHA_ANSWER
+    except:
+        return False

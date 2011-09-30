@@ -88,7 +88,7 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
 class Bitakora(BTreeFolder2, CatalogPathAware):
     """ Bitakora is a new blog product for Zope """
     from Post import manage_addPost
-    from utils import send_contact_mail, cleanBody, getCaptchaImage
+    from utils import send_contact_mail, cleanBody, getCaptchaQuestion
     
     meta_type = 'Bitakora'  
 
