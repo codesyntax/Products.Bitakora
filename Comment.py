@@ -61,7 +61,7 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
     comment = getattr(self, str(newid))
     
     try:
-        mailhost=getattr(self,self.superValues('Mail Host')[0].id)
+        mailhost = self.MailHost
         from EpozPostTidy import cleanHTML
         
         mTo = self.contact_mail
@@ -81,8 +81,8 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
             
         mSubj = self.gettext('New comment in your blog!') 
         mMsg = self.comment_email_template(self, **variables)
-
-        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)
+        
+        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg.encode('utf-8'))
     except:
         # If there is no MailHost, or other error happened
         # there won't be e-mail notifications

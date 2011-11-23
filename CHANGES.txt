@@ -4,6 +4,11 @@
 CHANGES.txt
 ===========
 
+v. 0.1.21
+==========
+- Fix e-mail templates [erral]
+
+
 v. 0.1.20
 ==========
 - Change CAPTCHA using a question. [erral]

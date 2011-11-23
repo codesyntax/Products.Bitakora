@@ -170,8 +170,7 @@ def send_contact_mail(context, name=u'', email=u'', subject=u'', body=u'', bitak
         variables['comment_body'] = body.encode('utf-8')
         mSubj = context.gettext('New message from your blog!') 
         mMsg = context.contact_email_template(context, **variables)
-
-        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg)    
+        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg.encode('utf-8'))    
     except Exception, e:
         # If there is no MailHost, or other error happened
         # there won't be e-mail notifications
