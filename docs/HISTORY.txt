@@ -1,8 +1,11 @@
-#$Id$
+===========
+CHANGELOG
+===========
 
-===========
-CHANGES.txt
-===========
+1.0 (UNRELEASED)
+==================
+
+- Eggify this product [erral]
 
 v. 0.1.21
 ==========
