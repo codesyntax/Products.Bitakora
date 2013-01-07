@@ -15,10 +15,10 @@ from Products.PythonScripts.PythonScript import PythonScript
 
 # ZCatalog
 from Products.ZCatalog import ZCatalog
-from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
+from Products.ZCatalog.CatalogAwareness import CatalogAware
 # To add ZCatalog FieldIndex and TextIndexNG2
 from ZPublisher.HTTPRequest import record
-# Localizer   
+# Localizer
 from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog
 # BTreeFolder2
@@ -41,24 +41,24 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
     sq = Bitakora.Bitakora(id, title, subtitle, description, contact_mail)
     self._setObject(id, sq)
     sq = getattr(self, id)
-    
+
     if REQUEST is not None and REQUEST.has_key('image'):
         ext = image.filename.split('.')[-1]
         imgid = 'image.%s' % ext
         sq.manage_addImage(imgid, REQUEST.get('image'))
         #sq.imageUrl = '%s/%s' % (sq.absolute_url(), imgid)
         sq.imagename = imgid
-    
+
     elif REQUEST is None or not REQUEST.has_key('image'):
         from random import random
-        
+
         imgnum = (int(random()*10) % 3) + 1
         file = 'face0%s.gif' % imgnum
         file_path = Globals.package_home(globals())
-        f=open(file_path+'/ui/communityTemplates/'+file,'rb')     
-        contents=f.read()     
-        f.close()     
-        title=''     
+        f=open(file_path+'/ui/communityTemplates/'+file,'rb')
+        contents=f.read()
+        f.close()
+        title=''
         tlen = len(contents)
         imgid = 'image.gif'
         new_id = sq.manage_addImage(imgid,contents,title=title)
@@ -68,11 +68,11 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
     perms = {}
     perms['Anonymous'] = ['Add Bitakora Comment']
     perms['Blogger'] = ['Manage Bitakora']
-    
+
     for role, perm in perms.items():
         sq.manage_role(role_to_manage=role, permissions=perm)
 
-        
+
     # Add a MessageCatalog if we are a standalone Bitakora
     # if not, the BitakoraCommunity MessageCatalog will handle
     # the messages
@@ -89,8 +89,8 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     """ Bitakora is a new blog product for Zope """
     from Post import manage_addPost
     from utils import send_contact_mail, cleanBody, getCaptchaQuestion
-    
-    meta_type = 'Bitakora'  
+
+    meta_type = 'Bitakora'
 
     __ac_roles__ = ('Blogger',)
 
@@ -99,7 +99,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
     security.setPermissionDefault('Manage Bitakora',     ('Blogger', 'Manager',))
     security.setPermissionDefault('Add Bitakora Comment',('Anonymous', 'Manager',))
-                                    
+
     _properties = (#{'id':'title', 'type': 'ustring', 'mode': 'w'},
                    #{'id':'subtitle', 'type':'ustring', 'mode':'w'},
                    #{'id':'contact_mail', 'type':'ustring', 'mode':'w'},
@@ -146,25 +146,25 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     user_links = HTMLFile('ui/user_links', globals())
 
     security.declareProtected('Manage Bitakora', 'manage_addPost')
-    
+
     security.declareProtected('Manage Bitakora', 'admin')
     admin = HTMLFile('ui/Post_list', globals())
-    
+
     security.declareProtected('Manage Bitakora', 'post')
     post = HTMLFile('ui/Post_add', globals())
-    
+
     security.declareProtected('Manage Bitakora', 'prefs')
     prefs = HTMLFile('ui/Blog_edit', globals())
 
     security.declareProtected('Manage Bitakora', 'sidebar')
-    sidebar = HTMLFile('ui/manage_sidebar', globals())    
-    
+    sidebar = HTMLFile('ui/manage_sidebar', globals())
+
     security.declareProtected('Manage Bitakora', 'template')
     template = HTMLFile('ui/manage_template', globals())
-    
+
     security.declareProtected('Manage Bitakora', 'comments')
     comments = HTMLFile('ui/manage_comments', globals())
-   
+
     admin_options = ['admin', 'post', 'sidebar', 'prefs', 'template', 'comments']
 
     security.declarePrivate('__init__')
@@ -175,7 +175,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         self.title = title
         self.subtitle = subtitle
         self.description = description
-        self.contact_mail = contact_mail      
+        self.contact_mail = contact_mail
         self.management_page_charset = u'UTF-8'
         self.sidebar_html = u''
         self._setObject('Catalog', ZCatalog.ZCatalog('Catalog', 'Catalog'))
@@ -190,7 +190,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         #self.imageUrl = None
         self.imagename = ''
         self.CAPTCHA_ENABLED = 1
-        
+
     security.declareProtected('View', 'searchResults')
     def searchResults(self, **kw):
         """ Call the Catalog """
@@ -218,10 +218,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             original_id = self.imagename
             original_img = self.get(original_id).data
             self._delObject(original_id)
-        
-            image.seek(0)      
+
+            image.seek(0)
             self.manage_addImage(imgid, image)
-            
+
             img = self.get(imgid)
             if img.height > 65 and img.width > 65:
                 self._delObject(imgid)
@@ -230,10 +230,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                 self.imagename = original_id
                 if REQUEST is not None:
                     return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Your image is too large. Try with a smaller one'))
-            
+
             #self.imageUrl = '%s/%s' % (self.absolute_url(), imgid)
             self.imagename = imgid
-                        
+
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.blogurl(), 'Preferences edited succesfully'))
 
@@ -242,10 +242,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         """ edit comment policy """
         self.comment_allowed = comment_allowed
         self.reference_allowed = comment_allowed
-        
+
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/comments?msg=%s' % (self.blogurl(), 'Comment policy edited succesfully'))
-        
+
 
     security.declarePrivate('_buildIndexes')
     def _buildIndexes(self):
@@ -287,22 +287,22 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         except:
             # new MessageCatalog
             self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en', 'es', 'eu']))
-        
+
         gettext = getattr(self, 'gettext')
         fillMessageCatalog(gettext)
-        
+
         # Add a special tag.py script which makes use of traverse subpath
         self._setObject('tag', PythonScript('tag'))
         tag = getattr(self, 'tag')
-        f=open(file_path+'/tag.py')     
+        f=open(file_path+'/tag.py')
         data = f.read()
         f.close()
         tag.ZPythonScript_edit('', data)
 
         # Add a feed.xml file with the RSS feed
         addDTML(self,'feed.xml','','ui/feed.xml')
- 
-        # Add the CSS file       
+
+        # Add the CSS file
         self.manage_addFile('blog.css')
         css = getattr(self, 'blog.css')
         f = open(file_path+'/ui/blog.css')
@@ -322,7 +322,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                 # We are in a Bitakora Community, so uncatalog the post there
                 cat = self.getParentNode().get('Catalog', 'None')
                 if cat is not None:
-                    cat.uncatalog_object('/'.join(obj.getPhysicalPath()))           
+                    cat.uncatalog_object('/'.join(obj.getPhysicalPath()))
             self._delObject(id)
 
         if REQUEST is not None:
@@ -337,14 +337,14 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
-        
+
     security.declarePublic('last_post')
     def last_post(self):
         """ return the last published post """
         posts = self.Catalog.searchResults(meta_type='Post', size=1, sort_on='date', sort_order='descending')
         if posts:
             return posts[0].getObject()
-       
+
         return None
 
     security.declarePublic('View', 'getId')
@@ -355,27 +355,27 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declarePublic('blog_title')
     def blog_title(self):
         """ blog title """
-        return self.title   
-        
+        return self.title
+
     security.declarePublic('blog_subtitle')
     def blog_subtitle(self):
         """ blog subtitle """
-        return self.subtitle  
-        
+        return self.subtitle
+
     security.declarePublic('showDescription')
     def showDescription(self):
         return self.description
-        
+
     security.declarePublic('show_contact_mail')
     def show_contact_mail(self):
         """ blog contact_mail """
         return self.contact_mail
-       
+
     security.declarePublic('show_sidebar_html')
     def show_sidebar_html(self):
         """ blog show_sidebar_html """
         return self.sidebar_html
-              
+
     security.declarePublic('title_or_id')
     def title_or_id(self):
         """ title or id """
@@ -385,7 +385,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def blogurl(self):
         """ blog url """
         return self.absolute_url()
-        
+
     security.declarePublic('getImageUrl')
     def getImageUrl(self):
         """ return image's url """
@@ -426,14 +426,14 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         maxpx = 2.30
         minpx = 0.70
         difpx = maxpx-minpx
-        
-        if zenbat.values():       
+
+        if zenbat.values():
             maxnum = max(zenbat.values())
             minnum = max(zenbat.values())
         else:
             maxnum = 0
             minnum = 0
-      
+
 
         hiz = {}
         for k,v in zenbat.items():
@@ -468,7 +468,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             except:
                 if REQUEST is not None:
                     return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), 'Error when deleting selected link'))
-            if REQUEST is not None:        
+            if REQUEST is not None:
                 return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.blogurl(), 'Selected link was removed succesfully'))
         else:
             if REQUEST is not None:
@@ -477,7 +477,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     security.declarePublic('showLinks')
     def showLinks(self):
         """ show links """
-        
+
         def sortByKey(el1, el2):
             return cmp(el1['key'], el2['key'])
 
@@ -489,24 +489,24 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
 
         elems.sort(sortByKey)
         return elems
-        
+
     security.declareProtected('Manage Bitakora', 'save_sidebar_html')
     def save_sidebar_html(self, html=u'', REQUEST=None):
         """ save sidebar HTML """
         self.sidebar_html = html
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.absolute_url(), 'HTML saved succesfully'))        
-        
-        
+            return REQUEST.RESPONSE.redirect('%s/sidebar?msg=%s' % (self.absolute_url(), 'HTML saved succesfully'))
+
+
     security.declareProtected('Manage Bitakora', 'save_css')
     def save_css(self, css=u'', REQUEST=None):
-        """ save CSS """       
+        """ save CSS """
         doc = getattr(self, 'blog.css')
         doc.update_data(css)
-        
+
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), 'CSS edited succesfully'))
-            
+
     security.declareProtected('Manage Bitakora', 'select_template')
     def select_template(self, template, REQUEST=None):
         """ select an existing template """
@@ -515,21 +515,21 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
                 return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), 'Selected template does not exist'))
             else:
                 return
-        
+
         obj = getattr(self.templates[template], 'blog.css').data
         current = getattr(self, 'blog.css')
         current.update_data(obj)
-        
+
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/template?msg=%s' % (self.absolute_url(), 'Template changed succesfully'))
-            
-    security.declarePublic('inCommunity')            
+
+    security.declarePublic('inCommunity')
     def inCommunity(self):
-        """ Return whether this Bitakora is in a Bitakora community """    
+        """ Return whether this Bitakora is in a Bitakora community """
         if self.getParentNode().meta_type == 'BitakoraCommunity':
             return 1
-        return 0      
-               
+        return 0
+
     security.declarePublic('showYearMonth')
     def showYearMonth(self, yearmonth):
         """ convert 200512 to December 2005 """
@@ -553,26 +553,26 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
         year = ym[:4]
         month = ym[4:]
         return self.gettext('%(year)s %(month)s')  % {'month':self.gettext(months[month]), 'year':year}
-     
+
     security.declarePublic('commentsAllowed')
     def commentsAllowed(self):
         """ Are comments allowed? """
         return self.comment_allowed
 
-    security.declarePublic('commentsModerated')        
+    security.declarePublic('commentsModerated')
     def commentsModerated(self):
         """ Are comments moderated? """
         return self.comment_allowed == 2
-        
-    security.declarePublic('commentsNotAllowed')        
+
+    security.declarePublic('commentsNotAllowed')
     def commentsNotAllowed(self):
         """ Are not comments allowed? """
         return not self.comment_allowed
-            
+
     referencesAllowed = commentsAllowed
     referencesModerated = commentsModerated
     referencesNotAllowed = commentsNotAllowed
-    
+
     security.declareProtected('Manage Bitakora', 'users')
     def users(self):
         """ Users """
@@ -585,10 +585,10 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
     def getUnpublishedComments(self, size=None):
         """ get unpublished comments """
         if size is not None:
-            return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending', sort_limit=size)            
+            return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog(meta_type='Comment', published=0, sort_on='date', sort_order='descending')
-        
+
     security.declarePublic('getPublishedComments')
     def getPublishedComments(self, size=None):
         """ get published comments """
@@ -596,7 +596,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog(meta_type='Comment', published=1, sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog(meta_type='Comment', published=1, sort_on='date', sort_order='descending')
-                
+
     security.declarePublic('getComments')
     def getComments(self, size=None):
         """ get comments """
@@ -604,15 +604,15 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog(meta_type='Comment', sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog(meta_type='Comment', sort_on='date', sort_order='descending')
-       
+
     security.declarePublic('getUnpublishedReference')
     def getUnpublishedReferences(self, size=None):
         """ get unpublished References """
         if size is not None:
-            return self.Catalog(meta_type='Reference', published=0, sort_on='date', sort_order='descending', sort_limit=size)            
+            return self.Catalog(meta_type='Reference', published=0, sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog(meta_type='Reference', published=0, sort_on='date', sort_order='descending')
-        
+
     security.declarePublic('getPublishedReferences')
     def getPublishedReferences(self, size=None):
         """ get published References """
@@ -620,7 +620,7 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog(meta_type='Reference', published=1, sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog(meta_type='Reference', published=1, sort_on='date', sort_order='descending')
-                
+
     security.declarePublic('getReferences')
     def getReferences(self, size=None):
         """ get References """
@@ -628,36 +628,36 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             return self.Catalog(meta_type='Reference', sort_on='date', sort_order='descending', sort_limit=size)
         else:
             return self.Catalog(meta_type='Reference', sort_on='date', sort_order='descending')
-           
-    security.declarePrivate('createId')    
+
+    security.declarePrivate('createId')
     def createId(self, title):
         """ Create an id for a post based on its title """
         s1 = unicode(r"'\;/ &:ÀÁÂÄÇÈÊÉËÌÎÍÏÒÔÓÖÙÛÚÜÝŸàâáäçèêéëìîíïòôóöùûúüýÿÑñ", 'utf-8')
         s2 = unicode(r'-------aaaaceeeeiiiioooouuuuyyaaaaceeeeiiiioooouuuuyyNn', 'utf-8')
 
         # XXX This is not efficient at all
-        # but string.maketrans and id.translate 
+        # but string.maketrans and id.translate
         # don't work correctly with unicode strings....
-        id = title.strip()        
+        id = title.strip()
         for i in range(len(s1)):
-            id = id.replace(s1[i], s2[i])           
+            id = id.replace(s1[i], s2[i])
 
         id = ''.join([c for c in id if c in ok_chars])
         while id.startswith('-') or id.startswith('_') or id.startswith(' '):
             id = id[1:]
-    
+
         while id.endswith('-') or id.endswith('_') or id.endswith(' '):
             id = id[:-1]
-            
+
         while id.find('--') != -1:
             id = id.replace('--', '-')
-    
+
         id = id.lower()
         if not id:
             return u'blogpost-%d' % self.postcount
-    
+
         return u'-'.join(id.split(' '))
-      
+
     security.declarePrivate('createNewId')
     def createNewId(self, oldid):
         """ Create a new id if the previous one was taken """
@@ -666,15 +666,15 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             end = int(num[-1]) + 1
             return '-'.join(num[:-1]) + '-' + str(end)
         else:
-            return oldid+'-1'           
-            
-    security.declarePublic('prepareTags')            
+            return oldid+'-1'
+
+    security.declarePublic('prepareTags')
     def prepareTags(self, tags=[]):
         """ return tags to add and edit interfaces preview """
         from utils import prepareTags as prepTags
         return prepTags(tags)
-        
-    security.declareProtected('Manage Bitakora', 'importXML')        
+
+    security.declareProtected('Manage Bitakora', 'importXML')
     def importXML(self, file, REQUEST=None):
         """ upload XML file with blog data """
         from XMLImporter import importXML as imp
@@ -684,9 +684,9 @@ class Bitakora(BTreeFolder2, CatalogPathAware):
             posta = self.get(id)
             for comment in post.get('comments', []):
                 posta.manage_addComment(author=comment['author'], body=comment['body'], url=comment['url'], email=comment['email'], date=comment['date'])
-                
-                
+
+
         if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.absolute_url(), 'XML file imported succesfully'))   
+            return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.absolute_url(), 'XML file imported succesfully'))
 
 Globals.InitializeClass(Bitakora)

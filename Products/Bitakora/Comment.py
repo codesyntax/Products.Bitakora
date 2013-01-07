@@ -11,7 +11,7 @@ from OFS.SimpleItem import SimpleItem
 from AccessControl import ClassSecurityInfo
 
 # Catalog
-from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
+from Products.ZCatalog.CatalogAwareness import CatalogAware
 from Products.PythonScripts.standard import url_quote
 
 # Other stuff
@@ -28,19 +28,19 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
             return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
 
         return None
-    
+
     # Publish the comment by default
     publish = 1
 
     if isCommentSpam(body, author, email, url, self.blogurl(), REQUEST):
         from zLOG import LOG, INFO
         LOG('manage_addComment', INFO, 'Spam: %s' % body)
-        
+
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
 
         return 0
-        
+
     newauthor = clean(author)
     newbody = cleanCommentBody(self, body)
     newurl = cleanURL(url)
@@ -48,29 +48,29 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
     if date is None:
         newdate = DateTime.DateTime()
     else:
-        newdate = DateTime.DateTime(date)           
+        newdate = DateTime.DateTime(date)
     newid = self.createCommentId()
 
     if self.commentsModerated():
         publish = 0
-          
+
     comment = Comment(newid, newauthor, newemail, newurl, newbody, newdate, self.getId(), publish)
 
     self._setObject(str(newid), comment)
-    
+
     comment = getattr(self, str(newid))
-    
+
     try:
         mailhost = self.MailHost
         from EpozPostTidy import cleanHTML
-        
+
         mTo = self.contact_mail
         if self.inCommunity():
             mFrom = self.admin_mail
         else:
             mFrom = self.contact_mail
-            
-        variables = {}            
+
+        variables = {}
         variables['from'] = mFrom.encode('utf-8')
         variables['to'] = mTo.encode('utf-8')
         variables['comment_author'] = newauthor.encode('utf-8')
@@ -78,16 +78,16 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
         variables['comment_url'] = newurl.encode('utf-8')
         variables['comment_body'] = cleanHTML(newbody).encode('utf-8')
         variables['comment_address'] = comment.absolute_url()
-            
-        mSubj = self.gettext('New comment in your blog!') 
+
+        mSubj = self.gettext('New comment in your blog!')
         mMsg = self.comment_email_template(self, **variables)
-        
+
         notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg.encode('utf-8'))
     except:
         # If there is no MailHost, or other error happened
         # there won't be e-mail notifications
         pass
-    
+
 
     #set cookie
     if REQUEST and REQUEST.form.has_key('setcookie'):
@@ -110,10 +110,10 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
     else:
         return newid
 
-class Comment(CatalogPathAware, SimpleItem):
+class Comment(CatalogAware, SimpleItem):
     """ Comment class """
     meta_type = 'Comment'
-    
+
     security = ClassSecurityInfo()
 
     security.declarePrivate('__init__')
@@ -155,7 +155,7 @@ class Comment(CatalogPathAware, SimpleItem):
     def index_html(self,REQUEST=None):
         """ Each post is rendered usint comment_body template """
         return self.getParentNode().index_html(REQUEST)
-        
+
     security.declarePublic('hidden')
     def hidden(self):
         """ return true if this comment is not published """

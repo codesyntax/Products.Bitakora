@@ -16,7 +16,7 @@ from AccessControl import ClassSecurityInfo
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
 # Catalog
-from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
+from Products.ZCatalog.CatalogAwareness import CatalogAware
 
 # Other stuff
 import DateTime
@@ -33,7 +33,7 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
     """ Called from ZMI when creating new posts """
     if not title and REQUEST is not None:
         return REQUEST.RESPONSE.redirect('%s/post?msg=%s' % (self.blogurl(), 'You must provide at least the title of the post'))
-        
+
     newid = self.createId(title)
     newtitle = clean(title)
     newauthor = clean(author)
@@ -48,10 +48,10 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
         newid = self.createNewId(newid)
 
     post = Post(newid, newtitle, newauthor, newbody, newtags, newdate, publish, comment_allowed)
-      
+
     self._setObject(str(newid), post)
     post = self.get(newid)
-        
+
     if self.inCommunity():
         # We are in a Bitakora Community, so catalog the post there
         cat = self.getParentNode().get('Catalog', 'None')
@@ -59,7 +59,7 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
             cat.catalog_object(post, '/'.join(post.getPhysicalPath()))
 
     self.postcount = self.postcount + 1
-    
+
     if sendping:
         tech_pings = Future(sendPing, self.absolute_url(), self.blog_title())
         pingbacks = Future(postPingBacks, newbody, post.absolute_url())
@@ -69,7 +69,7 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
 
     return newid
 
-class Post(CatalogPathAware, BTreeFolder2):
+class Post(CatalogAware, BTreeFolder2):
     """ Post class """
     meta_type = 'Post'
 
@@ -96,7 +96,7 @@ class Post(CatalogPathAware, BTreeFolder2):
         self.reference_allowed = comment_allowed
         self.published = publish
         self.reindex_object()
-        
+
 
     security.declareProtected('Manage Bitakora', 'manage_editPost')
     def manage_editPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, sendping=1, REQUEST=None):
@@ -116,7 +116,7 @@ class Post(CatalogPathAware, BTreeFolder2):
             # We are in a Bitakora Community, so catalog the post there
             cat = self.getParentNode().getParentNode().get('Catalog', 'None')
             if cat is not None:
-                cat.catalog_object(self, '/'.join(self.getPhysicalPath()))                
+                cat.catalog_object(self, '/'.join(self.getPhysicalPath()))
 
         if sendping:
             tech_pings = Future(sendPing, self.absolute_url(), self.blog_title())
@@ -138,7 +138,7 @@ class Post(CatalogPathAware, BTreeFolder2):
             if not (id in self.commentIds()):
                 if REQUEST is not None:
                     return REQUEST.RESPONSE.redirect('%s/edit?msg=%s' % (self.absolute_url(), 'Comment does not exists'))
-    
+
             com = getattr(self, id)
             com.edit(author, email, url, body, date, publish)
             self.reindex_object()
@@ -185,7 +185,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     def showTags(self):
         """ get the tags """
         return u' '.join(self.tags)
-        
+
     security.declarePublic('tagList')
     def tagList(self):
         """ get the tag list """
@@ -204,19 +204,19 @@ class Post(CatalogPathAware, BTreeFolder2):
     security.declarePublic('canComment')
     def canComment(self):
         """ Are the comments on this post allowed? """
-        return self.comment_allowed 
+        return self.comment_allowed
 
     security.declarePublic('canReference')
     def canReference(self):
         """ Are the references (trackbacks, pingbacks, ...)
             on this post allowed? """
         return self.reference_allowed
-        
+
     security.declarePublic('commentsModerated')
     def commentsModerated(self):
         """ Return whether comments are moderated (coment_allowed == 2) or not """
         return self.comment_allowed == 2
-        
+
     referencesModerated = commentsModerated
 
     security.declarePublic('hidden')
@@ -246,7 +246,7 @@ class Post(CatalogPathAware, BTreeFolder2):
             comlist = self.objectValues('Comment')[:]
         else:
             comlist = [com for com in self.objectValues('Comment') if com.published]
-        
+
         comlist.sort(lambda x,y:cmp(x.date,y.date))
         return comlist
 
@@ -259,7 +259,7 @@ class Post(CatalogPathAware, BTreeFolder2):
             reflist = [com for com in self.objectValues('Reference') if com.published]
 
         reflist.sort(lambda x,y:cmp(x.date,y.date))
-        return reflist          
+        return reflist
 
     security.declarePrivate('createCommentId')
     def createCommentId(self):
@@ -271,7 +271,7 @@ class Post(CatalogPathAware, BTreeFolder2):
             l.sort(lambda x,y:cmp(int(x.id), int(y.id)))
             last_c_id = l[-1].getId()
             return int(last_c_id) + 1
-                           
+
     security.declarePrivate('createReferenceId')
     def createReferenceId(self):
         """ create id """
@@ -289,7 +289,7 @@ class Post(CatalogPathAware, BTreeFolder2):
     def numberOfReferences(self):
         """ Method that returns the number of references of this post """
         return unicode(str(len(self.referenceList())))
-        
+
     security.declarePrivate('yearmonth')
     def yearmonth(self):
         """ for archive """
@@ -307,25 +307,25 @@ class Post(CatalogPathAware, BTreeFolder2):
         if REQUEST is not None:
             for cookie in ['comment_author', 'comment_url', 'comment_email']:
                 REQUEST.RESPONSE.expireCookie(cookie)
-            
+
             return REQUEST.RESPONSE.redirect(REQUEST.HTTP_REFERER)
 
     def users(self):
-        return None            
+        return None
 
     security.declarePublic('commentsAllowed')
     def commentsAllowed(self):
         """ Are comments allowed? """
         return self.comment_allowed
 
-    security.declarePublic('commentsModerated')        
+    security.declarePublic('commentsModerated')
     def commentsModerated(self):
         """ Are comments moderated? """
         return self.comment_allowed == 2
 
-    security.declarePublic('commentsNotAllowed')        
+    security.declarePublic('commentsNotAllowed')
     def commentsNotAllowed(self):
         """ Are not comments allowed? """
-        return not self.comment_allowed            
+        return not self.comment_allowed
 
 Globals.InitializeClass(Post)

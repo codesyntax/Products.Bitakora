@@ -11,7 +11,7 @@ from OFS.SimpleItem import SimpleItem
 from AccessControl import ClassSecurityInfo
 
 # Catalog
-from Products.ZCatalog.CatalogPathAwareness import CatalogPathAware
+from Products.ZCatalog.CatalogAwareness import CatalogAware
 
 # Other stuff
 import DateTime
@@ -22,7 +22,7 @@ def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
     """ Add a pingback """
 
     from utils import isPingbackSpam
-    
+
     if isPingbackSpam(sourceTitle, sourceURI, sourceExcerpt, self.blogurl(), self.REQUEST):
         try:
             return REQUEST.RESPONSE.redirect('http://www.google.com')
@@ -36,9 +36,9 @@ def manage_addPingback(self, sourceTitle, sourceURI, sourceExcerpt):
     pingback = Reference(id, newTitle, newURI, newExcerpt, self.getId())
     self._setObject(id, pingback)
     return 1
-        
 
-class Reference(CatalogPathAware, SimpleItem):
+
+class Reference(CatalogAware, SimpleItem):
     """ Reference class """
     meta_type = 'Reference'
 
@@ -116,5 +116,5 @@ class Reference(CatalogPathAware, SimpleItem):
     def absolute_url(self):
         """ """
         return self.getParentNode().absolute_url()+'#'+self.id
-        
+
 Globals.InitializeClass(Reference)
