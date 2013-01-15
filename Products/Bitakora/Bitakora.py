@@ -3,8 +3,6 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
-#$Id$
-
 # Zope modules
 from Globals import HTMLFile
 import Globals
@@ -32,7 +30,7 @@ import DateTime
 from utils import addDTML
 from utils import fillMessageCatalog, prepareTags, ok_chars
 from PingMethodContainer import PingMethodContainer
-
+from tinymce_conf import default_configurations
 
 manage_addBitakoraForm = HTMLFile('ui/Bitakora_add', globals())
 
@@ -74,8 +72,14 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
         sq.manage_role(role_to_manage=role, permissions=perm)
 
     sq.manage_addProduct['ZTinyMCE'].manage_addZTinyMCE('TinyMCE', 'TinyMCE')
-    cb_data = sq.TinyMCE.manage_copyObjects(['advanced.conf', 'simple.conf'])
-    sq.manage_pasteObjects(cb_data)
+    maker = sq.manage_addProduct['ZTinyMCE'].manage_addZTinyConfiguration
+    for config in default_configurations:
+        maker(config['name'], configuration=config['config'],
+              tinymce_instance_path='/'.join(sq.TinyMCE.getPhysicalPath()),
+              title='Example configuration',
+              optimize=True)
+
+
 
     # Add a MessageCatalog if we are a standalone Bitakora
     # if not, the BitakoraCommunity MessageCatalog will handle
