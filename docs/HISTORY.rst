@@ -5,6 +5,8 @@ CHANGELOG
 1.0 (UNRELEASED)
 ==================
 
+- PEP8ify [erral]
+
 - Provide migration for old instances [erral]
 
 - Fix attribute name clash issue [erral]

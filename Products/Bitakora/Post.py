@@ -20,16 +20,15 @@ from Products.ZCatalog.CatalogAwareness import CatalogAware
 
 # Other stuff
 import DateTime
-from utils import clean, cleanBody, cleanCommentBody
-from utils import addPythonScript, prepareTags, ok_chars
+from utils import clean, cleanBody
+from utils import prepareTags
 from utils import sendPing, postPingBacks
 from future import Future
-import os
-
-__version__ = "$Revision$"
 
 
-def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(), publish=1, comment_allowed=1, not_clean=0, sendping=1, REQUEST=None):
+def manage_addPost(self, title, author, body, tags=[],
+                  date=DateTime.DateTime(), publish=1,
+                  comment_allowed=1, not_clean=0, sendping=1, REQUEST=None):
     """ Called from ZMI when creating new posts """
     if not title and REQUEST is not None:
         return REQUEST.RESPONSE.redirect('%s/post?msg=%s' % (self.blogurl(), 'You must provide at least the title of the post'))
@@ -47,7 +46,8 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
     while hasattr(self, newid):
         newid = self.createNewId(newid)
 
-    post = Post(newid, newtitle, newauthor, newbody, newtags, newdate, publish, comment_allowed)
+    post = Post(newid, newtitle, newauthor, newbody,
+                newtags, newdate, publish, comment_allowed)
 
     self._setObject(str(newid), post)
     post = self.get(newid)
@@ -69,6 +69,7 @@ def manage_addPost(self, title, author, body, tags=[], date=DateTime.DateTime(),
 
     return newid
 
+
 class Post(CatalogAware, BTreeFolder2):
     """ Post class """
     meta_type = 'Post'
@@ -83,7 +84,9 @@ class Post(CatalogAware, BTreeFolder2):
     edit = HTMLFile('ui/Post_edit', globals())
 
     security.declarePrivate('__init__')
-    def __init__(self, id, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1):
+
+    def __init__(self, id, title, author, body,
+                 tags=[], date=u'', publish=1, comment_allowed=1):
         """ """
         BTreeFolder2.__init__(self, id)
         self.id = str(id)
@@ -97,9 +100,11 @@ class Post(CatalogAware, BTreeFolder2):
         self.published = publish
         self.reindex_object()
 
-
     security.declareProtected('Manage Bitakora', 'manage_editPost')
-    def manage_editPost(self, title, author, body, tags=[], date=u'', publish=1, comment_allowed=1, sendping=1, REQUEST=None):
+
+    def manage_editPost(self, title, author, body, tags=[],
+                        date=u'', publish=1, comment_allowed=1,
+                        sendping=1, REQUEST=None):
         """ Editor """
 
         self.title = title
@@ -119,17 +124,23 @@ class Post(CatalogAware, BTreeFolder2):
                 cat.catalog_object(self, '/'.join(self.getPhysicalPath()))
 
         if sendping:
-            tech_pings = Future(sendPing, self.absolute_url(), self.blog_title())
-            pingbacks = Future(postPingBacks, self.body, self.absolute_url())
+            tech_pings = Future(sendPing,
+                                self.absolute_url(),
+                                self.blog_title())
+            pingbacks = Future(postPingBacks,
+                               self.body,
+                               self.absolute_url())
 
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/edit?msg=%s' % (self.absolute_url(), 'Post edited succesfully'))
 
     security.declareProtected('Add Bitakora Comment', 'manage_editComment')
-    def manage_editComment(self, author, email, url, body, date, id, publish=1, REQUEST=None):
+
+    def manage_editComment(self, author, email, url, body,
+                           date, id, publish=1, REQUEST=None):
         """ Editor """
 
-        if REQUEST.has_key('delete'):
+        if REQUEST.get('delete', None):
             self._delObject(id)
             if REQUEST is not None:
                 return REQUEST.RESPONSE.redirect('%s/edit?msg=%s' % (self.absolute_url(), 'Comment deleted succesfully'))
@@ -147,6 +158,7 @@ class Post(CatalogAware, BTreeFolder2):
                 return REQUEST.RESPONSE.redirect('%s/edit?msg=%s' % (self.absolute_url(), 'Comment edited succesfully'))
 
     security.declarePrivate('hasPingback')
+
     def hasPingback(self, sourceURI):
         for pb in self.referenceList():
             if sourceURI == pb.showURI():
@@ -155,91 +167,100 @@ class Post(CatalogAware, BTreeFolder2):
         return 0
 
     security.declarePrivate('deleteAllComments')
+
     def deleteAllComments(self):
         """ """
         for id in self.commentIds():
             self._delObject(id)
 
     security.declarePrivate('deleteAllReferences')
+
     def deleteAllReferences(self):
         """ """
         for id in self.referenceIds():
             self._delObject(id)
 
     security.declarePublic('index_html')
+
     def index_html(self,REQUEST=None):
         """ Each post is rendered usint posting_html template """
-        return self.posting_html(self,REQUEST)
+        return self.posting_html(self, REQUEST)
 
     security.declarePublic('showTitle')
+
     def showTitle(self):
         """ get the title """
         return self.title
 
     security.declarePublic('showAuthor')
+
     def showAuthor(self):
         """ get the author """
         return self.author
 
     security.declarePublic('showTags')
+
     def showTags(self):
         """ get the tags """
         return u' '.join(self.tags)
 
     security.declarePublic('tagList')
+
     def tagList(self):
         """ get the tag list """
         return self.tags
 
     security.declarePublic('showDate')
+
     def showDate(self):
         """ get the date """
         return unicode(str(self.date))
 
     security.declarePublic('showBody')
+
     def showBody(self):
         """ get the body """
         return self.body
 
     security.declarePublic('canComment')
+
     def canComment(self):
         """ Are the comments on this post allowed? """
         return self.comment_allowed
 
     security.declarePublic('canReference')
+
     def canReference(self):
         """ Are the references (trackbacks, pingbacks, ...)
             on this post allowed? """
         return self.reference_allowed
 
-    security.declarePublic('commentsModerated')
-    def commentsModerated(self):
-        """ Return whether comments are moderated (coment_allowed == 2) or not """
-        return self.comment_allowed == 2
-
-    referencesModerated = commentsModerated
-
     security.declarePublic('hidden')
+
     def hidden(self):
         """ is hidden? """
         return not self.published
 
     security.declarePublic('getId')
+
     def getId(self):
         """ get the id of the post """
         return self.id
 
     security.declarePrivate('commentIds')
+
     def commentIds(self):
         """ Get the comment ids """
         return self.objectIds('Comment')
 
     security.declarePrivate('referenceIds')
+
     def referenceIds(self):
         """ Get the reference ids """
         return self.objectIds('Reference')
 
     security.declareProtected('View', 'commentList')
+
     def commentList(self, all=0):
         """ get the comments of this post ordered by date"""
         if all:
@@ -247,10 +268,11 @@ class Post(CatalogAware, BTreeFolder2):
         else:
             comlist = [com for com in self.objectValues('Comment') if com.published]
 
-        comlist.sort(lambda x,y:cmp(x.date,y.date))
+        comlist.sort(lambda x, y: cmp(x.date,y.date))
         return comlist
 
     security.declareProtected('View', 'referenceList')
+
     def referenceList(self, all=0):
         """ get the references of this post ordered by date """
         if all:
@@ -258,21 +280,23 @@ class Post(CatalogAware, BTreeFolder2):
         else:
             reflist = [com for com in self.objectValues('Reference') if com.published]
 
-        reflist.sort(lambda x,y:cmp(x.date,y.date))
+        reflist.sort(lambda x, y:cmp(x.date,y.date))
         return reflist
 
     security.declarePrivate('createCommentId')
+
     def createCommentId(self):
         """ create id """
         l = self.commentList(all=1)
         if len(l) == 0:
             return 0
         else:
-            l.sort(lambda x,y:cmp(int(x.id), int(y.id)))
+            l.sort(lambda x, y: cmp(int(x.id), int(y.id)))
             last_c_id = l[-1].getId()
             return int(last_c_id) + 1
 
     security.declarePrivate('createReferenceId')
+
     def createReferenceId(self):
         """ create id """
         if len(self.referenceList()) == 0:
@@ -281,16 +305,19 @@ class Post(CatalogAware, BTreeFolder2):
             return 'r' + str(len(self.referenceList()) + 1)
 
     security.declareProtected('View', 'numberOfComments')
+
     def numberOfComments(self):
         """ Method that returns the number of comments of this post """
         return unicode(str(len(self.commentList())))
 
     security.declareProtected('View', 'numberOfReferences')
+
     def numberOfReferences(self):
         """ Method that returns the number of references of this post """
         return unicode(str(len(self.referenceList())))
 
     security.declarePrivate('yearmonth')
+
     def yearmonth(self):
         """ for archive """
         date = self.date
@@ -302,6 +329,7 @@ class Post(CatalogAware, BTreeFolder2):
             return u''
 
     security.declarePublic('forgetPersonalInfo')
+
     def forgetPersonalInfo(self, REQUEST):
         """ Delete set cookies """
         if REQUEST is not None:
@@ -314,16 +342,21 @@ class Post(CatalogAware, BTreeFolder2):
         return None
 
     security.declarePublic('commentsAllowed')
+
     def commentsAllowed(self):
         """ Are comments allowed? """
         return self.comment_allowed
 
     security.declarePublic('commentsModerated')
+
     def commentsModerated(self):
         """ Are comments moderated? """
         return self.comment_allowed == 2
 
+    referencesModerated = commentsModerated
+
     security.declarePublic('commentsNotAllowed')
+
     def commentsNotAllowed(self):
         """ Are not comments allowed? """
         return not self.comment_allowed

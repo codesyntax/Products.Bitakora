@@ -3,15 +3,11 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
-#$Id$
-
-
 # Zope modules
 from OFS.Folder import Folder
 from PingMethodContainer import PingMethodContainer
 from AccessControl import ClassSecurityInfo
 
-__version__ = "$Revision$"
 
 class PingbackObject(Folder):
     """ asdfsaf """
@@ -19,6 +15,7 @@ class PingbackObject(Folder):
     security = ClassSecurityInfo()
 
     security.declarePublic('__init__')
+
     def __init__(self):
         """ Some stuff here """
         Folder.__init__(self)
@@ -26,6 +23,7 @@ class PingbackObject(Folder):
         self._setObject('pingback', PingMethodContainer())
 
     security.declarePublic('getId')
+
     def getId(self):
         return self.id
 

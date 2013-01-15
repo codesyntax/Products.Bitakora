@@ -3,8 +3,6 @@
 # Authors: Mikel Larreategi <mlarreategi@codesyntax.com>
 # See also LICENSE.txt
 
-#$Id$
-
 # Zope modules
 import Globals
 from OFS.SimpleItem import SimpleItem
@@ -18,9 +16,10 @@ from Products.PythonScripts.standard import url_quote
 import DateTime
 from utils import clean, cleanCommentBody, cleanEmail, cleanURL, notifyByEmail
 
-__version__ = "$Revision$"
 
-def manage_addComment(self, author, body, url='', email='', date=None, bitakora_cpt='', random_cpt='', captcha_zz=0, REQUEST=None):
+def manage_addComment(self, author, body, url='',
+                      email='', date=None, bitakora_cpt='',
+                      random_cpt='', captcha_zz=0, REQUEST=None):
     """ Called from HTML form when commenting """
     from utils import checkNewCaptchaValue, isCommentSpam
 
@@ -56,7 +55,8 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
     if self.commentsModerated():
         publish = 0
 
-    comment = Comment(newid, newauthor, newemail, newurl, newbody, newdate, self.getId(), publish)
+    comment = Comment(newid, newauthor, newemail, newurl,
+                      newbody, newdate, self.getId(), publish)
     self._setObject(str(newid), comment)
 
     comment = getattr(self, str(newid))
@@ -83,23 +83,28 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
         mSubj = self.gettext('New comment in your blog!')
         mMsg = self.comment_email_template(self, **variables)
 
-        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'), mSubj.encode('utf-8'), mMsg.encode('utf-8'))
-    except:
+        notifyByEmail(mailhost, mTo.encode('utf-8'), mFrom.encode('utf-8'),
+                      mSubj.encode('utf-8'), mMsg.encode('utf-8'))
+    except Exception, e:
         # If there is no MailHost, or other error happened
         # there won't be e-mail notifications
-        pass
-
+        from logging import getLogger
+        log = getLogger('manage_addComment')
+        log.info('Error sending e-mail: %s' % e)
 
     #set cookie
-    if REQUEST and REQUEST.form.has_key('setcookie'):
+    if REQUEST and REQUEST.form.get('setcookie', None):
         resp = REQUEST.RESPONSE
         path = "/"
         gtime = DateTime.DateTime() + 365
         exp = gtime.strftime('%A, %d-%b-%y %H:%M:%S GMT')
 
-        resp.setCookie('comment_author',author.encode('utf-8'),expires=exp,path=path)
-        resp.setCookie('comment_email',email.encode('utf-8'),expires=exp,path=path)
-        resp.setCookie('comment_url',url.encode('utf-8'),expires=exp,path=path)
+        resp.setCookie('comment_author', author.encode('utf-8'),
+                        expires=exp, path=path)
+        resp.setCookie('comment_email', email.encode('utf-8'), expires=exp,
+                        path=path)
+        resp.setCookie('comment_url', url.encode('utf-8'), expires=exp,
+                        path=path)
 
     if REQUEST is not None:
         url = self.absolute_url()
@@ -111,6 +116,7 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
     else:
         return newid
 
+
 class Comment(CatalogAware, SimpleItem):
     """ Comment class """
     meta_type = 'Comment'
@@ -118,6 +124,7 @@ class Comment(CatalogAware, SimpleItem):
     security = ClassSecurityInfo()
 
     security.declarePrivate('__init__')
+
     def __init__(self, id, author, email, url, body, date, postid, publish=1):
         """ Constructor """
         self.id = str(id)
@@ -130,6 +137,7 @@ class Comment(CatalogAware, SimpleItem):
         self.postid = postid
 
     security.declareProtected('Manage Bitakora', 'edit')
+
     def edit(self, author, email, url, body, date, publish=1, REQUEST=None):
         """ Editor """
         self.author = author
@@ -144,60 +152,73 @@ class Comment(CatalogAware, SimpleItem):
             return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Comment edited successfully')
 
     security.declareProtected('Manage bitakora', 'delete')
+
     def delete(self, REQUEST):
         """ delete this comment """
         REQUEST['delete'] = 1
-        self.getParentNode().manage_editComment(author='', email='', url='', body='', date='', id=self.id, REQUEST=REQUEST)
+        self.getParentNode().manage_editComment(author='', email='', url='',
+                                                body='', date='', id=self.id,
+                                                REQUEST=REQUEST)
         if REQUEST is not None:
             url = REQUEST.HTTP_REFERER.split('?')[0]
             return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Comment deleted successfully')
 
     security.declarePublic('index_html')
+
     def index_html(self,REQUEST=None):
         """ Each post is rendered usint comment_body template """
         return self.getParentNode().index_html(REQUEST)
 
     security.declarePublic('hidden')
+
     def hidden(self):
         """ return true if this comment is not published """
         return not self.published
 
     security.declarePublic('showAuthor')
+
     def showAuthor(self):
         """ get the author """
         return self.author
 
     security.declarePublic('showEmail')
+
     def showEmail(self):
         """ get the email """
         return self.email
 
     security.declarePublic('showURL')
+
     def showURL(self):
         """ get the url """
         return self.author_url
 
     security.declarePublic('showDate')
+
     def showDate(self):
         """ get the date """
         return unicode(str(self.date))
 
     security.declarePublic('showBody')
+
     def showBody(self):
         """ get the body """
         return self.body
 
     security.declarePublic('getId')
+
     def getId(self):
         """ get the id of the Comment """
         return self.id
 
     security.declarePublic('absolute_url')
+
     def absolute_url(self):
-        """ """
-        return self.getParentNode().absolute_url()+'#comment'+self.id
+        """ the absolute url"""
+        return self.getParentNode().absolute_url() + '#comment' + self.id
 
     security.declarePublic('postTitle')
+
     def postTitle(self):
         return self.showTitle()
 

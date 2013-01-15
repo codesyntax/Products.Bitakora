@@ -14,9 +14,9 @@ REQUEST = context.REQUEST
 
 ts = REQUEST.get('traverse_subpath', '')
 
-if len(ts)==0:
+if len(ts) == 0:
     return context.tag_all_html(context, REQUEST)
 
 else:
-    REQUEST.set('id',ts[0])
+    REQUEST.set('id', ts[0])
     return context.tag_html(context, REQUEST)

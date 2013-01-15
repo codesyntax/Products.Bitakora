@@ -34,7 +34,8 @@ from ZPublisher.HTTPRequest import record
 # BTreeFolder2
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
-from utils import addDTML, addPythonScript, addImage, addFile, fillMessageCatalog
+from utils import addDTML, addPythonScript, addImage
+from utils import addFile, fillMessageCatalog
 import DateTime
 
 try:
@@ -43,10 +44,12 @@ except:
     True = 1
     False = 0
 
-manage_addBitakoraCommunityForm = HTMLFile('ui/BitakoraCommunity_add', globals())
+manage_addBitakoraCommunityForm = HTMLFile('ui/BitakoraCommunity_add',
+                                            globals())
+
 
 def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
-    """ """
+    """ add Bitakora Community """
     self._setObject(id, BitakoraCommunity(id, admin_mail))
     com = getattr(self, id)
     com.Catalog.refreshCatalog(1)
@@ -57,19 +60,21 @@ def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
 
 class BitakoraCommunity(BTreeFolder2):
     """ BTreeFolder2 container for Bitakora community.
-        It will contain blogs and methods for the main page of the community """
+        It will contain blogs and methods for the main page of the community
+    """
     meta_type = 'BitakoraCommunity'
 
     security = ClassSecurityInfo()
-    security.setPermissionDefault('Manage BitakoraCommunity',('Manager',))
+    security.setPermissionDefault('Manage BitakoraCommunity', ('Manager', ))
 
-    _properties = ({'id':'admin_mail', 'type': 'ustring', 'mode': 'w'},
-                   {'id':'management_page_charset','type':'string', 'mode':'w'},
-                   {'id':'title', 'type':'ustring', 'mode':'w'})
+    _properties = ({'id': 'admin_mail', 'type': 'ustring', 'mode': 'w'},
+                   {'id': 'management_page_charset',
+                    'type': 'string',
+                    'mode': 'w'},
+                   {'id': 'title', 'type':'ustring', 'mode':'w'})
 
     manage_adminBlogs = HTMLFile('ui/admin_blogs', globals())
     manage_adminUsers = HTMLFile('ui/admin_users', globals())
-
 
     def __init__(self, id, admin_mail):
         """ Create Bitakora community """
@@ -90,19 +95,19 @@ class BitakoraCommunity(BTreeFolder2):
         """ Add Localizer stuff """
         try:
             # old MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', ('en', 'eu', 'es')))
+            self._setObject('gettext',
+                            MessageCatalog('gettext', '', ('en', 'eu', 'es')))
         except:
             # new MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en', 'eu', 'es']))
+            self._setObject('gettext',
+                    MessageCatalog('gettext', '', 'en', ['en', 'eu', 'es']))
 
         # fill the gettext with 'es' and 'eu' locales
         gettext = getattr(self, 'gettext')
-        res = fillMessageCatalog(gettext)
-
+        fillMessageCatalog(gettext)
         localizer = Localizer('Localizer', ('en',))
         localizer._v_hook = 1
         self._setObject('Localizer', localizer)
-
 
     def manage_options(self):
         """ """
@@ -118,7 +123,8 @@ class BitakoraCommunity(BTreeFolder2):
     def _addOthers(self):
         """ Add other stuff """
         self.manage_addUserFolder()
-        self._setObject('cookie_authentication', CookieCrumbler('cookie_authentication'))
+        self._setObject('cookie_authentication',
+                        CookieCrumbler('cookie_authentication'))
 
     def _addCatalog(self):
         """ Add ZCatalog instance """
@@ -133,14 +139,14 @@ class BitakoraCommunity(BTreeFolder2):
             catalog.delIndex(name)
 
         # add the default indexes
-        for (name,index_type) in [('meta_type', 'FieldIndex'),
+        for (name, index_type) in [('meta_type', 'FieldIndex'),
                                   ('published', 'FieldIndex'),
                                   ('date', 'DateIndex'),
                                   ('tags', 'KeywordIndex'),
                                   ('yearmonth', 'KeywordIndex'),
                                   ('postcount', 'FieldIndex'),
                                   ('users', 'FieldIndex')]:
-            catalog.addIndex(name,index_type)
+            catalog.addIndex(name, index_type)
 
         extras = record()
         extras.splitter_single_chars = 1
@@ -157,26 +163,26 @@ class BitakoraCommunity(BTreeFolder2):
     def _addMethods(self):
         """ method for adding templates, scripts, ... """
 
-        dtmls = ['blogs_main', 'column', 'create_blog_form', 'index_html', 'last_posts']
-        dtmls.extend(['logged_in', 'logged_out', 'login_form', 'entry_body_community'])
-        dtmls.extend(['menu', 'mini_login_form', 'preheader', 'default_template'])
-        dtmls.extend(['standard_html_footer', 'standard_html_header', 'step1', 'step2', 'step3'])
+        dtmls = ['blogs_main', 'column', 'create_blog_form',
+                 'index_html', 'last_posts']
+        dtmls.extend(['logged_in', 'logged_out', 'login_form',
+                      'entry_body_community'])
+        dtmls.extend(['menu', 'mini_login_form', 'preheader',
+                      'default_template'])
+        dtmls.extend(['standard_html_footer', 'standard_html_header',
+                      'step1', 'step2', 'step3'])
         dtmls.extend(['step3.done', 'tag_all_html', 'tag_html'])
         dtmls.extend(['reminder', 'reminder.done', 'changepass'])
         for dtml in dtmls:
             addDTML(self, dtml, '', 'ui/communityTemplates/%s' % dtml)
 
-        """
-        login = getattr(self, 'logged_in')
-        login._proxy_roles=('Manager',)
-        """
-
-        scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog', 'logout']
+        scripts = ['step1.do', 'step2.do', 'step3.do', 'tag',
+                   'tagsAndPixels', 'usersBlog', 'logout']
         scripts.extend(['reminder.do', 'changepass.do'])
         for script in scripts:
             addPythonScript(self, script, 'ui/communityTemplates/%s' % script)
             ob = getattr(self, script)
-            ob._proxy_roles=('Manager',)
+            ob._proxy_roles = ('Manager',)
 
     def _addTemplates(self):
         """ add some CSS and images """
@@ -185,7 +191,7 @@ class BitakoraCommunity(BTreeFolder2):
         import os
         file_path = Globals.package_home(globals())
         # just files
-        all = os.listdir(file_path+'/ui/communityTemplates')
+        all = os.listdir(file_path + '/ui/communityTemplates')
 
         imgs = [f for f in all if f.endswith('jpg') or f.endswith('gif')]
         for img in imgs:
@@ -195,7 +201,7 @@ class BitakoraCommunity(BTreeFolder2):
         for file in files:
             addFile(self.img, file, 'ui/communityTemplates/%s' % file)
 
-        for num in range(1,5):
+        for num in range(1, 5):
             self.templates.manage_addFolder('%s' % num)
             fol = getattr(self.templates, '%s' % num)
             addFile(fol, 'blog.css', 'ui/communityTemplates/%s/blog.css' % num)
@@ -207,16 +213,15 @@ class BitakoraCommunity(BTreeFolder2):
         for content in contents:
             try:
                 #old LocalContent
-                self._setObject(content, LocalContent(content, tuple(languages)))
+                self._setObject(content,
+                                LocalContent(content, tuple(languages)))
             except:
                 # new LocalContent
-                self._setObject(content, LocalContent(content, 'en', tuple(languages)))
-
-            obj = getattr(self, content)
-
-
+                self._setObject(content,
+                                LocalContent(content, 'en', tuple(languages)))
 
     security.declareProtected('Manage BitakoraCommunity', 'delBlogs')
+
     def delBlogs(self, ids=[], REQUEST=None):
         """ delete selected blogs """
         del_users = []
@@ -224,7 +229,7 @@ class BitakoraCommunity(BTreeFolder2):
         for id in ids:
             blog = self.get(id)
             rol = blog.get_local_roles()
-            del_users.extend([user for user,roles in rol])
+            del_users.extend([user for user, roles in rol])
             blog_path = '/'.join(blog.getPhysicalPath())
             self.Catalog.uncatalog_object(blog_path)
             for post in blog.published_posts(size=99999):
@@ -235,9 +240,10 @@ class BitakoraCommunity(BTreeFolder2):
 
         if REQUEST is not None:
             url = REQUEST.HTTP_REFERER.split('?')[0]
-            return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Blogs deleted successfully')
+            return REQUEST.RESPONSE.redirect(url + '?msg=%s' % 'Blogs deleted successfully')
 
     security.declareProtected('Manage BitakoraCommunity', 'delUsers')
+
     def delUsers(self, ids=[], REQUEST=None):
         """ delete selected blogs """
 
@@ -248,10 +254,10 @@ class BitakoraCommunity(BTreeFolder2):
             return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Users deleted successfully')
 
     security.declarePublic('cleanHTML')
+
     def cleanHTML(self, html):
         """ clean html from posts """
-    	# Which one is more efficient?
-
+        # Which one is more efficient?
         # One way...
         try:
             from EpozPostTidy import cleanHTML as clean
@@ -259,44 +265,59 @@ class BitakoraCommunity(BTreeFolder2):
         except:
             # perhaps more efficient but needed for old Zopes
             # Another way... (from Zopelabs)
-        	intag = [False]
+            intag = [False]
 
-        	def chk(c, intag):
-        		if intag[0]:
-        			intag[0] = (c != '>')
-        			return False
-        		elif c == '<':
-        			intag[0] = True
-        			return False
-        		return True
+            def chk(c, intag):
+                if intag[0]:
+                    intag[0] = (c != '>')
+                    return False
+                elif c == '<':
+                    intag[0] = True
+                    return False
+                return True
 
-        	return ''.join([c for c in html if chk(c, intag)])
-
+            return ''.join([c for c in html if chk(c, intag)])
 
     security.declarePublic('community')
+
     def community(self):
         """ return the community """
         return self
 
     security.declarePublic('communityTitle')
+
     def communityTitle(self):
         """ return the title """
         return self.title
 
     security.declarePublic('communityUrl')
+
     def communityUrl(self):
         """ return the URL of the community """
         return self.absolute_url()
 
     security.declarePublic('communityLastPosts')
+
     def communityLastPosts(self, size=10, start=None):
         """ The method for getting 'size' published posts"""
         if start is None:
-            return self.Catalog.searchResults(meta_type='Post', published=1, sort_limit=size, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
+            return self.Catalog.searchResults(meta_type='Post',
+                                              published=1,
+                                              sort_limit=size,
+                                              date={'query': DateTime.DateTime(),
+                                                    'range':'max'},
+                                              sort_on='date',
+                                              sort_order='descending')
         else:
-            return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
+            return self.Catalog.searchResults(meta_type='Post',
+                                              published=1,
+                                              date={'query': DateTime.DateTime(),
+                                                    'range':'max'},
+                                              sort_on='date',
+                                              sort_order='descending')
 
     security.declareProtected('Manage Bitakora', 'migrate_to_1_dot_0')
+
     def migrate_to_1_dot_0(self):
         """ migrate to Bitakora 1.0 """
         from logging import getLogger
