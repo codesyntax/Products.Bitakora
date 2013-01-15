@@ -23,7 +23,8 @@ from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog
 # BTreeFolder2
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
-
+# ZTinyMCE
+from Products.ZTinyMCE.TinyMCE import manage_addZTinyMCE
 # Other stuff
 import DateTime
 
@@ -72,6 +73,9 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
     for role, perm in perms.items():
         sq.manage_role(role_to_manage=role, permissions=perm)
 
+    sq.manage_addProduct['ZTinyMCE'].manage_addZTinyMCE('TinyMCE', 'TinyMCE')
+    cb_data = sq.TinyMCE.manage_copyObjects(['advanced.conf', 'simple.conf'])
+    sq.manage_pasteObjects(cb_data)
 
     # Add a MessageCatalog if we are a standalone Bitakora
     # if not, the BitakoraCommunity MessageCatalog will handle
@@ -85,7 +89,7 @@ def manage_addBitakora(self, id, title, subtitle, contact_mail, description=u'',
     if REQUEST is not None:
         return self.manage_main(self, REQUEST)
 
-class Bitakora(BTreeFolder2, CatalogPathAware):
+class Bitakora(BTreeFolder2, CatalogAware):
     """ Bitakora is a new blog product for Zope """
     from Post import manage_addPost
     from utils import send_contact_mail, cleanBody, getCaptchaQuestion
