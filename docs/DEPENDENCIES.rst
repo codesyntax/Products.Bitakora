@@ -1,5 +1,5 @@
 ================
-DEPENDENCIES.txt
+DEPENDENCIES
 ================
 
 - Zope 2.9.12 (yes, it's pretty old, but we can't install Localizer in a newer version of Zope)
