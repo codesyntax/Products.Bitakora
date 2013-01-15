@@ -14,8 +14,6 @@ from Products.PythonScripts.PythonScript import PythonScript
 # ZCatalog
 from Products.ZCatalog import ZCatalog
 from Products.ZCatalog.CatalogAwareness import CatalogAware
-# To add ZCatalog FieldIndex and TextIndexNG2
-from ZPublisher.HTTPRequest import record
 # Localizer
 from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog
@@ -278,15 +276,6 @@ class Bitakora(BTreeFolder2, CatalogAware):
                                    ('tags', 'KeywordIndex'),
                                    ('yearmonth', 'KeywordIndex')]:
             self.Catalog.addIndex(name, index_type)
-
-        extras = record()
-        extras.splitter_single_chars = 1
-        extras.default_encoding = 'UTF-8'
-        extras.splitter_separators = '.+-_@'
-        self.Catalog.manage_addIndex('author', 'TextIndexNG2', extra=extras)
-        self.Catalog.manage_addIndex('title', 'TextIndexNG2', extra=extras)
-        self.Catalog.manage_addIndex('body', 'TextIndexNG2', extra=extras)
-        self.Catalog.manage_addIndex('excerpt', 'TextIndexNG2', extra=extras)
 
     security.declarePrivate('_addMethods')
 
@@ -839,12 +828,26 @@ class Bitakora(BTreeFolder2, CatalogAware):
                       title='Example configuration',
                       optimize=True)
 
+    security.declareProtected('Manage Bitakora', 'migrate_textindexng2')
+
+    def migrate_textindexng2(self):
+        """ remove all textindeng2 indexes """
+        from logging import getLogger
+        log = getLogger('migrate_textindexng2')
+        indexes = ['author', 'body', 'excerpt', 'title']
+        for index in indexes:
+            if index in self.Catalog.indexes():
+                self.Catalog.manage_delIndex(index)
+                log.info('Deleted %s index' % index)
+        log.info('Deleted TextIndexNG2 indexes')
+
     security.declareProtected('Manage Bitakora', 'migrate_to_1_dot_0')
 
     def migrate_to_1_dot_0(self):
         """ migrate to Bitakora 1.0 """
         self.migrate_comments()
         self.migrate_tinymce()
+        self.migrate_textindexng2()
         return 1
 
 Globals.InitializeClass(Bitakora)

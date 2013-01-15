@@ -24,8 +24,6 @@ Bitakora Features
 
  - Full UTF-8 support, trying to avoid UnicodeDecodeErrors :)
 
- - All posts are indexed using TextIndexNG2, for providing quick and powerfull searches across the site.
-
  - Blog templates are clean XHTML, based on MovableType 3 templates.
 
  - Clean URLs and tag based categorization of posts.
@@ -54,6 +52,15 @@ More info
  - `Bitakora mailing list`_
 
  - `Blogak.com`_
+
+
+Migration to 1.0
+====================
+
+ - To migrate from 0.x version to 1.0, open http://yoursite.com/blog/migrate_to_1_dot_0 or
+   http://yoursite.com/community/migrate_to_1_dot_0 to run migration code. This migration
+   code, adds TinyMCE, fixes attribute name clash in Comment class and deletes TextIndexNG2
+   indexes created in the installtion
 
 License
 =========

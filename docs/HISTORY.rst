@@ -5,6 +5,8 @@ CHANGELOG
 1.0 (UNRELEASED)
 ==================
 
+- Remove TextIndexNG2 dependency and provide migration to delete indexes [erral]
+
 - PEP8ify [erral]
 
 - Provide migration for old instances [erral]
@@ -16,6 +18,7 @@ CHANGELOG
 - Add TinyMCE insted of epoz [erral
 
 - Eggify this product [erral]
+
 
 v. 0.1.21
 ==========

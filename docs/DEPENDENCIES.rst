@@ -6,8 +6,6 @@ DEPENDENCIES
 
 - Localizer 1.2.3 (install itools and iHotfix too, they are Localizer dependencies)
 
-- TextIndexNG2 2.2.0
-
 - CookieCrumbler 1.2
 
 - ZTinyMCE 0.2.1
