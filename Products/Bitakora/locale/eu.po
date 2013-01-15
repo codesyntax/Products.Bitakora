@@ -177,6 +177,9 @@ msgstr "Jaitsi TXT eran"
 msgid "Download in XML"
 msgstr "XML formatuan jaitsi"
 
+msgid "Download in WordPress format"
+msgstr "Deskargatu WordPress formatuan"
+
 msgid "Download your blog"
 msgstr "Jaitsi zure blogeko edukia"
 

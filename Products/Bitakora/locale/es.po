@@ -177,6 +177,10 @@ msgstr "Descarga en formato TXT"
 msgid "Download in XML"
 msgstr "Descarga en XML"
 
+msgid "Download in WordPress format"
+msgstr "Descargar en formato WordPress"
+
+
 msgid "Download your blog"
 msgstr "Descárgate tu blog"
 
