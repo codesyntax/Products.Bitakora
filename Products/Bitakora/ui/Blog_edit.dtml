@@ -23,7 +23,7 @@
 </p>
 
 <p>
-<dtml-var "gettext('Your current image')"> <br/> 
+<dtml-var "gettext('Your current image')"> <br/>
 <img src="<dtml-var getImageUrl>" alt="<dtml-var blog_title>" title="<dtml-var blog_title>" /><br/>
 <label for="image"><dtml-var "gettext('Image 65x65 pixels')"></label><br />
 <input type="file" id="image" name="image" size="50" />
@@ -50,7 +50,8 @@
 
 <ul>
     <li><a href="<dtml-var blogurl>/downloadTXT"><dtml-var "gettext('Download in TXT')"></a></li>
-    <li><a href="<dtml-var blogurl>/downloadXML"><dtml-var "gettext('Download in XML')"></a></li>    
+    <li><a href="<dtml-var blogurl>/downloadXML"><dtml-var "gettext('Download in XML')"></a></li>
+    <li><a href="<dtml-var blogurl>/downloadWordPress"><dtml-var "gettext('Download in WordPress format')"></a></li>
 </ul>
 
 <h1><dtml-var "gettext('Upload a XML file with blog data')"></h1>

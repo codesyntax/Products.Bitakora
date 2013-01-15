@@ -137,6 +137,7 @@ class Bitakora(BTreeFolder2, CatalogAware):
     contents = HTMLFile('ui/contents', globals())
     downloadTXT = HTMLFile('ui/downloadTXT', globals())
     downloadXML = HTMLFile('ui/downloadXML', globals())
+    downloadWordPress = HTMLFile('ui/downloadWordPress', globals())
     logged_in = HTMLFile('ui/logged_in', globals())
     logged_out = HTMLFile('ui/logged_out', globals())
     login_form = HTMLFile('ui/login_form', globals())

@@ -1,0 +1,57 @@
+<dtml-call "REQUEST.set('fname','Bitakora_WordPress_Export.xml')"><dtml-call "RESPONSE.setHeader('content-type', 'text/xml; charset=UTF-8')"><dtml-call "RESPONSE.setHeader('Content-Disposition','attachment;filename='+fname)"><dtml-call "RESPONSE.setHeader('content-type', 'text/xml; charset=utf-8')"><?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/css" href="/css/rssfeed.css" ?>
+<rss version="2.0"
+    xmlns:excerpt="http://wordpress.org/export/1.1/excerpt/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:wp="http://wordpress.org/export/1.1/"
+        xml:base="<dtml-var absolute_url>">
+  <channel>
+    <title><dtml-var title></title>
+    <link><dtml-var absolute_url></link>
+    <description><dtml-var subtitle></description>
+    <wp:wxr_version>1.1</wp:wxr_version>
+    <wp:base_site_url><dtml-var "aq_parent.absolute_url()"></wp:base_site_url>
+    <wp:base_blog_url><dtml-var "aq_parent.absolute_url()">/<dtml-var getId></wp:base_blog_url>
+    <language>eu</language>
+    <dtml-in "objectValues('Post')" sort="date" reverse>
+    <item>
+       <title><dtml-var showTitle></title>
+       <link><dtml-var absolute_url></link>
+       <pubDate><dtml-var "date.rfc822()"></pubDate>
+       <guid isPermaline="true"><dtml-var absolute_url></guid>
+       <dc:creator><dtml-var "getParentNode().getId()"></dc:creator>
+       <content:encoded><![CDATA[<dtml-var showBody>]]></content:encoded>
+       <wp:post_date><dtml-var "date.ISO()"></wp:post_date>
+       <wp:post_date_gmt><dtml-var "date.ISO()"></wp:post_date_gmt>
+       <wp:status><dtml-if published>publish<dtml-else>private</dtml-if></wp:status>
+       <wp:ping_status><dtml-if canReference>open<dtml-else>closed</dtml-if></wp:ping_status>
+       <wp:comment_status><dtml-if canComment>open<dtml-else>closed</dtml-if></wp:comment_status>
+       <wp:post_type>post</wp:post_type>
+       <dtml-in tagList>
+       <category domain="post_tag" nicename="<dtml-var sequence-item>"><dtml-var sequence-item></category>
+       </dtml-in>
+       <wp:postmeta>
+    <wp:meta_key>author</wp:meta_key>
+    <wp:meta_value><![CDATA[<dtml-var showAuthor>]]></wp:meta_value>
+       </wp:postmeta>
+       <dtml-in "commentList(all=1)">
+          <dtml-unless "meta_type == 'Post'">
+        <wp:comment>
+        <wp:comment_id><dtml-var id></wp:comment_id>
+        <wp:comment_author><![CDATA[<dtml-var showAuthor missing="">]]></wp:comment_author>
+        <wp:comment_author_email><dtml-var showEmail missing=""></wp:comment_author_email>
+        <wp:comment_author_url><dtml-var showURL missing=""></wp:comment_author_url>
+        <wp:comment_date><dtml-var "_.DateTime(showDate()).ISO()"></wp:comment_date>
+        <wp:comment_date_gmt><dtml-var "_.DateTime(showDate()).ISO()"></wp:comment_date_gmt>
+        <wp:comment_content><![CDATA[<dtml-var showBody missing="">]]></wp:comment_content>
+        <wp:comment_approved><dtml-if published>1<dtml-else>0</dtml-if></wp:comment_approved>
+        </wp:comment>
+           </dtml-unless>
+       </dtml-in>
+   </item>
+
+   </dtml-in>
+ </channel>
+</rss>
