@@ -14,7 +14,7 @@ setup(name='Products.Bitakora',
       classifiers=[
         "Programming Language :: Python",
         ],
-      keywords='zope blog bommunity',
+      keywords='zope blog community',
       author='Mikel Larreategi',
       author_email='mlarreategi@codesyntax.com',
       url='http://github.com/codesyntax/Products.Bitakora',
