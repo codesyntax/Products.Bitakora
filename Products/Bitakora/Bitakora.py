@@ -698,4 +698,41 @@ class Bitakora(BTreeFolder2, CatalogAware):
         if REQUEST is not None:
             return REQUEST.RESPONSE.redirect('%s/prefs?msg=%s' % (self.absolute_url(), 'XML file imported succesfully'))
 
+    security.declareProtected('Manage Bitakora', 'migrate_comments')
+    def migrate_comments(self):
+        """ Migrate comment attribute url to author_url, not to clash with
+            CatalogAware's url attribute
+        """
+        from logging import getLogger
+        log = getLogger('migrate_comments')
+        log.info('starting')
+        for post in self.objectValues('Post'):
+            for comment in post.objectValues('Comment'):
+                if hasattr(comment, 'url') and not callable(getattr(comment, 'url')):
+                    comment.author_url = comment.url
+                    log.info('Migrated: %s - %s' % (comment.getId(), comment.author_url))
+                    delattr
+        log.info('done')
+
+    security.declareProtected('Manage Bitakora', 'migrate_tinymce')
+    def migrate_tinymce(self):
+        from logging import getLogger
+        log = getLogger('migrate_tinymce')
+        if 'TinyMCE' not in self.objectIds():
+            log.info('Adding TinyMCE')
+            self.manage_addProduct['ZTinyMCE'].manage_addZTinyMCE('TinyMCE', 'TinyMCE')
+            maker = self.manage_addProduct['ZTinyMCE'].manage_addZTinyConfiguration
+            for config in default_configurations:
+                maker(config['name'], configuration=config['config'],
+                      tinymce_instance_path='/'.join(self.TinyMCE.getPhysicalPath()),
+                      title='Example configuration',
+                      optimize=True)
+
+    security.declareProtected('Manage Bitakora', 'migrate_to_1_dot_0')
+    def migrate_to_1_dot_0(self):
+        """ migrate to Bitakora 1.0 """
+        self.migrate_comments()
+        self.migrate_tinymce()
+        return 1
+
 Globals.InitializeClass(Bitakora)

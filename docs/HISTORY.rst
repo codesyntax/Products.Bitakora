@@ -5,6 +5,10 @@ CHANGELOG
 1.0 (UNRELEASED)
 ==================
 
+- Provide migration for old instances [erral]
+
+- Fix attribute name clash issue [erral]
+
 - Reformat README and HISTORY files in rST [erral]
 
 - Add TinyMCE insted of epoz [erral

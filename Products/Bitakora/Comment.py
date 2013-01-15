@@ -23,11 +23,13 @@ __version__ = "$Revision$"
 def manage_addComment(self, author, body, url='', email='', date=None, bitakora_cpt='', random_cpt='', captcha_zz=0, REQUEST=None):
     """ Called from HTML form when commenting """
     from utils import checkNewCaptchaValue, isCommentSpam
-    if not checkNewCaptchaValue(self, bitakora_cpt):
-        if REQUEST is not None:
-            return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
 
-        return None
+    if self.CAPTCHA_ENABLED:
+        if not checkNewCaptchaValue(self, bitakora_cpt):
+            if REQUEST is not None:
+                return REQUEST.RESPONSE.redirect(self.absolute_url()+u'?msg=%s&body=%s&comment_author=%s&comment_email=%s&comment_url=%s#bitakora_cpt_control' % (self.gettext('Are you a bot? Please try again...'), url_quote(body.encode('utf-8')), url_quote(author.encode('utf-8')), url_quote(email.encode('utf-8')), url_quote(url.encode('utf-8'))))
+
+            return None
 
     # Publish the comment by default
     publish = 1
@@ -55,7 +57,6 @@ def manage_addComment(self, author, body, url='', email='', date=None, bitakora_
         publish = 0
 
     comment = Comment(newid, newauthor, newemail, newurl, newbody, newdate, self.getId(), publish)
-
     self._setObject(str(newid), comment)
 
     comment = getattr(self, str(newid))
@@ -122,7 +123,7 @@ class Comment(CatalogAware, SimpleItem):
         self.id = str(id)
         self.author = author
         self.email = email
-        self.url = url
+        self.author_url = url
         self.body = body
         self.date = date
         self.published = publish
@@ -133,7 +134,7 @@ class Comment(CatalogAware, SimpleItem):
         """ Editor """
         self.author = author
         self.email = email
-        self.url = url
+        self.author_url = url
         self.body = cleanCommentBody(self, body)
         self.date = DateTime.DateTime(date)
         self.published = publish
@@ -174,7 +175,7 @@ class Comment(CatalogAware, SimpleItem):
     security.declarePublic('showURL')
     def showURL(self):
         """ get the url """
-        return self.url
+        return self.author_url
 
     security.declarePublic('showDate')
     def showDate(self):
@@ -199,5 +200,13 @@ class Comment(CatalogAware, SimpleItem):
     security.declarePublic('postTitle')
     def postTitle(self):
         return self.showTitle()
+
+    def index_object(self):
+        """A common method to allow Findables to index themselves."""
+        if hasattr(self, 'url') and not callable(getattr(self, 'url')):
+            self.author_url = self.url
+            delattr(self, 'url')
+        CatalogAware.index_object(self)
+
 
 Globals.InitializeClass(Comment)

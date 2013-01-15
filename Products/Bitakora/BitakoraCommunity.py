@@ -56,21 +56,21 @@ def manage_addBitakoraCommunity(self, id, admin_mail, REQUEST=None):
 
 
 class BitakoraCommunity(BTreeFolder2):
-    """ BTreeFolder2 container for Bitakora community. 
+    """ BTreeFolder2 container for Bitakora community.
         It will contain blogs and methods for the main page of the community """
     meta_type = 'BitakoraCommunity'
-    
+
     security = ClassSecurityInfo()
     security.setPermissionDefault('Manage BitakoraCommunity',('Manager',))
 
     _properties = ({'id':'admin_mail', 'type': 'ustring', 'mode': 'w'},
                    {'id':'management_page_charset','type':'string', 'mode':'w'},
                    {'id':'title', 'type':'ustring', 'mode':'w'})
-       
+
     manage_adminBlogs = HTMLFile('ui/admin_blogs', globals())
     manage_adminUsers = HTMLFile('ui/admin_users', globals())
-    
-    
+
+
     def __init__(self, id, admin_mail):
         """ Create Bitakora community """
         BTreeFolder2.__init__(self, id)
@@ -84,8 +84,8 @@ class BitakoraCommunity(BTreeFolder2):
         self._addTemplates()
         self._addContent()
         self._addOthers()
-        self._buildIndexes()         
-        
+        self._buildIndexes()
+
     def _addLocalizer(self):
         """ Add Localizer stuff """
         try:
@@ -93,16 +93,16 @@ class BitakoraCommunity(BTreeFolder2):
             self._setObject('gettext', MessageCatalog('gettext', '', ('en', 'eu', 'es')))
         except:
             # new MessageCatalog
-            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en', 'eu', 'es']))   
-            
+            self._setObject('gettext', MessageCatalog('gettext', '', 'en', ['en', 'eu', 'es']))
+
         # fill the gettext with 'es' and 'eu' locales
         gettext = getattr(self, 'gettext')
         res = fillMessageCatalog(gettext)
-        
+
         localizer = Localizer('Localizer', ('en',))
         localizer._v_hook = 1
         self._setObject('Localizer', localizer)
-        
+
 
     def manage_options(self):
         """ """
@@ -113,22 +113,22 @@ class BitakoraCommunity(BTreeFolder2):
                     'action': 'manage_adminUsers'}) \
                  + BTreeFolder2.manage_options[1:]
 
-        return options       
+        return options
 
     def _addOthers(self):
         """ Add other stuff """
         self.manage_addUserFolder()
         self._setObject('cookie_authentication', CookieCrumbler('cookie_authentication'))
-           
+
     def _addCatalog(self):
         """ Add ZCatalog instance """
         self._setObject('Catalog', ZCatalog.ZCatalog('Catalog', 'Catalog'))
-        
+
     def _buildIndexes(self):
         """ Stuff to create Catalog indexes """
         # get the Catalog in a BTreeFolder2 way: as if it was a dictionary
         catalog = self.get('Catalog')
-        # delete any existing indexes        
+        # delete any existing indexes
         for name in catalog.indexes():
             catalog.delIndex(name)
 
@@ -137,7 +137,7 @@ class BitakoraCommunity(BTreeFolder2):
                                   ('published', 'FieldIndex'),
                                   ('date', 'DateIndex'),
                                   ('tags', 'KeywordIndex'),
-                                  ('yearmonth', 'KeywordIndex'), 
+                                  ('yearmonth', 'KeywordIndex'),
                                   ('postcount', 'FieldIndex'),
                                   ('users', 'FieldIndex')]:
             catalog.addIndex(name,index_type)
@@ -156,50 +156,50 @@ class BitakoraCommunity(BTreeFolder2):
 
     def _addMethods(self):
         """ method for adding templates, scripts, ... """
-        
+
         dtmls = ['blogs_main', 'column', 'create_blog_form', 'index_html', 'last_posts']
         dtmls.extend(['logged_in', 'logged_out', 'login_form', 'entry_body_community'])
         dtmls.extend(['menu', 'mini_login_form', 'preheader', 'default_template'])
         dtmls.extend(['standard_html_footer', 'standard_html_header', 'step1', 'step2', 'step3'])
-        dtmls.extend(['step3.done', 'tag_all_html', 'tag_html'])        
+        dtmls.extend(['step3.done', 'tag_all_html', 'tag_html'])
         dtmls.extend(['reminder', 'reminder.done', 'changepass'])
         for dtml in dtmls:
             addDTML(self, dtml, '', 'ui/communityTemplates/%s' % dtml)
-        
-        """    
+
+        """
         login = getattr(self, 'logged_in')
         login._proxy_roles=('Manager',)
         """
-        
+
         scripts = ['step1.do', 'step2.do', 'step3.do', 'tag', 'tagsAndPixels', 'usersBlog', 'logout']
         scripts.extend(['reminder.do', 'changepass.do'])
         for script in scripts:
             addPythonScript(self, script, 'ui/communityTemplates/%s' % script)
             ob = getattr(self, script)
             ob._proxy_roles=('Manager',)
-            
+
     def _addTemplates(self):
-        """ add some CSS and images """                    
+        """ add some CSS and images """
         self.manage_addFolder('img')
         self.manage_addFolder('templates')
         import os
         file_path = Globals.package_home(globals())
         # just files
         all = os.listdir(file_path+'/ui/communityTemplates')
-        
+
         imgs = [f for f in all if f.endswith('jpg') or f.endswith('gif')]
         for img in imgs:
             addImage(self.img, img, 'ui/communityTemplates/%s' % img)
-            
+
         files = [f for f in all if f.endswith('css')]
         for file in files:
             addFile(self.img, file, 'ui/communityTemplates/%s' % file)
-            
+
         for num in range(1,5):
             self.templates.manage_addFolder('%s' % num)
             fol = getattr(self.templates, '%s' % num)
             addFile(fol, 'blog.css', 'ui/communityTemplates/%s/blog.css' % num)
-            
+
     def _addContent(self):
         """ add some LocalContents for fixed content """
         languages = 'en'
@@ -211,16 +211,16 @@ class BitakoraCommunity(BTreeFolder2):
             except:
                 # new LocalContent
                 self._setObject(content, LocalContent(content, 'en', tuple(languages)))
-            
+
             obj = getattr(self, content)
 
 
-       
-    security.declareProtected('Manage BitakoraCommunity', 'delBlogs')        
+
+    security.declareProtected('Manage BitakoraCommunity', 'delBlogs')
     def delBlogs(self, ids=[], REQUEST=None):
-        """ delete selected blogs """   
+        """ delete selected blogs """
         del_users = []
-                  
+
         for id in ids:
             blog = self.get(id)
             rol = blog.get_local_roles()
@@ -232,17 +232,17 @@ class BitakoraCommunity(BTreeFolder2):
 
         self.manage_delObjects(ids)
         self.delUsers(del_users)
-        
+
         if REQUEST is not None:
             url = REQUEST.HTTP_REFERER.split('?')[0]
             return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Blogs deleted successfully')
 
     security.declareProtected('Manage BitakoraCommunity', 'delUsers')
     def delUsers(self, ids=[], REQUEST=None):
-        """ delete selected blogs """   
+        """ delete selected blogs """
 
-        self.acl_users.userFolderDelUsers(ids)            
-        
+        self.acl_users.userFolderDelUsers(ids)
+
         if REQUEST is not None:
             url = REQUEST.HTTP_REFERER.split('?')[0]
             return REQUEST.RESPONSE.redirect(url+'?msg=%s' % 'Users deleted successfully')
@@ -260,7 +260,7 @@ class BitakoraCommunity(BTreeFolder2):
             # perhaps more efficient but needed for old Zopes
             # Another way... (from Zopelabs)
         	intag = [False]
-        	
+
         	def chk(c, intag):
         		if intag[0]:
         			intag[0] = (c != '>')
@@ -269,32 +269,42 @@ class BitakoraCommunity(BTreeFolder2):
         			intag[0] = True
         			return False
         		return True
-        	
+
         	return ''.join([c for c in html if chk(c, intag)])
-        	
-        
-    security.declarePublic('community')        
+
+
+    security.declarePublic('community')
     def community(self):
         """ return the community """
         return self
-        
-    security.declarePublic('communityTitle')        
+
+    security.declarePublic('communityTitle')
     def communityTitle(self):
         """ return the title """
         return self.title
-        
+
     security.declarePublic('communityUrl')
     def communityUrl(self):
         """ return the URL of the community """
         return self.absolute_url()
-                
-    security.declarePublic('communityLastPosts')                
+
+    security.declarePublic('communityLastPosts')
     def communityLastPosts(self, size=10, start=None):
         """ The method for getting 'size' published posts"""
         if start is None:
             return self.Catalog.searchResults(meta_type='Post', published=1, sort_limit=size, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
         else:
             return self.Catalog.searchResults(meta_type='Post', published=1, date={'query':DateTime.DateTime(), 'range':'max'}, sort_on='date', sort_order='descending')
-            
-        
-Globals.InitializeClass(BitakoraCommunity)        
+
+    security.declareProtected('Manage Bitakora', 'migrate_to_1_dot_0')
+    def migrate_to_1_dot_0(self):
+        """ migrate to Bitakora 1.0 """
+        from logging import getLogger
+        log = getLogger('migrate_to_1_dot_0')
+        for blog in self.objectValues('Bitakora'):
+            log.info('Migrating: %s' % blog.getId())
+            blog.migrate_to_1_dot_0()
+
+        log.info('done')
+
+Globals.InitializeClass(BitakoraCommunity)
