@@ -1,3 +1,5 @@
+<dtml-var simple.conf>
+
 <h2><dtml-var "gettext('Post a comment')"></h2>
 
 <div class="comment-data">
@@ -16,12 +18,7 @@
 </p>
 <p>
 <label><dtml-var "gettext('Comments:')"></label><br/>
-<dtml-var "Epoz('body:utf8:ustring', data=REQUEST.form.get('body', '').decode('utf-8'), toolbox='', lang=Localizer.get_selected_language(),
-            path='', widget='bitakora_comment_js',
-            style='width: 440px; height: 250px; border: 1px solid #000000;',
-            button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;',
-            css='', customcss='', charset='utf-8', pageurl='')">
-<dtml-comment><textarea id="text" name="body:utf8" rows="10" cols="50"><dtml-if "REQUEST.form.has_key('body')"><dtml-var "REQUEST.form['body']" html_quote></dtml-if></textarea></dtml-comment>
+    <textarea id="text" name="body:utf8" rows="10" cols="50"><dtml-if "REQUEST.form.has_key('body')"><dtml-var "REQUEST.form['body']" html_quote></dtml-if></textarea>
 </p>
 <dtml-var captcha_control missing="">
 <p>
@@ -31,4 +28,3 @@
 </p>
 </form>
 </div>
-  

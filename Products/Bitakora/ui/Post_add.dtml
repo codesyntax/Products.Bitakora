@@ -1,5 +1,7 @@
 <dtml-var standard_html_header>
 
+<dtml-var advanced.conf>
+
 <dtml-var admin_header>
 
 <dtml-if "'.' in REQUEST.keys()">
@@ -36,12 +38,7 @@
 
 <p>
 <label for="text"><dtml-var "gettext('Body')"></label><br/>
-<dtml-var "Epoz('body:utf8:utext', data=REQUEST.get('body', '') and cleanBody(body) or '', toolbox='', lang=Localizer.get_selected_language(),
-            path='', widget='bitakora_edit_js',
-            style='width: 440px; height: 250px; border: 1px solid #000000;', 
-            button='background-color: #EFEFEF; border: 1px solid #A0A0A0; cursor: pointer; margin-right: 1px; margin-bottom: 1px;', css='', customcss='', charset='utf-8', pageurl='')">
-
-<dtml-comment><textarea id="body" name="body:utf8:text" rows="10" cols="50"></textarea></dtml-comment>
+<textarea id="body" name="body:utf8:text" rows="10" cols="50"></textarea>
 </p>
 
 <p>
