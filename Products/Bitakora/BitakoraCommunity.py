@@ -24,9 +24,6 @@ try:
 except:
     from Products.CMFCore.CookieCrumbler import CookieCrumbler
 
-# To add ZCatalog FieldIndex and TextIndexNG2
-from ZPublisher.HTTPRequest import record
-
 # BTreeFolder2
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
@@ -67,7 +64,7 @@ class BitakoraCommunity(BTreeFolder2):
                    {'id': 'management_page_charset',
                     'type': 'string',
                     'mode': 'w'},
-                   {'id': 'title', 'type':'ustring', 'mode':'w'})
+                   {'id': 'title', 'type': 'ustring', 'mode': 'w'})
 
     manage_adminBlogs = HTMLFile('ui/admin_blogs', globals())
     manage_adminUsers = HTMLFile('ui/admin_users', globals())
@@ -143,14 +140,6 @@ class BitakoraCommunity(BTreeFolder2):
                                   ('postcount', 'FieldIndex'),
                                   ('users', 'FieldIndex')]:
             catalog.addIndex(name, index_type)
-
-        extras = record()
-        extras.splitter_single_chars = 1
-        extras.default_encoding = 'UTF-8'
-        extras.splitter_separators = '.+-_@'
-        catalog.manage_addIndex('author', 'TextIndexNG2', extra=extras)
-        catalog.manage_addIndex('title', 'TextIndexNG2', extra=extras)
-        catalog.manage_addIndex('body', 'TextIndexNG2', extra=extras)
 
         # delete the default metadata columns
         for name in catalog.schema():
@@ -300,17 +289,30 @@ class BitakoraCommunity(BTreeFolder2):
             return self.Catalog.searchResults(meta_type='Post',
                                               published=1,
                                               sort_limit=size,
-                                              date={'query': DateTime.DateTime(),
-                                                    'range':'max'},
+                                          date={'query': DateTime.DateTime(),
+                                                'range': 'max'},
                                               sort_on='date',
                                               sort_order='descending')
         else:
             return self.Catalog.searchResults(meta_type='Post',
                                               published=1,
-                                              date={'query': DateTime.DateTime(),
-                                                    'range':'max'},
+                                          date={'query': DateTime.DateTime(),
+                                                'range': 'max'},
                                               sort_on='date',
                                               sort_order='descending')
+
+    security.declareProtected('Manage Bitakora', 'migrate_textindexng2')
+
+    def migrate_textindexng2(self):
+        """ remove all textindeng2 indexes """
+        from logging import getLogger
+        log = getLogger('migrate_textindexng2')
+        indexes = ['author', 'body', 'excerpt', 'title']
+        for index in indexes:
+            if index in self.Catalog.indexes():
+                self.Catalog.manage_delIndex(index)
+                log.info('Deleted %s index' % index)
+        log.info('Deleted TextIndexNG2 indexes')
 
     security.declareProtected('Manage Bitakora', 'migrate_to_1_dot_0')
 
@@ -318,6 +320,7 @@ class BitakoraCommunity(BTreeFolder2):
         """ migrate to Bitakora 1.0 """
         from logging import getLogger
         log = getLogger('migrate_to_1_dot_0')
+        self.migrate_textindexng2()
         for blog in self.objectValues('Bitakora'):
             log.info('Migrating: %s' % blog.getId())
             blog.migrate_to_1_dot_0()

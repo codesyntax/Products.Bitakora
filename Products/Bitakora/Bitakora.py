@@ -807,9 +807,11 @@ class Bitakora(BTreeFolder2, CatalogAware):
         log.info('starting')
         for post in self.objectValues('Post'):
             for comment in post.objectValues('Comment'):
-                if hasattr(comment, 'url') and not callable(getattr(comment, 'url')):
+                if hasattr(comment, 'url') and \
+                    not callable(getattr(comment, 'url')):
                     comment.author_url = comment.url
-                    log.info('Migrated: %s - %s' % (comment.getId(), comment.author_url))
+                    log.info('Migrated: %s - %s' % (comment.getId(),
+                                                    comment.author_url))
                     delattr
         log.info('done')
 
