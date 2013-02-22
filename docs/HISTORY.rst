@@ -2,7 +2,7 @@
 CHANGELOG
 ===========
 
-1.0 (UNRELEASED)
+1.0 (2013/02/22)
 ==================
 
 - Remove TextIndexNG2 dependency and provide migration to delete indexes [erral]
