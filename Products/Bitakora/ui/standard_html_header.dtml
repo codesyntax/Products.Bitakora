@@ -11,6 +11,10 @@
 </dtml-if>
 <link rel="pingback" href="<dtml-var blogurl missing="">" />
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<dtml-var blogurl missing="">/feed.xml" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//connect.facebook.net/en/all.js#xfbml=1"></script>
+<script src="//apis.google.com/js/plusone.js" type="text/javascript">{'parsetags': 'explicit','lang':'en'}</script>
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 </head>
 
 <body>
