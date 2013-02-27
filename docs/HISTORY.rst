@@ -2,8 +2,10 @@
 CHANGELOG
 ===========
 
-1.0.1 (UNRELEASED)
+1.0.1 (2013/02/27)
 ====================
+
+- Documentation improvement [erral]
 
 1.0 (2013/02/22)
 ==================
