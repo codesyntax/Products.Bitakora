@@ -5,6 +5,8 @@ CHANGELOG
 1.0.1 (2013/02/27)
 ====================
 
+- Migration improvement for large installations [erral]
+
 - Documentation improvement [erral]
 
 1.0 (2013/02/22)

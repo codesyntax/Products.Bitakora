@@ -318,12 +318,14 @@ class BitakoraCommunity(BTreeFolder2):
 
     def migrate_to_1_dot_0(self):
         """ migrate to Bitakora 1.0 """
+        import transaction
         from logging import getLogger
         log = getLogger('migrate_to_1_dot_0')
         self.migrate_textindexng2()
         for blog in self.objectValues('Bitakora'):
             log.info('Migrating: %s' % blog.getId())
             blog.migrate_to_1_dot_0()
+            transaction.savepoint(optimistic=True)
 
         log.info('done')
 
