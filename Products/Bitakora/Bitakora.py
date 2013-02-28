@@ -13,7 +13,7 @@ from Products.PythonScripts.PythonScript import PythonScript
 
 # ZCatalog
 from Products.ZCatalog import ZCatalog
-from Products.ZCatalog.CatalogAwareness import CatalogAware
+from Products.ZCatalog.CatalogPathAwareness import CatalogAware
 # Localizer
 from Products.Localizer.Localizer import Localizer
 from Products.Localizer.MessageCatalog import MessageCatalog

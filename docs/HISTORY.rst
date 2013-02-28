@@ -2,8 +2,12 @@
 CHANGELOG
 ===========
 
-1.1 (UNRELEASED)
+1.0.2 (2013/02/28)
 ==================
+
+- Fix class inheritance for CatalogAware objects. This may
+  need to reindex all Catalogs (one per Bitakora instance
+  and one more for BitakoraCommunity)  [erral]
 
 1.0.1 (2013/02/27)
 ====================

@@ -16,7 +16,7 @@ from AccessControl import ClassSecurityInfo
 from Products.BTreeFolder2.BTreeFolder2 import BTreeFolder2
 
 # Catalog
-from Products.ZCatalog.CatalogAwareness import CatalogAware
+from Products.ZCatalog.CatalogPathAwareness import CatalogAware
 
 # Other stuff
 import DateTime

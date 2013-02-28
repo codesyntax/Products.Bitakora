@@ -9,7 +9,7 @@ from OFS.SimpleItem import SimpleItem
 from AccessControl import ClassSecurityInfo
 
 # Catalog
-from Products.ZCatalog.CatalogAwareness import CatalogAware
+from Products.ZCatalog.CatalogPathAwareness import CatalogAware
 from Products.PythonScripts.standard import url_quote
 
 # Other stuff
