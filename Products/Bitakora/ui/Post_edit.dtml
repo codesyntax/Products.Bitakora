@@ -19,7 +19,6 @@
 </dtml-if>
 
 
-
 <h1><dtml-var "gettext('Edit this post')"></h1>
 
 <p><a href="<dtml-var absolute_url>"><dtml-var "gettext('View')"></a></p>
@@ -28,7 +27,7 @@
 
 <p>
 <label for="author"><dtml-var "gettext('Author')"></label><br/>
-<dtml-if REQUEST.preview>
+<dtml-if "REQUEST.get('preview', None)">
 <input type="text" id="author" name="author:utf8:ustring" value="<dtml-var "REQUEST.get('author', '')">" size="50"/>
 <dtml-else>
 <input type="text" id="author" name="author:utf8:ustring" value="<dtml-var showAuthor>" size="50"/>
@@ -37,7 +36,7 @@
 
 <p>
 <label for="title"><dtml-var "gettext('Title')"></label><br/>
-<dtml-if REQUEST.preview>
+<dtml-if "REQUEST.get('preview', None)">
 <input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('title', '')">"/>
 <dtml-else>
 <input type="text" id="title" name="title:utf8:ustring" size="50" value="<dtml-var showTitle>"/>
@@ -46,7 +45,7 @@
 
 <p>
 <label for="tags"><dtml-var "gettext('Tags')"></label><br/>
-<dtml-if REQUEST.preview>
+<dtml-if "REQUEST.get('preview', None)">
 <input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var "u' '.join(prepareTags(tags=REQUEST.get('tags', [])))">"/>
 <dtml-else>
 <input type="text" id="tags" name="tags:utf8:utokens" size="50" value="<dtml-var showTags>"/>
@@ -55,8 +54,8 @@
 
 <p>
 <label for="body"><dtml-var "gettext('Body')"></label><br/>
-<dtml-if REQUEST.preview>
-    <textarea id="body" name="body:utf8:text" rows="10" cols="50"><dtml-var "REQUEST.get('body', '')"></textarea>
+<dtml-if "REQUEST.get('preview', None)">
+    <textarea id="body" name="body:utf8:text" rows="10" cols="50"><dtml-var "cleanBody(REQUEST.get('body'))"></textarea>
 <dtml-else>
     <textarea id="body" name="body:utf8:text" rows="10" cols="50"><dtml-var showBody></textarea>
 </dtml-if>
@@ -66,7 +65,7 @@
 
 <p>
 <label><dtml-var "gettext('Status')"></label><br/>
-<dtml-if REQUEST.preview>
+<dtml-if "REQUEST.get('preview', None)">
 <input type="radio" name="publish:int" id="yes" value="1" <dtml-if "REQUEST.get('publish', 0)==1">checked="checked"</dtml-if> /> <label for="yes"><dtml-var "gettext('Published')"></label>
 <input type="radio" name="publish:int" id="no" value="0" <dtml-if "REQUEST.get('publish', 1) ==0">checked="cheked"</dtml-if> /> <label for="no"><dtml-var "gettext('Unpublished')"></label>
 <dtml-else>
@@ -77,7 +76,7 @@
 
 <p>
 <label for="date"><dtml-var "gettext('Date')"></label><br/>
-<dtml-if REQUEST.preview>
+<dtml-if "REQUEST.get('preview', None)">
 <input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var "REQUEST.get('date', '')">"/>
 <dtml-else>
 <input type="text" id="date" name="date:utf8:ustring" size="50" value="<dtml-var showDate>"/>
