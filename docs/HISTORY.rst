@@ -2,8 +2,10 @@
 CHANGELOG
 ===========
 
-1.1 (UNRELEASED)
+1.0.4 (2013/03/06)
 ===================
+
+- Remove Epoz traces that avoided comments to be added [erral]
 
 1.0.3 (2013/03/05)
 ====================
