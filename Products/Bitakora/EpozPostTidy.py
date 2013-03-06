@@ -159,7 +159,6 @@ def EpozPostTidy(self, html, pageurl):
     parser = aHTMLParser()
 
     # Give the parser the global method for relative urls
-    parser.getRelativeUrl = self.EpozGetRelativeUrl
 
     # Submit the pageurl as base-url for calculating urls
     parser.pageurl = pageurl
