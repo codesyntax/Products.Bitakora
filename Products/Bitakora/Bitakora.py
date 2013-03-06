@@ -141,8 +141,6 @@ class Bitakora(BTreeFolder2, CatalogAware):
     recent_comments = HTMLFile('ui/recent_comments', globals())
     recent_references = HTMLFile('ui/recent_references', globals())
     reference_body = HTMLFile('ui/reference_body', globals())
-    bitakora_comment_js = HTMLFile('ui/bitakora_comment.js', globals())
-    bitakora_edit_js = HTMLFile('ui/bitakora_edit.js', globals())
     #standard_error_message = HTMLFile('ui/standard_error_message', globals())
     standard_html_footer = HTMLFile('ui/standard_html_footer', globals())
     standard_html_header = HTMLFile('ui/standard_html_header', globals())
