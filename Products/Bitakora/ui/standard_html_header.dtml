@@ -15,6 +15,27 @@
 <script src="//connect.facebook.net/en/all.js#xfbml=1"></script>
 <script src="//apis.google.com/js/plusone.js" type="text/javascript">{'parsetags': 'explicit','lang':'en'}</script>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+
+<meta property="og:site_name" content="<dtml-var blog_title>" />
+
+<dtml-if "meta_type == 'Post'">
+<meta property="og:title" content="<dtml-var showTitle>" />
+<meta property="og:url" content="<dtml-var absolute_url>" />
+<meta property="og:description" content="<dtml-var textBody>" />
+<meta property="og:type" content="website" />
+
+</dtml-if>
+<meta name="twitter:card" value="summary" />
+<dtml-if general_twitter_account>
+    <meta name="twitter:site" value="<dtml-var general_twitter_account>" />
+</dtml-if>
+
+<dtml-if general_fb_account>
+    <meta property="fb:app_id" content="<dtml-var general_fb_account>" />
+</dtml-if>
+
+
+
 </head>
 
 <body>

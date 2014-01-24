@@ -222,6 +222,29 @@ class Post(CatalogAware, BTreeFolder2):
         """ get the body """
         return self.body
 
+    security.declarePublic('textBody')
+
+    def textBody(self):
+        """ get the body """
+        try:
+            from EpozPostTidy import cleanHTML as clean
+            return clean(self.body)
+        except:
+            # perhaps more efficient but needed for old Zopes
+            # Another way... (from Zopelabs)
+            intag = [False]
+
+            def chk(c, intag):
+                if intag[0]:
+                    intag[0] = (c != '>')
+                    return False
+                elif c == '<':
+                    intag[0] = True
+                    return False
+                return True
+
+            return ''.join([c for c in self.body if chk(c, intag)])
+
     security.declarePublic('canComment')
 
     def canComment(self):

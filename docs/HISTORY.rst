@@ -2,8 +2,10 @@
 CHANGELOG
 ===========
 
-1.1 (UNRELEASED)
+1.1 (2014-01-24)
 ==================
+
+- OpenGraph and TwitterCard support [erral]
 
 1.0.4 (2013/03/06)
 ===================
