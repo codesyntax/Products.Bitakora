@@ -3,6 +3,6 @@
   <dtml-in "community().objectValues('LocalContent')" sort="id">
     <li><a href="<dtml-var absolute_url>"><dtml-var title_or_id></a></li>
   </dtml-in>
-    <li><a href="http://www.codesyntax.com/bitakora"><dtml-var "gettext('Powered by Bitakora')"></a></li>
+    <li><dtml-var "gettext('Powered by Bitakora')"></li>
   
 </ul>
