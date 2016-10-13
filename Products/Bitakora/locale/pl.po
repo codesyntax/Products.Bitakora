@@ -547,7 +547,7 @@ msgid "You can change your template here, editing the CSS file. Template is comp
 msgstr "Możesz zmieniś swój szablon tutaj, edytując plik CSS. Szblon jest kompatybilny z Movabletype3.1"
 
 msgid "You can create an XML file with your blog data in the format explained at http://www.codesyntax.com/bitakora/en/download and import to Bitakora using this form."
-msgstr "Możesz stworzyć plik XML z danymi z twojego bloga. więcj pod adresem http://www.codesyntax.com/bitakora/en/download i zimportować do Bitakory używając tej formy."
+msgstr "Możesz stworzyć plik XML z danymi z twojego bloga. więcj pod adresem i zimportować do Bitakory używając tej formy."
 
 msgid "You can get it touch with me filling and sending this form. If you want me to reply, please provide an email address so I can answer you. Thank you."
 msgstr "Możesz to zdobyć, wystarczy wypełnić i wysłać w tej formie. Jeśłi chcesz żebym powtórzył, prosze podac adres email, na który Ci odpowiem. Dziękuje"
