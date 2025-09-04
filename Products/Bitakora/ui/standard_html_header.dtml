@@ -34,6 +34,9 @@
     <meta property="fb:app_id" content="<dtml-var general_fb_account>" />
 </dtml-if>
 
+<dtml-if adsense_code>
+    <dtml-var adsense_code>
+</dtml-if>
 
 
 </head>
